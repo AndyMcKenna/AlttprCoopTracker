@@ -552,6 +552,9 @@ const ICON_SPRITES = {
   hookshot: ITEM_SPRITES.hookshot,
   powder: ITEM_SPRITES.powder,
   glove: ITEM_SPRITES.glove,
+  shovel: ITEM_SPRITES.shovel,
+  icerod: ITEM_SPRITES.icerod,
+  mushroom: ITEM_SPRITES.mushroom,
   sparkle: [
     '............',
     '.....kk.....',
@@ -587,13 +590,9 @@ const NPCS = [
   'King Zora',
   'Stumpy',
   'Catfish',
-  'Library',
-  'Mushroom',
   'Potion Shop',
   'Old Man',
-  'Purple Chest',
   "Link's Uncle",
-  'Digging Game',
   'Maze Race',
 ];
 
@@ -620,16 +619,22 @@ const CHECK_ICONS = new Map([
   ['Waterfall Fairy - Right', 'flippers'],
   ['Magic Bat', 'powder'],
   ['Blacksmith', 'glove'],
+  ['Floating Island', 'mirror'],
+  ['Purple Chest', 'purplechest'],
+  ['Digging Game', 'shovel'],
+  ['Ice Rod Cave', 'icerod'],
+  ['Library', 'boots'],
+  ['Mushroom', 'mushroom'],
+  ['Lumberjack Tree', 'boots'],
+  ["Aginah's Cave", 'bomb'],
 ]);
 
 const FREESTANDING = [
   'Desert Ledge',
   'Lake Hylia Island',
   'Sunken Treasure',
-  'Floating Island',
   'Spectacle Rock',
   'Pyramid',
-  'Lumberjack Tree',
   'Flute Spot',
   'Sanctuary',
   'Secret Passage',
@@ -638,7 +643,6 @@ const FREESTANDING = [
   "Zelda's Cell",
   'Spectacle Rock Cave',
   'Mimic Cave',
-  'Ice Rod Cave',
   'Checkerboard Cave',
   'Cave 45',
   'Lost Woods Hideout',
@@ -650,8 +654,9 @@ function kindForCheck(check) {
   if (CHECK_ICONS.has(name)) return CHECK_ICONS.get(name);
   // The whole cave is gated behind the hookshot, so every chest in it says so.
   if (name.startsWith('Hookshot Cave')) return 'hookshot';
-  // Ahead of the "- Guy" rule below, so MMC's generous guy matches too.
+  // Ahead of the "- Guy" rule below, so the generous guy in each matches too.
   if (name.startsWith('MMC')) return 'mmc';
+  if (name.startsWith('Hype Cave')) return 'bomb';
   if (BOSSES.includes(name)) return 'boss';
   // "MMC - Guy" / "Hype Cave - Guy" are the generous-guy chest rooms.
   if (NPCS.includes(name) || /- Guy$/.test(name)) return 'npc';
@@ -660,8 +665,25 @@ function kindForCheck(check) {
   return 'chest';
 }
 
-// There is no drawn mini-moldorm, so the chest stands in when the image for
-// the MMC checks is missing.
+// No drawn art for these two, so an ordinary chest stands in when their
+// images are missing.
 ICON_SPRITES.mmc = ICON_SPRITES.chest;
+ICON_SPRITES.purplechest = ICON_SPRITES.chest;
+
+// The bomb-in checks. Drawn fallback only; the real image wins when present.
+ICON_SPRITES.bomb = [
+  '.......kkk..',
+  '......kyyk..',
+  '.....kyk....',
+  '.....kk.....',
+  '..kkkkkk....',
+  '.kkddddkk...',
+  'kkdwddddkk..',
+  'kkddddddkk..',
+  'kkddddddkk..',
+  '.kkddddkk...',
+  '..kkkkkk....',
+  '............',
+];
 
 module.exports = { PALETTE, ITEM_SPRITES, ICON_SPRITES, kindForCheck };
