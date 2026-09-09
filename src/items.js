@@ -16,7 +16,10 @@ const MAIN_ITEMS = [
   { id: 'moonpearl', name: 'Moon Pearl', sprite: 'moonpearl', slots: 1, group: 'Equipment' },
 
   { id: 'bow', name: 'Bow', sprite: 'bow', slots: 2, group: 'Items' },
-  { id: 'boomerang', name: 'Boomerang', sprite: 'boomerang', slots: 2, group: 'Items' },
+  // Two separate boomerangs, not one progressive item: the red one is its own
+  // find rather than an upgrade of the blue.
+  { id: 'blueboomerang', name: 'Blue Boomerang', sprite: 'blueboomerang', slots: 1, group: 'Items' },
+  { id: 'redboomerang', name: 'Red Boomerang', sprite: 'redboomerang', slots: 1, group: 'Items' },
   { id: 'hookshot', name: 'Hookshot', sprite: 'hookshot', slots: 1, group: 'Items' },
   { id: 'mushroom', name: 'Mushroom', sprite: 'mushroom', slots: 1, group: 'Items' },
   { id: 'powder', name: 'Magic Powder', sprite: 'powder', slots: 1, group: 'Items' },

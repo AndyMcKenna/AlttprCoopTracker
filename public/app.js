@@ -38,6 +38,7 @@ const state = {
   regionFilter: new Set(), // empty means "all regions"
   collapsed: new Set(), // region ids folded shut; filled in once data arrives
   spriteImages: new Set(), // sprite names that have a real image on disk
+  checkImages: new Set(), // check glyphs that have a real image on disk
   search: '',
   hideUsed: false,
   spriteCache: new Map(),
@@ -404,7 +405,10 @@ function renderChecks(owners) {
       const icon = document.createElement('img');
       icon.className = 'check-icon';
       icon.alt = '';
-      icon.src = spriteUrl('icon:' + check.icon, state.data.iconSprites[check.icon]);
+      // As with items, a real image for this glyph wins over the drawn one.
+      icon.src = state.checkImages.has(check.icon)
+        ? 'sprites/checks/' + check.icon + '.png'
+        : spriteUrl('icon:' + check.icon, state.data.iconSprites[check.icon]);
       tile.appendChild(icon);
 
       const label = document.createElement('span');
@@ -650,6 +654,7 @@ fetch('/api/data')
     state.checksById = new Map(data.checks.map((check) => [check.id, check]));
     state.itemsById = new Map(data.items.map((item) => [item.id, item]));
     state.spriteImages = new Set(data.spriteImages || []);
+    state.checkImages = new Set(data.checkImages || []);
     // The two overworlds start open; the dungeons are folded away until needed.
     syncCollapsedToFilter();
     renderRegionFilters();

@@ -8,8 +8,8 @@ Fire Rod again?"*
 
 ## How it works
 
-1. Each of the 29 main items is a sprite tile on the left, with the dungeon
-   keys in their own panel below it.
+1. Each of the 30 main items is a sprite tile on the left, with the dungeon
+   keys as a third group under Equipment and Items.
 2. Click the **pencil** in the item's top-right corner — the tracker arms it.
 3. Click one of the **216 checks** on the right.
 4. The check's name is stored next to the item's sprite as text, and the check

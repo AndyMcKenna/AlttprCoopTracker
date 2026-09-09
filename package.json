@@ -16,6 +16,7 @@
     "ws": "^8.18.0"
   },
   "devDependencies": {
+    "jpeg-js": "^0.4.4",
     "pngjs": "^7.0.0"
   }
 }

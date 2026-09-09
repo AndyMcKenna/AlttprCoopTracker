@@ -23,16 +23,17 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 // item's `sprite` (public/sprites/items/lamp.png) is used in place of the
 // drawn pixel art; anything missing falls back to the built-in grid, so the
 // tracker still works from a clean checkout with no images at all.
-const ICON_DIR = path.join(__dirname, '..', 'public', 'sprites', 'items');
+const SPRITE_DIR = path.join(__dirname, '..', 'public', 'sprites');
 
-function availableIcons() {
+function availableIcons(kind) {
+  const dir = path.join(SPRITE_DIR, kind);
   try {
     return fs
-      .readdirSync(ICON_DIR)
+      .readdirSync(dir)
       .filter((file) => file.toLowerCase().endsWith('.png'))
       .map((file) => file.replace(/\.png$/i, ''));
   } catch (err) {
-    if (err.code !== 'ENOENT') console.error('Could not read ' + ICON_DIR + ':', err.message);
+    if (err.code !== 'ENOENT') console.error('Could not read ' + dir + ':', err.message);
     return [];
   }
 }
@@ -53,7 +54,8 @@ const STATIC_DATA = {
   checks: CHECKS.map((check) => ({ ...check, icon: kindForCheck(check) })),
   palette: PALETTE,
   itemSprites: ITEM_SPRITES,
-  spriteImages: availableIcons(),
+  spriteImages: availableIcons('items'),
+  checkImages: availableIcons('checks'),
   iconSprites: ICON_SPRITES,
 };
 
