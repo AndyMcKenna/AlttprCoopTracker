@@ -193,7 +193,7 @@ h2 {
   grid-template-columns: minmax(340px, 2fr) minmax(360px, 3fr);
   gap: 12px;
   padding: 12px 16px 72px;
-  align-items: start;
+  align-items: stretch;
 }
 
 @media (max-width: 1000px) {
@@ -506,8 +506,17 @@ h2 {
   font-weight: 600;
 }
 
+/* The check list fills whatever height the item board sets, scrolling inside
+   itself rather than leaving dead space beside a tall board. */
+.panel-checks {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
 .checks {
-  max-height: 68vh;
+  flex: 1;
+  min-height: 320px;
   overflow-y: auto;
   padding-right: 4px;
 }
