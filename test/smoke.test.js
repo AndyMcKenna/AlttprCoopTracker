@@ -11,7 +11,7 @@ const assert = require('node:assert');
 process.env.TRACKER_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), 'alttp-tracker-'));
 
 const { CHECKS, REGIONS } = require('../src/checks');
-const { ITEMS } = require('../src/items');
+const { ITEMS, ITEMS_BY_ID, KEY_PANEL } = require('../src/items');
 const { PALETTE, ITEM_SPRITES, ICON_SPRITES, kindForCheck } = require('../src/sprites');
 const { Store } = require('../src/store');
 
@@ -39,6 +39,57 @@ test('every item points at a sprite that exists', () => {
     assert.ok(ITEM_SPRITES[item.sprite], 'missing sprite for ' + item.id);
     assert.ok(item.slots >= 1, item.id + ' needs at least one slot');
   }
+});
+
+test('the key panel matches the game: 11 big keys, 29 small keys', () => {
+  const keyItems = ITEMS.filter((item) => item.panel === 'keys');
+  const bigKeys = keyItems.filter((item) => item.sprite === 'bigkey');
+  const smallKeys = keyItems.filter((item) => item.sprite === 'smallkey');
+
+  assert.strictEqual(bigKeys.length, 11);
+  assert.strictEqual(
+    smallKeys.reduce((sum, item) => sum + item.slots, 0),
+    29
+  );
+
+  // One small-key box per dungeon that has any, never one box per key.
+  assert.strictEqual(smallKeys.length, 12);
+  assert.strictEqual(smallKeys.find((item) => item.id === 'sk-pod').slots, 6);
+
+  // Every key row points at real items, and no dungeon is missing both.
+  for (const dungeon of KEY_PANEL) {
+    assert.ok(dungeon.bigKey || dungeon.smallKey, dungeon.name + ' has no keys at all');
+    for (const id of [dungeon.bigKey, dungeon.smallKey].filter(Boolean)) {
+      assert.ok(ITEMS_BY_ID.get(id), 'missing key item ' + id);
+    }
+  }
+
+  // Hyrule Castle and Castle Tower are the only big-key-less dungeons.
+  const noBigKey = KEY_PANEL.filter((d) => !d.bigKey).map((d) => d.id);
+  assert.deepStrictEqual(noBigKey, ['hc', 'ct']);
+  assert.deepStrictEqual(
+    KEY_PANEL.filter((d) => !d.smallKey).map((d) => d.id),
+    ['ep']
+  );
+});
+
+test('keys are assigned through the same rules as any other item', () => {
+  const store = new Store();
+  const room = 'key-room';
+
+  store.apply(room, { type: 'assign', itemId: 'bk-ep', checkId: 'ep/big-chest' });
+  assert.strictEqual(store.getOrCreate(room).assignments['bk-ep'][0].checkId, 'ep/big-chest');
+
+  // A check already holding a key will not silently take another item.
+  assert.throws(() => store.apply(room, { type: 'assign', itemId: 'lamp', checkId: 'ep/big-chest' }), {
+    message: /already recorded as EP Big Key/,
+  });
+
+  // The small-key box fills up to the dungeon's key count and then stops.
+  for (const checkId of ['pod/shooter-room', 'pod/the-arena-ledge', 'pod/map-chest']) {
+    store.apply(room, { type: 'assign', itemId: 'sk-pod', checkId });
+  }
+  assert.strictEqual(store.getOrCreate(room).assignments['sk-pod'].length, 3);
 });
 
 test('every check resolves to a known tile icon', () => {

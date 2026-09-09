@@ -5,7 +5,7 @@ const path = require('path');
 const express = require('express');
 const { WebSocketServer } = require('ws');
 
-const { ITEMS, GROUPS } = require('./items');
+const { ITEMS, GROUPS, KEY_PANEL } = require('./items');
 const { REGIONS, CHECKS } = require('./checks');
 const { PALETTE, ITEM_SPRITES, ICON_SPRITES, kindForCheck } = require('./sprites');
 const { Store, normalizeRoomId } = require('./store');
@@ -23,6 +23,7 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 const STATIC_DATA = {
   items: ITEMS,
   groups: GROUPS,
+  keyPanel: KEY_PANEL,
   regions: REGIONS.map((region) => ({
     id: region.id,
     name: region.name,

@@ -196,9 +196,32 @@ h2 {
   align-items: start;
 }
 
+/* Items above keys down the left, the long check list beside them. */
+.panel-items {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.panel-keys {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.panel-checks {
+  grid-column: 2;
+  grid-row: 1 / 3;
+}
+
 @media (max-width: 1000px) {
   .layout {
     grid-template-columns: 1fr;
+  }
+
+  .panel-items,
+  .panel-keys,
+  .panel-checks {
+    grid-column: auto;
+    grid-row: auto;
   }
 }
 
@@ -385,6 +408,64 @@ h2 {
 
 .loc-remove:hover {
   color: var(--bad);
+}
+
+/* ---------- keys ---------- */
+
+.key-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* One dungeon per line: label, then big key, then the small-key box. */
+.key-row {
+  display: grid;
+  grid-template-columns: 122px 1fr 1fr;
+  gap: 6px;
+  align-items: start;
+}
+
+.key-dungeon {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-top: 10px;
+  font-size: 11px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+/* Keys get roomier tiles than the item board — only two to a line. */
+.panel-keys .item {
+  grid-template-columns: 40px 1fr;
+}
+
+.panel-keys .item-sprite {
+  width: 40px;
+  height: 40px;
+}
+
+/* Hyrule Castle and Castle Tower have no big key; hold the column anyway. */
+.key-row .item.is-small-only {
+  grid-column: 3;
+}
+
+@media (max-width: 700px) {
+  .key-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .key-dungeon {
+    grid-column: 1 / -1;
+    padding-top: 4px;
+  }
+
+  .key-row .item.is-small-only {
+    grid-column: 2;
+  }
 }
 
 /* ---------- checks ---------- */

@@ -19,6 +19,8 @@ const el = {
   hint: document.getElementById('hint'),
   items: document.getElementById('items'),
   itemsSummary: document.getElementById('items-summary'),
+  keys: document.getElementById('keys'),
+  keysSummary: document.getElementById('keys-summary'),
   checks: document.getElementById('checks'),
   checksSummary: document.getElementById('checks-summary'),
   regions: document.getElementById('regions'),
@@ -158,15 +160,144 @@ function render() {
   if (!state.data) return;
   const owners = buildOwners();
   renderItems(owners);
+  renderKeys();
   renderChecks(owners);
 
-  const found = state.data.items.filter((item) => assignmentsFor(item.id).length).length;
-  el.itemsSummary.textContent = found + ' of ' + state.data.items.length + ' located';
+  const mainItems = state.data.items.filter((item) => item.panel === 'items');
+  const found = mainItems.filter((item) => assignmentsFor(item.id).length).length;
+  el.itemsSummary.textContent = found + ' of ' + mainItems.length + ' located';
+
+  // Keys count individual keys, not boxes: a dungeon's 6 small keys are 6.
+  const keyItems = state.data.items.filter((item) => item.panel === 'keys');
+  const keysFound = keyItems.reduce((sum, item) => sum + assignmentsFor(item.id).length, 0);
+  const keysTotal = keyItems.reduce((sum, item) => sum + item.slots, 0);
+  el.keysSummary.textContent = keysFound + ' of ' + keysTotal + ' located';
+
   el.checksSummary.textContent = owners.size + ' of ' + state.data.checks.length + ' recorded';
 }
 
+/**
+ * One item tile: sprite, name, the pencil that arms it, and the list of
+ * locations recorded against it. Shared by the item board and the key panel.
+ */
+function buildItemTile(item) {
+  const entries = assignmentsFor(item.id);
+  const full = entries.length >= item.slots;
+
+  const tile = document.createElement('div');
+  tile.className = 'item';
+  if (state.armed === item.id) tile.classList.add('is-armed');
+  tile.classList.add(entries.length ? 'is-found' : 'is-empty');
+
+  const sprite = document.createElement('img');
+  sprite.className = 'item-sprite';
+  sprite.alt = '';
+  sprite.src = spriteUrl('item:' + item.sprite, state.data.itemSprites[item.sprite]);
+  tile.appendChild(sprite);
+
+  const body = document.createElement('div');
+  body.className = 'item-body';
+
+  const name = document.createElement('div');
+  name.className = 'item-name';
+  // Key tiles use the short label; the dungeon is already the row heading.
+  name.textContent = item.label || item.name;
+  // Progressive items say how many of their locations are pinned down.
+  if (item.slots > 1 || item.alwaysCount) {
+    const count = document.createElement('span');
+    count.className = 'item-count';
+    if (full) count.classList.add('is-full');
+    count.textContent = entries.length + '/' + item.slots;
+    name.appendChild(count);
+  }
+  body.appendChild(name);
+
+  const edit = document.createElement('button');
+  edit.className = 'item-edit';
+  edit.type = 'button';
+  edit.innerHTML = PENCIL_ICON;
+  if (full && state.armed !== item.id) edit.classList.add('is-full');
+  const editText = editLabel(item, entries.length, full);
+  edit.title = editText;
+  edit.setAttribute('aria-label', editText);
+  edit.addEventListener('click', () => toggleArm(item.id));
+  tile.appendChild(edit);
+
+  if (entries.length) {
+    const list = document.createElement('ul');
+    list.className = 'item-locations';
+
+    for (const entry of entries) {
+      const check = state.checksById.get(entry.checkId);
+      const row = document.createElement('li');
+      row.className = 'item-location';
+      row.title = entry.by
+        ? 'Recorded by ' + entry.by + ' at ' + new Date(entry.at).toLocaleTimeString()
+        : 'Recorded at ' + new Date(entry.at).toLocaleTimeString();
+
+      const region = document.createElement('span');
+      region.className = 'loc-region';
+      region.textContent = check ? check.regionShort : '??';
+      row.appendChild(region);
+
+      const label = document.createElement('span');
+      label.className = 'loc-name';
+      label.textContent = check ? check.name : entry.checkId;
+      row.appendChild(label);
+
+      const remove = document.createElement('button');
+      remove.className = 'loc-remove';
+      remove.type = 'button';
+      remove.textContent = '×';
+      remove.title = 'Clear this location';
+      remove.addEventListener('click', () =>
+        send({ type: 'unassign', itemId: item.id, assignmentId: entry.id })
+      );
+      row.appendChild(remove);
+
+      list.appendChild(row);
+    }
+
+    body.appendChild(list);
+  }
+
+  tile.appendChild(body);
+  return tile;
+}
+
+/** One row per dungeon: big key first, then the single small-key box. */
+function renderKeys() {
+  const frag = document.createDocumentFragment();
+
+  for (const dungeon of state.data.keyPanel) {
+    const row = document.createElement('div');
+    row.className = 'key-row';
+
+    const heading = document.createElement('div');
+    heading.className = 'key-dungeon';
+    const swatch = document.createElement('span');
+    swatch.className = 'region-swatch';
+    swatch.style.background = dungeon.color;
+    heading.appendChild(swatch);
+    heading.appendChild(document.createTextNode(dungeon.name));
+    row.appendChild(heading);
+
+    if (dungeon.bigKey) row.appendChild(buildItemTile(state.itemsById.get(dungeon.bigKey)));
+
+    if (dungeon.smallKey) {
+      const tile = buildItemTile(state.itemsById.get(dungeon.smallKey));
+      // Keep the small-key column aligned when a dungeon has no big key.
+      if (!dungeon.bigKey) tile.classList.add('is-small-only');
+      row.appendChild(tile);
+    }
+
+    frag.appendChild(row);
+  }
+
+  el.keys.replaceChildren(frag);
+}
+
 function renderItems(owners) {
-  const checksById = state.checksById;
   const frag = document.createDocumentFragment();
 
   for (const group of state.data.groups) {
@@ -181,90 +312,7 @@ function renderItems(owners) {
     grid.className = 'item-grid';
 
     for (const item of state.data.items.filter((entry) => entry.group === group)) {
-      const entries = assignmentsFor(item.id);
-
-      const tile = document.createElement('div');
-      tile.className = 'item';
-      if (state.armed === item.id) tile.classList.add('is-armed');
-      tile.classList.add(entries.length ? 'is-found' : 'is-empty');
-
-      const sprite = document.createElement('img');
-      sprite.className = 'item-sprite';
-      sprite.alt = '';
-      sprite.src = spriteUrl('item:' + item.sprite, state.data.itemSprites[item.sprite]);
-      tile.appendChild(sprite);
-
-      const body = document.createElement('div');
-      body.className = 'item-body';
-
-      const full = entries.length >= item.slots;
-
-      const name = document.createElement('div');
-      name.className = 'item-name';
-      name.textContent = item.name;
-      // Progressive items say how many of their locations are pinned down.
-      if (item.slots > 1) {
-        const count = document.createElement('span');
-        count.className = 'item-count';
-        if (full) count.classList.add('is-full');
-        count.textContent = entries.length + '/' + item.slots;
-        name.appendChild(count);
-      }
-      body.appendChild(name);
-
-      const edit = document.createElement('button');
-      edit.className = 'item-edit';
-      edit.type = 'button';
-      edit.innerHTML = PENCIL_ICON;
-      if (full && state.armed !== item.id) edit.classList.add('is-full');
-      const label = editLabel(item, entries.length, full);
-      edit.title = label;
-      edit.setAttribute('aria-label', label);
-      edit.addEventListener('click', () => toggleArm(item.id));
-      tile.appendChild(edit);
-
-      if (entries.length) {
-        const list = document.createElement('ul');
-        list.className = 'item-locations';
-
-        for (const entry of entries) {
-          const check = checksById.get(entry.checkId);
-          const row = document.createElement('li');
-          row.className = 'item-location';
-          if (entry.by) {
-            row.title = 'Recorded by ' + entry.by + ' at ' + new Date(entry.at).toLocaleTimeString();
-          } else {
-            row.title = 'Recorded at ' + new Date(entry.at).toLocaleTimeString();
-          }
-
-          const region = document.createElement('span');
-          region.className = 'loc-region';
-          region.textContent = check ? check.regionShort : '??';
-          row.appendChild(region);
-
-          const label = document.createElement('span');
-          label.className = 'loc-name';
-          label.textContent = check ? check.name : entry.checkId;
-          row.appendChild(label);
-
-          const remove = document.createElement('button');
-          remove.className = 'loc-remove';
-          remove.type = 'button';
-          remove.textContent = '×';
-          remove.title = 'Clear this location';
-          remove.addEventListener('click', () =>
-            send({ type: 'unassign', itemId: item.id, assignmentId: entry.id })
-          );
-          row.appendChild(remove);
-
-          list.appendChild(row);
-        }
-
-        body.appendChild(list);
-      }
-
-      tile.appendChild(body);
-      grid.appendChild(tile);
+      grid.appendChild(buildItemTile(item));
     }
 
     section.appendChild(grid);
@@ -584,6 +632,7 @@ fetch('/api/data')
   .then((data) => {
     state.data = data;
     state.checksById = new Map(data.checks.map((check) => [check.id, check]));
+    state.itemsById = new Map(data.items.map((item) => [item.id, item]));
     // The two overworlds start open; the dungeons are folded away until needed.
     syncCollapsedToFilter();
     renderRegionFilters();

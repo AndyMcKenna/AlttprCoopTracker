@@ -8,7 +8,8 @@ Fire Rod again?"*
 
 ## How it works
 
-1. Each of the 29 main items is a sprite tile on the left.
+1. Each of the 29 main items is a sprite tile on the left, with the dungeon
+   keys in their own panel below it.
 2. Click the **pencil** in the item's top-right corner — the tracker arms it.
 3. Click one of the **216 checks** on the right.
 4. The check's name is stored next to the item's sprite as text, and the check
@@ -48,6 +49,12 @@ URL (`?room=demo`) and can be edited in the header.
   and opens them, so results are never hidden behind a folded header.
 - **Collapsible regions.** Light World and Dark World start open, the dungeons
   start folded; click any region header to toggle it.
+- **Keys.** The key panel is one line per dungeon, big key then small keys, and
+  works exactly like the item board. Small keys are interchangeable, so a
+  dungeon gets one box holding as many locations as it has keys — Palace of
+  Darkness 6, Turtle Rock and Ganon's Tower 4, and so on (11 big keys and 29
+  small keys, matching the game). Hyrule Castle and Castle Tower have no big
+  key; Eastern Palace has no small keys.
 - **Names are optional.** Type one in the header and your assignments carry it,
   visible on hover.
 - **Esc** cancels an armed item.
@@ -57,7 +64,7 @@ URL (`?room=demo`) and can be edited in the header.
 | Path                 | What it is                                             |
 | -------------------- | ------------------------------------------------------ |
 | `src/checks.js`      | The 216 checks, grouped into 15 regions                |
-| `src/items.js`       | The tracked items and how many locations each holds    |
+| `src/items.js`       | Items and dungeon keys, and how many locations each holds |
 | `src/sprites.js`     | Hand-drawn 12x12 pixel art for items and check icons   |
 | `src/store.js`       | Room state, the assignment rules, JSON persistence     |
 | `src/server.js`      | Express static server, `/api/data`, WebSocket fan-out  |
