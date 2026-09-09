@@ -29,11 +29,14 @@ const el = {
   assignCancel: document.getElementById('assign-cancel'),
 };
 
+const OPEN_BY_DEFAULT = new Set(['lw', 'dw']);
+
 const state = {
   data: null,
   room: null,
   armed: null, // item id waiting for a check click
   regionFilter: new Set(), // empty means "all regions"
+  collapsed: new Set(), // region ids folded shut; filled in once data arrives
   search: '',
   hideUsed: false,
   spriteCache: new Map(),
@@ -280,17 +283,38 @@ function renderChecks(owners) {
     if (!matches.length) continue;
     shown += matches.length;
 
+    // A search should never hide its own results behind a collapsed header.
+    const collapsed = !needle && state.collapsed.has(region.id);
+
     const block = document.createElement('div');
     block.className = 'region-block';
 
-    const title = document.createElement('div');
+    const title = document.createElement('button');
     title.className = 'region-title';
+    title.type = 'button';
+    title.setAttribute('aria-expanded', String(!collapsed));
+
+    const caret = document.createElement('span');
+    caret.className = 'region-caret';
+    caret.textContent = collapsed ? '▸' : '▾';
+    title.appendChild(caret);
+
     const swatch = document.createElement('span');
     swatch.className = 'region-swatch';
     swatch.style.background = region.color;
     title.appendChild(swatch);
     title.appendChild(document.createTextNode(region.name + ' (' + matches.length + ')'));
+    title.addEventListener('click', () => {
+      if (state.collapsed.has(region.id)) state.collapsed.delete(region.id);
+      else state.collapsed.add(region.id);
+      render();
+    });
     block.appendChild(title);
+
+    if (collapsed) {
+      frag.appendChild(block);
+      continue;
+    }
 
     const grid = document.createElement('div');
     grid.className = 'check-grid';
@@ -536,6 +560,10 @@ fetch('/api/data')
   .then((data) => {
     state.data = data;
     state.checksById = new Map(data.checks.map((check) => [check.id, check]));
+    // The two overworlds start open; the dungeons are folded away until needed.
+    state.collapsed = new Set(
+      data.regions.map((region) => region.id).filter((id) => !OPEN_BY_DEFAULT.has(id))
+    );
     renderRegionFilters();
     render();
     connect();

@@ -435,20 +435,6 @@ const ITEM_SPRITES = {
     '..kkkkkkkk..',
     '............',
   ],
-  silverarrows: [
-    '.....kk.....',
-    '....kswk....',
-    '...ksswk....',
-    '..ksswwsk...',
-    '..kkkswkkk..',
-    '....kswk....',
-    '....kswk....',
-    '....kswk....',
-    '....kswk....',
-    '...kkswkk...',
-    '...kwswwk...',
-    '....kkkk....',
-  ],
 };
 
 // Small glyphs used on the 216 check tiles. The glyph is picked from the

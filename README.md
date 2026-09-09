@@ -8,7 +8,7 @@ Fire Rod again?"*
 
 ## How it works
 
-1. Each of the 30 main items is a sprite tile on the left.
+1. Each of the 29 main items is a sprite tile on the left.
 2. Click the **pencil** in the item's top-right corner — the tracker arms it.
 3. Click one of the **216 checks** on the right.
 4. The check's name is stored next to the item's sprite as text, and the check
@@ -36,13 +36,17 @@ URL (`?room=demo`) and can be edited in the header.
 ## Details worth knowing
 
 - **Progressive items have several slots.** Sword holds 4 locations, Shield 3,
-  Mail/Gloves/Bow/Boomerang 2, Bottle 4. Single-slot items simply move when you
-  re-assign them; multi-slot items fill up and then say so.
+  Bottle 4, and Mail, Gloves, Boomerang and Bow 2 each — the Bow's second slot
+  is the silver arrows. Single-slot items simply move when you re-assign them;
+  multi-slot items fill up and then say so.
 - **A check holds one item.** Assigning an item to a check that already has one
   is refused with a message naming the current holder — clear the old entry
   (the `×` next to it) first. Nobody's note gets silently overwritten.
 - **Filtering.** Search by name, filter by region chips, or hide checks that are
-  already recorded to see what's left.
+  already recorded to see what's left. Searching looks inside collapsed regions
+  and opens them, so results are never hidden behind a folded header.
+- **Collapsible regions.** Light World and Dark World start open, the dungeons
+  start folded; click any region header to toggle it.
 - **Names are optional.** Type one in the header and your assignments carry it,
   visible on hover.
 - **Esc** cancels an armed item.
@@ -51,7 +55,7 @@ URL (`?room=demo`) and can be edited in the header.
 
 | Path                 | What it is                                             |
 | -------------------- | ------------------------------------------------------ |
-| `src/checks.js`      | The 216 checks, grouped into 16 regions                |
+| `src/checks.js`      | The 216 checks, grouped into 15 regions                |
 | `src/items.js`       | The tracked items and how many locations each holds    |
 | `src/sprites.js`     | Hand-drawn 12x12 pixel art for items and check icons   |
 | `src/store.js`       | Room state, the assignment rules, JSON persistence     |

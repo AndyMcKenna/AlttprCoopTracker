@@ -434,15 +434,35 @@ h2 {
   position: sticky;
   top: 0;
   z-index: 1;
+  width: 100%;
   background: var(--bg-panel);
-  padding: 4px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 5px 4px;
   display: flex;
   align-items: center;
   gap: 8px;
+  font: inherit;
   font-size: 11px;
+  text-align: left;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--muted);
+}
+
+.region-title:hover,
+.region-title:focus-visible {
+  background: var(--bg-tile);
+  color: var(--text);
+  outline: none;
+}
+
+.region-caret {
+  width: 9px;
+  flex: none;
+  font-size: 10px;
+  line-height: 1;
 }
 
 .region-swatch {

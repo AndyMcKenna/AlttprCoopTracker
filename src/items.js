@@ -14,7 +14,6 @@ const ITEMS = [
   { id: 'moonpearl', name: 'Moon Pearl', sprite: 'moonpearl', slots: 1, group: 'Equipment' },
 
   { id: 'bow', name: 'Bow', sprite: 'bow', slots: 2, group: 'Items' },
-  { id: 'silverarrows', name: 'Silver Arrows', sprite: 'silverarrows', slots: 1, group: 'Items' },
   { id: 'boomerang', name: 'Boomerang', sprite: 'boomerang', slots: 2, group: 'Items' },
   { id: 'hookshot', name: 'Hookshot', sprite: 'hookshot', slots: 1, group: 'Items' },
   { id: 'mushroom', name: 'Mushroom', sprite: 'mushroom', slots: 1, group: 'Items' },

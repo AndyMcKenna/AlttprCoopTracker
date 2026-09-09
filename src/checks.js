@@ -63,14 +63,8 @@ const REGIONS = [
       'Blacksmith',
       'Purple Chest',
       'Floodgate Chest',
-    ],
-  },
-  {
-    id: 'dm',
-    name: 'Death Mountain',
-    short: 'DM',
-    color: '#a5713f',
-    checks: [
+
+      // Death Mountain is light world territory, so its checks live here too.
       'Old Man',
       'Spectacle Rock Cave',
       'Ether Tablet',
