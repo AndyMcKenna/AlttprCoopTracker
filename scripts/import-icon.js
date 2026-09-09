@@ -35,15 +35,31 @@ function readImage(file) {
 
 const at = (img, x, y) => (y * img.width + x) * 4;
 
+/** Cut a rectangle out of a decoded image. */
+function cropImage(img, box) {
+  const out = { width: box.width, height: box.height, data: new Uint8Array(box.width * box.height * 4) };
+  for (let y = 0; y < box.height; y += 1) {
+    for (let x = 0; x < box.width; x += 1) {
+      const from = ((box.y + y) * img.width + (box.x + x)) * 4;
+      const to = (y * box.width + x) * 4;
+      out.data[to] = img.data[from];
+      out.data[to + 1] = img.data[from + 1];
+      out.data[to + 2] = img.data[from + 2];
+      out.data[to + 3] = img.data[from + 3];
+    }
+  }
+  return out;
+}
+
 /**
- * Sample the middle of the cell at (cx, cy) on a `size`-square grid. The
- * middle avoids the smeared edges a JPEG leaves at every colour boundary.
+ * Sample the middle of the cell at (cx, cy) on a cols x rows grid. The middle
+ * avoids the smeared edges a JPEG leaves at every colour boundary.
  */
-function cellColour(img, size, cx, cy) {
-  const x0 = Math.floor((cx * img.width) / size);
-  const x1 = Math.floor(((cx + 1) * img.width) / size);
-  const y0 = Math.floor((cy * img.height) / size);
-  const y1 = Math.floor(((cy + 1) * img.height) / size);
+function cellColour(img, cols, rows, cx, cy) {
+  const x0 = Math.floor((cx * img.width) / cols);
+  const x1 = Math.floor(((cx + 1) * img.width) / cols);
+  const y0 = Math.floor((cy * img.height) / rows);
+  const y1 = Math.floor(((cy + 1) * img.height) / rows);
 
   const insetX = Math.max(1, Math.floor((x1 - x0) / 4));
   const insetY = Math.max(1, Math.floor((y1 - y0) / 4));
@@ -68,24 +84,30 @@ function cellColour(img, size, cx, cy) {
   return [Math.round(r / n), Math.round(g / n), Math.round(b / n)];
 }
 
+/** Grid colours, row-major, for a cols x rows grid. */
+function gridColours(img, cols, rows) {
+  const colours = [];
+  for (let cy = 0; cy < rows; cy += 1) {
+    for (let cx = 0; cx < cols; cx += 1) colours.push(cellColour(img, cols, rows, cx, cy));
+  }
+  return colours;
+}
+
 /**
- * How wrong it would be to call this image a `size`-square grid: average
+ * How wrong it would be to call this image a cols x rows grid: average
  * distance between each pixel and the flat colour of the cell it lands in.
  */
-function gridError(img, size) {
-  const colours = [];
-  for (let cy = 0; cy < size; cy += 1) {
-    for (let cx = 0; cx < size; cx += 1) colours.push(cellColour(img, size, cx, cy));
-  }
+function gridError(img, cols, rows) {
+  const colours = gridColours(img, cols, rows);
 
   let error = 0;
   let n = 0;
-  // Every fourth pixel is plenty and keeps the search quick.
+  // Every other pixel is plenty and keeps the search quick.
   for (let y = 0; y < img.height; y += 2) {
     for (let x = 0; x < img.width; x += 2) {
-      const cx = Math.min(size - 1, Math.floor((x * size) / img.width));
-      const cy = Math.min(size - 1, Math.floor((y * size) / img.height));
-      const want = colours[cy * size + cx];
+      const cx = Math.min(cols - 1, Math.floor((x * cols) / img.width));
+      const cy = Math.min(rows - 1, Math.floor((y * rows) / img.height));
+      const want = colours[cy * cols + cx];
       const i = at(img, x, y);
       error +=
         Math.abs(img.data[i] - want[0]) +
@@ -97,27 +119,33 @@ function gridError(img, size) {
   return error / n;
 }
 
-/** The smallest grid that explains the picture about as well as the best one. */
-function detectSize(img, tolerance = 1.35) {
+/**
+ * The smallest grid that explains the picture about as well as the best one.
+ * Rows follow from columns so the recovered pixels stay square — a sprite
+ * that is wider than it is tall comes back that shape, not squashed.
+ */
+function detectGrid(img, tolerance = 1.35) {
+  const rowsFor = (cols) => Math.max(1, Math.round((cols * img.height) / img.width));
+
   let best = MIN_SIZE;
   let bestError = Infinity;
   const errors = new Map();
 
-  for (let size = MIN_SIZE; size <= MAX_SIZE; size += 1) {
-    const error = gridError(img, size);
-    errors.set(size, error);
+  for (let cols = MIN_SIZE; cols <= MAX_SIZE; cols += 1) {
+    const error = gridError(img, cols, rowsFor(cols));
+    errors.set(cols, error);
     if (error < bestError) {
       bestError = error;
-      best = size;
+      best = cols;
     }
   }
 
-  // Prefer the smallest size that is nearly as good, so a 16x16 sprite is not
-  // reported as the 32x32 that trivially also fits it.
-  for (let size = MIN_SIZE; size <= best; size += 1) {
-    if (errors.get(size) <= bestError * tolerance) return { size, error: errors.get(size), bestError };
+  // Prefer the smallest grid that is nearly as good, so a 16-wide sprite is
+  // not reported as the 32-wide one that trivially also fits it.
+  for (let cols = MIN_SIZE; cols <= best; cols += 1) {
+    if (errors.get(cols) <= bestError * tolerance) return { cols, rows: rowsFor(cols) };
   }
-  return { size: best, error: bestError, bestError };
+  return { cols: best, rows: rowsFor(best) };
 }
 
 function main() {
@@ -130,34 +158,113 @@ function main() {
   }
 
   const forced = args.indexOf('--size');
+  const cropAt = args.indexOf('--crop');
+  const passesAt = args.indexOf('--passes');
   const keepBackground = args.includes('--keep-bg');
+  // One peel by default. More than one only helps when the art sits inside a
+  // frame as well as on a backdrop, and it risks stripping the sprite's own
+  // colours once those layers are gone, so it has to be asked for.
+  const passes = passesAt === -1 ? 1 : Number(args[passesAt + 1]);
 
-  const img = readImage(input);
-  const size = forced === -1 ? detectSize(img).size : Number(args[forced + 1]);
-  console.log(path.basename(input) + ': ' + img.width + 'x' + img.height + ' -> ' + size + 'x' + size);
+  let img = readImage(input);
+  const from = img.width + 'x' + img.height;
 
-  const out = new PNG({ width: size, height: size });
-  const grid = [];
-  for (let cy = 0; cy < size; cy += 1) {
-    for (let cx = 0; cx < size; cx += 1) grid.push(cellColour(img, size, cx, cy));
+  if (cropAt !== -1) {
+    const [x, y, width, height] = args[cropAt + 1].split(',').map(Number);
+    img = cropImage(img, { x, y, width, height });
   }
 
-  // The backdrop is whatever colour the corners agree on.
-  const corners = [grid[0], grid[size - 1], grid[size * (size - 1)], grid[size * size - 1]];
+  let cols;
+  let rows;
+  if (forced === -1) {
+    ({ cols, rows } = detectGrid(img));
+  } else {
+    cols = Number(args[forced + 1]);
+    rows = Math.max(1, Math.round((cols * img.height) / img.width));
+  }
+  console.log(path.basename(input) + ': ' + from + ' -> ' + cols + 'x' + rows);
+
+  const out = new PNG({ width: cols, height: rows });
+  const grid = gridColours(img, cols, rows);
+
   const near = (a, b) =>
     Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]) + Math.abs(a[2] - b[2]) <= 40;
-  const backdrop = corners.filter((c) => near(c, corners[0])).length >= 3 ? corners[0] : null;
 
+  // Clear the backdrop, then look again: art saved from a sprite site often
+  // sits on a backdrop *and* inside a border, so there can be two layers to
+  // peel. Only colour reachable from the edge goes, which leaves the sprite's
+  // own outline alone even when it is the same colour as the border.
+  const gone = new Uint8Array(grid.length);
   let cleared = 0;
+
+  for (let pass = 0; pass < passes && !keepBackground; pass += 1) {
+    // Whatever is currently on the outside: the image edge to start with, and
+    // after a pass, whatever the cleared cells have exposed.
+    const exposed = [];
+    for (let i = 0; i < grid.length; i += 1) {
+      if (gone[i]) continue;
+      const x = i % cols;
+      const y = (i - x) / cols;
+      const edge =
+        x === 0 ||
+        y === 0 ||
+        x === cols - 1 ||
+        y === rows - 1 ||
+        gone[i - 1] ||
+        gone[i + 1] ||
+        gone[i - cols] ||
+        gone[i + cols];
+      if (edge) exposed.push(i);
+    }
+    if (exposed.length === 0) break;
+
+    // The backdrop is what the outermost surviving corners agree on. Corners
+    // are used rather than the whole ring because sprite art often runs right
+    // up to the edge, which would drown out the backdrop in a simple tally.
+    const nearestTo = (cornerX, cornerY) =>
+      exposed.reduce((best, i) => {
+        const x = i % cols;
+        const y = (i - x) / cols;
+        const d = Math.abs(x - cornerX) + Math.abs(y - cornerY);
+        return best === null || d < best.d ? { i, d } : best;
+      }, null).i;
+
+    const corners = [
+      grid[nearestTo(0, 0)],
+      grid[nearestTo(cols - 1, 0)],
+      grid[nearestTo(0, rows - 1)],
+      grid[nearestTo(cols - 1, rows - 1)],
+    ];
+    const backdrop = corners[0];
+    if (corners.filter((c) => near(c, backdrop)).length < 3) break;
+
+    // Cleared wholesale, not flood-filled: in this art the outline is the same
+    // colour as the backdrop it sits on, and the sprite reads better without
+    // it once the surrounding block is gone.
+    const doomed = [];
+    for (let i = 0; i < grid.length; i += 1) {
+      if (!gone[i] && near(grid[i], backdrop)) doomed.push(i);
+    }
+    if (doomed.length === 0) break;
+
+    // Once the backdrop and any frame are gone, the next colour out at the
+    // corners is the sprite itself. Refuse a pass that would eat it: peeling
+    // must leave most of the picture standing.
+    const remaining = grid.length - cleared - doomed.length;
+    if (remaining < grid.length * 0.25) break;
+
+    for (const i of doomed) gone[i] = 1;
+    cleared += doomed.length;
+  }
+
   for (let i = 0; i < grid.length; i += 1) {
     const [r, g, b] = grid[i];
     const to = i * 4;
-    if (!keepBackground && backdrop && near(grid[i], backdrop)) {
+    if (gone[i]) {
       out.data[to] = 0;
       out.data[to + 1] = 0;
       out.data[to + 2] = 0;
       out.data[to + 3] = 0;
-      cleared += 1;
       continue;
     }
     out.data[to] = r;

@@ -553,6 +553,9 @@ const ICON_SPRITES = {
     '............',
     '............',
   ],
+  // These two double as check glyphs: the item is the hint for how you get in.
+  mirror: ITEM_SPRITES.mirror,
+  cape: ITEM_SPRITES.cape,
   sparkle: [
     '............',
     '.....kk.....',
@@ -607,6 +610,11 @@ const NPCS = [
 
 const TABLETS = ['Bombos Tablet', 'Ether Tablet', 'Master Sword Pedestal'];
 
+// Ledges you reach by mirroring back from the dark world, and the one you
+// reach by caping through the bumper cave — the item is the hint.
+const MIRROR_SPOTS = ['Cave 45', 'Checkerboard Cave', 'Graveyard Ledge'];
+const CAPE_SPOTS = ['Bumper Cave Ledge'];
+
 const FREESTANDING = [
   "Zora's Ledge",
   'Desert Ledge',
@@ -639,6 +647,8 @@ function kindForCheck(check) {
   const name = check.name;
   if (BOSSES.includes(name)) return 'boss';
   if (TABLETS.includes(name)) return 'tablet';
+  if (MIRROR_SPOTS.includes(name)) return 'mirror';
+  if (CAPE_SPOTS.includes(name)) return 'cape';
   // "MMC - Guy" / "Hype Cave - Guy" are the generous-guy chest rooms.
   if (NPCS.includes(name) || /- Guy$/.test(name)) return 'npc';
   if (FREESTANDING.includes(name)) return 'sparkle';
