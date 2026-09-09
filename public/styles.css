@@ -190,7 +190,7 @@ h2 {
 
 .layout {
   display: grid;
-  grid-template-columns: minmax(320px, 5fr) minmax(360px, 6fr);
+  grid-template-columns: minmax(340px, 2fr) minmax(360px, 3fr);
   gap: 12px;
   padding: 12px 16px 72px;
   align-items: start;
@@ -235,9 +235,8 @@ h2 {
 
 .item-grid {
   display: grid;
-  /* Four to a row, so no group ends on a single stranded tile. */
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 6px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
 }
 
 @media (max-width: 560px) {
@@ -249,13 +248,13 @@ h2 {
 .item {
   position: relative;
   display: grid;
-  grid-template-columns: 36px 1fr;
-  gap: 6px;
+  grid-template-columns: 44px 1fr;
+  gap: 8px;
   align-items: start;
   background: var(--bg-tile);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 7px;
+  padding: 8px;
 }
 
 .item.is-armed {
@@ -268,8 +267,8 @@ h2 {
 }
 
 .item-sprite {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   image-rendering: pixelated;
   display: block;
 }
@@ -282,12 +281,12 @@ h2 {
 .item-body {
   min-width: 0;
   /* Leave room for the pencil parked in the corner. */
-  padding-right: 17px;
+  padding-right: 20px;
 }
 
 .item-name {
   font-weight: 600;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.25;
 }
 
