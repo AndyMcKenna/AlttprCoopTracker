@@ -192,6 +192,164 @@ function crop(png, box, bg) {
   return out;
 }
 
+/**
+ * The colour filling most of a crop's outer ring, if there is one. Inventory
+ * icons are drawn on a solid box whose colour is not the sheet background, so
+ * that box shows up as a ring of one colour around the sprite.
+ */
+function dominantBorderColour(png) {
+  const { data, width, height } = png;
+  const counts = new Map();
+
+  const look = (x, y) => {
+    const at = (y * width + x) * 4;
+    if (data[at + 3] === 0) return;
+    const key = (data[at] << 16) | (data[at + 1] << 8) | data[at + 2];
+    counts.set(key, (counts.get(key) || 0) + 1);
+  };
+
+  for (let x = 0; x < width; x += 1) {
+    look(x, 0);
+    look(x, height - 1);
+  }
+  for (let y = 1; y < height - 1; y += 1) {
+    look(0, y);
+    look(width - 1, y);
+  }
+
+  let best = null;
+  let bestCount = 0;
+  for (const [key, count] of counts) {
+    if (count > bestCount) {
+      best = key;
+      bestCount = count;
+    }
+  }
+  if (best === null) return null;
+
+  // Measured against the whole ring, not just its opaque pixels: a box fills
+  // its ring completely, while a sprite or a caption only touches it here and
+  // there — counting opaque pixels alone would read a caption's letters as a
+  // "background" and eat every stroke joined to the edge.
+  const ring = 2 * width + 2 * height - 4;
+  if (bestCount / ring < 0.7) return null;
+  return { r: (best >> 16) & 255, g: (best >> 8) & 255, b: best & 255 };
+}
+
+/**
+ * Clear `colour` where it is reachable from the crop's edge, so the box
+ * around an icon goes but the same colour inside the artwork stays.
+ * Returns how many pixels were cleared.
+ */
+function clearBoxColour(png, colour) {
+  const { data, width, height } = png;
+  const total = width * height;
+  const fill = new Uint8Array(total);
+  const queue = new Int32Array(total);
+  let tail = 0;
+
+  const matches = (at) =>
+    data[at * 4 + 3] !== 0 &&
+    data[at * 4] === colour.r &&
+    data[at * 4 + 1] === colour.g &&
+    data[at * 4 + 2] === colour.b;
+
+  const push = (at) => {
+    if (fill[at] || !matches(at)) return;
+    fill[at] = 1;
+    queue[tail++] = at;
+  };
+
+  for (let x = 0; x < width; x += 1) {
+    push(x);
+    push((height - 1) * width + x);
+  }
+  for (let y = 0; y < height; y += 1) {
+    push(y * width);
+    push(y * width + width - 1);
+  }
+
+  for (let head = 0; head < tail; head += 1) {
+    const at = queue[head];
+    const x = at % width;
+    const y = (at - x) / width;
+    if (x > 0) push(at - 1);
+    if (x < width - 1) push(at + 1);
+    if (y > 0) push(at - width);
+    if (y < height - 1) push(at + width);
+  }
+
+  let opaque = 0;
+  for (let i = 0; i < total; i += 1) if (data[i * 4 + 3] !== 0) opaque += 1;
+  // If the "box" is nearly the whole image this was a solid swatch, not an
+  // icon on a background; clearing it would leave nothing meaningful.
+  if (tail === 0 || tail > opaque * 0.95) return 0;
+
+  for (let i = 0; i < total; i += 1) {
+    if (fill[i]) data[i * 4 + 3] = 0;
+  }
+  return tail;
+}
+
+/** Tight bounds of the opaque pixels, or null if nothing is left. */
+function opaqueBounds(png) {
+  const { data, width, height } = png;
+  let minX = width;
+  let minY = height;
+  let maxX = -1;
+  let maxY = -1;
+
+  for (let y = 0; y < height; y += 1) {
+    for (let x = 0; x < width; x += 1) {
+      if (data[(y * width + x) * 4 + 3] === 0) continue;
+      if (x < minX) minX = x;
+      if (x > maxX) maxX = x;
+      if (y < minY) minY = y;
+      if (y > maxY) maxY = y;
+    }
+  }
+
+  if (maxX < 0) return null;
+  return { x: minX, y: minY, width: maxX - minX + 1, height: maxY - minY + 1 };
+}
+
+/** Copy a sub-rectangle of an RGBA PNG. */
+function subImage(png, box) {
+  const out = new PNG({ width: box.width, height: box.height });
+  for (let y = 0; y < box.height; y += 1) {
+    for (let x = 0; x < box.width; x += 1) {
+      const from = ((box.y + y) * png.width + (box.x + x)) * 4;
+      const to = (y * box.width + x) * 4;
+      out.data[to] = png.data[from];
+      out.data[to + 1] = png.data[from + 1];
+      out.data[to + 2] = png.data[from + 2];
+      out.data[to + 3] = png.data[from + 3];
+    }
+  }
+  return out;
+}
+
+/**
+ * Peel the box an icon sits on: clear the dominant edge colour, then look
+ * again in case the box had an outline in a second colour, and re-crop to
+ * whatever artwork is left.
+ */
+function stripIconBox(png) {
+  let cleared = 0;
+  for (let pass = 0; pass < 3; pass += 1) {
+    const colour = dominantBorderColour(png);
+    if (!colour) break;
+    const removed = clearBoxColour(png, colour);
+    if (removed === 0) break;
+    cleared += removed;
+  }
+
+  const bounds = opaqueBounds(png);
+  if (!bounds) return null;
+  const tightened = bounds.width !== png.width || bounds.height !== png.height;
+  return { png: tightened ? subImage(png, bounds) : png, offset: bounds, cleared };
+}
+
 function sliceSheet(file) {
   const name = path.basename(file);
   const png = PNG.sync.read(fs.readFileSync(file));
@@ -231,11 +389,26 @@ function sliceSheet(file) {
   const dir = path.join(OUT_DIR, slug(name));
   fs.mkdirSync(dir, { recursive: true });
 
-  const manifest = blobs.map((blob, index) => {
-    const id = String(index + 1).padStart(3, '0');
-    fs.writeFileSync(path.join(dir, id + '.png'), PNG.sync.write(crop(png, blob, bg)));
-    return { file: id + '.png', ...blob };
-  });
+  const manifest = [];
+  for (const blob of blobs) {
+    const stripped = stripIconBox(crop(png, blob, bg));
+    // Nothing but box: a palette swatch or a filled rectangle, not a sprite.
+    if (!stripped) continue;
+
+    const { png: sprite, offset, cleared } = stripped;
+    if (sprite.width < MIN_SIDE || sprite.height < MIN_SIDE) continue;
+
+    const id = String(manifest.length + 1).padStart(3, '0');
+    fs.writeFileSync(path.join(dir, id + '.png'), PNG.sync.write(sprite));
+    manifest.push({
+      file: id + '.png',
+      x: blob.x + offset.x,
+      y: blob.y + offset.y,
+      width: sprite.width,
+      height: sprite.height,
+      boxPixelsCleared: cleared,
+    });
+  }
 
   fs.writeFileSync(
     path.join(dir, 'manifest.json'),
