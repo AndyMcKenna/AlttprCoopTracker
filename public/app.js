@@ -37,6 +37,7 @@ const state = {
   armed: null, // item id waiting for a check click
   regionFilter: new Set(), // empty means "all regions"
   collapsed: new Set(), // region ids folded shut; filled in once data arrives
+  spriteImages: new Set(), // sprite names that have a real image on disk
   search: '',
   hideUsed: false,
   spriteCache: new Map(),
@@ -182,7 +183,10 @@ function buildItemTile(item) {
   const sprite = document.createElement('img');
   sprite.className = 'item-sprite';
   sprite.alt = '';
-  sprite.src = spriteUrl('item:' + item.sprite, state.data.itemSprites[item.sprite]);
+  // A real image wins over the drawn pixel art when one exists for this sprite.
+  sprite.src = state.spriteImages.has(item.sprite)
+    ? 'sprites/items/' + item.sprite + '.png'
+    : spriteUrl('item:' + item.sprite, state.data.itemSprites[item.sprite]);
   tile.appendChild(sprite);
 
   const body = document.createElement('div');
@@ -645,6 +649,7 @@ fetch('/api/data')
     state.data = data;
     state.checksById = new Map(data.checks.map((check) => [check.id, check]));
     state.itemsById = new Map(data.items.map((item) => [item.id, item]));
+    state.spriteImages = new Set(data.spriteImages || []);
     // The two overworlds start open; the dungeons are folded away until needed.
     syncCollapsedToFilter();
     renderRegionFilters();

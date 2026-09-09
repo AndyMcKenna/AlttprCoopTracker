@@ -279,7 +279,10 @@ h2 {
 .item-sprite {
   width: 44px;
   height: 44px;
+  /* Real sprites are small and vary in shape, so scale them up without
+     smoothing and keep their proportions inside the square. */
   image-rendering: pixelated;
+  object-fit: contain;
   display: block;
 }
 

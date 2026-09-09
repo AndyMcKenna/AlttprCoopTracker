@@ -1,5 +1,6 @@
 'use strict';
 
+const fs = require('fs');
 const http = require('http');
 const path = require('path');
 const express = require('express');
@@ -18,6 +19,24 @@ const app = express();
 app.use(express.json({ limit: '32kb' }));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
+// Real sprite images, if any have been dropped in. A file named after an
+// item's `sprite` (public/sprites/items/lamp.png) is used in place of the
+// drawn pixel art; anything missing falls back to the built-in grid, so the
+// tracker still works from a clean checkout with no images at all.
+const ICON_DIR = path.join(__dirname, '..', 'public', 'sprites', 'items');
+
+function availableIcons() {
+  try {
+    return fs
+      .readdirSync(ICON_DIR)
+      .filter((file) => file.toLowerCase().endsWith('.png'))
+      .map((file) => file.replace(/\.png$/i, ''));
+  } catch (err) {
+    if (err.code !== 'ENOENT') console.error('Could not read ' + ICON_DIR + ':', err.message);
+    return [];
+  }
+}
+
 // Static game data. Sent once on load so the client can render sprites and
 // the check list without shipping a second copy of the tables.
 const STATIC_DATA = {
@@ -34,6 +53,7 @@ const STATIC_DATA = {
   checks: CHECKS.map((check) => ({ ...check, icon: kindForCheck(check) })),
   palette: PALETTE,
   itemSprites: ITEM_SPRITES,
+  spriteImages: availableIcons(),
   iconSprites: ICON_SPRITES,
 };
 
