@@ -197,16 +197,25 @@ function renderItems(owners) {
       const body = document.createElement('div');
       body.className = 'item-body';
 
+      const full = entries.length >= item.slots;
+
       const name = document.createElement('div');
       name.className = 'item-name';
       name.textContent = item.name;
+      // Progressive items say how many of their locations are pinned down.
+      if (item.slots > 1) {
+        const count = document.createElement('span');
+        count.className = 'item-count';
+        if (full) count.classList.add('is-full');
+        count.textContent = entries.length + '/' + item.slots;
+        name.appendChild(count);
+      }
       body.appendChild(name);
 
       const edit = document.createElement('button');
       edit.className = 'item-edit';
       edit.type = 'button';
       edit.innerHTML = PENCIL_ICON;
-      const full = entries.length >= item.slots;
       if (full && state.armed !== item.id) edit.classList.add('is-full');
       const label = editLabel(item, entries.length, full);
       edit.title = label;

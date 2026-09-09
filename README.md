@@ -37,8 +37,9 @@ URL (`?room=demo`) and can be edited in the header.
 
 - **Progressive items have several slots.** Sword holds 4 locations, Shield 3,
   Bottle 4, and Mail, Gloves, Boomerang and Bow 2 each — the Bow's second slot
-  is the silver arrows. Single-slot items simply move when you re-assign them;
-  multi-slot items fill up and then say so.
+  is the silver arrows. These carry a `found/total` counter next to the name,
+  green once every slot is placed. Single-slot items simply move when you
+  re-assign them; multi-slot items fill up and then say so.
 - **A check holds one item.** Assigning an item to a check that already has one
   is refused with a message naming the current holder — clear the old entry
   (the `×` next to it) first. Nobody's note gets silently overwritten.
