@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ALTTP Co-op Tracker</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Crect width='12' height='12' fill='%230d0d12'/%3E%3Crect x='5' y='1' width='2' height='7' fill='%23c6c8d4'/%3E%3Crect x='3' y='8' width='6' height='1' fill='%23f2cf3a'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <h1>A Link to the Past &mdash; Co-op Tracker</h1>
+        <input
+          id="room-name"
+          class="room-name"
+          type="text"
+          maxlength="40"
+          aria-label="Session name"
+          placeholder="Session name"
+        />
+      </div>
+
+      <div class="topbar-actions">
+        <span id="status" class="status status-connecting">Connecting…</span>
+        <input
+          id="player-name"
+          class="player-name"
+          type="text"
+          maxlength="40"
+          spellcheck="false"
+          placeholder="Your name"
+          aria-label="Your name"
+        />
+        <span id="players" class="pill" title="Players connected to this room">1 here</span>
+        <label class="room-code">
+          Room
+          <input id="room-input" type="text" maxlength="32" spellcheck="false" />
+        </label>
+        <button id="copy-link" class="btn" type="button">Copy invite link</button>
+        <button id="reset" class="btn btn-danger" type="button">Reset</button>
+      </div>
+    </header>
+
+    <p id="hint" class="hint" hidden></p>
+
+    <main class="layout">
+      <section class="panel panel-items" aria-labelledby="items-heading">
+        <div class="panel-head">
+          <h2 id="items-heading">Items</h2>
+          <span id="items-summary" class="muted"></span>
+        </div>
+        <div id="items" class="items"></div>
+      </section>
+
+      <section class="panel panel-checks" aria-labelledby="checks-heading">
+        <div class="panel-head">
+          <h2 id="checks-heading">Checks</h2>
+          <span id="checks-summary" class="muted"></span>
+        </div>
+        <div class="filters">
+          <input
+            id="search"
+            class="search"
+            type="search"
+            placeholder="Filter checks…"
+            spellcheck="false"
+            aria-label="Filter checks"
+          />
+          <label class="toggle">
+            <input id="hide-used" type="checkbox" />
+            Hide recorded
+          </label>
+        </div>
+        <div id="regions" class="region-filters" role="group" aria-label="Region filter"></div>
+        <div id="checks" class="checks"></div>
+      </section>
+    </main>
+
+    <div id="assign-bar" class="assign-bar" hidden>
+      <span id="assign-bar-text"></span>
+      <button id="assign-cancel" class="btn btn-small" type="button">Cancel (Esc)</button>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
