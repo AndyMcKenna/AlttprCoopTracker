@@ -19,8 +19,6 @@ const el = {
   hint: document.getElementById('hint'),
   items: document.getElementById('items'),
   itemsSummary: document.getElementById('items-summary'),
-  keys: document.getElementById('keys'),
-  keysSummary: document.getElementById('keys-summary'),
   checks: document.getElementById('checks'),
   checksSummary: document.getElementById('checks-summary'),
   regions: document.getElementById('regions'),
@@ -160,19 +158,11 @@ function render() {
   if (!state.data) return;
   const owners = buildOwners();
   renderItems(owners);
-  renderKeys();
   renderChecks(owners);
 
   const mainItems = state.data.items.filter((item) => item.panel === 'items');
   const found = mainItems.filter((item) => assignmentsFor(item.id).length).length;
   el.itemsSummary.textContent = found + ' of ' + mainItems.length + ' located';
-
-  // Keys count individual keys, not boxes: a dungeon's 6 small keys are 6.
-  const keyItems = state.data.items.filter((item) => item.panel === 'keys');
-  const keysFound = keyItems.reduce((sum, item) => sum + assignmentsFor(item.id).length, 0);
-  const keysTotal = keyItems.reduce((sum, item) => sum + item.slots, 0);
-  el.keysSummary.textContent = keysFound + ' of ' + keysTotal + ' located';
-
   el.checksSummary.textContent = owners.size + ' of ' + state.data.checks.length + ' recorded';
 }
 
@@ -265,9 +255,29 @@ function buildItemTile(item) {
   return tile;
 }
 
-/** One row per dungeon: big key first, then the single small-key box. */
-function renderKeys() {
-  const frag = document.createDocumentFragment();
+/**
+ * The Keys group: one row per dungeon, big key first, then the single
+ * small-key box. Rendered as a third group inside the item board.
+ */
+function buildKeysGroup() {
+  const section = document.createElement('div');
+
+  const title = document.createElement('div');
+  title.className = 'item-group-title';
+  title.textContent = 'Keys';
+
+  // Keys count individual keys, not boxes: a dungeon's 6 small keys are 6.
+  const keyItems = state.data.items.filter((item) => item.panel === 'keys');
+  const found = keyItems.reduce((sum, item) => sum + assignmentsFor(item.id).length, 0);
+  const total = keyItems.reduce((sum, item) => sum + item.slots, 0);
+  const count = document.createElement('span');
+  count.className = 'group-count';
+  count.textContent = found + ' of ' + total + ' located';
+  title.appendChild(count);
+  section.appendChild(title);
+
+  const grid = document.createElement('div');
+  grid.className = 'key-grid';
 
   for (const dungeon of state.data.keyPanel) {
     const row = document.createElement('div');
@@ -291,10 +301,11 @@ function renderKeys() {
       row.appendChild(tile);
     }
 
-    frag.appendChild(row);
+    grid.appendChild(row);
   }
 
-  el.keys.replaceChildren(frag);
+  section.appendChild(grid);
+  return section;
 }
 
 function renderItems(owners) {
@@ -319,6 +330,7 @@ function renderItems(owners) {
     frag.appendChild(section);
   }
 
+  frag.appendChild(buildKeysGroup());
   el.items.replaceChildren(frag);
 }
 
