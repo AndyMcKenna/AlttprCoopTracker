@@ -31,7 +31,7 @@ const REGIONS = [
       "Blind's Hideout - Left",
       "Blind's Hideout - Right",
       "Blind's Hideout - Far Right",
-      'Pegasus Rocks',
+      'Bonk Rocks',
       'MMC - Far Left',
       'MMC - Left',
       'MMC - Right',
@@ -167,8 +167,8 @@ const REGIONS = [
     short: 'ToH',
     color: '#d97e42',
     checks: [
-      'Big Key Chest',
       'Basement Cage',
+      'Big Key Chest',
       'Map Chest',
       'Compass Chest',
       'Big Chest',

@@ -539,23 +539,19 @@ const ICON_SPRITES = {
     '..kwkwkwwk..',
     '..kkkkkkkk..',
   ],
-  tablet: [
-    '............',
-    '..kkkkkkkk..',
-    '.keeeeeeeek.',
-    '.kewwwwwwek.',
-    '.kewkkkkwek.',
-    '.kewkwwkwek.',
-    '.kewkkkkwek.',
-    '.kewwwwwwek.',
-    '.keeeeeeeek.',
-    '.kkkkkkkkkk.',
-    '............',
-    '............',
-  ],
-  // These two double as check glyphs: the item is the hint for how you get in.
+  // Item art doubling as check glyphs — see CHECK_ICONS. These are the drawn
+  // fallbacks; a PNG in public/sprites/checks wins when one is present.
   mirror: ITEM_SPRITES.mirror,
   cape: ITEM_SPRITES.cape,
+  book: ITEM_SPRITES.book,
+  sword: ITEM_SPRITES.sword,
+  hammer: ITEM_SPRITES.hammer,
+  boots: ITEM_SPRITES.boots,
+  bottle: ITEM_SPRITES.bottle,
+  flippers: ITEM_SPRITES.flippers,
+  hookshot: ITEM_SPRITES.hookshot,
+  powder: ITEM_SPRITES.powder,
+  glove: ITEM_SPRITES.glove,
   sparkle: [
     '............',
     '.....kk.....',
@@ -588,51 +584,57 @@ const BOSSES = [
 const NPCS = [
   'Bottle Merchant',
   'Sahasrahla',
-  'Sick Kid',
-  'Hobo',
   'King Zora',
-  'Blacksmith',
   'Stumpy',
   'Catfish',
   'Library',
   'Mushroom',
   'Potion Shop',
   'Old Man',
-  'Magic Bat',
   'Purple Chest',
   "Link's Uncle",
-  'Chest Game',
   'Digging Game',
   'Maze Race',
-  'Hammer Pegs',
-  'Mushroom',
 ];
 
-const TABLETS = ['Bombos Tablet', 'Ether Tablet', 'Master Sword Pedestal'];
-
-// Ledges you reach by mirroring back from the dark world, and the one you
-// reach by caping through the bumper cave — the item is the hint.
-const MIRROR_SPOTS = ['Cave 45', 'Checkerboard Cave', 'Graveyard Ledge'];
-const CAPE_SPOTS = ['Bumper Cave Ledge'];
+/**
+ * Checks that show a specific item rather than a generic glyph — usually the
+ * thing that gets you in (mirror, cape, flippers, hammer) or the thing you
+ * read or find there (book, sword). Beats every rule below it.
+ */
+const CHECK_ICONS = new Map([
+  ['Bombos Tablet', 'book'],
+  ['Ether Tablet', 'book'],
+  ['Master Sword Pedestal', 'sword'],
+  ['Hammer Pegs', 'hammer'],
+  ['Chest Game', 'chest'],
+  ['Bonk Rocks', 'boots'],
+  ['Cave 45', 'mirror'],
+  ['Checkerboard Cave', 'mirror'],
+  ['Graveyard Ledge', 'mirror'],
+  ['Bumper Cave Ledge', 'cape'],
+  ['Sick Kid', 'bottle'],
+  ['Hobo', 'flippers'],
+  ["Zora's Ledge", 'flippers'],
+  ['Waterfall Fairy - Left', 'flippers'],
+  ['Waterfall Fairy - Right', 'flippers'],
+  ['Magic Bat', 'powder'],
+  ['Blacksmith', 'glove'],
+]);
 
 const FREESTANDING = [
-  "Zora's Ledge",
   'Desert Ledge',
   'Lake Hylia Island',
   'Sunken Treasure',
   'Floating Island',
   'Spectacle Rock',
   'Pyramid',
-  'Bumper Cave Ledge',
-  'Graveyard Ledge',
   'Lumberjack Tree',
-  'Pegasus Rocks',
   'Flute Spot',
   'Sanctuary',
   'Secret Passage',
   "Bob's Torch",
   'Torch',
-  'Basement Cage',
   "Zelda's Cell",
   'Spectacle Rock Cave',
   'Mimic Cave',
@@ -645,15 +647,21 @@ const FREESTANDING = [
 // Which glyph a check tile gets.
 function kindForCheck(check) {
   const name = check.name;
+  if (CHECK_ICONS.has(name)) return CHECK_ICONS.get(name);
+  // The whole cave is gated behind the hookshot, so every chest in it says so.
+  if (name.startsWith('Hookshot Cave')) return 'hookshot';
+  // Ahead of the "- Guy" rule below, so MMC's generous guy matches too.
+  if (name.startsWith('MMC')) return 'mmc';
   if (BOSSES.includes(name)) return 'boss';
-  if (TABLETS.includes(name)) return 'tablet';
-  if (MIRROR_SPOTS.includes(name)) return 'mirror';
-  if (CAPE_SPOTS.includes(name)) return 'cape';
   // "MMC - Guy" / "Hype Cave - Guy" are the generous-guy chest rooms.
   if (NPCS.includes(name) || /- Guy$/.test(name)) return 'npc';
   if (FREESTANDING.includes(name)) return 'sparkle';
   if (/^Big Chest$/.test(name)) return 'bigchest';
   return 'chest';
 }
+
+// There is no drawn mini-moldorm, so the chest stands in when the image for
+// the MMC checks is missing.
+ICON_SPRITES.mmc = ICON_SPRITES.chest;
 
 module.exports = { PALETTE, ITEM_SPRITES, ICON_SPRITES, kindForCheck };
