@@ -109,6 +109,28 @@ function spriteUrl(cacheKey, grid) {
   return url;
 }
 
+// The one bit of chrome that isn't game art: a pencil for "record a location".
+const PENCIL_ICON =
+  '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">' +
+  '<path d="M11.0 1.2 L14.8 5.0 L4.9 14.9 L0.7 15.3 L1.1 11.1 Z" fill="currentColor"/>' +
+  '<path d="M9.1 3.1 L12.9 6.9" stroke="var(--bg-tile)" stroke-width="1.2" fill="none"/>' +
+  '</svg>';
+
+function editLabel(item, count, full) {
+  if (state.armed === item.id) {
+    return 'Click the check where ' + item.name + ' was found (Esc to cancel)';
+  }
+  if (full) {
+    return item.slots > 1
+      ? item.name + ' already has all ' + item.slots + ' locations'
+      : 'Change where ' + item.name + ' was found';
+  }
+  if (count) {
+    return 'Record another location for ' + item.name + ' (' + count + ' of ' + item.slots + ')';
+  }
+  return 'Record where ' + item.name + ' was found';
+}
+
 /* ---------------------------------------------------------------- derive */
 
 function assignmentsFor(itemId) {
@@ -177,20 +199,17 @@ function renderItems(owners) {
       name.textContent = item.name;
       body.appendChild(name);
 
-      const button = document.createElement('button');
-      button.className = 'item-assign';
-      button.type = 'button';
+      const edit = document.createElement('button');
+      edit.className = 'item-edit';
+      edit.type = 'button';
+      edit.innerHTML = PENCIL_ICON;
       const full = entries.length >= item.slots;
-      if (state.armed === item.id) {
-        button.textContent = 'Pick a check…';
-      } else if (item.slots > 1) {
-        button.textContent =
-          (full ? 'Full' : 'Set location') + ' (' + entries.length + '/' + item.slots + ')';
-      } else {
-        button.textContent = entries.length ? 'Change location' : 'Set location';
-      }
-      button.addEventListener('click', () => toggleArm(item.id));
-      body.appendChild(button);
+      if (full && state.armed !== item.id) edit.classList.add('is-full');
+      const label = editLabel(item, entries.length, full);
+      edit.title = label;
+      edit.setAttribute('aria-label', label);
+      edit.addEventListener('click', () => toggleArm(item.id));
+      tile.appendChild(edit);
 
       if (entries.length) {
         const list = document.createElement('ul');

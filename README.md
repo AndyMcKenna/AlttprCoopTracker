@@ -8,8 +8,8 @@ Fire Rod again?"*
 
 ## How it works
 
-1. Each of the 31 main items is a sprite tile on the left.
-2. Click **Set location** on an item — the tracker arms that item.
+1. Each of the 30 main items is a sprite tile on the left.
+2. Click the **pencil** in the item's top-right corner — the tracker arms it.
 3. Click one of the **216 checks** on the right.
 4. The check's name is stored next to the item's sprite as text, and the check
    tile is marked with the item it holds.

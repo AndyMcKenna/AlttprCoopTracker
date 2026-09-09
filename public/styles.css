@@ -240,6 +240,7 @@ h2 {
 }
 
 .item {
+  position: relative;
   display: grid;
   grid-template-columns: 44px 1fr;
   gap: 8px;
@@ -273,6 +274,8 @@ h2 {
 
 .item-body {
   min-width: 0;
+  /* Leave room for the pencil parked in the corner. */
+  padding-right: 20px;
 }
 
 .item-name {
@@ -280,30 +283,44 @@ h2 {
   font-size: 13px;
 }
 
-.item-assign {
-  margin-top: 4px;
-  width: 100%;
-  background: #2a3042;
-  border: 1px solid var(--line);
+.item-edit {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  background: none;
+  border: 1px solid transparent;
   border-radius: 4px;
-  color: var(--text);
+  color: var(--muted);
   cursor: pointer;
-  font: inherit;
-  font-size: 12px;
-  padding: 3px 6px;
-  text-align: left;
 }
 
-.item-assign:hover {
+.item-edit svg {
+  width: 12px;
+  height: 12px;
+  display: block;
+}
+
+.item-edit:hover,
+.item-edit:focus-visible {
   background: var(--bg-tile-hover);
   border-color: var(--accent-dim);
+  color: var(--accent);
+  outline: none;
 }
 
-.item.is-armed .item-assign {
+.item-edit.is-full {
+  opacity: 0.4;
+}
+
+.item.is-armed .item-edit {
   background: var(--accent);
   border-color: var(--accent);
   color: #201c05;
-  font-weight: 600;
 }
 
 .item-locations {
