@@ -484,18 +484,18 @@ const ICON_SPRITES = {
     '............',
   ],
   boss: [
-    '............',
-    '..kk....kk..',
-    '.krrkkkkrrk.',
-    'krrrrrrrrrrk',
-    'krrrrrrrrrrk',
-    'krrrrrrrrrrk',
-    '.krrrrrrrrk.',
-    '..krrrrrrk..',
-    '...krrrrk...',
-    '....krrk....',
-    '.....kk.....',
-    '............',
+    '...kkkkkk...',
+    '..kwwwwwwk..',
+    '.kwwwwwwwwk.',
+    '.kwkkwwkkwk.',
+    '.kwkkwwkkwk.',
+    '.kwwwwwwwwk.',
+    '.kwwwkkwwwk.',
+    '.kwwwwwwwwk.',
+    '..kwwwwwwk..',
+    '..kwwwwwwk..',
+    '..kwkwkwwk..',
+    '..kkkkkkkk..',
   ],
   tablet: [
     '............',
@@ -597,7 +597,8 @@ function kindForCheck(check) {
   const name = check.name;
   if (BOSSES.includes(name)) return 'boss';
   if (TABLETS.includes(name)) return 'tablet';
-  if (NPCS.includes(name) || /Generous Guy/.test(name)) return 'npc';
+  // "MMC - Guy" / "Hype Cave - Guy" are the generous-guy chest rooms.
+  if (NPCS.includes(name) || /- Guy$/.test(name)) return 'npc';
   if (FREESTANDING.includes(name)) return 'sparkle';
   if (/^Big Chest$/.test(name)) return 'bigchest';
   return 'chest';

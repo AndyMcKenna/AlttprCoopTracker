@@ -364,6 +364,19 @@ function renderChecks(owners) {
   el.checks.scrollTop = scroll;
 }
 
+/**
+ * Filtering to a region is a statement of interest, so that region opens.
+ * Dropping the filter falls back to the default: the two overworlds open and
+ * every dungeon folded. Regions still pinned by another chip stay open.
+ */
+function syncCollapsedToFilter() {
+  state.collapsed = new Set(
+    state.data.regions
+      .map((region) => region.id)
+      .filter((id) => !OPEN_BY_DEFAULT.has(id) && !state.regionFilter.has(id))
+  );
+}
+
 function renderRegionFilters() {
   const frag = document.createDocumentFragment();
 
@@ -382,6 +395,7 @@ function renderRegionFilters() {
     chip.addEventListener('click', () => {
       if (state.regionFilter.has(region.id)) state.regionFilter.delete(region.id);
       else state.regionFilter.add(region.id);
+      syncCollapsedToFilter();
       renderRegionFilters();
       render();
     });
@@ -395,6 +409,7 @@ function renderRegionFilters() {
   all.setAttribute('aria-pressed', String(state.regionFilter.size === 0));
   all.addEventListener('click', () => {
     state.regionFilter.clear();
+    syncCollapsedToFilter();
     renderRegionFilters();
     render();
   });
@@ -561,9 +576,7 @@ fetch('/api/data')
     state.data = data;
     state.checksById = new Map(data.checks.map((check) => [check.id, check]));
     // The two overworlds start open; the dungeons are folded away until needed.
-    state.collapsed = new Set(
-      data.regions.map((region) => region.id).filter((id) => !OPEN_BY_DEFAULT.has(id))
-    );
+    syncCollapsedToFilter();
     renderRegionFilters();
     render();
     connect();
