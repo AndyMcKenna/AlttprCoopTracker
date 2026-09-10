@@ -168,8 +168,8 @@ const REGIONS = [
     color: '#d97e42',
     checks: [
       'Basement Cage',
-      'Big Key Chest',
       'Map Chest',
+      'Big Key Chest',
       'Compass Chest',
       'Big Chest',
       'Moldorm',
