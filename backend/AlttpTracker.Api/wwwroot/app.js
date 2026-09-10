@@ -38,7 +38,6 @@ const state = {
   regionFilter: new Set(), // empty means "all regions"
   collapsed: new Set(), // region ids folded shut; filled in once data arrives
   keysCollapsed: true, // the key board is long; it opens on request
-  apiBaseUrl: '', // the tracker service; comes from /api/data
   spriteImages: new Set(), // sprite names that have a real image on disk
   checkImages: new Set(), // check glyphs that have a real image on disk
   search: '',
@@ -564,9 +563,9 @@ function showHint(message) {
 
 /* ------------------------------------------------------------- transport */
 
-/** Build a URL against the tracker service for the current room. */
+/** The API serves this page, so its routes are relative. */
 function roomUrl(suffix) {
-  return state.apiBaseUrl + '/api/rooms/' + encodeURIComponent(roomId) + (suffix || '');
+  return 'api/rooms/' + encodeURIComponent(roomId) + (suffix || '');
 }
 
 /**
@@ -576,11 +575,6 @@ function roomUrl(suffix) {
  * waiting for the round trip.
  */
 async function send(action) {
-  if (!state.apiBaseUrl) {
-    showHint('No tracker service configured — set API_URL and restart.');
-    return;
-  }
-
   const json = { headers: { 'content-type': 'application/json' } };
   let request;
 
@@ -641,13 +635,9 @@ function connect() {
     socket.close();
   }
 
-  if (!state.apiBaseUrl) {
-    setStatus('No service', 'closed');
-    return;
-  }
-
   setStatus('Connecting…', 'connecting');
-  socket = new WebSocket(state.apiBaseUrl.replace(/^http/, 'ws') + '/ws?room=' + encodeURIComponent(roomId));
+  const scheme = location.protocol === 'https:' ? 'wss' : 'ws';
+  socket = new WebSocket(scheme + '://' + location.host + '/ws?room=' + encodeURIComponent(roomId));
 
   socket.onopen = () => {
     reconnectDelay = 500;
@@ -729,7 +719,7 @@ document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') disarm();
 });
 
-fetch('/api/data')
+fetch('api/gamedata')
   .then((response) => response.json())
   .then((data) => {
     state.data = data;
@@ -737,7 +727,6 @@ fetch('/api/data')
     state.itemsById = new Map(data.items.map((item) => [item.id, item]));
     state.spriteImages = new Set(data.spriteImages || []);
     state.checkImages = new Set(data.checkImages || []);
-    state.apiBaseUrl = (data.apiBaseUrl || '').replace(/\/$/, '');
     // The two overworlds start open; the dungeons are folded away until needed.
     syncCollapsedToFilter();
     renderRegionFilters();

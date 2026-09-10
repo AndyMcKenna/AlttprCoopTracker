@@ -1,6 +1,7 @@
 using AlttpTracker.Api;
 using AlttpTracker.Api.Data;
 using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.EntityFrameworkCore;
 
 namespace AlttpTracker.Api.Tests;
@@ -14,12 +15,14 @@ public class RoomServiceTests : IDisposable
 {
     private readonly SqliteConnection _connection;
     private readonly DbContextOptions<TrackerDbContext> _options;
-    private readonly GameData _gameData;
+    private readonly GameCatalog _catalog;
 
     public RoomServiceTests()
     {
         // A real SQLite database, held in memory: unique indexes and foreign
         // keys behave as they do in production, unlike the in-memory provider.
+        // The model avoids provider-specific column types so it opens here as
+        // well as on the Postgres the app actually runs against.
         _connection = new SqliteConnection("Data Source=:memory:");
         _connection.Open();
 
@@ -30,7 +33,18 @@ public class RoomServiceTests : IDisposable
         using var db = new TrackerDbContext(_options);
         db.Database.EnsureCreated();
 
-        _gameData = GameData.Load(GameDataPath());
+        // The rules read the game from the catalog, and the catalog reads it
+        // from the database, so the tests seed it the same way the app does.
+        new GameDataSeeder(db, NullLogger<GameDataSeeder>.Instance)
+            .SeedAsync(GameDataPath())
+            .GetAwaiter()
+            .GetResult();
+
+        _catalog = new GameCatalog();
+        _catalog
+            .LoadAsync(db, SpriteImages.Scan("no-such-directory", NullLogger.Instance))
+            .GetAwaiter()
+            .GetResult();
     }
 
     private static string GameDataPath()
@@ -54,7 +68,7 @@ public class RoomServiceTests : IDisposable
     private RoomService NewService(out TrackerDbContext db)
     {
         db = new TrackerDbContext(_options);
-        return new RoomService(db, _gameData);
+        return new RoomService(db, _catalog);
     }
 
     public void Dispose() => _connection.Dispose();

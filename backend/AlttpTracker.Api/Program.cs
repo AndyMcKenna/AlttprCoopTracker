@@ -9,37 +9,50 @@ builder.AddServiceDefaults();
 builder.Services.AddOpenApi();
 builder.Services.AddProblemDetails();
 
-// SQLite keeps the tracker to a single file with no container to run, which
-// suits a tool people start on a laptop before a race.
-var connectionString = builder.Configuration.GetConnectionString("tracker")
-    ?? $"Data Source={Path.Combine(builder.Environment.ContentRootPath, "tracker.db")}";
+// Postgres, run as a container by the AppHost. Aspire supplies the connection
+// string and wires up health checks and retries.
+builder.AddNpgsqlDbContext<TrackerDbContext>("tracker");
 
-builder.Services.AddDbContext<TrackerDbContext>(options => options.UseSqlite(connectionString));
-
-builder.Services.AddSingleton(_ =>
-    GameData.Load(Path.Combine(builder.Environment.ContentRootPath, "gamedata.json")));
 builder.Services.AddScoped<RoomService>();
+builder.Services.AddScoped<GameDataSeeder>();
 builder.Services.AddSingleton<RoomBroker>();
 
-// The board is served by the frontend app on its own origin, so it has to be
-// allowed to call this one.
-const string FrontendCors = "frontend";
-builder.Services.AddCors(options => options.AddPolicy(FrontendCors, policy => policy
-    .SetIsOriginAllowed(_ => true)
-    .AllowAnyHeader()
-    .AllowAnyMethod()));
+// Loaded from the database at startup and held for the life of the process.
+builder.Services.AddSingleton<GameCatalog>();
 
 var app = builder.Build();
 
-// Bring the database up to date on start. With SQLite there is no server to
-// wait for, and it means a fresh clone runs without a manual step.
+// Migrate, seed the game from gamedata.json, then read it back into memory.
+// The order matters: the catalog is what the rules and the board both read.
 using (var scope = app.Services.CreateScope())
 {
-    await scope.ServiceProvider.GetRequiredService<TrackerDbContext>().Database.MigrateAsync();
+    var services = scope.ServiceProvider;
+    var db = services.GetRequiredService<TrackerDbContext>();
+
+    await db.Database.MigrateAsync();
+
+    var gameDataPath = Path.Combine(builder.Environment.ContentRootPath, "gamedata.json");
+    await services.GetRequiredService<GameDataSeeder>().SeedAsync(gameDataPath);
+
+    // Which sprite PNGs exist is a fact about the folder they sit in, not the
+    // database, so it is read from disk rather than seeded.
+    var spritesPath = builder.Configuration["Sprites:Path"]
+        ?? Path.Combine(builder.Environment.WebRootPath ?? builder.Environment.ContentRootPath, "sprites");
+
+    var images = SpriteImages.Scan(
+        Path.GetFullPath(spritesPath),
+        services.GetRequiredService<ILogger<Program>>());
+
+    await app.Services.GetRequiredService<GameCatalog>().LoadAsync(db, images);
 }
 
 app.MapDefaultEndpoints();
-app.UseCors(FrontendCors);
+
+// The board itself: index.html and its assets out of wwwroot, same origin as
+// the API it talks to.
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 app.UseWebSockets();
 
 if (app.Environment.IsDevelopment())
@@ -47,7 +60,15 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+// Everything the board needs to draw itself: the regions, the 216 checks, the
+// items and keys, the pixel art, and which sprite images are on disk.
+app.MapGet("/api/gamedata", (GameCatalog catalog) => Results.Ok(catalog.Payload));
+
 var rooms = app.MapGroup("/api/rooms");
+
+// A room code nobody is using, for the button on the home page.
+rooms.MapGet("/new-name", async (TrackerDbContext db, CancellationToken ct) =>
+    Results.Ok(new { room = await RoomNames.SuggestAsync(db, ct) }));
 
 rooms.MapGet("/{roomId}", async (string roomId, RoomService service, CancellationToken ct) =>
     Results.Ok(RoomState.From(await service.GetOrCreateAsync(roomId, ct))));

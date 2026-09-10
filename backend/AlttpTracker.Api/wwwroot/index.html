@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ALTTP Co-op Tracker</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Crect width='12' height='12' fill='%230d0d12'/%3E%3Crect x='5' y='1' width='2' height='7' fill='%23c6c8d4'/%3E%3Crect x='3' y='8' width='6' height='1' fill='%23f2cf3a'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="page">
+    <main class="home">
+      <header class="home-head">
+        <h1>A Link to the Past<span>Co-op Tracker</span></h1>
+        <p class="home-lede">
+          A shared board for co-op runs. One player finds an item, records where
+          it came from, and everyone else sees it straight away.
+        </p>
+      </header>
+
+      <section class="home-start">
+        <button id="generate" class="btn-big" type="button">Generate a room</button>
+        <p class="home-note" id="generate-note">
+          You will get a room code to share. Anyone who opens it joins the same board.
+        </p>
+
+        <form class="home-join" id="join-form">
+          <label for="join-room">Already have a code?</label>
+          <div class="home-join-row">
+            <input
+              id="join-room"
+              type="text"
+              maxlength="32"
+              spellcheck="false"
+              placeholder="brave-deku"
+              autocomplete="off"
+            />
+            <button class="btn" type="submit">Join</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="home-how">
+        <h2>How it works</h2>
+        <ol>
+          <li>Click the pencil on an item to arm it.</li>
+          <li>Click the check where you found it — all 216 are there.</li>
+          <li>The location is recorded next to the item for everyone in the room.</li>
+        </ol>
+        <p class="home-note">
+          Rooms are kept, so closing the tab and coming back later picks the run
+          up where it was. Progressive items hold several locations, and a check
+          only ever holds one item, so nobody overwrites anyone else's note.
+        </p>
+      </section>
+
+      <footer class="home-foot">
+        <a href="changelog.html">Changelog</a>
+      </footer>
+    </main>
+
+    <script src="home.js"></script>
+  </body>
+</html>

@@ -1,1136 +1,4348 @@
 {
-  "generatedFrom": "src/checks.js, src/items.js",
-  "items": [
+  "generatedFrom": "src/checks.js, src/items.js, src/sprites.js",
+  "regions": [
     {
-      "id": "sword",
-      "name": "Sword",
-      "slots": 4
+      "id": "lw",
+      "name": "Light World",
+      "short": "LW",
+      "color": "#3f9e55",
+      "count": 68,
+      "ordinal": 0
     },
     {
-      "id": "shield",
-      "name": "Shield",
-      "slots": 3
+      "id": "dw",
+      "name": "Dark World",
+      "short": "DW",
+      "color": "#8f4fb5",
+      "count": 25,
+      "ordinal": 1
     },
     {
-      "id": "mail",
-      "name": "Mail",
-      "slots": 2
+      "id": "hc",
+      "name": "Hyrule Castle",
+      "short": "HC",
+      "color": "#5f86bf",
+      "count": 8,
+      "ordinal": 2
     },
     {
-      "id": "glove",
-      "name": "Gloves",
-      "slots": 2
+      "id": "ep",
+      "name": "Eastern Palace",
+      "short": "EP",
+      "color": "#2fa877",
+      "count": 6,
+      "ordinal": 3
     },
     {
-      "id": "boots",
-      "name": "Pegasus Boots",
-      "slots": 1
+      "id": "dp",
+      "name": "Desert Palace",
+      "short": "DP",
+      "color": "#d1a72b",
+      "count": 6,
+      "ordinal": 4
     },
     {
-      "id": "flippers",
-      "name": "Flippers",
-      "slots": 1
+      "id": "toh",
+      "name": "Tower of Hera",
+      "short": "ToH",
+      "color": "#d97e42",
+      "count": 6,
+      "ordinal": 5
     },
     {
-      "id": "moonpearl",
-      "name": "Moon Pearl",
-      "slots": 1
+      "id": "ct",
+      "name": "Castle Tower",
+      "short": "CT",
+      "color": "#9295a3",
+      "count": 2,
+      "ordinal": 6
     },
     {
-      "id": "bow",
-      "name": "Bow",
-      "slots": 2
+      "id": "pod",
+      "name": "Palace of Darkness",
+      "short": "PoD",
+      "color": "#5257a0",
+      "count": 14,
+      "ordinal": 7
     },
     {
-      "id": "blueboomerang",
-      "name": "Blue Boomerang",
-      "slots": 1
+      "id": "sp",
+      "name": "Swamp Palace",
+      "short": "SP",
+      "color": "#2f9aa8",
+      "count": 10,
+      "ordinal": 8
     },
     {
-      "id": "redboomerang",
-      "name": "Red Boomerang",
-      "slots": 1
+      "id": "sw",
+      "name": "Skull Woods",
+      "short": "SW",
+      "color": "#74854f",
+      "count": 8,
+      "ordinal": 9
     },
     {
-      "id": "hookshot",
-      "name": "Hookshot",
-      "slots": 1
+      "id": "tt",
+      "name": "Thieves' Town",
+      "short": "TT",
+      "color": "#a86333",
+      "count": 8,
+      "ordinal": 10
     },
     {
-      "id": "mushroom",
-      "name": "Mushroom",
-      "slots": 1
+      "id": "ip",
+      "name": "Ice Palace",
+      "short": "IP",
+      "color": "#4fb3d4",
+      "count": 8,
+      "ordinal": 11
     },
     {
-      "id": "powder",
-      "name": "Magic Powder",
-      "slots": 1
+      "id": "mm",
+      "name": "Misery Mire",
+      "short": "MM",
+      "color": "#8272a8",
+      "count": 8,
+      "ordinal": 12
     },
     {
-      "id": "firerod",
-      "name": "Fire Rod",
-      "slots": 1
+      "id": "tr",
+      "name": "Turtle Rock",
+      "short": "TR",
+      "color": "#c04a41",
+      "count": 12,
+      "ordinal": 13
     },
     {
-      "id": "icerod",
-      "name": "Ice Rod",
-      "slots": 1
-    },
-    {
-      "id": "bombos",
-      "name": "Bombos",
-      "slots": 1
-    },
-    {
-      "id": "ether",
-      "name": "Ether",
-      "slots": 1
-    },
-    {
-      "id": "quake",
-      "name": "Quake",
-      "slots": 1
-    },
-    {
-      "id": "lamp",
-      "name": "Lamp",
-      "slots": 1
-    },
-    {
-      "id": "hammer",
-      "name": "Hammer",
-      "slots": 1
-    },
-    {
-      "id": "shovel",
-      "name": "Shovel",
-      "slots": 1
-    },
-    {
-      "id": "flute",
-      "name": "Flute",
-      "slots": 1
-    },
-    {
-      "id": "bugnet",
-      "name": "Bug Net",
-      "slots": 1
-    },
-    {
-      "id": "book",
-      "name": "Book of Mudora",
-      "slots": 1
-    },
-    {
-      "id": "bottle",
-      "name": "Bottle",
-      "slots": 4
-    },
-    {
-      "id": "somaria",
-      "name": "Cane of Somaria",
-      "slots": 1
-    },
-    {
-      "id": "byrna",
-      "name": "Cane of Byrna",
-      "slots": 1
-    },
-    {
-      "id": "cape",
-      "name": "Magic Cape",
-      "slots": 1
-    },
-    {
-      "id": "mirror",
-      "name": "Magic Mirror",
-      "slots": 1
-    },
-    {
-      "id": "halfmagic",
-      "name": "Half Magic",
-      "slots": 1
-    },
-    {
-      "id": "sk-hc",
-      "name": "HC Small Key",
-      "slots": 1
-    },
-    {
-      "id": "sk-ct",
-      "name": "CT Small Key",
-      "slots": 2
-    },
-    {
-      "id": "bk-ep",
-      "name": "EP Big Key",
-      "slots": 1
-    },
-    {
-      "id": "bk-dp",
-      "name": "DP Big Key",
-      "slots": 1
-    },
-    {
-      "id": "sk-dp",
-      "name": "DP Small Key",
-      "slots": 1
-    },
-    {
-      "id": "bk-toh",
-      "name": "ToH Big Key",
-      "slots": 1
-    },
-    {
-      "id": "sk-toh",
-      "name": "ToH Small Key",
-      "slots": 1
-    },
-    {
-      "id": "bk-pod",
-      "name": "PoD Big Key",
-      "slots": 1
-    },
-    {
-      "id": "sk-pod",
-      "name": "PoD Small Key",
-      "slots": 6
-    },
-    {
-      "id": "bk-sp",
-      "name": "SP Big Key",
-      "slots": 1
-    },
-    {
-      "id": "sk-sp",
-      "name": "SP Small Key",
-      "slots": 1
-    },
-    {
-      "id": "bk-sw",
-      "name": "SW Big Key",
-      "slots": 1
-    },
-    {
-      "id": "sk-sw",
-      "name": "SW Small Key",
-      "slots": 3
-    },
-    {
-      "id": "bk-tt",
-      "name": "TT Big Key",
-      "slots": 1
-    },
-    {
-      "id": "sk-tt",
-      "name": "TT Small Key",
-      "slots": 1
-    },
-    {
-      "id": "bk-ip",
-      "name": "IP Big Key",
-      "slots": 1
-    },
-    {
-      "id": "sk-ip",
-      "name": "IP Small Key",
-      "slots": 2
-    },
-    {
-      "id": "bk-mm",
-      "name": "MM Big Key",
-      "slots": 1
-    },
-    {
-      "id": "sk-mm",
-      "name": "MM Small Key",
-      "slots": 3
-    },
-    {
-      "id": "bk-tr",
-      "name": "TR Big Key",
-      "slots": 1
-    },
-    {
-      "id": "sk-tr",
-      "name": "TR Small Key",
-      "slots": 4
-    },
-    {
-      "id": "bk-gt",
-      "name": "GT Big Key",
-      "slots": 1
-    },
-    {
-      "id": "sk-gt",
-      "name": "GT Small Key",
-      "slots": 4
+      "id": "gt",
+      "name": "Ganon's Tower",
+      "short": "GT",
+      "color": "#ab4283",
+      "count": 27,
+      "ordinal": 14
     }
   ],
   "checks": [
     {
       "id": "lw/links-house",
-      "fullName": "Light World - Link's House"
+      "name": "Link's House",
+      "fullName": "Light World - Link's House",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "link",
+      "ordinal": 0
     },
     {
       "id": "lw/links-uncle",
-      "fullName": "Light World - Link's Uncle"
+      "name": "Link's Uncle",
+      "fullName": "Light World - Link's Uncle",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "uncle",
+      "ordinal": 1
     },
     {
       "id": "lw/secret-passage",
-      "fullName": "Light World - Secret Passage"
+      "name": "Secret Passage",
+      "fullName": "Light World - Secret Passage",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "sparkle",
+      "ordinal": 2
     },
     {
       "id": "lw/kings-tomb",
-      "fullName": "Light World - King's Tomb"
+      "name": "King's Tomb",
+      "fullName": "Light World - King's Tomb",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "boots",
+      "ordinal": 3
     },
     {
       "id": "lw/kakariko-tavern",
-      "fullName": "Light World - Kakariko Tavern"
+      "name": "Kakariko Tavern",
+      "fullName": "Light World - Kakariko Tavern",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "ordinal": 4
     },
     {
       "id": "lw/chicken-house",
-      "fullName": "Light World - Chicken House"
+      "name": "Chicken House",
+      "fullName": "Light World - Chicken House",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chicken",
+      "ordinal": 5
     },
     {
       "id": "lw/aginahs-cave",
-      "fullName": "Light World - Aginah's Cave"
+      "name": "Aginah's Cave",
+      "fullName": "Light World - Aginah's Cave",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "bomb",
+      "ordinal": 6
     },
     {
       "id": "lw/sahasrahlas-hut-left",
-      "fullName": "Light World - Sahasrahla's Hut - Left"
+      "name": "Sahasrahla's Hut - Left",
+      "fullName": "Light World - Sahasrahla's Hut - Left",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "ordinal": 7
     },
     {
       "id": "lw/sahasrahlas-hut-middle",
-      "fullName": "Light World - Sahasrahla's Hut - Middle"
+      "name": "Sahasrahla's Hut - Middle",
+      "fullName": "Light World - Sahasrahla's Hut - Middle",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "ordinal": 8
     },
     {
       "id": "lw/sahasrahlas-hut-right",
-      "fullName": "Light World - Sahasrahla's Hut - Right"
+      "name": "Sahasrahla's Hut - Right",
+      "fullName": "Light World - Sahasrahla's Hut - Right",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "ordinal": 9
     },
     {
       "id": "lw/sahasrahla",
-      "fullName": "Light World - Sahasrahla"
+      "name": "Sahasrahla",
+      "fullName": "Light World - Sahasrahla",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "greenpendant",
+      "ordinal": 10
     },
     {
       "id": "lw/kakariko-well-top",
-      "fullName": "Light World - Kakariko Well - Top"
+      "name": "Kakariko Well - Top",
+      "fullName": "Light World - Kakariko Well - Top",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "ordinal": 11
     },
     {
       "id": "lw/kakariko-well-left",
-      "fullName": "Light World - Kakariko Well - Left"
+      "name": "Kakariko Well - Left",
+      "fullName": "Light World - Kakariko Well - Left",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "ordinal": 12
     },
     {
       "id": "lw/kakariko-well-middle",
-      "fullName": "Light World - Kakariko Well - Middle"
+      "name": "Kakariko Well - Middle",
+      "fullName": "Light World - Kakariko Well - Middle",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "ordinal": 13
     },
     {
       "id": "lw/kakariko-well-right",
-      "fullName": "Light World - Kakariko Well - Right"
+      "name": "Kakariko Well - Right",
+      "fullName": "Light World - Kakariko Well - Right",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "ordinal": 14
     },
     {
       "id": "lw/kakariko-well-bottom",
-      "fullName": "Light World - Kakariko Well - Bottom"
+      "name": "Kakariko Well - Bottom",
+      "fullName": "Light World - Kakariko Well - Bottom",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "ordinal": 15
     },
     {
       "id": "lw/blinds-hideout-top",
-      "fullName": "Light World - Blind's Hideout - Top"
+      "name": "Blind's Hideout - Top",
+      "fullName": "Light World - Blind's Hideout - Top",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "ordinal": 16
     },
     {
       "id": "lw/blinds-hideout-far-left",
-      "fullName": "Light World - Blind's Hideout - Far Left"
+      "name": "Blind's Hideout - Far Left",
+      "fullName": "Light World - Blind's Hideout - Far Left",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "ordinal": 17
     },
     {
       "id": "lw/blinds-hideout-left",
-      "fullName": "Light World - Blind's Hideout - Left"
+      "name": "Blind's Hideout - Left",
+      "fullName": "Light World - Blind's Hideout - Left",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "ordinal": 18
     },
     {
       "id": "lw/blinds-hideout-right",
-      "fullName": "Light World - Blind's Hideout - Right"
+      "name": "Blind's Hideout - Right",
+      "fullName": "Light World - Blind's Hideout - Right",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "ordinal": 19
     },
     {
       "id": "lw/blinds-hideout-far-right",
-      "fullName": "Light World - Blind's Hideout - Far Right"
+      "name": "Blind's Hideout - Far Right",
+      "fullName": "Light World - Blind's Hideout - Far Right",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "ordinal": 20
     },
     {
       "id": "lw/bonk-rocks",
-      "fullName": "Light World - Bonk Rocks"
+      "name": "Bonk Rocks",
+      "fullName": "Light World - Bonk Rocks",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "boots",
+      "ordinal": 21
     },
     {
       "id": "lw/mmc-far-left",
-      "fullName": "Light World - MMC - Far Left"
+      "name": "MMC - Far Left",
+      "fullName": "Light World - MMC - Far Left",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "mmc",
+      "ordinal": 22
     },
     {
       "id": "lw/mmc-left",
-      "fullName": "Light World - MMC - Left"
+      "name": "MMC - Left",
+      "fullName": "Light World - MMC - Left",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "mmc",
+      "ordinal": 23
     },
     {
       "id": "lw/mmc-right",
-      "fullName": "Light World - MMC - Right"
+      "name": "MMC - Right",
+      "fullName": "Light World - MMC - Right",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "mmc",
+      "ordinal": 24
     },
     {
       "id": "lw/mmc-far-right",
-      "fullName": "Light World - MMC - Far Right"
+      "name": "MMC - Far Right",
+      "fullName": "Light World - MMC - Far Right",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "mmc",
+      "ordinal": 25
     },
     {
       "id": "lw/mmc-guy",
-      "fullName": "Light World - MMC - Guy"
+      "name": "MMC - Guy",
+      "fullName": "Light World - MMC - Guy",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "mmc",
+      "ordinal": 26
     },
     {
       "id": "lw/ice-rod-cave",
-      "fullName": "Light World - Ice Rod Cave"
+      "name": "Ice Rod Cave",
+      "fullName": "Light World - Ice Rod Cave",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "icerod",
+      "ordinal": 27
     },
     {
       "id": "lw/bottle-merchant",
-      "fullName": "Light World - Bottle Merchant"
+      "name": "Bottle Merchant",
+      "fullName": "Light World - Bottle Merchant",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "rupee",
+      "ordinal": 28
     },
     {
       "id": "lw/magic-bat",
-      "fullName": "Light World - Magic Bat"
+      "name": "Magic Bat",
+      "fullName": "Light World - Magic Bat",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "powder",
+      "ordinal": 29
     },
     {
       "id": "lw/sick-kid",
-      "fullName": "Light World - Sick Kid"
+      "name": "Sick Kid",
+      "fullName": "Light World - Sick Kid",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "bottle",
+      "ordinal": 30
     },
     {
       "id": "lw/hobo",
-      "fullName": "Light World - Hobo"
+      "name": "Hobo",
+      "fullName": "Light World - Hobo",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "flippers",
+      "ordinal": 31
     },
     {
       "id": "lw/bombos-tablet",
-      "fullName": "Light World - Bombos Tablet"
+      "name": "Bombos Tablet",
+      "fullName": "Light World - Bombos Tablet",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "book",
+      "ordinal": 32
     },
     {
       "id": "lw/ether-tablet",
-      "fullName": "Light World - Ether Tablet"
+      "name": "Ether Tablet",
+      "fullName": "Light World - Ether Tablet",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "book",
+      "ordinal": 33
     },
     {
       "id": "lw/king-zora",
-      "fullName": "Light World - King Zora"
+      "name": "King Zora",
+      "fullName": "Light World - King Zora",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "zora",
+      "ordinal": 34
     },
     {
       "id": "lw/lost-woods-hideout",
-      "fullName": "Light World - Lost Woods Hideout"
+      "name": "Lost Woods Hideout",
+      "fullName": "Light World - Lost Woods Hideout",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "sparkle",
+      "ordinal": 35
     },
     {
       "id": "lw/lumberjack-tree",
-      "fullName": "Light World - Lumberjack Tree"
+      "name": "Lumberjack Tree",
+      "fullName": "Light World - Lumberjack Tree",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "boots",
+      "ordinal": 36
     },
     {
       "id": "lw/cave-45",
-      "fullName": "Light World - Cave 45"
+      "name": "Cave 45",
+      "fullName": "Light World - Cave 45",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "mirror",
+      "ordinal": 37
     },
     {
       "id": "lw/graveyard-ledge",
-      "fullName": "Light World - Graveyard Ledge"
+      "name": "Graveyard Ledge",
+      "fullName": "Light World - Graveyard Ledge",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "mirror",
+      "ordinal": 38
     },
     {
       "id": "lw/checkerboard-cave",
-      "fullName": "Light World - Checkerboard Cave"
+      "name": "Checkerboard Cave",
+      "fullName": "Light World - Checkerboard Cave",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "mirror",
+      "ordinal": 39
     },
     {
       "id": "lw/library",
-      "fullName": "Light World - Library"
+      "name": "Library",
+      "fullName": "Light World - Library",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "boots",
+      "ordinal": 40
     },
     {
       "id": "lw/mushroom",
-      "fullName": "Light World - Mushroom"
+      "name": "Mushroom",
+      "fullName": "Light World - Mushroom",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "mushroom",
+      "ordinal": 41
     },
     {
       "id": "lw/potion-shop",
-      "fullName": "Light World - Potion Shop"
+      "name": "Potion Shop",
+      "fullName": "Light World - Potion Shop",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "npc",
+      "ordinal": 42
     },
     {
       "id": "lw/maze-race",
-      "fullName": "Light World - Maze Race"
+      "name": "Maze Race",
+      "fullName": "Light World - Maze Race",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "npc",
+      "ordinal": 43
     },
     {
       "id": "lw/desert-ledge",
-      "fullName": "Light World - Desert Ledge"
+      "name": "Desert Ledge",
+      "fullName": "Light World - Desert Ledge",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "sparkle",
+      "ordinal": 44
     },
     {
       "id": "lw/lake-hylia-island",
-      "fullName": "Light World - Lake Hylia Island"
+      "name": "Lake Hylia Island",
+      "fullName": "Light World - Lake Hylia Island",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "mirror",
+      "ordinal": 45
     },
     {
       "id": "lw/sunken-treasure",
-      "fullName": "Light World - Sunken Treasure"
+      "name": "Sunken Treasure",
+      "fullName": "Light World - Sunken Treasure",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "sparkle",
+      "ordinal": 46
     },
     {
       "id": "lw/floodgate-chest",
-      "fullName": "Light World - Floodgate Chest"
+      "name": "Floodgate Chest",
+      "fullName": "Light World - Floodgate Chest",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "ordinal": 47
     },
     {
       "id": "lw/zoras-ledge",
-      "fullName": "Light World - Zora's Ledge"
+      "name": "Zora's Ledge",
+      "fullName": "Light World - Zora's Ledge",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "flippers",
+      "ordinal": 48
     },
     {
       "id": "lw/dig-spot",
-      "fullName": "Light World - Dig Spot"
+      "name": "Dig Spot",
+      "fullName": "Light World - Dig Spot",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "shovel",
+      "ordinal": 49
     },
     {
       "id": "lw/waterfall-fairy-left",
-      "fullName": "Light World - Waterfall Fairy - Left"
+      "name": "Waterfall Fairy - Left",
+      "fullName": "Light World - Waterfall Fairy - Left",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "flippers",
+      "ordinal": 50
     },
     {
       "id": "lw/waterfall-fairy-right",
-      "fullName": "Light World - Waterfall Fairy - Right"
+      "name": "Waterfall Fairy - Right",
+      "fullName": "Light World - Waterfall Fairy - Right",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "flippers",
+      "ordinal": 51
     },
     {
       "id": "lw/blacksmith",
-      "fullName": "Light World - Blacksmith"
+      "name": "Blacksmith",
+      "fullName": "Light World - Blacksmith",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "glove",
+      "ordinal": 52
     },
     {
       "id": "lw/purple-chest",
-      "fullName": "Light World - Purple Chest"
+      "name": "Purple Chest",
+      "fullName": "Light World - Purple Chest",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "purplechest",
+      "ordinal": 53
     },
     {
       "id": "lw/old-man",
-      "fullName": "Light World - Old Man"
+      "name": "Old Man",
+      "fullName": "Light World - Old Man",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "oldman",
+      "ordinal": 54
     },
     {
       "id": "lw/spectacle-rock-cave",
-      "fullName": "Light World - Spectacle Rock Cave"
+      "name": "Spectacle Rock Cave",
+      "fullName": "Light World - Spectacle Rock Cave",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "ordinal": 55
     },
     {
       "id": "lw/spectacle-rock",
-      "fullName": "Light World - Spectacle Rock"
+      "name": "Spectacle Rock",
+      "fullName": "Light World - Spectacle Rock",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "mirror",
+      "ordinal": 56
     },
     {
       "id": "lw/spiral-cave",
-      "fullName": "Light World - Spiral Cave"
+      "name": "Spiral Cave",
+      "fullName": "Light World - Spiral Cave",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "ordinal": 57
     },
     {
       "id": "lw/mimic-cave",
-      "fullName": "Light World - Mimic Cave"
+      "name": "Mimic Cave",
+      "fullName": "Light World - Mimic Cave",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "mirror",
+      "ordinal": 58
     },
     {
       "id": "lw/paradox-lower-far-left",
-      "fullName": "Light World - Paradox Lower - Far Left"
+      "name": "Paradox Lower - Far Left",
+      "fullName": "Light World - Paradox Lower - Far Left",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "ordinal": 59
     },
     {
       "id": "lw/paradox-lower-left",
-      "fullName": "Light World - Paradox Lower - Left"
+      "name": "Paradox Lower - Left",
+      "fullName": "Light World - Paradox Lower - Left",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "ordinal": 60
     },
     {
       "id": "lw/paradox-lower-middle",
-      "fullName": "Light World - Paradox Lower - Middle"
+      "name": "Paradox Lower - Middle",
+      "fullName": "Light World - Paradox Lower - Middle",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "ordinal": 61
     },
     {
       "id": "lw/paradox-lower-right",
-      "fullName": "Light World - Paradox Lower - Right"
+      "name": "Paradox Lower - Right",
+      "fullName": "Light World - Paradox Lower - Right",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "ordinal": 62
     },
     {
       "id": "lw/paradox-lower-far-right",
-      "fullName": "Light World - Paradox Lower - Far Right"
+      "name": "Paradox Lower - Far Right",
+      "fullName": "Light World - Paradox Lower - Far Right",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "ordinal": 63
     },
     {
       "id": "lw/paradox-upper-left",
-      "fullName": "Light World - Paradox Upper - Left"
+      "name": "Paradox Upper - Left",
+      "fullName": "Light World - Paradox Upper - Left",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "ordinal": 64
     },
     {
       "id": "lw/paradox-upper-right",
-      "fullName": "Light World - Paradox Upper - Right"
+      "name": "Paradox Upper - Right",
+      "fullName": "Light World - Paradox Upper - Right",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "ordinal": 65
     },
     {
       "id": "lw/floating-island",
-      "fullName": "Light World - Floating Island"
+      "name": "Floating Island",
+      "fullName": "Light World - Floating Island",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "mirror",
+      "ordinal": 66
     },
     {
       "id": "lw/master-sword-pedestal",
-      "fullName": "Light World - Master Sword Pedestal"
+      "name": "Master Sword Pedestal",
+      "fullName": "Light World - Master Sword Pedestal",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "sword",
+      "ordinal": 67
     },
     {
       "id": "dw/bumper-cave-ledge",
-      "fullName": "Dark World - Bumper Cave Ledge"
+      "name": "Bumper Cave Ledge",
+      "fullName": "Dark World - Bumper Cave Ledge",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "cape",
+      "ordinal": 68
     },
     {
       "id": "dw/catfish",
-      "fullName": "Dark World - Catfish"
+      "name": "Catfish",
+      "fullName": "Dark World - Catfish",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "catfish",
+      "ordinal": 69
     },
     {
       "id": "dw/pyramid",
-      "fullName": "Dark World - Pyramid"
+      "name": "Pyramid",
+      "fullName": "Dark World - Pyramid",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "pyramid",
+      "ordinal": 70
     },
     {
       "id": "dw/pyramid-fairy-left",
-      "fullName": "Dark World - Pyramid Fairy - Left"
+      "name": "Pyramid Fairy - Left",
+      "fullName": "Dark World - Pyramid Fairy - Left",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "superbomb",
+      "ordinal": 71
     },
     {
       "id": "dw/pyramid-fairy-right",
-      "fullName": "Dark World - Pyramid Fairy - Right"
+      "name": "Pyramid Fairy - Right",
+      "fullName": "Dark World - Pyramid Fairy - Right",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "superbomb",
+      "ordinal": 72
     },
     {
       "id": "dw/brewery",
-      "fullName": "Dark World - Brewery"
+      "name": "Brewery",
+      "fullName": "Dark World - Brewery",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "chest",
+      "ordinal": 73
     },
     {
       "id": "dw/c-shaped-house",
-      "fullName": "Dark World - C-Shaped House"
+      "name": "C-Shaped House",
+      "fullName": "Dark World - C-Shaped House",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "chest",
+      "ordinal": 74
     },
     {
       "id": "dw/chest-game",
-      "fullName": "Dark World - Chest Game"
+      "name": "Chest Game",
+      "fullName": "Dark World - Chest Game",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "chest",
+      "ordinal": 75
     },
     {
       "id": "dw/hammer-pegs",
-      "fullName": "Dark World - Hammer Pegs"
+      "name": "Hammer Pegs",
+      "fullName": "Dark World - Hammer Pegs",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "hammer",
+      "ordinal": 76
     },
     {
       "id": "dw/stumpy",
-      "fullName": "Dark World - Stumpy"
+      "name": "Stumpy",
+      "fullName": "Dark World - Stumpy",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "stumpy",
+      "ordinal": 77
     },
     {
       "id": "dw/digging-game",
-      "fullName": "Dark World - Digging Game"
+      "name": "Digging Game",
+      "fullName": "Dark World - Digging Game",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "shovel",
+      "ordinal": 78
     },
     {
       "id": "dw/hype-cave-top",
-      "fullName": "Dark World - Hype Cave - Top"
+      "name": "Hype Cave - Top",
+      "fullName": "Dark World - Hype Cave - Top",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "bomb",
+      "ordinal": 79
     },
     {
       "id": "dw/hype-cave-left",
-      "fullName": "Dark World - Hype Cave - Left"
+      "name": "Hype Cave - Left",
+      "fullName": "Dark World - Hype Cave - Left",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "bomb",
+      "ordinal": 80
     },
     {
       "id": "dw/hype-cave-right",
-      "fullName": "Dark World - Hype Cave - Right"
+      "name": "Hype Cave - Right",
+      "fullName": "Dark World - Hype Cave - Right",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "bomb",
+      "ordinal": 81
     },
     {
       "id": "dw/hype-cave-bottom",
-      "fullName": "Dark World - Hype Cave - Bottom"
+      "name": "Hype Cave - Bottom",
+      "fullName": "Dark World - Hype Cave - Bottom",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "bomb",
+      "ordinal": 82
     },
     {
       "id": "dw/hype-cave-guy",
-      "fullName": "Dark World - Hype Cave - Guy"
+      "name": "Hype Cave - Guy",
+      "fullName": "Dark World - Hype Cave - Guy",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "bomb",
+      "ordinal": 83
     },
     {
       "id": "dw/mire-shed-left",
-      "fullName": "Dark World - Mire Shed - Left"
+      "name": "Mire Shed - Left",
+      "fullName": "Dark World - Mire Shed - Left",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "mireshed",
+      "ordinal": 84
     },
     {
       "id": "dw/mire-shed-right",
-      "fullName": "Dark World - Mire Shed - Right"
+      "name": "Mire Shed - Right",
+      "fullName": "Dark World - Mire Shed - Right",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "mireshed",
+      "ordinal": 85
     },
     {
       "id": "dw/super-bunny-cave-top",
-      "fullName": "Dark World - Super Bunny Cave - Top"
+      "name": "Super Bunny Cave - Top",
+      "fullName": "Dark World - Super Bunny Cave - Top",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "bunny",
+      "ordinal": 86
     },
     {
       "id": "dw/super-bunny-cave-bottom",
-      "fullName": "Dark World - Super Bunny Cave - Bottom"
+      "name": "Super Bunny Cave - Bottom",
+      "fullName": "Dark World - Super Bunny Cave - Bottom",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "bunny",
+      "ordinal": 87
     },
     {
       "id": "dw/spike-cave",
-      "fullName": "Dark World - Spike Cave"
+      "name": "Spike Cave",
+      "fullName": "Dark World - Spike Cave",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "spike",
+      "ordinal": 88
     },
     {
       "id": "dw/hookshot-cave-bottom-right",
-      "fullName": "Dark World - Hookshot Cave - Bottom Right"
+      "name": "Hookshot Cave - Bottom Right",
+      "fullName": "Dark World - Hookshot Cave - Bottom Right",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "hookshot",
+      "ordinal": 89
     },
     {
       "id": "dw/hookshot-cave-bottom-left",
-      "fullName": "Dark World - Hookshot Cave - Bottom Left"
+      "name": "Hookshot Cave - Bottom Left",
+      "fullName": "Dark World - Hookshot Cave - Bottom Left",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "hookshot",
+      "ordinal": 90
     },
     {
       "id": "dw/hookshot-cave-top-left",
-      "fullName": "Dark World - Hookshot Cave - Top Left"
+      "name": "Hookshot Cave - Top Left",
+      "fullName": "Dark World - Hookshot Cave - Top Left",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "hookshot",
+      "ordinal": 91
     },
     {
       "id": "dw/hookshot-cave-top-right",
-      "fullName": "Dark World - Hookshot Cave - Top Right"
+      "name": "Hookshot Cave - Top Right",
+      "fullName": "Dark World - Hookshot Cave - Top Right",
+      "region": "dw",
+      "regionName": "Dark World",
+      "regionShort": "DW",
+      "icon": "hookshot",
+      "ordinal": 92
     },
     {
       "id": "hc/map-chest",
-      "fullName": "Hyrule Castle - Map Chest"
+      "name": "Map Chest",
+      "fullName": "Hyrule Castle - Map Chest",
+      "region": "hc",
+      "regionName": "Hyrule Castle",
+      "regionShort": "HC",
+      "icon": "chest",
+      "ordinal": 93
     },
     {
       "id": "hc/boomerang-chest",
-      "fullName": "Hyrule Castle - Boomerang Chest"
+      "name": "Boomerang Chest",
+      "fullName": "Hyrule Castle - Boomerang Chest",
+      "region": "hc",
+      "regionName": "Hyrule Castle",
+      "regionShort": "HC",
+      "icon": "chest",
+      "ordinal": 94
     },
     {
       "id": "hc/zeldas-cell",
-      "fullName": "Hyrule Castle - Zelda's Cell"
+      "name": "Zelda's Cell",
+      "fullName": "Hyrule Castle - Zelda's Cell",
+      "region": "hc",
+      "regionName": "Hyrule Castle",
+      "regionShort": "HC",
+      "icon": "sparkle",
+      "ordinal": 95
     },
     {
       "id": "hc/sewers-dark-cross",
-      "fullName": "Hyrule Castle - Sewers - Dark Cross"
+      "name": "Sewers - Dark Cross",
+      "fullName": "Hyrule Castle - Sewers - Dark Cross",
+      "region": "hc",
+      "regionName": "Hyrule Castle",
+      "regionShort": "HC",
+      "icon": "chest",
+      "ordinal": 96
     },
     {
       "id": "hc/sewers-secret-room-left",
-      "fullName": "Hyrule Castle - Sewers - Secret Room Left"
+      "name": "Sewers - Secret Room Left",
+      "fullName": "Hyrule Castle - Sewers - Secret Room Left",
+      "region": "hc",
+      "regionName": "Hyrule Castle",
+      "regionShort": "HC",
+      "icon": "chest",
+      "ordinal": 97
     },
     {
       "id": "hc/sewers-secret-room-middle",
-      "fullName": "Hyrule Castle - Sewers - Secret Room Middle"
+      "name": "Sewers - Secret Room Middle",
+      "fullName": "Hyrule Castle - Sewers - Secret Room Middle",
+      "region": "hc",
+      "regionName": "Hyrule Castle",
+      "regionShort": "HC",
+      "icon": "chest",
+      "ordinal": 98
     },
     {
       "id": "hc/sewers-secret-room-right",
-      "fullName": "Hyrule Castle - Sewers - Secret Room Right"
+      "name": "Sewers - Secret Room Right",
+      "fullName": "Hyrule Castle - Sewers - Secret Room Right",
+      "region": "hc",
+      "regionName": "Hyrule Castle",
+      "regionShort": "HC",
+      "icon": "chest",
+      "ordinal": 99
     },
     {
       "id": "hc/sanctuary",
-      "fullName": "Hyrule Castle - Sanctuary"
+      "name": "Sanctuary",
+      "fullName": "Hyrule Castle - Sanctuary",
+      "region": "hc",
+      "regionName": "Hyrule Castle",
+      "regionShort": "HC",
+      "icon": "sparkle",
+      "ordinal": 100
     },
     {
       "id": "ep/cannonball-chest",
-      "fullName": "Eastern Palace - Cannonball Chest"
+      "name": "Cannonball Chest",
+      "fullName": "Eastern Palace - Cannonball Chest",
+      "region": "ep",
+      "regionName": "Eastern Palace",
+      "regionShort": "EP",
+      "icon": "chest",
+      "ordinal": 101
     },
     {
       "id": "ep/map-chest",
-      "fullName": "Eastern Palace - Map Chest"
+      "name": "Map Chest",
+      "fullName": "Eastern Palace - Map Chest",
+      "region": "ep",
+      "regionName": "Eastern Palace",
+      "regionShort": "EP",
+      "icon": "chest",
+      "ordinal": 102
     },
     {
       "id": "ep/compass-chest",
-      "fullName": "Eastern Palace - Compass Chest"
+      "name": "Compass Chest",
+      "fullName": "Eastern Palace - Compass Chest",
+      "region": "ep",
+      "regionName": "Eastern Palace",
+      "regionShort": "EP",
+      "icon": "chest",
+      "ordinal": 103
     },
     {
       "id": "ep/big-chest",
-      "fullName": "Eastern Palace - Big Chest"
+      "name": "Big Chest",
+      "fullName": "Eastern Palace - Big Chest",
+      "region": "ep",
+      "regionName": "Eastern Palace",
+      "regionShort": "EP",
+      "icon": "bigchest",
+      "ordinal": 104
     },
     {
       "id": "ep/big-key-chest",
-      "fullName": "Eastern Palace - Big Key Chest"
+      "name": "Big Key Chest",
+      "fullName": "Eastern Palace - Big Key Chest",
+      "region": "ep",
+      "regionName": "Eastern Palace",
+      "regionShort": "EP",
+      "icon": "chest",
+      "ordinal": 105
     },
     {
       "id": "ep/armos-knights",
-      "fullName": "Eastern Palace - Armos Knights"
+      "name": "Armos Knights",
+      "fullName": "Eastern Palace - Armos Knights",
+      "region": "ep",
+      "regionName": "Eastern Palace",
+      "regionShort": "EP",
+      "icon": "boss",
+      "ordinal": 106
     },
     {
       "id": "dp/map-chest",
-      "fullName": "Desert Palace - Map Chest"
+      "name": "Map Chest",
+      "fullName": "Desert Palace - Map Chest",
+      "region": "dp",
+      "regionName": "Desert Palace",
+      "regionShort": "DP",
+      "icon": "chest",
+      "ordinal": 107
     },
     {
       "id": "dp/torch",
-      "fullName": "Desert Palace - Torch"
+      "name": "Torch",
+      "fullName": "Desert Palace - Torch",
+      "region": "dp",
+      "regionName": "Desert Palace",
+      "regionShort": "DP",
+      "icon": "sparkle",
+      "ordinal": 108
     },
     {
       "id": "dp/compass-chest",
-      "fullName": "Desert Palace - Compass Chest"
+      "name": "Compass Chest",
+      "fullName": "Desert Palace - Compass Chest",
+      "region": "dp",
+      "regionName": "Desert Palace",
+      "regionShort": "DP",
+      "icon": "chest",
+      "ordinal": 109
     },
     {
       "id": "dp/big-key-chest",
-      "fullName": "Desert Palace - Big Key Chest"
+      "name": "Big Key Chest",
+      "fullName": "Desert Palace - Big Key Chest",
+      "region": "dp",
+      "regionName": "Desert Palace",
+      "regionShort": "DP",
+      "icon": "chest",
+      "ordinal": 110
     },
     {
       "id": "dp/big-chest",
-      "fullName": "Desert Palace - Big Chest"
+      "name": "Big Chest",
+      "fullName": "Desert Palace - Big Chest",
+      "region": "dp",
+      "regionName": "Desert Palace",
+      "regionShort": "DP",
+      "icon": "bigchest",
+      "ordinal": 111
     },
     {
       "id": "dp/lanmolas",
-      "fullName": "Desert Palace - Lanmolas"
+      "name": "Lanmolas",
+      "fullName": "Desert Palace - Lanmolas",
+      "region": "dp",
+      "regionName": "Desert Palace",
+      "regionShort": "DP",
+      "icon": "boss",
+      "ordinal": 112
     },
     {
       "id": "toh/basement-cage",
-      "fullName": "Tower of Hera - Basement Cage"
+      "name": "Basement Cage",
+      "fullName": "Tower of Hera - Basement Cage",
+      "region": "toh",
+      "regionName": "Tower of Hera",
+      "regionShort": "ToH",
+      "icon": "chest",
+      "ordinal": 113
     },
     {
       "id": "toh/map-chest",
-      "fullName": "Tower of Hera - Map Chest"
+      "name": "Map Chest",
+      "fullName": "Tower of Hera - Map Chest",
+      "region": "toh",
+      "regionName": "Tower of Hera",
+      "regionShort": "ToH",
+      "icon": "chest",
+      "ordinal": 114
     },
     {
       "id": "toh/big-key-chest",
-      "fullName": "Tower of Hera - Big Key Chest"
+      "name": "Big Key Chest",
+      "fullName": "Tower of Hera - Big Key Chest",
+      "region": "toh",
+      "regionName": "Tower of Hera",
+      "regionShort": "ToH",
+      "icon": "chest",
+      "ordinal": 115
     },
     {
       "id": "toh/compass-chest",
-      "fullName": "Tower of Hera - Compass Chest"
+      "name": "Compass Chest",
+      "fullName": "Tower of Hera - Compass Chest",
+      "region": "toh",
+      "regionName": "Tower of Hera",
+      "regionShort": "ToH",
+      "icon": "chest",
+      "ordinal": 116
     },
     {
       "id": "toh/big-chest",
-      "fullName": "Tower of Hera - Big Chest"
+      "name": "Big Chest",
+      "fullName": "Tower of Hera - Big Chest",
+      "region": "toh",
+      "regionName": "Tower of Hera",
+      "regionShort": "ToH",
+      "icon": "bigchest",
+      "ordinal": 117
     },
     {
       "id": "toh/moldorm",
-      "fullName": "Tower of Hera - Moldorm"
+      "name": "Moldorm",
+      "fullName": "Tower of Hera - Moldorm",
+      "region": "toh",
+      "regionName": "Tower of Hera",
+      "regionShort": "ToH",
+      "icon": "boss",
+      "ordinal": 118
     },
     {
       "id": "ct/room-03",
-      "fullName": "Castle Tower - Room 03"
+      "name": "Room 03",
+      "fullName": "Castle Tower - Room 03",
+      "region": "ct",
+      "regionName": "Castle Tower",
+      "regionShort": "CT",
+      "icon": "chest",
+      "ordinal": 119
     },
     {
       "id": "ct/dark-maze",
-      "fullName": "Castle Tower - Dark Maze"
+      "name": "Dark Maze",
+      "fullName": "Castle Tower - Dark Maze",
+      "region": "ct",
+      "regionName": "Castle Tower",
+      "regionShort": "CT",
+      "icon": "chest",
+      "ordinal": 120
     },
     {
       "id": "pod/shooter-room",
-      "fullName": "Palace of Darkness - Shooter Room"
+      "name": "Shooter Room",
+      "fullName": "Palace of Darkness - Shooter Room",
+      "region": "pod",
+      "regionName": "Palace of Darkness",
+      "regionShort": "PoD",
+      "icon": "chest",
+      "ordinal": 121
     },
     {
       "id": "pod/big-key-chest",
-      "fullName": "Palace of Darkness - Big Key Chest"
+      "name": "Big Key Chest",
+      "fullName": "Palace of Darkness - Big Key Chest",
+      "region": "pod",
+      "regionName": "Palace of Darkness",
+      "regionShort": "PoD",
+      "icon": "chest",
+      "ordinal": 122
     },
     {
       "id": "pod/stalfos-basement",
-      "fullName": "Palace of Darkness - Stalfos Basement"
+      "name": "Stalfos Basement",
+      "fullName": "Palace of Darkness - Stalfos Basement",
+      "region": "pod",
+      "regionName": "Palace of Darkness",
+      "regionShort": "PoD",
+      "icon": "chest",
+      "ordinal": 123
     },
     {
       "id": "pod/the-arena-ledge",
-      "fullName": "Palace of Darkness - The Arena - Ledge"
+      "name": "The Arena - Ledge",
+      "fullName": "Palace of Darkness - The Arena - Ledge",
+      "region": "pod",
+      "regionName": "Palace of Darkness",
+      "regionShort": "PoD",
+      "icon": "chest",
+      "ordinal": 124
     },
     {
       "id": "pod/the-arena-bridge",
-      "fullName": "Palace of Darkness - The Arena - Bridge"
+      "name": "The Arena - Bridge",
+      "fullName": "Palace of Darkness - The Arena - Bridge",
+      "region": "pod",
+      "regionName": "Palace of Darkness",
+      "regionShort": "PoD",
+      "icon": "chest",
+      "ordinal": 125
     },
     {
       "id": "pod/map-chest",
-      "fullName": "Palace of Darkness - Map Chest"
+      "name": "Map Chest",
+      "fullName": "Palace of Darkness - Map Chest",
+      "region": "pod",
+      "regionName": "Palace of Darkness",
+      "regionShort": "PoD",
+      "icon": "chest",
+      "ordinal": 126
     },
     {
       "id": "pod/compass-chest",
-      "fullName": "Palace of Darkness - Compass Chest"
+      "name": "Compass Chest",
+      "fullName": "Palace of Darkness - Compass Chest",
+      "region": "pod",
+      "regionName": "Palace of Darkness",
+      "regionShort": "PoD",
+      "icon": "chest",
+      "ordinal": 127
     },
     {
       "id": "pod/dark-basement-left",
-      "fullName": "Palace of Darkness - Dark Basement - Left"
+      "name": "Dark Basement - Left",
+      "fullName": "Palace of Darkness - Dark Basement - Left",
+      "region": "pod",
+      "regionName": "Palace of Darkness",
+      "regionShort": "PoD",
+      "icon": "chest",
+      "ordinal": 128
     },
     {
       "id": "pod/dark-basement-right",
-      "fullName": "Palace of Darkness - Dark Basement - Right"
+      "name": "Dark Basement - Right",
+      "fullName": "Palace of Darkness - Dark Basement - Right",
+      "region": "pod",
+      "regionName": "Palace of Darkness",
+      "regionShort": "PoD",
+      "icon": "chest",
+      "ordinal": 129
     },
     {
       "id": "pod/dark-maze-top",
-      "fullName": "Palace of Darkness - Dark Maze - Top"
+      "name": "Dark Maze - Top",
+      "fullName": "Palace of Darkness - Dark Maze - Top",
+      "region": "pod",
+      "regionName": "Palace of Darkness",
+      "regionShort": "PoD",
+      "icon": "chest",
+      "ordinal": 130
     },
     {
       "id": "pod/dark-maze-bottom",
-      "fullName": "Palace of Darkness - Dark Maze - Bottom"
+      "name": "Dark Maze - Bottom",
+      "fullName": "Palace of Darkness - Dark Maze - Bottom",
+      "region": "pod",
+      "regionName": "Palace of Darkness",
+      "regionShort": "PoD",
+      "icon": "chest",
+      "ordinal": 131
     },
     {
       "id": "pod/big-chest",
-      "fullName": "Palace of Darkness - Big Chest"
+      "name": "Big Chest",
+      "fullName": "Palace of Darkness - Big Chest",
+      "region": "pod",
+      "regionName": "Palace of Darkness",
+      "regionShort": "PoD",
+      "icon": "bigchest",
+      "ordinal": 132
     },
     {
       "id": "pod/harmless-hellway",
-      "fullName": "Palace of Darkness - Harmless Hellway"
+      "name": "Harmless Hellway",
+      "fullName": "Palace of Darkness - Harmless Hellway",
+      "region": "pod",
+      "regionName": "Palace of Darkness",
+      "regionShort": "PoD",
+      "icon": "chest",
+      "ordinal": 133
     },
     {
       "id": "pod/helmasaur-king",
-      "fullName": "Palace of Darkness - Helmasaur King"
+      "name": "Helmasaur King",
+      "fullName": "Palace of Darkness - Helmasaur King",
+      "region": "pod",
+      "regionName": "Palace of Darkness",
+      "regionShort": "PoD",
+      "icon": "boss",
+      "ordinal": 134
     },
     {
       "id": "sp/entrance",
-      "fullName": "Swamp Palace - Entrance"
+      "name": "Entrance",
+      "fullName": "Swamp Palace - Entrance",
+      "region": "sp",
+      "regionName": "Swamp Palace",
+      "regionShort": "SP",
+      "icon": "chest",
+      "ordinal": 135
     },
     {
       "id": "sp/map-chest",
-      "fullName": "Swamp Palace - Map Chest"
+      "name": "Map Chest",
+      "fullName": "Swamp Palace - Map Chest",
+      "region": "sp",
+      "regionName": "Swamp Palace",
+      "regionShort": "SP",
+      "icon": "chest",
+      "ordinal": 136
     },
     {
       "id": "sp/big-chest",
-      "fullName": "Swamp Palace - Big Chest"
+      "name": "Big Chest",
+      "fullName": "Swamp Palace - Big Chest",
+      "region": "sp",
+      "regionName": "Swamp Palace",
+      "regionShort": "SP",
+      "icon": "bigchest",
+      "ordinal": 137
     },
     {
       "id": "sp/compass-chest",
-      "fullName": "Swamp Palace - Compass Chest"
+      "name": "Compass Chest",
+      "fullName": "Swamp Palace - Compass Chest",
+      "region": "sp",
+      "regionName": "Swamp Palace",
+      "regionShort": "SP",
+      "icon": "chest",
+      "ordinal": 138
     },
     {
       "id": "sp/west-chest",
-      "fullName": "Swamp Palace - West Chest"
+      "name": "West Chest",
+      "fullName": "Swamp Palace - West Chest",
+      "region": "sp",
+      "regionName": "Swamp Palace",
+      "regionShort": "SP",
+      "icon": "chest",
+      "ordinal": 139
     },
     {
       "id": "sp/big-key-chest",
-      "fullName": "Swamp Palace - Big Key Chest"
+      "name": "Big Key Chest",
+      "fullName": "Swamp Palace - Big Key Chest",
+      "region": "sp",
+      "regionName": "Swamp Palace",
+      "regionShort": "SP",
+      "icon": "chest",
+      "ordinal": 140
     },
     {
       "id": "sp/flooded-room-left",
-      "fullName": "Swamp Palace - Flooded Room - Left"
+      "name": "Flooded Room - Left",
+      "fullName": "Swamp Palace - Flooded Room - Left",
+      "region": "sp",
+      "regionName": "Swamp Palace",
+      "regionShort": "SP",
+      "icon": "chest",
+      "ordinal": 141
     },
     {
       "id": "sp/flooded-room-right",
-      "fullName": "Swamp Palace - Flooded Room - Right"
+      "name": "Flooded Room - Right",
+      "fullName": "Swamp Palace - Flooded Room - Right",
+      "region": "sp",
+      "regionName": "Swamp Palace",
+      "regionShort": "SP",
+      "icon": "chest",
+      "ordinal": 142
     },
     {
       "id": "sp/waterfall-room",
-      "fullName": "Swamp Palace - Waterfall Room"
+      "name": "Waterfall Room",
+      "fullName": "Swamp Palace - Waterfall Room",
+      "region": "sp",
+      "regionName": "Swamp Palace",
+      "regionShort": "SP",
+      "icon": "chest",
+      "ordinal": 143
     },
     {
       "id": "sp/arrghus",
-      "fullName": "Swamp Palace - Arrghus"
+      "name": "Arrghus",
+      "fullName": "Swamp Palace - Arrghus",
+      "region": "sp",
+      "regionName": "Swamp Palace",
+      "regionShort": "SP",
+      "icon": "boss",
+      "ordinal": 144
     },
     {
       "id": "sw/big-chest",
-      "fullName": "Skull Woods - Big Chest"
+      "name": "Big Chest",
+      "fullName": "Skull Woods - Big Chest",
+      "region": "sw",
+      "regionName": "Skull Woods",
+      "regionShort": "SW",
+      "icon": "bigchest",
+      "ordinal": 145
     },
     {
       "id": "sw/big-key-chest",
-      "fullName": "Skull Woods - Big Key Chest"
+      "name": "Big Key Chest",
+      "fullName": "Skull Woods - Big Key Chest",
+      "region": "sw",
+      "regionName": "Skull Woods",
+      "regionShort": "SW",
+      "icon": "chest",
+      "ordinal": 146
     },
     {
       "id": "sw/compass-chest",
-      "fullName": "Skull Woods - Compass Chest"
+      "name": "Compass Chest",
+      "fullName": "Skull Woods - Compass Chest",
+      "region": "sw",
+      "regionName": "Skull Woods",
+      "regionShort": "SW",
+      "icon": "chest",
+      "ordinal": 147
     },
     {
       "id": "sw/map-chest",
-      "fullName": "Skull Woods - Map Chest"
+      "name": "Map Chest",
+      "fullName": "Skull Woods - Map Chest",
+      "region": "sw",
+      "regionName": "Skull Woods",
+      "regionShort": "SW",
+      "icon": "chest",
+      "ordinal": 148
     },
     {
       "id": "sw/bridge-room",
-      "fullName": "Skull Woods - Bridge Room"
+      "name": "Bridge Room",
+      "fullName": "Skull Woods - Bridge Room",
+      "region": "sw",
+      "regionName": "Skull Woods",
+      "regionShort": "SW",
+      "icon": "chest",
+      "ordinal": 149
     },
     {
       "id": "sw/pot-prison",
-      "fullName": "Skull Woods - Pot Prison"
+      "name": "Pot Prison",
+      "fullName": "Skull Woods - Pot Prison",
+      "region": "sw",
+      "regionName": "Skull Woods",
+      "regionShort": "SW",
+      "icon": "chest",
+      "ordinal": 150
     },
     {
       "id": "sw/pinball-room",
-      "fullName": "Skull Woods - Pinball Room"
+      "name": "Pinball Room",
+      "fullName": "Skull Woods - Pinball Room",
+      "region": "sw",
+      "regionName": "Skull Woods",
+      "regionShort": "SW",
+      "icon": "chest",
+      "ordinal": 151
     },
     {
       "id": "sw/mothula",
-      "fullName": "Skull Woods - Mothula"
+      "name": "Mothula",
+      "fullName": "Skull Woods - Mothula",
+      "region": "sw",
+      "regionName": "Skull Woods",
+      "regionShort": "SW",
+      "icon": "boss",
+      "ordinal": 152
     },
     {
       "id": "tt/map-chest",
-      "fullName": "Thieves' Town - Map Chest"
+      "name": "Map Chest",
+      "fullName": "Thieves' Town - Map Chest",
+      "region": "tt",
+      "regionName": "Thieves' Town",
+      "regionShort": "TT",
+      "icon": "chest",
+      "ordinal": 153
     },
     {
       "id": "tt/ambush-chest",
-      "fullName": "Thieves' Town - Ambush Chest"
+      "name": "Ambush Chest",
+      "fullName": "Thieves' Town - Ambush Chest",
+      "region": "tt",
+      "regionName": "Thieves' Town",
+      "regionShort": "TT",
+      "icon": "chest",
+      "ordinal": 154
     },
     {
       "id": "tt/compass-chest",
-      "fullName": "Thieves' Town - Compass Chest"
+      "name": "Compass Chest",
+      "fullName": "Thieves' Town - Compass Chest",
+      "region": "tt",
+      "regionName": "Thieves' Town",
+      "regionShort": "TT",
+      "icon": "chest",
+      "ordinal": 155
     },
     {
       "id": "tt/big-key-chest",
-      "fullName": "Thieves' Town - Big Key Chest"
+      "name": "Big Key Chest",
+      "fullName": "Thieves' Town - Big Key Chest",
+      "region": "tt",
+      "regionName": "Thieves' Town",
+      "regionShort": "TT",
+      "icon": "chest",
+      "ordinal": 156
     },
     {
       "id": "tt/attic",
-      "fullName": "Thieves' Town - Attic"
+      "name": "Attic",
+      "fullName": "Thieves' Town - Attic",
+      "region": "tt",
+      "regionName": "Thieves' Town",
+      "regionShort": "TT",
+      "icon": "chest",
+      "ordinal": 157
     },
     {
       "id": "tt/blinds-cell",
-      "fullName": "Thieves' Town - Blind's Cell"
+      "name": "Blind's Cell",
+      "fullName": "Thieves' Town - Blind's Cell",
+      "region": "tt",
+      "regionName": "Thieves' Town",
+      "regionShort": "TT",
+      "icon": "chest",
+      "ordinal": 158
     },
     {
       "id": "tt/big-chest",
-      "fullName": "Thieves' Town - Big Chest"
+      "name": "Big Chest",
+      "fullName": "Thieves' Town - Big Chest",
+      "region": "tt",
+      "regionName": "Thieves' Town",
+      "regionShort": "TT",
+      "icon": "bigchest",
+      "ordinal": 159
     },
     {
       "id": "tt/blind",
-      "fullName": "Thieves' Town - Blind"
+      "name": "Blind",
+      "fullName": "Thieves' Town - Blind",
+      "region": "tt",
+      "regionName": "Thieves' Town",
+      "regionShort": "TT",
+      "icon": "boss",
+      "ordinal": 160
     },
     {
       "id": "ip/compass-chest",
-      "fullName": "Ice Palace - Compass Chest"
+      "name": "Compass Chest",
+      "fullName": "Ice Palace - Compass Chest",
+      "region": "ip",
+      "regionName": "Ice Palace",
+      "regionShort": "IP",
+      "icon": "chest",
+      "ordinal": 161
     },
     {
       "id": "ip/spike-room",
-      "fullName": "Ice Palace - Spike Room"
+      "name": "Spike Room",
+      "fullName": "Ice Palace - Spike Room",
+      "region": "ip",
+      "regionName": "Ice Palace",
+      "regionShort": "IP",
+      "icon": "chest",
+      "ordinal": 162
     },
     {
       "id": "ip/map-chest",
-      "fullName": "Ice Palace - Map Chest"
+      "name": "Map Chest",
+      "fullName": "Ice Palace - Map Chest",
+      "region": "ip",
+      "regionName": "Ice Palace",
+      "regionShort": "IP",
+      "icon": "chest",
+      "ordinal": 163
     },
     {
       "id": "ip/big-key-chest",
-      "fullName": "Ice Palace - Big Key Chest"
+      "name": "Big Key Chest",
+      "fullName": "Ice Palace - Big Key Chest",
+      "region": "ip",
+      "regionName": "Ice Palace",
+      "regionShort": "IP",
+      "icon": "chest",
+      "ordinal": 164
     },
     {
       "id": "ip/iced-t-room",
-      "fullName": "Ice Palace - Iced T Room"
+      "name": "Iced T Room",
+      "fullName": "Ice Palace - Iced T Room",
+      "region": "ip",
+      "regionName": "Ice Palace",
+      "regionShort": "IP",
+      "icon": "chest",
+      "ordinal": 165
     },
     {
       "id": "ip/freezor-chest",
-      "fullName": "Ice Palace - Freezor Chest"
+      "name": "Freezor Chest",
+      "fullName": "Ice Palace - Freezor Chest",
+      "region": "ip",
+      "regionName": "Ice Palace",
+      "regionShort": "IP",
+      "icon": "chest",
+      "ordinal": 166
     },
     {
       "id": "ip/big-chest",
-      "fullName": "Ice Palace - Big Chest"
+      "name": "Big Chest",
+      "fullName": "Ice Palace - Big Chest",
+      "region": "ip",
+      "regionName": "Ice Palace",
+      "regionShort": "IP",
+      "icon": "bigchest",
+      "ordinal": 167
     },
     {
       "id": "ip/kholdstare",
-      "fullName": "Ice Palace - Kholdstare"
+      "name": "Kholdstare",
+      "fullName": "Ice Palace - Kholdstare",
+      "region": "ip",
+      "regionName": "Ice Palace",
+      "regionShort": "IP",
+      "icon": "boss",
+      "ordinal": 168
     },
     {
       "id": "mm/bridge-chest",
-      "fullName": "Misery Mire - Bridge Chest"
+      "name": "Bridge Chest",
+      "fullName": "Misery Mire - Bridge Chest",
+      "region": "mm",
+      "regionName": "Misery Mire",
+      "regionShort": "MM",
+      "icon": "chest",
+      "ordinal": 169
     },
     {
       "id": "mm/spike-chest",
-      "fullName": "Misery Mire - Spike Chest"
+      "name": "Spike Chest",
+      "fullName": "Misery Mire - Spike Chest",
+      "region": "mm",
+      "regionName": "Misery Mire",
+      "regionShort": "MM",
+      "icon": "chest",
+      "ordinal": 170
     },
     {
       "id": "mm/compass-chest",
-      "fullName": "Misery Mire - Compass Chest"
+      "name": "Compass Chest",
+      "fullName": "Misery Mire - Compass Chest",
+      "region": "mm",
+      "regionName": "Misery Mire",
+      "regionShort": "MM",
+      "icon": "chest",
+      "ordinal": 171
     },
     {
       "id": "mm/main-lobby",
-      "fullName": "Misery Mire - Main Lobby"
+      "name": "Main Lobby",
+      "fullName": "Misery Mire - Main Lobby",
+      "region": "mm",
+      "regionName": "Misery Mire",
+      "regionShort": "MM",
+      "icon": "chest",
+      "ordinal": 172
     },
     {
       "id": "mm/map-chest",
-      "fullName": "Misery Mire - Map Chest"
+      "name": "Map Chest",
+      "fullName": "Misery Mire - Map Chest",
+      "region": "mm",
+      "regionName": "Misery Mire",
+      "regionShort": "MM",
+      "icon": "chest",
+      "ordinal": 173
     },
     {
       "id": "mm/big-key-chest",
-      "fullName": "Misery Mire - Big Key Chest"
+      "name": "Big Key Chest",
+      "fullName": "Misery Mire - Big Key Chest",
+      "region": "mm",
+      "regionName": "Misery Mire",
+      "regionShort": "MM",
+      "icon": "chest",
+      "ordinal": 174
     },
     {
       "id": "mm/big-chest",
-      "fullName": "Misery Mire - Big Chest"
+      "name": "Big Chest",
+      "fullName": "Misery Mire - Big Chest",
+      "region": "mm",
+      "regionName": "Misery Mire",
+      "regionShort": "MM",
+      "icon": "bigchest",
+      "ordinal": 175
     },
     {
       "id": "mm/vitreous",
-      "fullName": "Misery Mire - Vitreous"
+      "name": "Vitreous",
+      "fullName": "Misery Mire - Vitreous",
+      "region": "mm",
+      "regionName": "Misery Mire",
+      "regionShort": "MM",
+      "icon": "boss",
+      "ordinal": 176
     },
     {
       "id": "tr/roller-room-left",
-      "fullName": "Turtle Rock - Roller Room - Left"
+      "name": "Roller Room - Left",
+      "fullName": "Turtle Rock - Roller Room - Left",
+      "region": "tr",
+      "regionName": "Turtle Rock",
+      "regionShort": "TR",
+      "icon": "chest",
+      "ordinal": 177
     },
     {
       "id": "tr/roller-room-right",
-      "fullName": "Turtle Rock - Roller Room - Right"
+      "name": "Roller Room - Right",
+      "fullName": "Turtle Rock - Roller Room - Right",
+      "region": "tr",
+      "regionName": "Turtle Rock",
+      "regionShort": "TR",
+      "icon": "chest",
+      "ordinal": 178
     },
     {
       "id": "tr/compass-chest",
-      "fullName": "Turtle Rock - Compass Chest"
+      "name": "Compass Chest",
+      "fullName": "Turtle Rock - Compass Chest",
+      "region": "tr",
+      "regionName": "Turtle Rock",
+      "regionShort": "TR",
+      "icon": "chest",
+      "ordinal": 179
     },
     {
       "id": "tr/chain-chomps",
-      "fullName": "Turtle Rock - Chain Chomps"
+      "name": "Chain Chomps",
+      "fullName": "Turtle Rock - Chain Chomps",
+      "region": "tr",
+      "regionName": "Turtle Rock",
+      "regionShort": "TR",
+      "icon": "chest",
+      "ordinal": 180
     },
     {
       "id": "tr/big-key-chest",
-      "fullName": "Turtle Rock - Big Key Chest"
+      "name": "Big Key Chest",
+      "fullName": "Turtle Rock - Big Key Chest",
+      "region": "tr",
+      "regionName": "Turtle Rock",
+      "regionShort": "TR",
+      "icon": "chest",
+      "ordinal": 181
     },
     {
       "id": "tr/big-chest",
-      "fullName": "Turtle Rock - Big Chest"
+      "name": "Big Chest",
+      "fullName": "Turtle Rock - Big Chest",
+      "region": "tr",
+      "regionName": "Turtle Rock",
+      "regionShort": "TR",
+      "icon": "bigchest",
+      "ordinal": 182
     },
     {
       "id": "tr/crystaroller-room",
-      "fullName": "Turtle Rock - Crystaroller Room"
+      "name": "Crystaroller Room",
+      "fullName": "Turtle Rock - Crystaroller Room",
+      "region": "tr",
+      "regionName": "Turtle Rock",
+      "regionShort": "TR",
+      "icon": "chest",
+      "ordinal": 183
     },
     {
       "id": "tr/laser-bridge-top-left",
-      "fullName": "Turtle Rock - Laser Bridge - Top Left"
+      "name": "Laser Bridge - Top Left",
+      "fullName": "Turtle Rock - Laser Bridge - Top Left",
+      "region": "tr",
+      "regionName": "Turtle Rock",
+      "regionShort": "TR",
+      "icon": "chest",
+      "ordinal": 184
     },
     {
       "id": "tr/laser-bridge-top-right",
-      "fullName": "Turtle Rock - Laser Bridge - Top Right"
+      "name": "Laser Bridge - Top Right",
+      "fullName": "Turtle Rock - Laser Bridge - Top Right",
+      "region": "tr",
+      "regionName": "Turtle Rock",
+      "regionShort": "TR",
+      "icon": "chest",
+      "ordinal": 185
     },
     {
       "id": "tr/laser-bridge-bottom-left",
-      "fullName": "Turtle Rock - Laser Bridge - Bottom Left"
+      "name": "Laser Bridge - Bottom Left",
+      "fullName": "Turtle Rock - Laser Bridge - Bottom Left",
+      "region": "tr",
+      "regionName": "Turtle Rock",
+      "regionShort": "TR",
+      "icon": "chest",
+      "ordinal": 186
     },
     {
       "id": "tr/laser-bridge-bottom-right",
-      "fullName": "Turtle Rock - Laser Bridge - Bottom Right"
+      "name": "Laser Bridge - Bottom Right",
+      "fullName": "Turtle Rock - Laser Bridge - Bottom Right",
+      "region": "tr",
+      "regionName": "Turtle Rock",
+      "regionShort": "TR",
+      "icon": "chest",
+      "ordinal": 187
     },
     {
       "id": "tr/trinexx",
-      "fullName": "Turtle Rock - Trinexx"
+      "name": "Trinexx",
+      "fullName": "Turtle Rock - Trinexx",
+      "region": "tr",
+      "regionName": "Turtle Rock",
+      "regionShort": "TR",
+      "icon": "boss",
+      "ordinal": 188
     },
     {
       "id": "gt/bobs-torch",
-      "fullName": "Ganon's Tower - Bob's Torch"
+      "name": "Bob's Torch",
+      "fullName": "Ganon's Tower - Bob's Torch",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "sparkle",
+      "ordinal": 189
     },
     {
       "id": "gt/dms-room-top-left",
-      "fullName": "Ganon's Tower - DMs Room - Top Left"
+      "name": "DMs Room - Top Left",
+      "fullName": "Ganon's Tower - DMs Room - Top Left",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 190
     },
     {
       "id": "gt/dms-room-top-right",
-      "fullName": "Ganon's Tower - DMs Room - Top Right"
+      "name": "DMs Room - Top Right",
+      "fullName": "Ganon's Tower - DMs Room - Top Right",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 191
     },
     {
       "id": "gt/dms-room-bottom-left",
-      "fullName": "Ganon's Tower - DMs Room - Bottom Left"
+      "name": "DMs Room - Bottom Left",
+      "fullName": "Ganon's Tower - DMs Room - Bottom Left",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 192
     },
     {
       "id": "gt/dms-room-bottom-right",
-      "fullName": "Ganon's Tower - DMs Room - Bottom Right"
+      "name": "DMs Room - Bottom Right",
+      "fullName": "Ganon's Tower - DMs Room - Bottom Right",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 193
     },
     {
       "id": "gt/map-chest",
-      "fullName": "Ganon's Tower - Map Chest"
+      "name": "Map Chest",
+      "fullName": "Ganon's Tower - Map Chest",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 194
     },
     {
       "id": "gt/firesnake-room",
-      "fullName": "Ganon's Tower - Firesnake Room"
+      "name": "Firesnake Room",
+      "fullName": "Ganon's Tower - Firesnake Room",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 195
     },
     {
       "id": "gt/randomizer-room-top-left",
-      "fullName": "Ganon's Tower - Randomizer Room - Top Left"
+      "name": "Randomizer Room - Top Left",
+      "fullName": "Ganon's Tower - Randomizer Room - Top Left",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 196
     },
     {
       "id": "gt/randomizer-room-top-right",
-      "fullName": "Ganon's Tower - Randomizer Room - Top Right"
+      "name": "Randomizer Room - Top Right",
+      "fullName": "Ganon's Tower - Randomizer Room - Top Right",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 197
     },
     {
       "id": "gt/randomizer-room-bottom-left",
-      "fullName": "Ganon's Tower - Randomizer Room - Bottom Left"
+      "name": "Randomizer Room - Bottom Left",
+      "fullName": "Ganon's Tower - Randomizer Room - Bottom Left",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 198
     },
     {
       "id": "gt/randomizer-room-bottom-right",
-      "fullName": "Ganon's Tower - Randomizer Room - Bottom Right"
+      "name": "Randomizer Room - Bottom Right",
+      "fullName": "Ganon's Tower - Randomizer Room - Bottom Right",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 199
     },
     {
       "id": "gt/big-chest",
-      "fullName": "Ganon's Tower - Big Chest"
+      "name": "Big Chest",
+      "fullName": "Ganon's Tower - Big Chest",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "bigchest",
+      "ordinal": 200
     },
     {
       "id": "gt/bobs-chest",
-      "fullName": "Ganon's Tower - Bob's Chest"
+      "name": "Bob's Chest",
+      "fullName": "Ganon's Tower - Bob's Chest",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 201
     },
     {
       "id": "gt/big-key-chest",
-      "fullName": "Ganon's Tower - Big Key Chest"
+      "name": "Big Key Chest",
+      "fullName": "Ganon's Tower - Big Key Chest",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 202
     },
     {
       "id": "gt/big-key-room-left",
-      "fullName": "Ganon's Tower - Big Key Room - Left"
+      "name": "Big Key Room - Left",
+      "fullName": "Ganon's Tower - Big Key Room - Left",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 203
     },
     {
       "id": "gt/big-key-room-right",
-      "fullName": "Ganon's Tower - Big Key Room - Right"
+      "name": "Big Key Room - Right",
+      "fullName": "Ganon's Tower - Big Key Room - Right",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 204
     },
     {
       "id": "gt/hope-room-left",
-      "fullName": "Ganon's Tower - Hope Room - Left"
+      "name": "Hope Room - Left",
+      "fullName": "Ganon's Tower - Hope Room - Left",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 205
     },
     {
       "id": "gt/hope-room-right",
-      "fullName": "Ganon's Tower - Hope Room - Right"
+      "name": "Hope Room - Right",
+      "fullName": "Ganon's Tower - Hope Room - Right",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 206
     },
     {
       "id": "gt/compass-room-top-left",
-      "fullName": "Ganon's Tower - Compass Room - Top Left"
+      "name": "Compass Room - Top Left",
+      "fullName": "Ganon's Tower - Compass Room - Top Left",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 207
     },
     {
       "id": "gt/compass-room-top-right",
-      "fullName": "Ganon's Tower - Compass Room - Top Right"
+      "name": "Compass Room - Top Right",
+      "fullName": "Ganon's Tower - Compass Room - Top Right",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 208
     },
     {
       "id": "gt/compass-room-bottom-left",
-      "fullName": "Ganon's Tower - Compass Room - Bottom Left"
+      "name": "Compass Room - Bottom Left",
+      "fullName": "Ganon's Tower - Compass Room - Bottom Left",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 209
     },
     {
       "id": "gt/compass-room-bottom-right",
-      "fullName": "Ganon's Tower - Compass Room - Bottom Right"
+      "name": "Compass Room - Bottom Right",
+      "fullName": "Ganon's Tower - Compass Room - Bottom Right",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 210
     },
     {
       "id": "gt/tile-room",
-      "fullName": "Ganon's Tower - Tile Room"
+      "name": "Tile Room",
+      "fullName": "Ganon's Tower - Tile Room",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 211
     },
     {
       "id": "gt/mini-helmasaur-room-left",
-      "fullName": "Ganon's Tower - Mini Helmasaur Room - Left"
+      "name": "Mini Helmasaur Room - Left",
+      "fullName": "Ganon's Tower - Mini Helmasaur Room - Left",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 212
     },
     {
       "id": "gt/mini-helmasaur-room-right",
-      "fullName": "Ganon's Tower - Mini Helmasaur Room - Right"
+      "name": "Mini Helmasaur Room - Right",
+      "fullName": "Ganon's Tower - Mini Helmasaur Room - Right",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 213
     },
     {
       "id": "gt/pre-moldorm-chest",
-      "fullName": "Ganon's Tower - Pre-Moldorm Chest"
+      "name": "Pre-Moldorm Chest",
+      "fullName": "Ganon's Tower - Pre-Moldorm Chest",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 214
     },
     {
       "id": "gt/moldorm-chest",
-      "fullName": "Ganon's Tower - Moldorm Chest"
+      "name": "Moldorm Chest",
+      "fullName": "Ganon's Tower - Moldorm Chest",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "chest",
+      "ordinal": 215
+    }
+  ],
+  "items": [
+    {
+      "id": "sword",
+      "name": "Sword",
+      "label": null,
+      "sprite": "sword",
+      "slots": 4,
+      "group": "Equipment",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 0
+    },
+    {
+      "id": "shield",
+      "name": "Shield",
+      "label": null,
+      "sprite": "shield",
+      "slots": 3,
+      "group": "Equipment",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 1
+    },
+    {
+      "id": "mail",
+      "name": "Mail",
+      "label": null,
+      "sprite": "mail",
+      "slots": 2,
+      "group": "Equipment",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 2
+    },
+    {
+      "id": "glove",
+      "name": "Gloves",
+      "label": null,
+      "sprite": "glove",
+      "slots": 2,
+      "group": "Equipment",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 3
+    },
+    {
+      "id": "boots",
+      "name": "Pegasus Boots",
+      "label": null,
+      "sprite": "boots",
+      "slots": 1,
+      "group": "Equipment",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 4
+    },
+    {
+      "id": "flippers",
+      "name": "Flippers",
+      "label": null,
+      "sprite": "flippers",
+      "slots": 1,
+      "group": "Equipment",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 5
+    },
+    {
+      "id": "moonpearl",
+      "name": "Moon Pearl",
+      "label": null,
+      "sprite": "moonpearl",
+      "slots": 1,
+      "group": "Equipment",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 6
+    },
+    {
+      "id": "bow",
+      "name": "Bow",
+      "label": null,
+      "sprite": "bow",
+      "slots": 2,
+      "group": "Items",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 7
+    },
+    {
+      "id": "blueboomerang",
+      "name": "Blue Boomerang",
+      "label": null,
+      "sprite": "blueboomerang",
+      "slots": 1,
+      "group": "Items",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 8
+    },
+    {
+      "id": "redboomerang",
+      "name": "Red Boomerang",
+      "label": null,
+      "sprite": "redboomerang",
+      "slots": 1,
+      "group": "Items",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 9
+    },
+    {
+      "id": "hookshot",
+      "name": "Hookshot",
+      "label": null,
+      "sprite": "hookshot",
+      "slots": 1,
+      "group": "Items",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 10
+    },
+    {
+      "id": "mushroom",
+      "name": "Mushroom",
+      "label": null,
+      "sprite": "mushroom",
+      "slots": 1,
+      "group": "Items",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 11
+    },
+    {
+      "id": "powder",
+      "name": "Magic Powder",
+      "label": null,
+      "sprite": "powder",
+      "slots": 1,
+      "group": "Items",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 12
+    },
+    {
+      "id": "firerod",
+      "name": "Fire Rod",
+      "label": null,
+      "sprite": "firerod",
+      "slots": 1,
+      "group": "Items",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 13
+    },
+    {
+      "id": "icerod",
+      "name": "Ice Rod",
+      "label": null,
+      "sprite": "icerod",
+      "slots": 1,
+      "group": "Items",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 14
+    },
+    {
+      "id": "bombos",
+      "name": "Bombos",
+      "label": null,
+      "sprite": "bombos",
+      "slots": 1,
+      "group": "Items",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 15
+    },
+    {
+      "id": "ether",
+      "name": "Ether",
+      "label": null,
+      "sprite": "ether",
+      "slots": 1,
+      "group": "Items",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 16
+    },
+    {
+      "id": "quake",
+      "name": "Quake",
+      "label": null,
+      "sprite": "quake",
+      "slots": 1,
+      "group": "Items",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 17
+    },
+    {
+      "id": "lamp",
+      "name": "Lamp",
+      "label": null,
+      "sprite": "lamp",
+      "slots": 1,
+      "group": "Items",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 18
+    },
+    {
+      "id": "hammer",
+      "name": "Hammer",
+      "label": null,
+      "sprite": "hammer",
+      "slots": 1,
+      "group": "Items",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 19
+    },
+    {
+      "id": "shovel",
+      "name": "Shovel",
+      "label": null,
+      "sprite": "shovel",
+      "slots": 1,
+      "group": "Items",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 20
+    },
+    {
+      "id": "flute",
+      "name": "Flute",
+      "label": null,
+      "sprite": "flute",
+      "slots": 1,
+      "group": "Items",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 21
+    },
+    {
+      "id": "bugnet",
+      "name": "Bug Net",
+      "label": null,
+      "sprite": "bugnet",
+      "slots": 1,
+      "group": "Items",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 22
+    },
+    {
+      "id": "book",
+      "name": "Book of Mudora",
+      "label": null,
+      "sprite": "book",
+      "slots": 1,
+      "group": "Items",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 23
+    },
+    {
+      "id": "bottle",
+      "name": "Bottle",
+      "label": null,
+      "sprite": "bottle",
+      "slots": 4,
+      "group": "Items",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 24
+    },
+    {
+      "id": "somaria",
+      "name": "Cane of Somaria",
+      "label": null,
+      "sprite": "somaria",
+      "slots": 1,
+      "group": "Items",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 25
+    },
+    {
+      "id": "byrna",
+      "name": "Cane of Byrna",
+      "label": null,
+      "sprite": "byrna",
+      "slots": 1,
+      "group": "Items",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 26
+    },
+    {
+      "id": "cape",
+      "name": "Magic Cape",
+      "label": null,
+      "sprite": "cape",
+      "slots": 1,
+      "group": "Items",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 27
+    },
+    {
+      "id": "mirror",
+      "name": "Magic Mirror",
+      "label": null,
+      "sprite": "mirror",
+      "slots": 1,
+      "group": "Items",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 28
+    },
+    {
+      "id": "halfmagic",
+      "name": "Half Magic",
+      "label": null,
+      "sprite": "halfmagic",
+      "slots": 1,
+      "group": "Items",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 29
+    },
+    {
+      "id": "sk-hc",
+      "name": "HC Small Key",
+      "label": "Small Key",
+      "sprite": "smallkey",
+      "slots": 1,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "hc",
+      "alwaysCount": true,
+      "ordinal": 30
+    },
+    {
+      "id": "sk-ct",
+      "name": "CT Small Key",
+      "label": "Small Keys",
+      "sprite": "smallkey",
+      "slots": 2,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "ct",
+      "alwaysCount": true,
+      "ordinal": 31
+    },
+    {
+      "id": "bk-ep",
+      "name": "EP Big Key",
+      "label": "Big Key",
+      "sprite": "bigkey",
+      "slots": 1,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "ep",
+      "alwaysCount": false,
+      "ordinal": 32
+    },
+    {
+      "id": "bk-dp",
+      "name": "DP Big Key",
+      "label": "Big Key",
+      "sprite": "bigkey",
+      "slots": 1,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "dp",
+      "alwaysCount": false,
+      "ordinal": 33
+    },
+    {
+      "id": "sk-dp",
+      "name": "DP Small Key",
+      "label": "Small Key",
+      "sprite": "smallkey",
+      "slots": 1,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "dp",
+      "alwaysCount": true,
+      "ordinal": 34
+    },
+    {
+      "id": "bk-toh",
+      "name": "ToH Big Key",
+      "label": "Big Key",
+      "sprite": "bigkey",
+      "slots": 1,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "toh",
+      "alwaysCount": false,
+      "ordinal": 35
+    },
+    {
+      "id": "sk-toh",
+      "name": "ToH Small Key",
+      "label": "Small Key",
+      "sprite": "smallkey",
+      "slots": 1,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "toh",
+      "alwaysCount": true,
+      "ordinal": 36
+    },
+    {
+      "id": "bk-pod",
+      "name": "PoD Big Key",
+      "label": "Big Key",
+      "sprite": "bigkey",
+      "slots": 1,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "pod",
+      "alwaysCount": false,
+      "ordinal": 37
+    },
+    {
+      "id": "sk-pod",
+      "name": "PoD Small Key",
+      "label": "Small Keys",
+      "sprite": "smallkey",
+      "slots": 6,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "pod",
+      "alwaysCount": true,
+      "ordinal": 38
+    },
+    {
+      "id": "bk-sp",
+      "name": "SP Big Key",
+      "label": "Big Key",
+      "sprite": "bigkey",
+      "slots": 1,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "sp",
+      "alwaysCount": false,
+      "ordinal": 39
+    },
+    {
+      "id": "sk-sp",
+      "name": "SP Small Key",
+      "label": "Small Key",
+      "sprite": "smallkey",
+      "slots": 1,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "sp",
+      "alwaysCount": true,
+      "ordinal": 40
+    },
+    {
+      "id": "bk-sw",
+      "name": "SW Big Key",
+      "label": "Big Key",
+      "sprite": "bigkey",
+      "slots": 1,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "sw",
+      "alwaysCount": false,
+      "ordinal": 41
+    },
+    {
+      "id": "sk-sw",
+      "name": "SW Small Key",
+      "label": "Small Keys",
+      "sprite": "smallkey",
+      "slots": 3,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "sw",
+      "alwaysCount": true,
+      "ordinal": 42
+    },
+    {
+      "id": "bk-tt",
+      "name": "TT Big Key",
+      "label": "Big Key",
+      "sprite": "bigkey",
+      "slots": 1,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "tt",
+      "alwaysCount": false,
+      "ordinal": 43
+    },
+    {
+      "id": "sk-tt",
+      "name": "TT Small Key",
+      "label": "Small Key",
+      "sprite": "smallkey",
+      "slots": 1,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "tt",
+      "alwaysCount": true,
+      "ordinal": 44
+    },
+    {
+      "id": "bk-ip",
+      "name": "IP Big Key",
+      "label": "Big Key",
+      "sprite": "bigkey",
+      "slots": 1,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "ip",
+      "alwaysCount": false,
+      "ordinal": 45
+    },
+    {
+      "id": "sk-ip",
+      "name": "IP Small Key",
+      "label": "Small Keys",
+      "sprite": "smallkey",
+      "slots": 2,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "ip",
+      "alwaysCount": true,
+      "ordinal": 46
+    },
+    {
+      "id": "bk-mm",
+      "name": "MM Big Key",
+      "label": "Big Key",
+      "sprite": "bigkey",
+      "slots": 1,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "mm",
+      "alwaysCount": false,
+      "ordinal": 47
+    },
+    {
+      "id": "sk-mm",
+      "name": "MM Small Key",
+      "label": "Small Keys",
+      "sprite": "smallkey",
+      "slots": 3,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "mm",
+      "alwaysCount": true,
+      "ordinal": 48
+    },
+    {
+      "id": "bk-tr",
+      "name": "TR Big Key",
+      "label": "Big Key",
+      "sprite": "bigkey",
+      "slots": 1,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "tr",
+      "alwaysCount": false,
+      "ordinal": 49
+    },
+    {
+      "id": "sk-tr",
+      "name": "TR Small Key",
+      "label": "Small Keys",
+      "sprite": "smallkey",
+      "slots": 4,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "tr",
+      "alwaysCount": true,
+      "ordinal": 50
+    },
+    {
+      "id": "bk-gt",
+      "name": "GT Big Key",
+      "label": "Big Key",
+      "sprite": "bigkey",
+      "slots": 1,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "gt",
+      "alwaysCount": false,
+      "ordinal": 51
+    },
+    {
+      "id": "sk-gt",
+      "name": "GT Small Key",
+      "label": "Small Keys",
+      "sprite": "smallkey",
+      "slots": 4,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "gt",
+      "alwaysCount": true,
+      "ordinal": 52
+    }
+  ],
+  "keyPanel": [
+    {
+      "id": "hc",
+      "name": "Hyrule Castle",
+      "short": "HC",
+      "color": "#5f86bf",
+      "bigKey": null,
+      "smallKey": "sk-hc",
+      "ordinal": 0
+    },
+    {
+      "id": "ct",
+      "name": "Castle Tower",
+      "short": "CT",
+      "color": "#9295a3",
+      "bigKey": null,
+      "smallKey": "sk-ct",
+      "ordinal": 1
+    },
+    {
+      "id": "ep",
+      "name": "Eastern Palace",
+      "short": "EP",
+      "color": "#2fa877",
+      "bigKey": "bk-ep",
+      "smallKey": null,
+      "ordinal": 2
+    },
+    {
+      "id": "dp",
+      "name": "Desert Palace",
+      "short": "DP",
+      "color": "#d1a72b",
+      "bigKey": "bk-dp",
+      "smallKey": "sk-dp",
+      "ordinal": 3
+    },
+    {
+      "id": "toh",
+      "name": "Tower of Hera",
+      "short": "ToH",
+      "color": "#d97e42",
+      "bigKey": "bk-toh",
+      "smallKey": "sk-toh",
+      "ordinal": 4
+    },
+    {
+      "id": "pod",
+      "name": "Palace of Darkness",
+      "short": "PoD",
+      "color": "#5257a0",
+      "bigKey": "bk-pod",
+      "smallKey": "sk-pod",
+      "ordinal": 5
+    },
+    {
+      "id": "sp",
+      "name": "Swamp Palace",
+      "short": "SP",
+      "color": "#2f9aa8",
+      "bigKey": "bk-sp",
+      "smallKey": "sk-sp",
+      "ordinal": 6
+    },
+    {
+      "id": "sw",
+      "name": "Skull Woods",
+      "short": "SW",
+      "color": "#74854f",
+      "bigKey": "bk-sw",
+      "smallKey": "sk-sw",
+      "ordinal": 7
+    },
+    {
+      "id": "tt",
+      "name": "Thieves' Town",
+      "short": "TT",
+      "color": "#a86333",
+      "bigKey": "bk-tt",
+      "smallKey": "sk-tt",
+      "ordinal": 8
+    },
+    {
+      "id": "ip",
+      "name": "Ice Palace",
+      "short": "IP",
+      "color": "#4fb3d4",
+      "bigKey": "bk-ip",
+      "smallKey": "sk-ip",
+      "ordinal": 9
+    },
+    {
+      "id": "mm",
+      "name": "Misery Mire",
+      "short": "MM",
+      "color": "#8272a8",
+      "bigKey": "bk-mm",
+      "smallKey": "sk-mm",
+      "ordinal": 10
+    },
+    {
+      "id": "tr",
+      "name": "Turtle Rock",
+      "short": "TR",
+      "color": "#c04a41",
+      "bigKey": "bk-tr",
+      "smallKey": "sk-tr",
+      "ordinal": 11
+    },
+    {
+      "id": "gt",
+      "name": "Ganon's Tower",
+      "short": "GT",
+      "color": "#ab4283",
+      "bigKey": "bk-gt",
+      "smallKey": "sk-gt",
+      "ordinal": 12
+    }
+  ],
+  "palette": [
+    {
+      "symbol": "k",
+      "color": "#0d0d12"
+    },
+    {
+      "symbol": "w",
+      "color": "#f4f4f8"
+    },
+    {
+      "symbol": "s",
+      "color": "#c6c8d4"
+    },
+    {
+      "symbol": "e",
+      "color": "#8b8fa0"
+    },
+    {
+      "symbol": "d",
+      "color": "#5a6078"
+    },
+    {
+      "symbol": "r",
+      "color": "#d83b32"
+    },
+    {
+      "symbol": "R",
+      "color": "#8c1f1a"
+    },
+    {
+      "symbol": "o",
+      "color": "#ef8a25"
+    },
+    {
+      "symbol": "y",
+      "color": "#f2cf3a"
+    },
+    {
+      "symbol": "g",
+      "color": "#4bb04b"
+    },
+    {
+      "symbol": "G",
+      "color": "#24702c"
+    },
+    {
+      "symbol": "b",
+      "color": "#3f63d4"
+    },
+    {
+      "symbol": "B",
+      "color": "#1e3080"
+    },
+    {
+      "symbol": "p",
+      "color": "#a94fd0"
+    },
+    {
+      "symbol": "n",
+      "color": "#9c6a2c"
+    },
+    {
+      "symbol": "N",
+      "color": "#5a3a14"
+    },
+    {
+      "symbol": "t",
+      "color": "#f5c48c"
+    },
+    {
+      "symbol": "c",
+      "color": "#57dcdc"
+    },
+    {
+      "symbol": "m",
+      "color": "#f582bd"
+    }
+  ],
+  "sprites": [
+    {
+      "name": "sword",
+      "kind": "item",
+      "rows": [
+        ".....kk.....",
+        "....kswk....",
+        "....kswk....",
+        "....kswk....",
+        "....kswk....",
+        "....kswk....",
+        "..kkkswkkk..",
+        "..kyyyyyyk..",
+        "..kkkNkkk...",
+        "....kNk.....",
+        "....kNk.....",
+        "....kkk....."
+      ]
+    },
+    {
+      "name": "shield",
+      "kind": "item",
+      "rows": [
+        "..kkkkkkkk..",
+        "..kbbbbbbk..",
+        "..kbwwwwbk..",
+        "..kbwrrwbk..",
+        "..kbwrrwbk..",
+        "..kbwwwwbk..",
+        "..kbbbbbbk..",
+        "..kbbbbbbk..",
+        "...kbbbbk...",
+        "....kbbk....",
+        ".....kk.....",
+        "............"
+      ]
+    },
+    {
+      "name": "mail",
+      "kind": "item",
+      "rows": [
+        ".kk......kk.",
+        ".kgkkkkkkgk.",
+        ".kggggggggk.",
+        ".kggggggggk.",
+        ".kkggggggkk.",
+        "..kggggggk..",
+        "..kggggggk..",
+        "..kggkkggk..",
+        "..kgk..kgk..",
+        "..kkk..kkk..",
+        "............",
+        "............"
+      ]
+    },
+    {
+      "name": "bow",
+      "kind": "item",
+      "rows": [
+        "..kk........",
+        ".knnk.......",
+        ".knnkk......",
+        ".knn.kk.....",
+        ".knn..kk....",
+        ".knnsssssskk",
+        ".knnsssssskk",
+        ".knn..kk....",
+        ".knn.kk.....",
+        ".knnkk......",
+        ".knnk.......",
+        "..kk........"
+      ]
+    },
+    {
+      "name": "blueboomerang",
+      "kind": "item",
+      "rows": [
+        "....kkkk....",
+        "...kbbbbk...",
+        "..kbbwwbk...",
+        "..kbbk.kk...",
+        "..kbbk......",
+        "..kbbk......",
+        "..kbbk......",
+        "..kbbbbkk...",
+        "..kbbwwbbk..",
+        "...kbbbbbk..",
+        "....kkkkk...",
+        "............"
+      ]
+    },
+    {
+      "name": "redboomerang",
+      "kind": "item",
+      "rows": [
+        "....kkkk....",
+        "...krrrrk...",
+        "..krrwwrk...",
+        "..krrk.kk...",
+        "..krrk......",
+        "..krrk......",
+        "..krrk......",
+        "..krrrrkk...",
+        "..krrwwrrk..",
+        "...krrrrrk..",
+        "....kkkkk...",
+        "............"
+      ]
+    },
+    {
+      "name": "hookshot",
+      "kind": "item",
+      "rows": [
+        "............",
+        "..kkk.......",
+        "..ksk.......",
+        "..kskkkkkk..",
+        "..kskssssk..",
+        "..kkkkkkkk..",
+        "....kddddk..",
+        "....kdyydk..",
+        "....kddddk..",
+        "....kkkkkk..",
+        "............",
+        "............"
+      ]
+    },
+    {
+      "name": "mushroom",
+      "kind": "item",
+      "rows": [
+        "............",
+        "...kkkkkk...",
+        "..krrrrrrk..",
+        ".krwrrwrrrk.",
+        ".krrrrrrrrk.",
+        ".kkrrrrrrkk.",
+        "...kkwwkk...",
+        "....kwwk....",
+        "....kwwk....",
+        "....kwwk....",
+        "....kkkk....",
+        "............"
+      ]
+    },
+    {
+      "name": "powder",
+      "kind": "item",
+      "rows": [
+        ".....kk.....",
+        "....kddk....",
+        "...kkddkk...",
+        "..kppppppk..",
+        ".kpppwppppk.",
+        ".kppppppppk.",
+        ".kpwppppppk.",
+        ".kppppppppk.",
+        ".kpppppwppk.",
+        "..kppppppk..",
+        "...kkkkkk...",
+        "............"
+      ]
+    },
+    {
+      "name": "firerod",
+      "kind": "item",
+      "rows": [
+        ".....rr.....",
+        "....rkor....",
+        "...rkookr...",
+        "...rkoykr...",
+        "....koyk....",
+        "....kok.....",
+        "....krk.....",
+        "....krk.....",
+        "....krk.....",
+        "....krk.....",
+        "....kkk.....",
+        "............"
+      ]
+    },
+    {
+      "name": "icerod",
+      "kind": "item",
+      "rows": [
+        ".....cc.....",
+        "....ckbc....",
+        "...ckbbkc...",
+        "...ckbwkc...",
+        "....kbwk....",
+        "....kbk.....",
+        "....kbk.....",
+        "....kbk.....",
+        "....kbk.....",
+        "....kbk.....",
+        "....kkk.....",
+        "............"
+      ]
+    },
+    {
+      "name": "bombos",
+      "kind": "item",
+      "rows": [
+        "....kkkk....",
+        "..kkyyyykk..",
+        ".kyyrrrryyk.",
+        ".kyrrwwrryk.",
+        "kyyrwrrwryyk",
+        "kyyrwrrwryyk",
+        ".kyrrwwrryk.",
+        ".kyyrrrryyk.",
+        "..kkyyyykk..",
+        "....kkkk....",
+        "............",
+        "............"
+      ]
+    },
+    {
+      "name": "ether",
+      "kind": "item",
+      "rows": [
+        "....kkkk....",
+        "..kkwwwwkk..",
+        ".kwwbbbbwwk.",
+        ".kwbbccbbwk.",
+        "kwwbcwwcbwwk",
+        "kwwbcwwcbwwk",
+        ".kwbbccbbwk.",
+        ".kwwbbbbwwk.",
+        "..kkwwwwkk..",
+        "....kkkk....",
+        "............",
+        "............"
+      ]
+    },
+    {
+      "name": "quake",
+      "kind": "item",
+      "rows": [
+        "....kkkk....",
+        "..kkooookk..",
+        ".koorrrrook.",
+        ".korrRRrrok.",
+        "koorRooRrook",
+        "koorRooRrook",
+        ".korrRRrrok.",
+        ".koorrrrook.",
+        "..kkooookk..",
+        "....kkkk....",
+        "............",
+        "............"
+      ]
+    },
+    {
+      "name": "lamp",
+      "kind": "item",
+      "rows": [
+        ".....kk.....",
+        "....keek....",
+        "...keeeek...",
+        "..kkkkkkkk..",
+        "..kwyyyywk..",
+        "..kyyyyyyk..",
+        "..kyywwyyk..",
+        "..kyyyyyyk..",
+        "..kwyyyywk..",
+        "..kkkkkkkk..",
+        "...keeeek...",
+        "....kkkk...."
+      ]
+    },
+    {
+      "name": "hammer",
+      "kind": "item",
+      "rows": [
+        "............",
+        ".kkkkkkkk...",
+        ".kssssssk...",
+        "kseewweesk..",
+        "kseewweesk..",
+        ".kssssssk...",
+        ".kkkkNkkk...",
+        ".....kNk....",
+        ".....kNk....",
+        ".....kNk....",
+        ".....kNk....",
+        ".....kkk...."
+      ]
+    },
+    {
+      "name": "shovel",
+      "kind": "item",
+      "rows": [
+        ".....kNk....",
+        ".....kNk....",
+        ".....kNk....",
+        ".....kNk....",
+        "....kkNkk...",
+        "....kNNNk...",
+        "...kkNNNkk..",
+        "...kssssk...",
+        "..kssssssk..",
+        "..kssssssk..",
+        "..kkssssk...",
+        "....kkkk...."
+      ]
+    },
+    {
+      "name": "flute",
+      "kind": "item",
+      "rows": [
+        "............",
+        "............",
+        "............",
+        "..kkkkkkkk..",
+        ".knnnnnnnnk.",
+        "knNnkNnkNnnk",
+        "knnnnnnnnnnk",
+        ".knnnnnnnnk.",
+        "..kkkkkkkk..",
+        "............",
+        "............",
+        "............"
+      ]
+    },
+    {
+      "name": "bugnet",
+      "kind": "item",
+      "rows": [
+        ".........kk.",
+        "........kwk.",
+        ".......kwk..",
+        "..kkk.kwk...",
+        ".kwwwkwk....",
+        "kwwwwwk.....",
+        "kwwwwwk.....",
+        ".kwwwkwk....",
+        "..kkk.kwk...",
+        ".......kwk..",
+        "........kwk.",
+        ".........kk."
+      ]
+    },
+    {
+      "name": "book",
+      "kind": "item",
+      "rows": [
+        "............",
+        ".kkkkkkkkkk.",
+        ".kRyyykyyyk.",
+        ".kRywykywyk.",
+        ".kRyyykyyyk.",
+        ".kRywykywyk.",
+        ".kRyyykyyyk.",
+        ".kRRRRkRRRk.",
+        ".kkkkkkkkkk.",
+        "............",
+        "............",
+        "............"
+      ]
+    },
+    {
+      "name": "bottle",
+      "kind": "item",
+      "rows": [
+        ".....kk.....",
+        "....krrk....",
+        "....kwwk....",
+        "....kwwk....",
+        "...kkwwkk...",
+        "..kwggggwk..",
+        "..kwggggwk..",
+        "..kggggggk..",
+        "..kggggggk..",
+        "..kggggggk..",
+        "..kkkkkkkk..",
+        "............"
+      ]
+    },
+    {
+      "name": "somaria",
+      "kind": "item",
+      "rows": [
+        "....kkkk....",
+        "...krrrrk...",
+        "..krrwwrrk..",
+        "..krwwrrrk..",
+        "...krrrrk...",
+        "....kkkk....",
+        "....krk.....",
+        "....krk.....",
+        "....krk.....",
+        "....krk.....",
+        "....krk.....",
+        "....kkk....."
+      ]
+    },
+    {
+      "name": "byrna",
+      "kind": "item",
+      "rows": [
+        "....kkkk....",
+        "...kbbbbk...",
+        "..kbbccbbk..",
+        "..kbccbbbk..",
+        "...kbbbbk...",
+        "....kkkk....",
+        "....kbk.....",
+        "....kbk.....",
+        "....kbk.....",
+        "....kbk.....",
+        "....kbk.....",
+        "....kkk....."
+      ]
+    },
+    {
+      "name": "cape",
+      "kind": "item",
+      "rows": [
+        "...kkkkkk...",
+        "..kwrrrrwk..",
+        ".krrrrrrrrk.",
+        "krrrrrrrrrrk",
+        "krrrrrrrrrrk",
+        "krrrrrrrrrrk",
+        "krrrrrrrrrrk",
+        "krrrrrrrrrrk",
+        ".krrrrrrrrk.",
+        ".kRRRRRRRRk.",
+        "..kkkkkkkk..",
+        "............"
+      ]
+    },
+    {
+      "name": "mirror",
+      "kind": "item",
+      "rows": [
+        "....kkkk....",
+        "...kppppk...",
+        "..kpccccpk..",
+        "..kpcwccpk..",
+        "..kpccccpk..",
+        "...kppppk...",
+        "....kkkk....",
+        "....kpk.....",
+        "....kpk.....",
+        "...kpppk....",
+        "...kkkkk....",
+        "............"
+      ]
+    },
+    {
+      "name": "boots",
+      "kind": "item",
+      "rows": [
+        "............",
+        "..kk........",
+        "..kbk.......",
+        "..kbk.......",
+        "..kbbkkk....",
+        "..kbbbbbk...",
+        "..kbbbbbbk..",
+        ".kkbbbbbbk..",
+        ".kwwwwwwwwk.",
+        ".kkkkkkkkkk.",
+        "............",
+        "............"
+      ]
+    },
+    {
+      "name": "flippers",
+      "kind": "item",
+      "rows": [
+        "............",
+        "..kkk..kkk..",
+        "..kck..kck..",
+        "..kck..kck..",
+        ".kkck..kckk.",
+        ".kcck..kcck.",
+        ".kcck..kcck.",
+        ".kcck..kcck.",
+        ".kkck..kckk.",
+        "..kkk..kkk..",
+        "............",
+        "............"
+      ]
+    },
+    {
+      "name": "moonpearl",
+      "kind": "item",
+      "rows": [
+        "....kkkk....",
+        "...kwwwwk...",
+        "..kwwwwbbk..",
+        ".kwwwwbbbbk.",
+        ".kwwbbbbbbk.",
+        ".kwbbbbbbBk.",
+        ".kbbbbbbbBk.",
+        ".kbbbbbbBBk.",
+        "..kbbbbBBk..",
+        "...kBBBBk...",
+        "....kkkk....",
+        "............"
+      ]
+    },
+    {
+      "name": "glove",
+      "kind": "item",
+      "rows": [
+        "............",
+        "...kk.kk....",
+        "..kwkkwkkk..",
+        "..kwwwwwwk..",
+        ".kkwwwwwwk..",
+        ".kwwwwwwwk..",
+        ".kwwwwwwwk..",
+        "..kwwwwwwk..",
+        "..kyyyyyyk..",
+        "..kyyyyyyk..",
+        "..kkkkkkkk..",
+        "............"
+      ]
+    },
+    {
+      "name": "bigkey",
+      "kind": "item",
+      "rows": [
+        "....kkkk....",
+        "...kyyyyk...",
+        "..kyykkyyk..",
+        "..kyk..kyk..",
+        "..kyk..kyk..",
+        "..kyykkyyk..",
+        "...kyyyyk...",
+        "....kyyk....",
+        "....kyykkk..",
+        "....kyyk....",
+        "....kyykk...",
+        "....kkkk...."
+      ]
+    },
+    {
+      "name": "smallkey",
+      "kind": "item",
+      "rows": [
+        "............",
+        "....kkk.....",
+        "...ksssk....",
+        "...ksksk....",
+        "...ksssk....",
+        "....ksk.....",
+        "....ksk.....",
+        "....kskk....",
+        "....ksk.....",
+        "....kskk....",
+        "....kkk.....",
+        "............"
+      ]
+    },
+    {
+      "name": "halfmagic",
+      "kind": "item",
+      "rows": [
+        ".....kk.....",
+        "....kkkk....",
+        "...kwwwwk...",
+        "...kwppwk...",
+        "..kwppppwk..",
+        "..kppppppk..",
+        "..kppppppk..",
+        "..kppwpppk..",
+        "..kppppppk..",
+        "..kppppppk..",
+        "..kkkkkkkk..",
+        "............"
+      ]
+    },
+    {
+      "name": "chest",
+      "kind": "icon",
+      "rows": [
+        "............",
+        "..kkkkkkkk..",
+        ".knnnnnnnnk.",
+        ".knnnnnnnnk.",
+        ".kkkkkkkkkk.",
+        ".knnnnnnnnk.",
+        ".knnnkyknnk.",
+        ".knnnkyknnk.",
+        ".knnnnnnnnk.",
+        ".kkkkkkkkkk.",
+        "............",
+        "............"
+      ]
+    },
+    {
+      "name": "bigchest",
+      "kind": "icon",
+      "rows": [
+        "............",
+        "..kkkkkkkk..",
+        ".kyyyyyyyyk.",
+        ".kyooooooyk.",
+        ".kkkkkkkkkk.",
+        ".kyooooooyk.",
+        ".kyyykwkyyk.",
+        ".kyyykwkyyk.",
+        ".kyooooooyk.",
+        ".kkkkkkkkkk.",
+        "............",
+        "............"
+      ]
+    },
+    {
+      "name": "npc",
+      "kind": "icon",
+      "rows": [
+        "............",
+        "....kkkk....",
+        "...kttttk...",
+        "...ktktkk...",
+        "...kttttk...",
+        "....kttk....",
+        "..kkkkkkkk..",
+        ".kbbbbbbbbk.",
+        ".kbbbbbbbbk.",
+        ".kbbbbbbbbk.",
+        ".kkkkkkkkkk.",
+        "............"
+      ]
+    },
+    {
+      "name": "boss",
+      "kind": "icon",
+      "rows": [
+        "...kkkkkk...",
+        "..kwwwwwwk..",
+        ".kwwwwwwwwk.",
+        ".kwkkwwkkwk.",
+        ".kwkkwwkkwk.",
+        ".kwwwwwwwwk.",
+        ".kwwwkkwwwk.",
+        ".kwwwwwwwwk.",
+        "..kwwwwwwk..",
+        "..kwwwwwwk..",
+        "..kwkwkwwk..",
+        "..kkkkkkkk.."
+      ]
+    },
+    {
+      "name": "mirror",
+      "kind": "icon",
+      "rows": [
+        "....kkkk....",
+        "...kppppk...",
+        "..kpccccpk..",
+        "..kpcwccpk..",
+        "..kpccccpk..",
+        "...kppppk...",
+        "....kkkk....",
+        "....kpk.....",
+        "....kpk.....",
+        "...kpppk....",
+        "...kkkkk....",
+        "............"
+      ]
+    },
+    {
+      "name": "cape",
+      "kind": "icon",
+      "rows": [
+        "...kkkkkk...",
+        "..kwrrrrwk..",
+        ".krrrrrrrrk.",
+        "krrrrrrrrrrk",
+        "krrrrrrrrrrk",
+        "krrrrrrrrrrk",
+        "krrrrrrrrrrk",
+        "krrrrrrrrrrk",
+        ".krrrrrrrrk.",
+        ".kRRRRRRRRk.",
+        "..kkkkkkkk..",
+        "............"
+      ]
+    },
+    {
+      "name": "book",
+      "kind": "icon",
+      "rows": [
+        "............",
+        ".kkkkkkkkkk.",
+        ".kRyyykyyyk.",
+        ".kRywykywyk.",
+        ".kRyyykyyyk.",
+        ".kRywykywyk.",
+        ".kRyyykyyyk.",
+        ".kRRRRkRRRk.",
+        ".kkkkkkkkkk.",
+        "............",
+        "............",
+        "............"
+      ]
+    },
+    {
+      "name": "sword",
+      "kind": "icon",
+      "rows": [
+        ".....kk.....",
+        "....kswk....",
+        "....kswk....",
+        "....kswk....",
+        "....kswk....",
+        "....kswk....",
+        "..kkkswkkk..",
+        "..kyyyyyyk..",
+        "..kkkNkkk...",
+        "....kNk.....",
+        "....kNk.....",
+        "....kkk....."
+      ]
+    },
+    {
+      "name": "hammer",
+      "kind": "icon",
+      "rows": [
+        "............",
+        ".kkkkkkkk...",
+        ".kssssssk...",
+        "kseewweesk..",
+        "kseewweesk..",
+        ".kssssssk...",
+        ".kkkkNkkk...",
+        ".....kNk....",
+        ".....kNk....",
+        ".....kNk....",
+        ".....kNk....",
+        ".....kkk...."
+      ]
+    },
+    {
+      "name": "boots",
+      "kind": "icon",
+      "rows": [
+        "............",
+        "..kk........",
+        "..kbk.......",
+        "..kbk.......",
+        "..kbbkkk....",
+        "..kbbbbbk...",
+        "..kbbbbbbk..",
+        ".kkbbbbbbk..",
+        ".kwwwwwwwwk.",
+        ".kkkkkkkkkk.",
+        "............",
+        "............"
+      ]
+    },
+    {
+      "name": "bottle",
+      "kind": "icon",
+      "rows": [
+        ".....kk.....",
+        "....krrk....",
+        "....kwwk....",
+        "....kwwk....",
+        "...kkwwkk...",
+        "..kwggggwk..",
+        "..kwggggwk..",
+        "..kggggggk..",
+        "..kggggggk..",
+        "..kggggggk..",
+        "..kkkkkkkk..",
+        "............"
+      ]
+    },
+    {
+      "name": "flippers",
+      "kind": "icon",
+      "rows": [
+        "............",
+        "..kkk..kkk..",
+        "..kck..kck..",
+        "..kck..kck..",
+        ".kkck..kckk.",
+        ".kcck..kcck.",
+        ".kcck..kcck.",
+        ".kcck..kcck.",
+        ".kkck..kckk.",
+        "..kkk..kkk..",
+        "............",
+        "............"
+      ]
+    },
+    {
+      "name": "hookshot",
+      "kind": "icon",
+      "rows": [
+        "............",
+        "..kkk.......",
+        "..ksk.......",
+        "..kskkkkkk..",
+        "..kskssssk..",
+        "..kkkkkkkk..",
+        "....kddddk..",
+        "....kdyydk..",
+        "....kddddk..",
+        "....kkkkkk..",
+        "............",
+        "............"
+      ]
+    },
+    {
+      "name": "powder",
+      "kind": "icon",
+      "rows": [
+        ".....kk.....",
+        "....kddk....",
+        "...kkddkk...",
+        "..kppppppk..",
+        ".kpppwppppk.",
+        ".kppppppppk.",
+        ".kpwppppppk.",
+        ".kppppppppk.",
+        ".kpppppwppk.",
+        "..kppppppk..",
+        "...kkkkkk...",
+        "............"
+      ]
+    },
+    {
+      "name": "glove",
+      "kind": "icon",
+      "rows": [
+        "............",
+        "...kk.kk....",
+        "..kwkkwkkk..",
+        "..kwwwwwwk..",
+        ".kkwwwwwwk..",
+        ".kwwwwwwwk..",
+        ".kwwwwwwwk..",
+        "..kwwwwwwk..",
+        "..kyyyyyyk..",
+        "..kyyyyyyk..",
+        "..kkkkkkkk..",
+        "............"
+      ]
+    },
+    {
+      "name": "shovel",
+      "kind": "icon",
+      "rows": [
+        ".....kNk....",
+        ".....kNk....",
+        ".....kNk....",
+        ".....kNk....",
+        "....kkNkk...",
+        "....kNNNk...",
+        "...kkNNNkk..",
+        "...kssssk...",
+        "..kssssssk..",
+        "..kssssssk..",
+        "..kkssssk...",
+        "....kkkk...."
+      ]
+    },
+    {
+      "name": "icerod",
+      "kind": "icon",
+      "rows": [
+        ".....cc.....",
+        "....ckbc....",
+        "...ckbbkc...",
+        "...ckbwkc...",
+        "....kbwk....",
+        "....kbk.....",
+        "....kbk.....",
+        "....kbk.....",
+        "....kbk.....",
+        "....kbk.....",
+        "....kkk.....",
+        "............"
+      ]
+    },
+    {
+      "name": "mushroom",
+      "kind": "icon",
+      "rows": [
+        "............",
+        "...kkkkkk...",
+        "..krrrrrrk..",
+        ".krwrrwrrrk.",
+        ".krrrrrrrrk.",
+        ".kkrrrrrrkk.",
+        "...kkwwkk...",
+        "....kwwk....",
+        "....kwwk....",
+        "....kwwk....",
+        "....kkkk....",
+        "............"
+      ]
+    },
+    {
+      "name": "sparkle",
+      "kind": "icon",
+      "rows": [
+        "............",
+        ".....kk.....",
+        "....kyyk....",
+        ".kk.kyyk.kk.",
+        ".kykkyykkyk.",
+        "..kyyyyyyk..",
+        "..kyyyyyyk..",
+        ".kykkyykkyk.",
+        ".kk.kyyk.kk.",
+        "....kyyk....",
+        ".....kk.....",
+        "............"
+      ]
+    },
+    {
+      "name": "mmc",
+      "kind": "icon",
+      "rows": [
+        "............",
+        "..kkkkkkkk..",
+        ".knnnnnnnnk.",
+        ".knnnnnnnnk.",
+        ".kkkkkkkkkk.",
+        ".knnnnnnnnk.",
+        ".knnnkyknnk.",
+        ".knnnkyknnk.",
+        ".knnnnnnnnk.",
+        ".kkkkkkkkkk.",
+        "............",
+        "............"
+      ]
+    },
+    {
+      "name": "purplechest",
+      "kind": "icon",
+      "rows": [
+        "............",
+        "..kkkkkkkk..",
+        ".knnnnnnnnk.",
+        ".knnnnnnnnk.",
+        ".kkkkkkkkkk.",
+        ".knnnnnnnnk.",
+        ".knnnkyknnk.",
+        ".knnnkyknnk.",
+        ".knnnnnnnnk.",
+        ".kkkkkkkkkk.",
+        "............",
+        "............"
+      ]
+    },
+    {
+      "name": "catfish",
+      "kind": "icon",
+      "rows": [
+        "............",
+        "....kkkk....",
+        "...kttttk...",
+        "...ktktkk...",
+        "...kttttk...",
+        "....kttk....",
+        "..kkkkkkkk..",
+        ".kbbbbbbbbk.",
+        ".kbbbbbbbbk.",
+        ".kbbbbbbbbk.",
+        ".kkkkkkkkkk.",
+        "............"
+      ]
+    },
+    {
+      "name": "stumpy",
+      "kind": "icon",
+      "rows": [
+        "............",
+        "....kkkk....",
+        "...kttttk...",
+        "...ktktkk...",
+        "...kttttk...",
+        "....kttk....",
+        "..kkkkkkkk..",
+        ".kbbbbbbbbk.",
+        ".kbbbbbbbbk.",
+        ".kbbbbbbbbk.",
+        ".kkkkkkkkkk.",
+        "............"
+      ]
+    },
+    {
+      "name": "chicken",
+      "kind": "icon",
+      "rows": [
+        "............",
+        "....kkkk....",
+        "...kttttk...",
+        "...ktktkk...",
+        "...kttttk...",
+        "....kttk....",
+        "..kkkkkkkk..",
+        ".kbbbbbbbbk.",
+        ".kbbbbbbbbk.",
+        ".kbbbbbbbbk.",
+        ".kkkkkkkkkk.",
+        "............"
+      ]
+    },
+    {
+      "name": "link",
+      "kind": "icon",
+      "rows": [
+        "............",
+        "....kkkk....",
+        "...kttttk...",
+        "...ktktkk...",
+        "...kttttk...",
+        "....kttk....",
+        "..kkkkkkkk..",
+        ".kbbbbbbbbk.",
+        ".kbbbbbbbbk.",
+        ".kbbbbbbbbk.",
+        ".kkkkkkkkkk.",
+        "............"
+      ]
+    },
+    {
+      "name": "bunny",
+      "kind": "icon",
+      "rows": [
+        "............",
+        "....kkkk....",
+        "...kttttk...",
+        "...ktktkk...",
+        "...kttttk...",
+        "....kttk....",
+        "..kkkkkkkk..",
+        ".kbbbbbbbbk.",
+        ".kbbbbbbbbk.",
+        ".kbbbbbbbbk.",
+        ".kkkkkkkkkk.",
+        "............"
+      ]
+    },
+    {
+      "name": "spike",
+      "kind": "icon",
+      "rows": [
+        "............",
+        "..kkkkkkkk..",
+        ".knnnnnnnnk.",
+        ".knnnnnnnnk.",
+        ".kkkkkkkkkk.",
+        ".knnnnnnnnk.",
+        ".knnnkyknnk.",
+        ".knnnkyknnk.",
+        ".knnnnnnnnk.",
+        ".kkkkkkkkkk.",
+        "............",
+        "............"
+      ]
+    },
+    {
+      "name": "oldman",
+      "kind": "icon",
+      "rows": [
+        "............",
+        "....kkkk....",
+        "...kttttk...",
+        "...ktktkk...",
+        "...kttttk...",
+        "....kttk....",
+        "..kkkkkkkk..",
+        ".kbbbbbbbbk.",
+        ".kbbbbbbbbk.",
+        ".kbbbbbbbbk.",
+        ".kkkkkkkkkk.",
+        "............"
+      ]
+    },
+    {
+      "name": "greenpendant",
+      "kind": "icon",
+      "rows": [
+        "............",
+        ".....kk.....",
+        "....kyyk....",
+        ".kk.kyyk.kk.",
+        ".kykkyykkyk.",
+        "..kyyyyyyk..",
+        "..kyyyyyyk..",
+        ".kykkyykkyk.",
+        ".kk.kyyk.kk.",
+        "....kyyk....",
+        ".....kk.....",
+        "............"
+      ]
+    },
+    {
+      "name": "mireshed",
+      "kind": "icon",
+      "rows": [
+        "............",
+        "..kkkkkkkk..",
+        ".knnnnnnnnk.",
+        ".knnnnnnnnk.",
+        ".kkkkkkkkkk.",
+        ".knnnnnnnnk.",
+        ".knnnkyknnk.",
+        ".knnnkyknnk.",
+        ".knnnnnnnnk.",
+        ".kkkkkkkkkk.",
+        "............",
+        "............"
+      ]
+    },
+    {
+      "name": "pyramid",
+      "kind": "icon",
+      "rows": [
+        "............",
+        ".....kk.....",
+        "....kyyk....",
+        ".kk.kyyk.kk.",
+        ".kykkyykkyk.",
+        "..kyyyyyyk..",
+        "..kyyyyyyk..",
+        ".kykkyykkyk.",
+        ".kk.kyyk.kk.",
+        "....kyyk....",
+        ".....kk.....",
+        "............"
+      ]
+    },
+    {
+      "name": "rupee",
+      "kind": "icon",
+      "rows": [
+        "............",
+        ".....kk.....",
+        "....kyyk....",
+        ".kk.kyyk.kk.",
+        ".kykkyykkyk.",
+        "..kyyyyyyk..",
+        "..kyyyyyyk..",
+        ".kykkyykkyk.",
+        ".kk.kyyk.kk.",
+        "....kyyk....",
+        ".....kk.....",
+        "............"
+      ]
+    },
+    {
+      "name": "uncle",
+      "kind": "icon",
+      "rows": [
+        "............",
+        "....kkkk....",
+        "...kttttk...",
+        "...ktktkk...",
+        "...kttttk...",
+        "....kttk....",
+        "..kkkkkkkk..",
+        ".kbbbbbbbbk.",
+        ".kbbbbbbbbk.",
+        ".kbbbbbbbbk.",
+        ".kkkkkkkkkk.",
+        "............"
+      ]
+    },
+    {
+      "name": "zora",
+      "kind": "icon",
+      "rows": [
+        "............",
+        "....kkkk....",
+        "...kttttk...",
+        "...ktktkk...",
+        "...kttttk...",
+        "....kttk....",
+        "..kkkkkkkk..",
+        ".kbbbbbbbbk.",
+        ".kbbbbbbbbk.",
+        ".kbbbbbbbbk.",
+        ".kkkkkkkkkk.",
+        "............"
+      ]
+    },
+    {
+      "name": "bomb",
+      "kind": "icon",
+      "rows": [
+        ".......kkk..",
+        "......kyyk..",
+        ".....kyk....",
+        ".....kk.....",
+        "..kkkkkk....",
+        ".kkddddkk...",
+        "kkdwddddkk..",
+        "kkddddddkk..",
+        "kkddddddkk..",
+        ".kkddddkk...",
+        "..kkkkkk....",
+        "............"
+      ]
+    },
+    {
+      "name": "superbomb",
+      "kind": "icon",
+      "rows": [
+        ".......kkk..",
+        "......kyyk..",
+        ".....kyk....",
+        ".....kk.....",
+        "..kkkkkk....",
+        ".kkddddkk...",
+        "kkdwddddkk..",
+        "kkddddddkk..",
+        "kkddddddkk..",
+        ".kkddddkk...",
+        "..kkkkkk....",
+        "............"
+      ]
     }
   ]
 }

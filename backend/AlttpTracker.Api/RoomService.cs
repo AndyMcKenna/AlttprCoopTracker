@@ -19,7 +19,7 @@ public readonly record struct RoomResult(Room? Room, string? Error)
 /// Every rule about what may be recorded where. Kept in one place so the HTTP
 /// endpoints stay thin and the rules can be tested without a web server.
 /// </summary>
-public partial class RoomService(TrackerDbContext db, GameData gameData)
+public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
 {
     /// <summary>
     /// Room codes are typed by hand and shared, so they are folded to a
@@ -80,12 +80,12 @@ public partial class RoomService(TrackerDbContext db, GameData gameData)
         string? by,
         CancellationToken cancellationToken = default)
     {
-        if (!gameData.Items.TryGetValue(itemId, out var item))
+        if (!catalog.Items.TryGetValue(itemId, out var item))
         {
             return RoomResult.Failure($"Unknown item: {itemId}");
         }
 
-        if (!gameData.Checks.TryGetValue(checkId, out var check))
+        if (!catalog.Checks.TryGetValue(checkId, out var check))
         {
             return RoomResult.Failure($"Unknown check: {checkId}");
         }
@@ -97,7 +97,7 @@ public partial class RoomService(TrackerDbContext db, GameData gameData)
         var holder = room.Assignments.FirstOrDefault(a => a.CheckId == check.Id);
         if (holder is not null)
         {
-            var holderName = gameData.Items.TryGetValue(holder.ItemId, out var held) ? held.Name : holder.ItemId;
+            var holderName = catalog.Items.TryGetValue(holder.ItemId, out var held) ? held.Name : holder.ItemId;
             return RoomResult.Failure($"{check.FullName} is already recorded as {holderName}");
         }
 

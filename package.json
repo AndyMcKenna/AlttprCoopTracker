@@ -2,18 +2,13 @@
   "name": "alttp-coop-tracker",
   "version": "1.0.0",
   "private": true,
-  "description": "Shared co-op item tracker for A Link to the Past: record which of the 216 checks held each item.",
-  "main": "src/server.js",
+  "description": "Game tables and tooling for the ALTTP co-op tracker; the app itself lives in backend/.",
   "scripts": {
-    "start": "node src/server.js",
     "test": "node test/smoke.test.js",
     "export-gamedata": "node scripts/export-gamedata.js"
   },
   "engines": {
     "node": ">=18"
-  },
-  "dependencies": {
-    "express": "^4.19.2"
   },
   "devDependencies": {
     "jpeg-js": "^0.4.4",
