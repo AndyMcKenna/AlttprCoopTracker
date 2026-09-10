@@ -123,8 +123,8 @@ const REGIONS = [
     short: 'HC',
     color: '#5f86bf',
     checks: [
-      'Boomerang Chest',
       'Map Chest',
+      'Boomerang Chest',
       "Zelda's Cell",
       'Sewers - Dark Cross',
       'Sewers - Secret Room Left',
@@ -139,11 +139,11 @@ const REGIONS = [
     short: 'EP',
     color: '#2fa877',
     checks: [
-      'Compass Chest',
       'Cannonball Chest',
+      'Map Chest',
+      'Compass Chest',
       'Big Chest',
       'Big Key Chest',
-      'Map Chest',
       'Armos Knights',
     ],
   },
