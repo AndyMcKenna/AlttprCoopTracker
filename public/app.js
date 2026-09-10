@@ -37,6 +37,7 @@ const state = {
   armed: null, // item id waiting for a check click
   regionFilter: new Set(), // empty means "all regions"
   collapsed: new Set(), // region ids folded shut; filled in once data arrives
+  keysCollapsed: true, // the key board is long; it opens on request
   spriteImages: new Set(), // sprite names that have a real image on disk
   checkImages: new Set(), // check glyphs that have a real image on disk
   search: '',
@@ -267,9 +268,24 @@ function buildItemTile(item) {
 function buildKeysGroup() {
   const section = document.createElement('div');
 
-  const title = document.createElement('div');
-  title.className = 'item-group-title';
-  title.textContent = 'Keys';
+  const title = document.createElement('button');
+  title.className = 'item-group-title item-group-toggle';
+  title.type = 'button';
+  title.setAttribute('aria-expanded', String(!state.keysCollapsed));
+  title.addEventListener('click', () => {
+    state.keysCollapsed = !state.keysCollapsed;
+    render();
+  });
+
+  // Caret and label together, so the count still sits at the far right.
+  const label = document.createElement('span');
+  label.className = 'group-label';
+  const caret = document.createElement('span');
+  caret.className = 'group-caret';
+  caret.textContent = state.keysCollapsed ? '▸' : '▾';
+  label.appendChild(caret);
+  label.appendChild(document.createTextNode('Keys'));
+  title.appendChild(label);
 
   // Keys count individual keys, not boxes: a dungeon's 6 small keys are 6.
   const keyItems = state.data.items.filter((item) => item.panel === 'keys');
@@ -309,7 +325,7 @@ function buildKeysGroup() {
     grid.appendChild(row);
   }
 
-  section.appendChild(grid);
+  if (!state.keysCollapsed) section.appendChild(grid);
   return section;
 }
 

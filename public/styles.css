@@ -243,6 +243,42 @@ h2 {
   text-transform: none;
 }
 
+/* A group heading that folds its contents away. */
+.item-group-toggle {
+  width: 100%;
+  background: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  padding: 3px 4px;
+  margin-left: -4px;
+}
+
+.item-group-toggle:hover,
+.item-group-toggle:focus-visible {
+  background: var(--bg-tile);
+  color: var(--text);
+  outline: none;
+}
+
+.group-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.group-caret {
+  width: 9px;
+  flex: none;
+  font-size: 10px;
+  line-height: 1;
+}
+
 .item-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
