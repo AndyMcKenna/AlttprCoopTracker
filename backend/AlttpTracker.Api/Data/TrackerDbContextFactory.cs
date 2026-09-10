@@ -14,10 +14,19 @@ namespace AlttpTracker.Api.Data;
 /// </remarks>
 public class TrackerDbContextFactory : IDesignTimeDbContextFactory<TrackerDbContext>
 {
+    /// <summary>Set this to point the tools at a real database.</summary>
+    public const string ConnectionVariable = "TRACKER_CONNECTION";
+
     public TrackerDbContext CreateDbContext(string[] args)
     {
+        // Adding a migration only reads the model, so the placeholder is
+        // enough. Applying one needs a real database, which the Aspire
+        // dashboard command and the deploy workflow both supply here.
+        var connectionString = Environment.GetEnvironmentVariable(ConnectionVariable)
+            ?? "Host=localhost;Database=tracker;Username=postgres";
+
         var options = new DbContextOptionsBuilder<TrackerDbContext>()
-            .UseNpgsql("Host=localhost;Database=tracker;Username=postgres")
+            .UseNpgsql(connectionString)
             .Options;
 
         return new TrackerDbContext(options);

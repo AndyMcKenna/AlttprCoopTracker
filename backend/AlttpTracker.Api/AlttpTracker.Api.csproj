@@ -19,4 +19,10 @@
     <ProjectReference Include="..\AlttpTracker.ServiceDefaults\AlttpTracker.ServiceDefaults.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- The SDK already picks this up as content; this only pins the copy
+         behaviour, because the API refuses to start without it. -->
+    <Content Update="gamedata.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

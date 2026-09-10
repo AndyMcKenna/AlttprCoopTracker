@@ -19,45 +19,50 @@ Everything is per-room and live: everyone on the same room code sees the same
 board over a WebSocket, and rooms are kept in a database, so closing the browser
 and coming back later picks the run up where it was.
 
-## The two halves
+## Shape of it
 
-| Piece                        | What it does                                                |
-| ---------------------------- | ----------------------------------------------------------- |
-| `backend/` (.NET Aspire)     | Rooms, the rules about what goes where, the database, and the websocket fan-out |
-| the Node app at the root     | Serves the board and the game tables (the 216 checks, the items, the sprites) |
+One ASP.NET Core app serves everything: the board out of `wwwroot`, the API it
+calls, and the websocket it listens on — all the same origin. Postgres holds
+both the rooms and the game itself. The JS at the repository root is not a
+server; it is where the game is authored, plus the tooling that carries it
+across.
 
-The browser reads the game tables from the Node app, then talks to the API for
-everything to do with a room: a change is a request to the API, and the API
-pushes the new state down the websocket to everyone in that room.
+A change is a request to the API, and the API pushes the new state down the
+websocket to everyone in that room.
 
 ## Running it
 
-Start both halves together with Aspire:
-
 ```sh
-npm install
 dotnet run --project backend/AlttpTracker.AppHost
 ```
 
-Aspire starts the API, applies any outstanding database migrations, starts the
-board, and prints a dashboard URL where both are listed with their addresses.
-Open the `frontend` address to play.
+Aspire starts Postgres in a container, waits for it, applies any outstanding
+migrations, seeds the game, and starts the app. It prints a dashboard URL where
+the resources are listed with their addresses — open the `api` one to play.
+The dashboard also has a **Run EF migrations** button on the database, for
+applying a new migration without cycling the app.
 
-To run the halves separately — useful when working on one of them:
-
-```sh
-dotnet run --project backend/AlttpTracker.Api   # http://localhost:5220
-API_URL=http://localhost:5220 npm start         # http://localhost:3000
-```
+Running the app on its own needs a Postgres to point at:
 
 ```sh
-npm test                                  # game tables and sprites
-dotnet test backend/AlttpTracker.Api.Tests   # the room rules
+ConnectionStrings__tracker="Host=localhost;Database=tracker;Username=postgres;Password=..." \
+  dotnet run --project backend/AlttpTracker.Api
 ```
 
-Share the URL from **Copy invite link** with the other players. Anyone on the
-same machine or LAN who opens it joins the same board. The room code is in the
-URL (`?room=demo`) and can be edited in the header.
+### Tests
+
+```sh
+npm test                                            # game tables and sprites
+dotnet test backend/AlttpTracker.Api.Tests          # the room rules, on SQLite
+dotnet test backend/AlttpTracker.Api.IntegrationTests  # migrations and indexes, on real Postgres
+```
+
+The integration tests start their own Postgres with Testcontainers, so they
+need Docker running; the other two do not.
+
+From the board, share the URL from **Copy invite link** with the other players.
+Anyone who opens it joins the same board. The room code is in the URL
+(`?room=brave-deku`) and can be edited in the header.
 
 ## Details worth knowing
 
@@ -88,27 +93,56 @@ URL (`?room=demo`) and can be edited in the header.
 
 | Path                                | What it is                                                     |
 | ----------------------------------- | -------------------------------------------------------------- |
-| `src/checks.js`                     | The 216 checks, grouped into 15 regions                        |
-| `src/items.js`                      | Items and dungeon keys, and how many locations each holds      |
-| `src/sprites.js`                    | Hand-drawn 12x12 pixel art for items and check icons           |
-| `src/server.js`                     | Express static server and `/api/data`                          |
-| `public/`                           | The client — no build step, no framework                       |
-| `test/smoke.test.js`                | Game tables and sprites                                        |
-| `backend/AlttpTracker.AppHost`      | Aspire: starts the API and the board together                  |
-| `backend/AlttpTracker.Api`          | The API, EF Core model and migrations, websocket fan-out       |
-| `backend/AlttpTracker.Api.Tests`    | The room rules                                                 |
-| `scripts/export-gamedata.js`        | Writes `gamedata.json` for the API                             |
+| `src/checks.js`                          | The 216 checks, grouped into 15 regions                   |
+| `src/items.js`                           | Items and dungeon keys, and how many locations each holds |
+| `src/sprites.js`                         | Hand-drawn 12x12 pixel art for items and check icons      |
+| `scripts/export-gamedata.js`             | Carries those three to `gamedata.json` for the API        |
+| `test/smoke.test.js`                     | Game tables and sprites                                   |
+| `backend/AlttpTracker.AppHost`           | Aspire: Postgres, the app, and the migrations command     |
+| `backend/AlttpTracker.Api`               | The app: board, API, EF model, migrations, websockets     |
+| `backend/AlttpTracker.Api/wwwroot`       | The board — no build step, no framework                   |
+| `backend/AlttpTracker.Api.Tests`         | The room rules                                            |
+| `backend/AlttpTracker.Api.IntegrationTests` | Database behaviour, on real Postgres                   |
 
 ### The API
 
 | Route                                            | What it does                    |
 | ------------------------------------------------ | ------------------------------- |
+| `GET /api/gamedata`                              | Everything the board draws from |
+| `GET /api/rooms/new-name`                        | An unused room code             |
 | `GET /api/rooms/{room}`                          | The room, created on first ask  |
 | `POST /api/rooms/{room}/assignments`             | Record an item at a check       |
 | `DELETE /api/rooms/{room}/assignments/{id}`      | Clear one location              |
 | `POST /api/rooms/{room}/reset`                   | Clear the room                  |
 | `PUT /api/rooms/{room}/name`                     | Rename the session              |
 | `GET /ws?room={room}`                            | Listen for changes              |
+
+## Deploying
+
+`.github/workflows/ci-cd.yml` builds, runs all three test suites, and — only on
+a push to `main` — publishes and deploys to an Azure App Service. Pull requests
+stop at the tests.
+
+It signs in with OIDC rather than a publish profile, because new App Services
+have basic authentication switched off by default. Before the first deploy:
+
+1. Create an Entra app registration with a federated credential for this
+   repository, and give it the **Contributor** role on the App Service.
+2. Add repository **secrets** `AZURE_CLIENT_ID`, `AZURE_TENANT_ID` and
+   `AZURE_SUBSCRIPTION_ID`.
+3. Add a repository **variable** `AZURE_WEBAPP_NAME` (and `AZURE_WEBAPP_SLOT`
+   if you deploy to a slot).
+4. On the App Service, set the connection string the app looks for:
+   `ConnectionStrings__tracker`, pointing at the Postgres you provisioned.
+   Turn on **Web sockets** in the configuration — the live updates need it.
+
+Migrations run when the app starts, so a deploy brings the schema up with it.
+That is fine for a single instance; if you ever scale out, apply them from the
+pipeline instead so two instances cannot race.
+
+One thing to know: `wwwroot/sprites/` is git-ignored, so a deployed build has no
+sprite PNGs and every tile falls back to the drawn pixel art. If you want the
+real art in production, either commit that folder or upload it separately.
 
 Rooms live in SQLite next to the API (`tracker.db`, git-ignored) and migrations
 run at startup, so a clean checkout needs no setup step. Delete the file to wipe
