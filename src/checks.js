@@ -57,13 +57,13 @@ const REGIONS = [
       'Desert Ledge',
       'Lake Hylia Island',
       'Sunken Treasure',
+      'Floodgate Chest',
       "Zora's Ledge",
       'Flute Spot',
       'Waterfall Fairy - Left',
       'Waterfall Fairy - Right',
       'Blacksmith',
       'Purple Chest',
-      'Floodgate Chest',
 
       // Death Mountain is light world territory, so its checks live here too.
       'Old Man',

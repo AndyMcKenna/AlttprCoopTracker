@@ -586,10 +586,8 @@ const BOSSES = [
 
 const NPCS = [
   'Bottle Merchant',
-  'Sahasrahla',
   'King Zora',
   'Potion Shop',
-  'Old Man',
   "Link's Uncle",
   'Maze Race',
 ];
@@ -638,12 +636,16 @@ const CHECK_ICONS = new Map([
   ['Super Bunny Cave - Top', 'bunny'],
   ['Super Bunny Cave - Bottom', 'bunny'],
   ['Spike Cave', 'spike'],
+  ['Old Man', 'oldman'],
+  ['Sahasrahla', 'greenpendant'],
+  ['Mire Shed - Left', 'mireshed'],
+  ['Mire Shed - Right', 'mireshed'],
+  ['Pyramid', 'pyramid'],
 ]);
 
 const FREESTANDING = [
   'Desert Ledge',
   'Sunken Treasure',
-  'Pyramid',
   'Flute Spot',
   'Sanctuary',
   'Secret Passage',
@@ -685,6 +687,10 @@ ICON_SPRITES.chicken = ICON_SPRITES.npc;
 ICON_SPRITES.link = ICON_SPRITES.npc;
 ICON_SPRITES.bunny = ICON_SPRITES.npc;
 ICON_SPRITES.spike = ICON_SPRITES.chest;
+ICON_SPRITES.oldman = ICON_SPRITES.npc;
+ICON_SPRITES.greenpendant = ICON_SPRITES.sparkle;
+ICON_SPRITES.mireshed = ICON_SPRITES.chest;
+ICON_SPRITES.pyramid = ICON_SPRITES.sparkle;
 
 // The bomb-in checks. Drawn fallback only; the real image wins when present.
 ICON_SPRITES.bomb = [
