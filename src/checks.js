@@ -153,11 +153,11 @@ const REGIONS = [
     short: 'DP',
     color: '#d1a72b',
     checks: [
-      'Big Chest',
-      'Torch',
       'Map Chest',
+      'Torch',
       'Compass Chest',
       'Big Key Chest',
+      'Big Chest',
       'Lanmolas',
     ],
   },
