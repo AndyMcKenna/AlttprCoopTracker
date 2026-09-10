@@ -16,18 +16,43 @@ Fire Rod again?"*
    tile is marked with the item it holds.
 
 Everything is per-room and live: everyone on the same room code sees the same
-board over a WebSocket, and the room survives a server restart.
+board over a WebSocket, and rooms are kept in a database, so closing the browser
+and coming back later picks the run up where it was.
+
+## The two halves
+
+| Piece                        | What it does                                                |
+| ---------------------------- | ----------------------------------------------------------- |
+| `backend/` (.NET Aspire)     | Rooms, the rules about what goes where, the database, and the websocket fan-out |
+| the Node app at the root     | Serves the board and the game tables (the 216 checks, the items, the sprites) |
+
+The browser reads the game tables from the Node app, then talks to the API for
+everything to do with a room: a change is a request to the API, and the API
+pushes the new state down the websocket to everyone in that room.
 
 ## Running it
 
+Start both halves together with Aspire:
+
 ```sh
 npm install
-npm start          # http://localhost:3000
+dotnet run --project backend/AlttpTracker.AppHost
+```
+
+Aspire starts the API, applies any outstanding database migrations, starts the
+board, and prints a dashboard URL where both are listed with their addresses.
+Open the `frontend` address to play.
+
+To run the halves separately — useful when working on one of them:
+
+```sh
+dotnet run --project backend/AlttpTracker.Api   # http://localhost:5220
+API_URL=http://localhost:5220 npm start         # http://localhost:3000
 ```
 
 ```sh
-PORT=8080 npm start   # different port
-npm test              # data + store checks
+npm test                                  # game tables and sprites
+dotnet test backend/AlttpTracker.Api.Tests   # the room rules
 ```
 
 Share the URL from **Copy invite link** with the other players. Anyone on the
@@ -61,18 +86,39 @@ URL (`?room=demo`) and can be edited in the header.
 
 ## Layout
 
-| Path                 | What it is                                             |
-| -------------------- | ------------------------------------------------------ |
-| `src/checks.js`      | The 216 checks, grouped into 15 regions                |
-| `src/items.js`       | Items and dungeon keys, and how many locations each holds |
-| `src/sprites.js`     | Hand-drawn 12x12 pixel art for items and check icons   |
-| `src/store.js`       | Room state, the assignment rules, JSON persistence     |
-| `src/server.js`      | Express static server, `/api/data`, WebSocket fan-out  |
-| `public/`            | The client — no build step, no framework               |
-| `test/smoke.test.js` | Data integrity and store behaviour                     |
+| Path                                | What it is                                                     |
+| ----------------------------------- | -------------------------------------------------------------- |
+| `src/checks.js`                     | The 216 checks, grouped into 15 regions                        |
+| `src/items.js`                      | Items and dungeon keys, and how many locations each holds      |
+| `src/sprites.js`                    | Hand-drawn 12x12 pixel art for items and check icons           |
+| `src/server.js`                     | Express static server and `/api/data`                          |
+| `public/`                           | The client — no build step, no framework                       |
+| `test/smoke.test.js`                | Game tables and sprites                                        |
+| `backend/AlttpTracker.AppHost`      | Aspire: starts the API and the board together                  |
+| `backend/AlttpTracker.Api`          | The API, EF Core model and migrations, websocket fan-out       |
+| `backend/AlttpTracker.Api.Tests`    | The room rules                                                 |
+| `scripts/export-gamedata.js`        | Writes `gamedata.json` for the API                             |
 
-Sessions are written to `data/rooms.json` (git-ignored). Delete it to wipe every
-room; the **Reset** button clears just the current one.
+### The API
+
+| Route                                            | What it does                    |
+| ------------------------------------------------ | ------------------------------- |
+| `GET /api/rooms/{room}`                          | The room, created on first ask  |
+| `POST /api/rooms/{room}/assignments`             | Record an item at a check       |
+| `DELETE /api/rooms/{room}/assignments/{id}`      | Clear one location              |
+| `POST /api/rooms/{room}/reset`                   | Clear the room                  |
+| `PUT /api/rooms/{room}/name`                     | Rename the session              |
+| `GET /ws?room={room}`                            | Listen for changes              |
+
+Rooms live in SQLite next to the API (`tracker.db`, git-ignored) and migrations
+run at startup, so a clean checkout needs no setup step. Delete the file to wipe
+every room; the **Reset** button clears just the current one.
+
+The API has to know the same things the board does — which item and check ids
+exist, and how many locations an item holds — so `scripts/export-gamedata.js`
+writes them to `gamedata.json` from the JS modules. The JS files stay the single
+source of truth; run `npm run export-gamedata` after editing `checks.js` or
+`items.js`.
 
 ## Sprites
 

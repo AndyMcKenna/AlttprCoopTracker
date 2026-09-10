@@ -1,0 +1,1136 @@
+{
+  "generatedFrom": "src/checks.js, src/items.js",
+  "items": [
+    {
+      "id": "sword",
+      "name": "Sword",
+      "slots": 4
+    },
+    {
+      "id": "shield",
+      "name": "Shield",
+      "slots": 3
+    },
+    {
+      "id": "mail",
+      "name": "Mail",
+      "slots": 2
+    },
+    {
+      "id": "glove",
+      "name": "Gloves",
+      "slots": 2
+    },
+    {
+      "id": "boots",
+      "name": "Pegasus Boots",
+      "slots": 1
+    },
+    {
+      "id": "flippers",
+      "name": "Flippers",
+      "slots": 1
+    },
+    {
+      "id": "moonpearl",
+      "name": "Moon Pearl",
+      "slots": 1
+    },
+    {
+      "id": "bow",
+      "name": "Bow",
+      "slots": 2
+    },
+    {
+      "id": "blueboomerang",
+      "name": "Blue Boomerang",
+      "slots": 1
+    },
+    {
+      "id": "redboomerang",
+      "name": "Red Boomerang",
+      "slots": 1
+    },
+    {
+      "id": "hookshot",
+      "name": "Hookshot",
+      "slots": 1
+    },
+    {
+      "id": "mushroom",
+      "name": "Mushroom",
+      "slots": 1
+    },
+    {
+      "id": "powder",
+      "name": "Magic Powder",
+      "slots": 1
+    },
+    {
+      "id": "firerod",
+      "name": "Fire Rod",
+      "slots": 1
+    },
+    {
+      "id": "icerod",
+      "name": "Ice Rod",
+      "slots": 1
+    },
+    {
+      "id": "bombos",
+      "name": "Bombos",
+      "slots": 1
+    },
+    {
+      "id": "ether",
+      "name": "Ether",
+      "slots": 1
+    },
+    {
+      "id": "quake",
+      "name": "Quake",
+      "slots": 1
+    },
+    {
+      "id": "lamp",
+      "name": "Lamp",
+      "slots": 1
+    },
+    {
+      "id": "hammer",
+      "name": "Hammer",
+      "slots": 1
+    },
+    {
+      "id": "shovel",
+      "name": "Shovel",
+      "slots": 1
+    },
+    {
+      "id": "flute",
+      "name": "Flute",
+      "slots": 1
+    },
+    {
+      "id": "bugnet",
+      "name": "Bug Net",
+      "slots": 1
+    },
+    {
+      "id": "book",
+      "name": "Book of Mudora",
+      "slots": 1
+    },
+    {
+      "id": "bottle",
+      "name": "Bottle",
+      "slots": 4
+    },
+    {
+      "id": "somaria",
+      "name": "Cane of Somaria",
+      "slots": 1
+    },
+    {
+      "id": "byrna",
+      "name": "Cane of Byrna",
+      "slots": 1
+    },
+    {
+      "id": "cape",
+      "name": "Magic Cape",
+      "slots": 1
+    },
+    {
+      "id": "mirror",
+      "name": "Magic Mirror",
+      "slots": 1
+    },
+    {
+      "id": "halfmagic",
+      "name": "Half Magic",
+      "slots": 1
+    },
+    {
+      "id": "sk-hc",
+      "name": "HC Small Key",
+      "slots": 1
+    },
+    {
+      "id": "sk-ct",
+      "name": "CT Small Key",
+      "slots": 2
+    },
+    {
+      "id": "bk-ep",
+      "name": "EP Big Key",
+      "slots": 1
+    },
+    {
+      "id": "bk-dp",
+      "name": "DP Big Key",
+      "slots": 1
+    },
+    {
+      "id": "sk-dp",
+      "name": "DP Small Key",
+      "slots": 1
+    },
+    {
+      "id": "bk-toh",
+      "name": "ToH Big Key",
+      "slots": 1
+    },
+    {
+      "id": "sk-toh",
+      "name": "ToH Small Key",
+      "slots": 1
+    },
+    {
+      "id": "bk-pod",
+      "name": "PoD Big Key",
+      "slots": 1
+    },
+    {
+      "id": "sk-pod",
+      "name": "PoD Small Key",
+      "slots": 6
+    },
+    {
+      "id": "bk-sp",
+      "name": "SP Big Key",
+      "slots": 1
+    },
+    {
+      "id": "sk-sp",
+      "name": "SP Small Key",
+      "slots": 1
+    },
+    {
+      "id": "bk-sw",
+      "name": "SW Big Key",
+      "slots": 1
+    },
+    {
+      "id": "sk-sw",
+      "name": "SW Small Key",
+      "slots": 3
+    },
+    {
+      "id": "bk-tt",
+      "name": "TT Big Key",
+      "slots": 1
+    },
+    {
+      "id": "sk-tt",
+      "name": "TT Small Key",
+      "slots": 1
+    },
+    {
+      "id": "bk-ip",
+      "name": "IP Big Key",
+      "slots": 1
+    },
+    {
+      "id": "sk-ip",
+      "name": "IP Small Key",
+      "slots": 2
+    },
+    {
+      "id": "bk-mm",
+      "name": "MM Big Key",
+      "slots": 1
+    },
+    {
+      "id": "sk-mm",
+      "name": "MM Small Key",
+      "slots": 3
+    },
+    {
+      "id": "bk-tr",
+      "name": "TR Big Key",
+      "slots": 1
+    },
+    {
+      "id": "sk-tr",
+      "name": "TR Small Key",
+      "slots": 4
+    },
+    {
+      "id": "bk-gt",
+      "name": "GT Big Key",
+      "slots": 1
+    },
+    {
+      "id": "sk-gt",
+      "name": "GT Small Key",
+      "slots": 4
+    }
+  ],
+  "checks": [
+    {
+      "id": "lw/links-house",
+      "fullName": "Light World - Link's House"
+    },
+    {
+      "id": "lw/links-uncle",
+      "fullName": "Light World - Link's Uncle"
+    },
+    {
+      "id": "lw/secret-passage",
+      "fullName": "Light World - Secret Passage"
+    },
+    {
+      "id": "lw/kings-tomb",
+      "fullName": "Light World - King's Tomb"
+    },
+    {
+      "id": "lw/kakariko-tavern",
+      "fullName": "Light World - Kakariko Tavern"
+    },
+    {
+      "id": "lw/chicken-house",
+      "fullName": "Light World - Chicken House"
+    },
+    {
+      "id": "lw/aginahs-cave",
+      "fullName": "Light World - Aginah's Cave"
+    },
+    {
+      "id": "lw/sahasrahlas-hut-left",
+      "fullName": "Light World - Sahasrahla's Hut - Left"
+    },
+    {
+      "id": "lw/sahasrahlas-hut-middle",
+      "fullName": "Light World - Sahasrahla's Hut - Middle"
+    },
+    {
+      "id": "lw/sahasrahlas-hut-right",
+      "fullName": "Light World - Sahasrahla's Hut - Right"
+    },
+    {
+      "id": "lw/sahasrahla",
+      "fullName": "Light World - Sahasrahla"
+    },
+    {
+      "id": "lw/kakariko-well-top",
+      "fullName": "Light World - Kakariko Well - Top"
+    },
+    {
+      "id": "lw/kakariko-well-left",
+      "fullName": "Light World - Kakariko Well - Left"
+    },
+    {
+      "id": "lw/kakariko-well-middle",
+      "fullName": "Light World - Kakariko Well - Middle"
+    },
+    {
+      "id": "lw/kakariko-well-right",
+      "fullName": "Light World - Kakariko Well - Right"
+    },
+    {
+      "id": "lw/kakariko-well-bottom",
+      "fullName": "Light World - Kakariko Well - Bottom"
+    },
+    {
+      "id": "lw/blinds-hideout-top",
+      "fullName": "Light World - Blind's Hideout - Top"
+    },
+    {
+      "id": "lw/blinds-hideout-far-left",
+      "fullName": "Light World - Blind's Hideout - Far Left"
+    },
+    {
+      "id": "lw/blinds-hideout-left",
+      "fullName": "Light World - Blind's Hideout - Left"
+    },
+    {
+      "id": "lw/blinds-hideout-right",
+      "fullName": "Light World - Blind's Hideout - Right"
+    },
+    {
+      "id": "lw/blinds-hideout-far-right",
+      "fullName": "Light World - Blind's Hideout - Far Right"
+    },
+    {
+      "id": "lw/bonk-rocks",
+      "fullName": "Light World - Bonk Rocks"
+    },
+    {
+      "id": "lw/mmc-far-left",
+      "fullName": "Light World - MMC - Far Left"
+    },
+    {
+      "id": "lw/mmc-left",
+      "fullName": "Light World - MMC - Left"
+    },
+    {
+      "id": "lw/mmc-right",
+      "fullName": "Light World - MMC - Right"
+    },
+    {
+      "id": "lw/mmc-far-right",
+      "fullName": "Light World - MMC - Far Right"
+    },
+    {
+      "id": "lw/mmc-guy",
+      "fullName": "Light World - MMC - Guy"
+    },
+    {
+      "id": "lw/ice-rod-cave",
+      "fullName": "Light World - Ice Rod Cave"
+    },
+    {
+      "id": "lw/bottle-merchant",
+      "fullName": "Light World - Bottle Merchant"
+    },
+    {
+      "id": "lw/magic-bat",
+      "fullName": "Light World - Magic Bat"
+    },
+    {
+      "id": "lw/sick-kid",
+      "fullName": "Light World - Sick Kid"
+    },
+    {
+      "id": "lw/hobo",
+      "fullName": "Light World - Hobo"
+    },
+    {
+      "id": "lw/bombos-tablet",
+      "fullName": "Light World - Bombos Tablet"
+    },
+    {
+      "id": "lw/ether-tablet",
+      "fullName": "Light World - Ether Tablet"
+    },
+    {
+      "id": "lw/king-zora",
+      "fullName": "Light World - King Zora"
+    },
+    {
+      "id": "lw/lost-woods-hideout",
+      "fullName": "Light World - Lost Woods Hideout"
+    },
+    {
+      "id": "lw/lumberjack-tree",
+      "fullName": "Light World - Lumberjack Tree"
+    },
+    {
+      "id": "lw/cave-45",
+      "fullName": "Light World - Cave 45"
+    },
+    {
+      "id": "lw/graveyard-ledge",
+      "fullName": "Light World - Graveyard Ledge"
+    },
+    {
+      "id": "lw/checkerboard-cave",
+      "fullName": "Light World - Checkerboard Cave"
+    },
+    {
+      "id": "lw/library",
+      "fullName": "Light World - Library"
+    },
+    {
+      "id": "lw/mushroom",
+      "fullName": "Light World - Mushroom"
+    },
+    {
+      "id": "lw/potion-shop",
+      "fullName": "Light World - Potion Shop"
+    },
+    {
+      "id": "lw/maze-race",
+      "fullName": "Light World - Maze Race"
+    },
+    {
+      "id": "lw/desert-ledge",
+      "fullName": "Light World - Desert Ledge"
+    },
+    {
+      "id": "lw/lake-hylia-island",
+      "fullName": "Light World - Lake Hylia Island"
+    },
+    {
+      "id": "lw/sunken-treasure",
+      "fullName": "Light World - Sunken Treasure"
+    },
+    {
+      "id": "lw/floodgate-chest",
+      "fullName": "Light World - Floodgate Chest"
+    },
+    {
+      "id": "lw/zoras-ledge",
+      "fullName": "Light World - Zora's Ledge"
+    },
+    {
+      "id": "lw/dig-spot",
+      "fullName": "Light World - Dig Spot"
+    },
+    {
+      "id": "lw/waterfall-fairy-left",
+      "fullName": "Light World - Waterfall Fairy - Left"
+    },
+    {
+      "id": "lw/waterfall-fairy-right",
+      "fullName": "Light World - Waterfall Fairy - Right"
+    },
+    {
+      "id": "lw/blacksmith",
+      "fullName": "Light World - Blacksmith"
+    },
+    {
+      "id": "lw/purple-chest",
+      "fullName": "Light World - Purple Chest"
+    },
+    {
+      "id": "lw/old-man",
+      "fullName": "Light World - Old Man"
+    },
+    {
+      "id": "lw/spectacle-rock-cave",
+      "fullName": "Light World - Spectacle Rock Cave"
+    },
+    {
+      "id": "lw/spectacle-rock",
+      "fullName": "Light World - Spectacle Rock"
+    },
+    {
+      "id": "lw/spiral-cave",
+      "fullName": "Light World - Spiral Cave"
+    },
+    {
+      "id": "lw/mimic-cave",
+      "fullName": "Light World - Mimic Cave"
+    },
+    {
+      "id": "lw/paradox-lower-far-left",
+      "fullName": "Light World - Paradox Lower - Far Left"
+    },
+    {
+      "id": "lw/paradox-lower-left",
+      "fullName": "Light World - Paradox Lower - Left"
+    },
+    {
+      "id": "lw/paradox-lower-middle",
+      "fullName": "Light World - Paradox Lower - Middle"
+    },
+    {
+      "id": "lw/paradox-lower-right",
+      "fullName": "Light World - Paradox Lower - Right"
+    },
+    {
+      "id": "lw/paradox-lower-far-right",
+      "fullName": "Light World - Paradox Lower - Far Right"
+    },
+    {
+      "id": "lw/paradox-upper-left",
+      "fullName": "Light World - Paradox Upper - Left"
+    },
+    {
+      "id": "lw/paradox-upper-right",
+      "fullName": "Light World - Paradox Upper - Right"
+    },
+    {
+      "id": "lw/floating-island",
+      "fullName": "Light World - Floating Island"
+    },
+    {
+      "id": "lw/master-sword-pedestal",
+      "fullName": "Light World - Master Sword Pedestal"
+    },
+    {
+      "id": "dw/bumper-cave-ledge",
+      "fullName": "Dark World - Bumper Cave Ledge"
+    },
+    {
+      "id": "dw/catfish",
+      "fullName": "Dark World - Catfish"
+    },
+    {
+      "id": "dw/pyramid",
+      "fullName": "Dark World - Pyramid"
+    },
+    {
+      "id": "dw/pyramid-fairy-left",
+      "fullName": "Dark World - Pyramid Fairy - Left"
+    },
+    {
+      "id": "dw/pyramid-fairy-right",
+      "fullName": "Dark World - Pyramid Fairy - Right"
+    },
+    {
+      "id": "dw/brewery",
+      "fullName": "Dark World - Brewery"
+    },
+    {
+      "id": "dw/c-shaped-house",
+      "fullName": "Dark World - C-Shaped House"
+    },
+    {
+      "id": "dw/chest-game",
+      "fullName": "Dark World - Chest Game"
+    },
+    {
+      "id": "dw/hammer-pegs",
+      "fullName": "Dark World - Hammer Pegs"
+    },
+    {
+      "id": "dw/stumpy",
+      "fullName": "Dark World - Stumpy"
+    },
+    {
+      "id": "dw/digging-game",
+      "fullName": "Dark World - Digging Game"
+    },
+    {
+      "id": "dw/hype-cave-top",
+      "fullName": "Dark World - Hype Cave - Top"
+    },
+    {
+      "id": "dw/hype-cave-left",
+      "fullName": "Dark World - Hype Cave - Left"
+    },
+    {
+      "id": "dw/hype-cave-right",
+      "fullName": "Dark World - Hype Cave - Right"
+    },
+    {
+      "id": "dw/hype-cave-bottom",
+      "fullName": "Dark World - Hype Cave - Bottom"
+    },
+    {
+      "id": "dw/hype-cave-guy",
+      "fullName": "Dark World - Hype Cave - Guy"
+    },
+    {
+      "id": "dw/mire-shed-left",
+      "fullName": "Dark World - Mire Shed - Left"
+    },
+    {
+      "id": "dw/mire-shed-right",
+      "fullName": "Dark World - Mire Shed - Right"
+    },
+    {
+      "id": "dw/super-bunny-cave-top",
+      "fullName": "Dark World - Super Bunny Cave - Top"
+    },
+    {
+      "id": "dw/super-bunny-cave-bottom",
+      "fullName": "Dark World - Super Bunny Cave - Bottom"
+    },
+    {
+      "id": "dw/spike-cave",
+      "fullName": "Dark World - Spike Cave"
+    },
+    {
+      "id": "dw/hookshot-cave-bottom-right",
+      "fullName": "Dark World - Hookshot Cave - Bottom Right"
+    },
+    {
+      "id": "dw/hookshot-cave-bottom-left",
+      "fullName": "Dark World - Hookshot Cave - Bottom Left"
+    },
+    {
+      "id": "dw/hookshot-cave-top-left",
+      "fullName": "Dark World - Hookshot Cave - Top Left"
+    },
+    {
+      "id": "dw/hookshot-cave-top-right",
+      "fullName": "Dark World - Hookshot Cave - Top Right"
+    },
+    {
+      "id": "hc/map-chest",
+      "fullName": "Hyrule Castle - Map Chest"
+    },
+    {
+      "id": "hc/boomerang-chest",
+      "fullName": "Hyrule Castle - Boomerang Chest"
+    },
+    {
+      "id": "hc/zeldas-cell",
+      "fullName": "Hyrule Castle - Zelda's Cell"
+    },
+    {
+      "id": "hc/sewers-dark-cross",
+      "fullName": "Hyrule Castle - Sewers - Dark Cross"
+    },
+    {
+      "id": "hc/sewers-secret-room-left",
+      "fullName": "Hyrule Castle - Sewers - Secret Room Left"
+    },
+    {
+      "id": "hc/sewers-secret-room-middle",
+      "fullName": "Hyrule Castle - Sewers - Secret Room Middle"
+    },
+    {
+      "id": "hc/sewers-secret-room-right",
+      "fullName": "Hyrule Castle - Sewers - Secret Room Right"
+    },
+    {
+      "id": "hc/sanctuary",
+      "fullName": "Hyrule Castle - Sanctuary"
+    },
+    {
+      "id": "ep/cannonball-chest",
+      "fullName": "Eastern Palace - Cannonball Chest"
+    },
+    {
+      "id": "ep/map-chest",
+      "fullName": "Eastern Palace - Map Chest"
+    },
+    {
+      "id": "ep/compass-chest",
+      "fullName": "Eastern Palace - Compass Chest"
+    },
+    {
+      "id": "ep/big-chest",
+      "fullName": "Eastern Palace - Big Chest"
+    },
+    {
+      "id": "ep/big-key-chest",
+      "fullName": "Eastern Palace - Big Key Chest"
+    },
+    {
+      "id": "ep/armos-knights",
+      "fullName": "Eastern Palace - Armos Knights"
+    },
+    {
+      "id": "dp/map-chest",
+      "fullName": "Desert Palace - Map Chest"
+    },
+    {
+      "id": "dp/torch",
+      "fullName": "Desert Palace - Torch"
+    },
+    {
+      "id": "dp/compass-chest",
+      "fullName": "Desert Palace - Compass Chest"
+    },
+    {
+      "id": "dp/big-key-chest",
+      "fullName": "Desert Palace - Big Key Chest"
+    },
+    {
+      "id": "dp/big-chest",
+      "fullName": "Desert Palace - Big Chest"
+    },
+    {
+      "id": "dp/lanmolas",
+      "fullName": "Desert Palace - Lanmolas"
+    },
+    {
+      "id": "toh/basement-cage",
+      "fullName": "Tower of Hera - Basement Cage"
+    },
+    {
+      "id": "toh/map-chest",
+      "fullName": "Tower of Hera - Map Chest"
+    },
+    {
+      "id": "toh/big-key-chest",
+      "fullName": "Tower of Hera - Big Key Chest"
+    },
+    {
+      "id": "toh/compass-chest",
+      "fullName": "Tower of Hera - Compass Chest"
+    },
+    {
+      "id": "toh/big-chest",
+      "fullName": "Tower of Hera - Big Chest"
+    },
+    {
+      "id": "toh/moldorm",
+      "fullName": "Tower of Hera - Moldorm"
+    },
+    {
+      "id": "ct/room-03",
+      "fullName": "Castle Tower - Room 03"
+    },
+    {
+      "id": "ct/dark-maze",
+      "fullName": "Castle Tower - Dark Maze"
+    },
+    {
+      "id": "pod/shooter-room",
+      "fullName": "Palace of Darkness - Shooter Room"
+    },
+    {
+      "id": "pod/big-key-chest",
+      "fullName": "Palace of Darkness - Big Key Chest"
+    },
+    {
+      "id": "pod/stalfos-basement",
+      "fullName": "Palace of Darkness - Stalfos Basement"
+    },
+    {
+      "id": "pod/the-arena-ledge",
+      "fullName": "Palace of Darkness - The Arena - Ledge"
+    },
+    {
+      "id": "pod/the-arena-bridge",
+      "fullName": "Palace of Darkness - The Arena - Bridge"
+    },
+    {
+      "id": "pod/map-chest",
+      "fullName": "Palace of Darkness - Map Chest"
+    },
+    {
+      "id": "pod/compass-chest",
+      "fullName": "Palace of Darkness - Compass Chest"
+    },
+    {
+      "id": "pod/dark-basement-left",
+      "fullName": "Palace of Darkness - Dark Basement - Left"
+    },
+    {
+      "id": "pod/dark-basement-right",
+      "fullName": "Palace of Darkness - Dark Basement - Right"
+    },
+    {
+      "id": "pod/dark-maze-top",
+      "fullName": "Palace of Darkness - Dark Maze - Top"
+    },
+    {
+      "id": "pod/dark-maze-bottom",
+      "fullName": "Palace of Darkness - Dark Maze - Bottom"
+    },
+    {
+      "id": "pod/big-chest",
+      "fullName": "Palace of Darkness - Big Chest"
+    },
+    {
+      "id": "pod/harmless-hellway",
+      "fullName": "Palace of Darkness - Harmless Hellway"
+    },
+    {
+      "id": "pod/helmasaur-king",
+      "fullName": "Palace of Darkness - Helmasaur King"
+    },
+    {
+      "id": "sp/entrance",
+      "fullName": "Swamp Palace - Entrance"
+    },
+    {
+      "id": "sp/map-chest",
+      "fullName": "Swamp Palace - Map Chest"
+    },
+    {
+      "id": "sp/big-chest",
+      "fullName": "Swamp Palace - Big Chest"
+    },
+    {
+      "id": "sp/compass-chest",
+      "fullName": "Swamp Palace - Compass Chest"
+    },
+    {
+      "id": "sp/west-chest",
+      "fullName": "Swamp Palace - West Chest"
+    },
+    {
+      "id": "sp/big-key-chest",
+      "fullName": "Swamp Palace - Big Key Chest"
+    },
+    {
+      "id": "sp/flooded-room-left",
+      "fullName": "Swamp Palace - Flooded Room - Left"
+    },
+    {
+      "id": "sp/flooded-room-right",
+      "fullName": "Swamp Palace - Flooded Room - Right"
+    },
+    {
+      "id": "sp/waterfall-room",
+      "fullName": "Swamp Palace - Waterfall Room"
+    },
+    {
+      "id": "sp/arrghus",
+      "fullName": "Swamp Palace - Arrghus"
+    },
+    {
+      "id": "sw/big-chest",
+      "fullName": "Skull Woods - Big Chest"
+    },
+    {
+      "id": "sw/big-key-chest",
+      "fullName": "Skull Woods - Big Key Chest"
+    },
+    {
+      "id": "sw/compass-chest",
+      "fullName": "Skull Woods - Compass Chest"
+    },
+    {
+      "id": "sw/map-chest",
+      "fullName": "Skull Woods - Map Chest"
+    },
+    {
+      "id": "sw/bridge-room",
+      "fullName": "Skull Woods - Bridge Room"
+    },
+    {
+      "id": "sw/pot-prison",
+      "fullName": "Skull Woods - Pot Prison"
+    },
+    {
+      "id": "sw/pinball-room",
+      "fullName": "Skull Woods - Pinball Room"
+    },
+    {
+      "id": "sw/mothula",
+      "fullName": "Skull Woods - Mothula"
+    },
+    {
+      "id": "tt/map-chest",
+      "fullName": "Thieves' Town - Map Chest"
+    },
+    {
+      "id": "tt/ambush-chest",
+      "fullName": "Thieves' Town - Ambush Chest"
+    },
+    {
+      "id": "tt/compass-chest",
+      "fullName": "Thieves' Town - Compass Chest"
+    },
+    {
+      "id": "tt/big-key-chest",
+      "fullName": "Thieves' Town - Big Key Chest"
+    },
+    {
+      "id": "tt/attic",
+      "fullName": "Thieves' Town - Attic"
+    },
+    {
+      "id": "tt/blinds-cell",
+      "fullName": "Thieves' Town - Blind's Cell"
+    },
+    {
+      "id": "tt/big-chest",
+      "fullName": "Thieves' Town - Big Chest"
+    },
+    {
+      "id": "tt/blind",
+      "fullName": "Thieves' Town - Blind"
+    },
+    {
+      "id": "ip/compass-chest",
+      "fullName": "Ice Palace - Compass Chest"
+    },
+    {
+      "id": "ip/spike-room",
+      "fullName": "Ice Palace - Spike Room"
+    },
+    {
+      "id": "ip/map-chest",
+      "fullName": "Ice Palace - Map Chest"
+    },
+    {
+      "id": "ip/big-key-chest",
+      "fullName": "Ice Palace - Big Key Chest"
+    },
+    {
+      "id": "ip/iced-t-room",
+      "fullName": "Ice Palace - Iced T Room"
+    },
+    {
+      "id": "ip/freezor-chest",
+      "fullName": "Ice Palace - Freezor Chest"
+    },
+    {
+      "id": "ip/big-chest",
+      "fullName": "Ice Palace - Big Chest"
+    },
+    {
+      "id": "ip/kholdstare",
+      "fullName": "Ice Palace - Kholdstare"
+    },
+    {
+      "id": "mm/bridge-chest",
+      "fullName": "Misery Mire - Bridge Chest"
+    },
+    {
+      "id": "mm/spike-chest",
+      "fullName": "Misery Mire - Spike Chest"
+    },
+    {
+      "id": "mm/compass-chest",
+      "fullName": "Misery Mire - Compass Chest"
+    },
+    {
+      "id": "mm/main-lobby",
+      "fullName": "Misery Mire - Main Lobby"
+    },
+    {
+      "id": "mm/map-chest",
+      "fullName": "Misery Mire - Map Chest"
+    },
+    {
+      "id": "mm/big-key-chest",
+      "fullName": "Misery Mire - Big Key Chest"
+    },
+    {
+      "id": "mm/big-chest",
+      "fullName": "Misery Mire - Big Chest"
+    },
+    {
+      "id": "mm/vitreous",
+      "fullName": "Misery Mire - Vitreous"
+    },
+    {
+      "id": "tr/roller-room-left",
+      "fullName": "Turtle Rock - Roller Room - Left"
+    },
+    {
+      "id": "tr/roller-room-right",
+      "fullName": "Turtle Rock - Roller Room - Right"
+    },
+    {
+      "id": "tr/compass-chest",
+      "fullName": "Turtle Rock - Compass Chest"
+    },
+    {
+      "id": "tr/chain-chomps",
+      "fullName": "Turtle Rock - Chain Chomps"
+    },
+    {
+      "id": "tr/big-key-chest",
+      "fullName": "Turtle Rock - Big Key Chest"
+    },
+    {
+      "id": "tr/big-chest",
+      "fullName": "Turtle Rock - Big Chest"
+    },
+    {
+      "id": "tr/crystaroller-room",
+      "fullName": "Turtle Rock - Crystaroller Room"
+    },
+    {
+      "id": "tr/laser-bridge-top-left",
+      "fullName": "Turtle Rock - Laser Bridge - Top Left"
+    },
+    {
+      "id": "tr/laser-bridge-top-right",
+      "fullName": "Turtle Rock - Laser Bridge - Top Right"
+    },
+    {
+      "id": "tr/laser-bridge-bottom-left",
+      "fullName": "Turtle Rock - Laser Bridge - Bottom Left"
+    },
+    {
+      "id": "tr/laser-bridge-bottom-right",
+      "fullName": "Turtle Rock - Laser Bridge - Bottom Right"
+    },
+    {
+      "id": "tr/trinexx",
+      "fullName": "Turtle Rock - Trinexx"
+    },
+    {
+      "id": "gt/bobs-torch",
+      "fullName": "Ganon's Tower - Bob's Torch"
+    },
+    {
+      "id": "gt/dms-room-top-left",
+      "fullName": "Ganon's Tower - DMs Room - Top Left"
+    },
+    {
+      "id": "gt/dms-room-top-right",
+      "fullName": "Ganon's Tower - DMs Room - Top Right"
+    },
+    {
+      "id": "gt/dms-room-bottom-left",
+      "fullName": "Ganon's Tower - DMs Room - Bottom Left"
+    },
+    {
+      "id": "gt/dms-room-bottom-right",
+      "fullName": "Ganon's Tower - DMs Room - Bottom Right"
+    },
+    {
+      "id": "gt/map-chest",
+      "fullName": "Ganon's Tower - Map Chest"
+    },
+    {
+      "id": "gt/firesnake-room",
+      "fullName": "Ganon's Tower - Firesnake Room"
+    },
+    {
+      "id": "gt/randomizer-room-top-left",
+      "fullName": "Ganon's Tower - Randomizer Room - Top Left"
+    },
+    {
+      "id": "gt/randomizer-room-top-right",
+      "fullName": "Ganon's Tower - Randomizer Room - Top Right"
+    },
+    {
+      "id": "gt/randomizer-room-bottom-left",
+      "fullName": "Ganon's Tower - Randomizer Room - Bottom Left"
+    },
+    {
+      "id": "gt/randomizer-room-bottom-right",
+      "fullName": "Ganon's Tower - Randomizer Room - Bottom Right"
+    },
+    {
+      "id": "gt/big-chest",
+      "fullName": "Ganon's Tower - Big Chest"
+    },
+    {
+      "id": "gt/bobs-chest",
+      "fullName": "Ganon's Tower - Bob's Chest"
+    },
+    {
+      "id": "gt/big-key-chest",
+      "fullName": "Ganon's Tower - Big Key Chest"
+    },
+    {
+      "id": "gt/big-key-room-left",
+      "fullName": "Ganon's Tower - Big Key Room - Left"
+    },
+    {
+      "id": "gt/big-key-room-right",
+      "fullName": "Ganon's Tower - Big Key Room - Right"
+    },
+    {
+      "id": "gt/hope-room-left",
+      "fullName": "Ganon's Tower - Hope Room - Left"
+    },
+    {
+      "id": "gt/hope-room-right",
+      "fullName": "Ganon's Tower - Hope Room - Right"
+    },
+    {
+      "id": "gt/compass-room-top-left",
+      "fullName": "Ganon's Tower - Compass Room - Top Left"
+    },
+    {
+      "id": "gt/compass-room-top-right",
+      "fullName": "Ganon's Tower - Compass Room - Top Right"
+    },
+    {
+      "id": "gt/compass-room-bottom-left",
+      "fullName": "Ganon's Tower - Compass Room - Bottom Left"
+    },
+    {
+      "id": "gt/compass-room-bottom-right",
+      "fullName": "Ganon's Tower - Compass Room - Bottom Right"
+    },
+    {
+      "id": "gt/tile-room",
+      "fullName": "Ganon's Tower - Tile Room"
+    },
+    {
+      "id": "gt/mini-helmasaur-room-left",
+      "fullName": "Ganon's Tower - Mini Helmasaur Room - Left"
+    },
+    {
+      "id": "gt/mini-helmasaur-room-right",
+      "fullName": "Ganon's Tower - Mini Helmasaur Room - Right"
+    },
+    {
+      "id": "gt/pre-moldorm-chest",
+      "fullName": "Ganon's Tower - Pre-Moldorm Chest"
+    },
+    {
+      "id": "gt/moldorm-chest",
+      "fullName": "Ganon's Tower - Moldorm Chest"
+    }
+  ]
+}

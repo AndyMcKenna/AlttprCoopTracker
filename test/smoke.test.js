@@ -1,19 +1,11 @@
 'use strict';
 
-const os = require('os');
-const fs = require('fs');
-const path = require('path');
 const test = require('node:test');
 const assert = require('node:assert');
-
-// Point the store at a scratch directory before it is required, so running
-// the tests never touches a real session file.
-process.env.TRACKER_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), 'alttp-tracker-'));
 
 const { CHECKS, REGIONS } = require('../src/checks');
 const { ITEMS, ITEMS_BY_ID, KEY_PANEL } = require('../src/items');
 const { PALETTE, ITEM_SPRITES, ICON_SPRITES, kindForCheck } = require('../src/sprites');
-const { Store } = require('../src/store');
 
 test('the game has exactly 216 checks with unique ids', () => {
   assert.strictEqual(CHECKS.length, 216);
@@ -73,81 +65,8 @@ test('the key panel matches the game: 11 big keys, 29 small keys', () => {
   );
 });
 
-test('keys are assigned through the same rules as any other item', () => {
-  const store = new Store();
-  const room = 'key-room';
-
-  store.apply(room, { type: 'assign', itemId: 'bk-ep', checkId: 'ep/big-chest' });
-  assert.strictEqual(store.getOrCreate(room).assignments['bk-ep'][0].checkId, 'ep/big-chest');
-
-  // A check already holding a key will not silently take another item.
-  assert.throws(() => store.apply(room, { type: 'assign', itemId: 'lamp', checkId: 'ep/big-chest' }), {
-    message: /already recorded as EP Big Key/,
-  });
-
-  // The small-key box fills up to the dungeon's key count and then stops.
-  for (const checkId of ['pod/shooter-room', 'pod/the-arena-ledge', 'pod/map-chest']) {
-    store.apply(room, { type: 'assign', itemId: 'sk-pod', checkId });
-  }
-  assert.strictEqual(store.getOrCreate(room).assignments['sk-pod'].length, 3);
-});
-
 test('every check resolves to a known tile icon', () => {
   for (const check of CHECKS) {
     assert.ok(ICON_SPRITES[kindForCheck(check)], 'no icon for ' + check.fullName);
   }
-});
-
-test('assigning, replacing and clearing locations', () => {
-  const store = new Store();
-  const room = 'test-room';
-
-  store.apply(room, { type: 'assign', itemId: 'hookshot', checkId: 'ep/big-chest', by: 'Andy' });
-  assert.strictEqual(store.getOrCreate(room).assignments.hookshot.length, 1);
-  assert.strictEqual(store.getOrCreate(room).assignments.hookshot[0].by, 'Andy');
-
-  // A single-slot item moves rather than erroring when re-assigned.
-  store.apply(room, { type: 'assign', itemId: 'hookshot', checkId: 'lw/library' });
-  const hookshot = store.getOrCreate(room).assignments.hookshot;
-  assert.strictEqual(hookshot.length, 1);
-  assert.strictEqual(hookshot[0].checkId, 'lw/library');
-
-  // Multi-slot items accumulate up to their limit and refuse duplicates.
-  for (const checkId of ['lw/sick-kid', 'lw/hobo', 'lw/king-zora', 'dw/catfish']) {
-    store.apply(room, { type: 'assign', itemId: 'bottle', checkId });
-  }
-  assert.strictEqual(store.getOrCreate(room).assignments.bottle.length, 4);
-  assert.throws(() => store.apply(room, { type: 'assign', itemId: 'bottle', checkId: 'lw/library' }));
-  assert.throws(() => store.apply(room, { type: 'assign', itemId: 'sword', checkId: 'lw/sick-kid' }), {
-    message: /already recorded/,
-  });
-
-  // Unknown ids are rejected rather than stored.
-  assert.throws(() => store.apply(room, { type: 'assign', itemId: 'nope', checkId: 'lw/library' }));
-  assert.throws(() => store.apply(room, { type: 'assign', itemId: 'lamp', checkId: 'lw/nope' }));
-
-  const first = store.getOrCreate(room).assignments.bottle[0];
-  store.apply(room, { type: 'unassign', itemId: 'bottle', assignmentId: first.id });
-  assert.strictEqual(store.getOrCreate(room).assignments.bottle.length, 3);
-
-  store.apply(room, { type: 'reset' });
-  assert.deepStrictEqual(store.getOrCreate(room).assignments, {});
-});
-
-test('rooms persist across a restart', () => {
-  const store = new Store();
-  store.apply('persist-me', { type: 'assign', itemId: 'lamp', checkId: 'hc/sanctuary' });
-  store.apply('persist-me', { type: 'rename', name: 'Friday night race' });
-  store.saveNow();
-
-  const reloaded = new Store();
-  const room = reloaded.getOrCreate('persist-me');
-  assert.strictEqual(room.name, 'Friday night race');
-  assert.strictEqual(room.assignments.lamp[0].checkId, 'hc/sanctuary');
-});
-
-test('room codes are normalised to something shareable', () => {
-  const store = new Store();
-  assert.strictEqual(store.getOrCreate('  My Room!! ').id, 'myroom');
-  assert.strictEqual(store.getOrCreate('').id, 'lobby');
 });

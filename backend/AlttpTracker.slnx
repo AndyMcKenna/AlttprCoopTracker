@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="AlttpTracker.Api.Tests/AlttpTracker.Api.Tests.csproj" />
+  <Project Path="AlttpTracker.Api/AlttpTracker.Api.csproj" />
+  <Project Path="AlttpTracker.AppHost/AlttpTracker.AppHost.csproj" />
+  <Project Path="AlttpTracker.ServiceDefaults/AlttpTracker.ServiceDefaults.csproj" />
+</Solution>

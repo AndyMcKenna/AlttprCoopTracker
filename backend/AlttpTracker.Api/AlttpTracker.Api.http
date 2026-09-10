@@ -1,0 +1,39 @@
+@host = http://localhost:5220
+@room = demo
+
+### The room, created on first ask
+GET {{host}}/api/rooms/{{room}}
+Accept: application/json
+
+### Record an item at a check
+POST {{host}}/api/rooms/{{room}}/assignments
+Content-Type: application/json
+
+{
+  "itemId": "hookshot",
+  "checkId": "ep/big-chest",
+  "by": "Andy"
+}
+
+### Refused, because a check holds one item
+POST {{host}}/api/rooms/{{room}}/assignments
+Content-Type: application/json
+
+{
+  "itemId": "lamp",
+  "checkId": "ep/big-chest"
+}
+
+### Clear one location (take the id from the room above)
+DELETE {{host}}/api/rooms/{{room}}/assignments/00000000-0000-0000-0000-000000000000
+
+### Rename the session
+PUT {{host}}/api/rooms/{{room}}/name
+Content-Type: application/json
+
+{
+  "name": "Friday night race"
+}
+
+### Clear the room
+POST {{host}}/api/rooms/{{room}}/reset

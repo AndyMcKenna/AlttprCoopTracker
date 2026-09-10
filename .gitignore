@@ -8,3 +8,12 @@ npm-debug.log*
 # Sprite images, kept out of the repo. The tracker falls back to its own drawn
 # pixel art when they are absent, so a clean checkout still runs.
 public/sprites/
+
+# .NET build output
+bin/
+obj/
+
+# The tracker service's SQLite database and its journals. Migrations rebuild
+# the schema on start, so a clean checkout only loses old rooms.
+backend/**/tracker.db
+backend/**/tracker.db-*

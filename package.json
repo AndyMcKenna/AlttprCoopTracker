@@ -6,14 +6,14 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
-    "test": "node test/smoke.test.js"
+    "test": "node test/smoke.test.js",
+    "export-gamedata": "node scripts/export-gamedata.js"
   },
   "engines": {
     "node": ">=18"
   },
   "dependencies": {
-    "express": "^4.19.2",
-    "ws": "^8.18.0"
+    "express": "^4.19.2"
   },
   "devDependencies": {
     "jpeg-js": "^0.4.4",

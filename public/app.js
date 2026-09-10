@@ -38,6 +38,7 @@ const state = {
   regionFilter: new Set(), // empty means "all regions"
   collapsed: new Set(), // region ids folded shut; filled in once data arrives
   keysCollapsed: true, // the key board is long; it opens on request
+  apiBaseUrl: '', // the tracker service; comes from /api/data
   spriteImages: new Set(), // sprite names that have a real image on disk
   checkImages: new Set(), // check glyphs that have a real image on disk
   search: '',
@@ -563,12 +564,70 @@ function showHint(message) {
 
 /* ------------------------------------------------------------- transport */
 
-function send(action) {
-  if (!socket || socket.readyState !== WebSocket.OPEN) {
-    showHint('Not connected — reconnecting…');
+/** Build a URL against the tracker service for the current room. */
+function roomUrl(suffix) {
+  return state.apiBaseUrl + '/api/rooms/' + encodeURIComponent(roomId) + (suffix || '');
+}
+
+/**
+ * Every change goes to the service as a request; the service then pushes the
+ * new state down the websocket to everyone in the room, this client included.
+ * The response is applied directly too, so the board does not sit still
+ * waiting for the round trip.
+ */
+async function send(action) {
+  if (!state.apiBaseUrl) {
+    showHint('No tracker service configured — set API_URL and restart.');
     return;
   }
-  socket.send(JSON.stringify(action));
+
+  const json = { headers: { 'content-type': 'application/json' } };
+  let request;
+
+  if (action.type === 'assign') {
+    request = fetch(roomUrl('/assignments'), {
+      method: 'POST',
+      ...json,
+      body: JSON.stringify({ itemId: action.itemId, checkId: action.checkId, by: action.by }),
+    });
+  } else if (action.type === 'unassign') {
+    request = fetch(roomUrl('/assignments/' + action.assignmentId), { method: 'DELETE' });
+  } else if (action.type === 'reset') {
+    request = fetch(roomUrl('/reset'), { method: 'POST' });
+  } else if (action.type === 'rename') {
+    request = fetch(roomUrl('/name'), {
+      method: 'PUT',
+      ...json,
+      body: JSON.stringify({ name: action.name }),
+    });
+  } else {
+    return;
+  }
+
+  let response;
+  try {
+    response = await request;
+  } catch {
+    setStatus('Service unreachable', 'closed');
+    showHint('Could not reach the tracker service.');
+    return;
+  }
+
+  if (!response.ok) {
+    // A refused change is the sender's problem only — someone else may have
+    // taken that check first. Everyone keeps the state the service has.
+    const body = await response.json().catch(() => null);
+    showHint((body && body.error) || 'That change was refused.');
+    return;
+  }
+
+  applyRoom(await response.json());
+}
+
+function applyRoom(room) {
+  state.room = room;
+  if (document.activeElement !== el.roomName) el.roomName.value = room.name;
+  render();
 }
 
 function setStatus(text, kind) {
@@ -582,9 +641,13 @@ function connect() {
     socket.close();
   }
 
+  if (!state.apiBaseUrl) {
+    setStatus('No service', 'closed');
+    return;
+  }
+
   setStatus('Connecting…', 'connecting');
-  const scheme = location.protocol === 'https:' ? 'wss' : 'ws';
-  socket = new WebSocket(scheme + '://' + location.host + '/ws?room=' + encodeURIComponent(roomId));
+  socket = new WebSocket(state.apiBaseUrl.replace(/^http/, 'ws') + '/ws?room=' + encodeURIComponent(roomId));
 
   socket.onopen = () => {
     reconnectDelay = 500;
@@ -594,10 +657,8 @@ function connect() {
   socket.onmessage = (event) => {
     const message = JSON.parse(event.data);
     if (message.type === 'state') {
-      state.room = message.room;
-      if (document.activeElement !== el.roomName) el.roomName.value = message.room.name;
+      applyRoom(message.room);
       setPlayers(message.players);
-      render();
     } else if (message.type === 'players') {
       setPlayers(message.players);
     } else if (message.type === 'error') {
@@ -676,6 +737,7 @@ fetch('/api/data')
     state.itemsById = new Map(data.items.map((item) => [item.id, item]));
     state.spriteImages = new Set(data.spriteImages || []);
     state.checkImages = new Set(data.checkImages || []);
+    state.apiBaseUrl = (data.apiBaseUrl || '').replace(/\/$/, '');
     // The two overworlds start open; the dungeons are folded away until needed.
     syncCollapsedToFilter();
     renderRegionFilters();
