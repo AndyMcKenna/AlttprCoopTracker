@@ -165,6 +165,10 @@ function main() {
   // frame as well as on a backdrop, and it risks stripping the sprite's own
   // colours once those layers are gone, so it has to be asked for.
   const passes = passesAt === -1 ? 1 : Number(args[passesAt + 1]);
+  // Corner agreement fails when a sprite runs to two of the corners, so the
+  // backdrop can be named outright: --bg 48,48,48
+  const bgAt = args.indexOf('--bg');
+  const forcedBackdrop = bgAt === -1 ? null : args[bgAt + 1].split(',').map(Number);
 
   let img = readImage(input);
   const from = img.width + 'x' + img.height;
@@ -235,8 +239,8 @@ function main() {
       grid[nearestTo(0, rows - 1)],
       grid[nearestTo(cols - 1, rows - 1)],
     ];
-    const backdrop = corners[0];
-    if (corners.filter((c) => near(c, backdrop)).length < 3) break;
+    const backdrop = forcedBackdrop || corners[0];
+    if (!forcedBackdrop && corners.filter((c) => near(c, backdrop)).length < 3) break;
 
     // Cleared wholesale, not flood-filled: in this art the outline is the same
     // colour as the backdrop it sits on, and the sprite reads better without

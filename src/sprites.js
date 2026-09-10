@@ -635,6 +635,9 @@ const CHECK_ICONS = new Map([
   ['Spectacle Rock', 'mirror'],
   ["King's Tomb", 'boots'],
   ['Lake Hylia Island', 'mirror'],
+  ['Super Bunny Cave - Top', 'bunny'],
+  ['Super Bunny Cave - Bottom', 'bunny'],
+  ['Spike Cave', 'spike'],
 ]);
 
 const FREESTANDING = [
@@ -680,6 +683,8 @@ ICON_SPRITES.catfish = ICON_SPRITES.npc;
 ICON_SPRITES.stumpy = ICON_SPRITES.npc;
 ICON_SPRITES.chicken = ICON_SPRITES.npc;
 ICON_SPRITES.link = ICON_SPRITES.npc;
+ICON_SPRITES.bunny = ICON_SPRITES.npc;
+ICON_SPRITES.spike = ICON_SPRITES.chest;
 
 // The bomb-in checks. Drawn fallback only; the real image wins when present.
 ICON_SPRITES.bomb = [
