@@ -273,8 +273,44 @@ function main() {
     out.data[to + 3] = 255;
   }
 
+  // Trim the transparent margin the backdrop leaves behind, so the sprite
+  // fills its tile instead of floating in a box of nothing.
+  let final = out;
+  if (!args.includes('--no-trim')) {
+    let minX = cols;
+    let minY = rows;
+    let maxX = -1;
+    let maxY = -1;
+    for (let y = 0; y < rows; y += 1) {
+      for (let x = 0; x < cols; x += 1) {
+        if (out.data[(y * cols + x) * 4 + 3] === 0) continue;
+        if (x < minX) minX = x;
+        if (x > maxX) maxX = x;
+        if (y < minY) minY = y;
+        if (y > maxY) maxY = y;
+      }
+    }
+    if (maxX >= 0 && (minX > 0 || minY > 0 || maxX < cols - 1 || maxY < rows - 1)) {
+      const width = maxX - minX + 1;
+      const height = maxY - minY + 1;
+      const trimmed = new PNG({ width, height });
+      for (let y = 0; y < height; y += 1) {
+        for (let x = 0; x < width; x += 1) {
+          const from = ((minY + y) * cols + (minX + x)) * 4;
+          const to = (y * width + x) * 4;
+          trimmed.data[to] = out.data[from];
+          trimmed.data[to + 1] = out.data[from + 1];
+          trimmed.data[to + 2] = out.data[from + 2];
+          trimmed.data[to + 3] = out.data[from + 3];
+        }
+      }
+      final = trimmed;
+      console.log('  trimmed to ' + width + 'x' + height);
+    }
+  }
+
   fs.mkdirSync(path.dirname(output), { recursive: true });
-  fs.writeFileSync(output, PNG.sync.write(out));
+  fs.writeFileSync(output, PNG.sync.write(final));
   console.log('wrote ' + output + (cleared ? ' (' + cleared + ' backdrop cells cleared)' : ''));
 }
 

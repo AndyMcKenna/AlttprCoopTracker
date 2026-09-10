@@ -588,8 +588,6 @@ const NPCS = [
   'Bottle Merchant',
   'Sahasrahla',
   'King Zora',
-  'Stumpy',
-  'Catfish',
   'Potion Shop',
   'Old Man',
   "Link's Uncle",
@@ -627,13 +625,20 @@ const CHECK_ICONS = new Map([
   ['Mushroom', 'mushroom'],
   ['Lumberjack Tree', 'boots'],
   ["Aginah's Cave", 'bomb'],
+  ['Catfish', 'catfish'],
+  ["Link's House", 'link'],
+  ['Stumpy', 'stumpy'],
+  ['Chicken House', 'chicken'],
+  ['Pyramid Fairy - Left', 'superbomb'],
+  ['Pyramid Fairy - Right', 'superbomb'],
+  ['Mimic Cave', 'mirror'],
+  ['Spectacle Rock', 'mirror'],
 ]);
 
 const FREESTANDING = [
   'Desert Ledge',
   'Lake Hylia Island',
   'Sunken Treasure',
-  'Spectacle Rock',
   'Pyramid',
   'Flute Spot',
   'Sanctuary',
@@ -642,7 +647,6 @@ const FREESTANDING = [
   'Torch',
   "Zelda's Cell",
   'Spectacle Rock Cave',
-  'Mimic Cave',
   'Checkerboard Cave',
   'Cave 45',
   'Lost Woods Hideout',
@@ -670,6 +674,13 @@ function kindForCheck(check) {
 ICON_SPRITES.mmc = ICON_SPRITES.chest;
 ICON_SPRITES.purplechest = ICON_SPRITES.chest;
 
+// Likewise for the character and super-bomb glyphs: no drawn art, so the
+// nearest generic one stands in until the image is there.
+ICON_SPRITES.catfish = ICON_SPRITES.npc;
+ICON_SPRITES.stumpy = ICON_SPRITES.npc;
+ICON_SPRITES.chicken = ICON_SPRITES.npc;
+ICON_SPRITES.link = ICON_SPRITES.npc;
+
 // The bomb-in checks. Drawn fallback only; the real image wins when present.
 ICON_SPRITES.bomb = [
   '.......kkk..',
@@ -685,5 +696,8 @@ ICON_SPRITES.bomb = [
   '..kkkkkk....',
   '............',
 ];
+
+// Defined last because it borrows the bomb above.
+ICON_SPRITES.superbomb = ICON_SPRITES.bomb;
 
 module.exports = { PALETTE, ITEM_SPRITES, ICON_SPRITES, kindForCheck };
