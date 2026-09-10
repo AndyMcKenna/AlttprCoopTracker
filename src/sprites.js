@@ -633,11 +633,12 @@ const CHECK_ICONS = new Map([
   ['Pyramid Fairy - Right', 'superbomb'],
   ['Mimic Cave', 'mirror'],
   ['Spectacle Rock', 'mirror'],
+  ["King's Tomb", 'boots'],
+  ['Lake Hylia Island', 'mirror'],
 ]);
 
 const FREESTANDING = [
   'Desert Ledge',
-  'Lake Hylia Island',
   'Sunken Treasure',
   'Pyramid',
   'Flute Spot',
@@ -646,7 +647,6 @@ const FREESTANDING = [
   "Bob's Torch",
   'Torch',
   "Zelda's Cell",
-  'Spectacle Rock Cave',
   'Checkerboard Cave',
   'Cave 45',
   'Lost Woods Hideout',

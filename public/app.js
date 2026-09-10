@@ -405,10 +405,15 @@ function renderChecks(owners) {
       const icon = document.createElement('img');
       icon.className = 'check-icon';
       icon.alt = '';
-      // As with items, a real image for this glyph wins over the drawn one.
+      // A real image for this glyph wins; failing that, the real chest, so a
+      // glyph with no art of its own still looks like the rest of the board
+      // rather than falling back to the drawn pixel art. Drop in a PNG named
+      // after the glyph and those tiles pick it up.
       icon.src = state.checkImages.has(check.icon)
         ? 'sprites/checks/' + check.icon + '.png'
-        : spriteUrl('icon:' + check.icon, state.data.iconSprites[check.icon]);
+        : state.checkImages.has('chest')
+          ? 'sprites/checks/chest.png'
+          : spriteUrl('icon:' + check.icon, state.data.iconSprites[check.icon]);
       tile.appendChild(icon);
 
       const label = document.createElement('span');
