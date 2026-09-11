@@ -84,7 +84,8 @@ h2 {
 }
 
 .room-code input {
-  width: 120px;
+  /* Three words, e.g. "shining-plucky-pyramid", need the room. */
+  width: 160px;
   background: var(--bg-tile);
   border: 1px solid var(--line);
   border-radius: 4px;
@@ -789,8 +790,35 @@ h2 {
   outline: none;
 }
 
-.home-how h2 {
+.home-how h2,
+.home-about h2 {
   margin-bottom: 10px;
+}
+
+.home-about {
+  margin-top: 32px;
+}
+
+.home-about p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.home-about a,
+.release a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.home-about a:hover,
+.release a:hover {
+  text-decoration: underline;
+}
+
+.home-foot a + a {
+  margin-left: 14px;
 }
 
 .home-how ol {
@@ -801,23 +829,9 @@ h2 {
   line-height: 1.7;
 }
 
-.release-empty {
-  margin: 32px 0;
-  padding: 22px;
-  background: var(--bg-panel);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  color: var(--muted);
-  font-size: 14px;
-}
-
-.release-empty p {
-  margin: 0;
-}
-
 /* Each changelog entry, once there are any. */
 .release {
-  margin: 0 0 28px;
+  margin: 32px 0 28px;
 }
 
 .release h2 {
