@@ -1,6 +1,7 @@
 using System.Net.WebSockets;
 using AlttpTracker.Api;
 using AlttpTracker.Api.Data;
+using AlttpTracker.Api.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

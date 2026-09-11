@@ -1,4 +1,5 @@
 using AlttpTracker.Api.Models;
+using AlttpTracker.Api.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging.Abstractions;
 

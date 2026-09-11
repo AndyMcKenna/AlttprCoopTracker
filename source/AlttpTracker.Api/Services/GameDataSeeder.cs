@@ -4,7 +4,7 @@ using AlttpTracker.Api.Data;
 using AlttpTracker.Api.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace AlttpTracker.Api;
+namespace AlttpTracker.Api.Services;
 
 /// <summary>
 /// Puts the game into the database from gamedata.json, which

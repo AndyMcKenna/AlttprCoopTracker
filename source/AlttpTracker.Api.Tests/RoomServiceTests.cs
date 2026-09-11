@@ -1,5 +1,6 @@
 using AlttpTracker.Api;
 using AlttpTracker.Api.Data;
+using AlttpTracker.Api.Services;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.EntityFrameworkCore;

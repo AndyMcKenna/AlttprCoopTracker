@@ -1,7 +1,7 @@
 using AlttpTracker.Api.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace AlttpTracker.Api;
+namespace AlttpTracker.Api.Services;
 
 /// <summary>
 /// Makes up room codes like "brave-deku" — two words a player can read out

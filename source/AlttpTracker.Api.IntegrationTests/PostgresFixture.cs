@@ -1,5 +1,6 @@
 using AlttpTracker.Api;
 using AlttpTracker.Api.Data;
+using AlttpTracker.Api.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging.Abstractions;
 using Testcontainers.PostgreSql;

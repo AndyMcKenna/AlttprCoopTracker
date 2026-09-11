@@ -1,6 +1,6 @@
 using AlttpTracker.Api.Models;
 
-namespace AlttpTracker.Api;
+namespace AlttpTracker.Api.Services;
 
 public record AssignmentState(Guid Id, string CheckId, long At);
 

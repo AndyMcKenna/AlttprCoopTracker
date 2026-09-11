@@ -2,7 +2,7 @@ using System.Collections.Concurrent;
 using System.Net.WebSockets;
 using System.Text.Json;
 
-namespace AlttpTracker.Api;
+namespace AlttpTracker.Api.Services;
 
 /// <summary>
 /// Holds the open sockets for each room and pushes state to them, so a change
