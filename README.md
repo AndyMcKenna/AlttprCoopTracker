@@ -133,6 +133,10 @@ have basic authentication switched off by default. Before the first deploy:
 4. On the App Service, set the connection string the app looks for:
    `ConnectionStrings__tracker`, pointing at the Postgres you provisioned.
    Turn on **Web sockets** in the configuration — the live updates need it.
+5. Optionally, set `APPLICATIONINSIGHTS_CONNECTION_STRING` to an Application
+   Insights resource and traces, logs and metrics go there. Unset, nothing is
+   sent — locally the Aspire dashboard is the only sink. Put a daily cap on
+   the workspace (0.1 GB is plenty) and it stays inside the free 5 GB/month.
 
 Migrations run when the app starts, so a deploy brings the schema up with it.
 That is fine for a single instance; if you ever scale out, apply them from the
