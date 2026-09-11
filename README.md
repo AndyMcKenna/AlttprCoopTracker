@@ -85,8 +85,6 @@ Anyone who opens it joins the same board. The room code is in the URL
   Darkness 6, Turtle Rock and Ganon's Tower 4, and so on (11 big keys and 29
   small keys, matching the game). Hyrule Castle and Castle Tower have no big
   key; Eastern Palace has no small keys.
-- **Names are optional.** Type one in the header and your assignments carry it,
-  visible on hover.
 - **Esc** cancels an armed item.
 
 ## Layout
@@ -114,7 +112,6 @@ Anyone who opens it joins the same board. The room code is in the URL
 | `POST /api/rooms/{room}/assignments`             | Record an item at a check       |
 | `DELETE /api/rooms/{room}/assignments/{id}`      | Clear one location              |
 | `POST /api/rooms/{room}/reset`                   | Clear the room                  |
-| `PUT /api/rooms/{room}/name`                     | Rename the session              |
 | `GET /ws?room={room}`                            | Listen for changes              |
 
 ## Deploying
@@ -140,13 +137,8 @@ Migrations run when the app starts, so a deploy brings the schema up with it.
 That is fine for a single instance; if you ever scale out, apply them from the
 pipeline instead so two instances cannot race.
 
-One thing to know: `wwwroot/sprites/` is git-ignored, so a deployed build has no
-sprite PNGs and every tile falls back to the drawn pixel art. If you want the
-real art in production, either commit that folder or upload it separately.
-
-Rooms live in SQLite next to the API (`tracker.db`, git-ignored) and migrations
-run at startup, so a clean checkout needs no setup step. Delete the file to wipe
-every room; the **Reset** button clears just the current one.
+Rooms live in the Postgres the app is pointed at. The **Reset** button clears
+the current room; dropping the `Rooms` table clears the lot.
 
 The API has to know the same things the board does — which item and check ids
 exist, and how many locations an item holds — so `scripts/export-gamedata.js`

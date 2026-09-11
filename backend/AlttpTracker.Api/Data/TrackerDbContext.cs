@@ -32,7 +32,6 @@ public class TrackerDbContext(DbContextOptions<TrackerDbContext> options) : DbCo
         {
             room.HasKey(r => r.Id);
             room.Property(r => r.Id).HasMaxLength(32);
-            room.Property(r => r.Name).HasMaxLength(40);
 
             room.HasMany(r => r.Assignments)
                 .WithOne(a => a.Room)
@@ -46,7 +45,6 @@ public class TrackerDbContext(DbContextOptions<TrackerDbContext> options) : DbCo
             assignment.HasKey(a => a.Id);
             assignment.Property(a => a.ItemId).HasMaxLength(64);
             assignment.Property(a => a.CheckId).HasMaxLength(64);
-            assignment.Property(a => a.By).HasMaxLength(40);
 
             // A check holds one item. The service reports a friendly error
             // before it gets here, but two players clicking at once should

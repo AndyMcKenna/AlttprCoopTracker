@@ -36,17 +36,6 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
         return cleaned.Length == 0 ? "lobby" : cleaned;
     }
 
-    public static string? SanitizeName(string? value)
-    {
-        if (string.IsNullOrWhiteSpace(value))
-        {
-            return null;
-        }
-
-        var collapsed = WhitespacePattern().Replace(value.Trim(), " ");
-        return collapsed.Length > 40 ? collapsed[..40] : collapsed;
-    }
-
     /// <summary>Loads a room, creating it the first time anyone opens the code.</summary>
     public async Task<Room> GetOrCreateAsync(string roomId, CancellationToken cancellationToken = default)
     {
@@ -77,7 +66,6 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
         string roomId,
         string itemId,
         string checkId,
-        string? by,
         CancellationToken cancellationToken = default)
     {
         if (!catalog.Items.TryGetValue(itemId, out var item))
@@ -126,7 +114,6 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
             RoomId = room.Id,
             ItemId = item.Id,
             CheckId = check.Id,
-            By = SanitizeName(by),
             At = DateTimeOffset.UtcNow,
         };
 
@@ -174,22 +161,6 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
         return RoomResult.Success(room);
     }
 
-    public async Task<RoomResult> RenameAsync(
-        string roomId,
-        string? name,
-        CancellationToken cancellationToken = default)
-    {
-        var room = await GetOrCreateAsync(roomId, cancellationToken);
-
-        room.Name = SanitizeName(name) ?? "Co-op Tracker";
-        room.UpdatedAt = DateTimeOffset.UtcNow;
-        await db.SaveChangesAsync(cancellationToken);
-        return RoomResult.Success(room);
-    }
-
     [GeneratedRegex("[^a-z0-9-]")]
     private static partial Regex RoomCodePattern();
-
-    [GeneratedRegex(@"\s+")]
-    private static partial Regex WhitespacePattern();
 }

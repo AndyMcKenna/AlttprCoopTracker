@@ -74,17 +74,16 @@ public class RoomServiceTests : IDisposable
     public void Dispose() => _connection.Dispose();
 
     [Fact]
-    public async Task Assigning_records_the_item_and_who_found_it()
+    public async Task Assigning_records_the_item_against_the_check()
     {
         var service = NewService(out var db);
         using (db)
         {
-            var result = await service.AssignAsync("test-room", "hookshot", "ep/big-chest", "Andy");
+            var result = await service.AssignAsync("test-room", "hookshot", "ep/big-chest");
 
             Assert.True(result.Ok);
             var assignment = Assert.Single(result.Room!.Assignments);
             Assert.Equal("ep/big-chest", assignment.CheckId);
-            Assert.Equal("Andy", assignment.By);
         }
     }
 
@@ -94,8 +93,8 @@ public class RoomServiceTests : IDisposable
         var service = NewService(out var db);
         using (db)
         {
-            await service.AssignAsync("test-room", "hookshot", "ep/big-chest", null);
-            var result = await service.AssignAsync("test-room", "hookshot", "lw/library", null);
+            await service.AssignAsync("test-room", "hookshot", "ep/big-chest");
+            var result = await service.AssignAsync("test-room", "hookshot", "lw/library");
 
             Assert.True(result.Ok);
             var assignment = Assert.Single(result.Room!.Assignments);
@@ -111,12 +110,12 @@ public class RoomServiceTests : IDisposable
         {
             foreach (var check in new[] { "lw/sick-kid", "lw/hobo", "lw/king-zora", "dw/catfish" })
             {
-                Assert.True((await service.AssignAsync("test-room", "bottle", check, null)).Ok);
+                Assert.True((await service.AssignAsync("test-room", "bottle", check)).Ok);
             }
 
             Assert.Equal(4, db.Assignments.Count(a => a.ItemId == "bottle"));
 
-            var full = await service.AssignAsync("test-room", "bottle", "lw/library", null);
+            var full = await service.AssignAsync("test-room", "bottle", "lw/library");
             Assert.False(full.Ok);
             Assert.Contains("already has 4 locations", full.Error);
         }
@@ -128,9 +127,9 @@ public class RoomServiceTests : IDisposable
         var service = NewService(out var db);
         using (db)
         {
-            await service.AssignAsync("test-room", "hookshot", "ep/big-chest", null);
+            await service.AssignAsync("test-room", "hookshot", "ep/big-chest");
 
-            var taken = await service.AssignAsync("test-room", "lamp", "ep/big-chest", null);
+            var taken = await service.AssignAsync("test-room", "lamp", "ep/big-chest");
 
             Assert.False(taken.Ok);
             Assert.Contains("already recorded as Hookshot", taken.Error);
@@ -143,16 +142,16 @@ public class RoomServiceTests : IDisposable
         var service = NewService(out var db);
         using (db)
         {
-            Assert.True((await service.AssignAsync("keys", "bk-ep", "ep/big-chest", null)).Ok);
+            Assert.True((await service.AssignAsync("keys", "bk-ep", "ep/big-chest")).Ok);
 
-            var taken = await service.AssignAsync("keys", "lamp", "ep/big-chest", null);
+            var taken = await service.AssignAsync("keys", "lamp", "ep/big-chest");
             Assert.False(taken.Ok);
             Assert.Contains("EP Big Key", taken.Error);
 
             // Palace of Darkness holds six small keys in the one box.
             foreach (var check in new[] { "pod/shooter-room", "pod/the-arena-ledge", "pod/map-chest" })
             {
-                Assert.True((await service.AssignAsync("keys", "sk-pod", check, null)).Ok);
+                Assert.True((await service.AssignAsync("keys", "sk-pod", check)).Ok);
             }
 
             Assert.Equal(3, db.Assignments.Count(a => a.ItemId == "sk-pod"));
@@ -167,7 +166,7 @@ public class RoomServiceTests : IDisposable
         var service = NewService(out var db);
         using (db)
         {
-            var result = await service.AssignAsync("test-room", itemId, checkId, null);
+            var result = await service.AssignAsync("test-room", itemId, checkId);
 
             Assert.False(result.Ok);
             Assert.Contains("Unknown", result.Error);
@@ -180,8 +179,8 @@ public class RoomServiceTests : IDisposable
         var service = NewService(out var db);
         using (db)
         {
-            await service.AssignAsync("test-room", "bottle", "lw/sick-kid", null);
-            await service.AssignAsync("test-room", "bottle", "lw/hobo", null);
+            await service.AssignAsync("test-room", "bottle", "lw/sick-kid");
+            await service.AssignAsync("test-room", "bottle", "lw/hobo");
 
             var first = db.Assignments.First(a => a.CheckId == "lw/sick-kid");
             var result = await service.UnassignAsync("test-room", first.Id);
@@ -197,7 +196,7 @@ public class RoomServiceTests : IDisposable
         var service = NewService(out var db);
         using (db)
         {
-            await service.AssignAsync("test-room", "lamp", "hc/sanctuary", null);
+            await service.AssignAsync("test-room", "lamp", "hc/sanctuary");
 
             var result = await service.ResetAsync("test-room");
 
@@ -213,8 +212,7 @@ public class RoomServiceTests : IDisposable
         var first = NewService(out var db);
         using (db)
         {
-            await first.AssignAsync("persist-me", "lamp", "hc/sanctuary", null);
-            await first.RenameAsync("persist-me", "Friday night race");
+            await first.AssignAsync("persist-me", "lamp", "hc/sanctuary");
         }
 
         // A new context, as a later request would use.
@@ -223,7 +221,6 @@ public class RoomServiceTests : IDisposable
         {
             var room = await second.GetOrCreateAsync("persist-me");
 
-            Assert.Equal("Friday night race", room.Name);
             Assert.Equal("hc/sanctuary", Assert.Single(room.Assignments).CheckId);
         }
     }
@@ -236,11 +233,4 @@ public class RoomServiceTests : IDisposable
     public void Room_codes_are_normalised_to_something_shareable(string? input, string expected) =>
         Assert.Equal(expected, RoomService.NormalizeRoomId(input));
 
-    [Fact]
-    public void Names_are_trimmed_collapsed_and_capped()
-    {
-        Assert.Equal("Friday night race", RoomService.SanitizeName("  Friday   night  race "));
-        Assert.Null(RoomService.SanitizeName("   "));
-        Assert.Equal(40, RoomService.SanitizeName(new string('x', 60))!.Length);
-    }
 }

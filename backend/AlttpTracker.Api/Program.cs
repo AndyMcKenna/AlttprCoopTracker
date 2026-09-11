@@ -80,7 +80,7 @@ rooms.MapPost("/{roomId}/assignments", async (
     RoomBroker broker,
     CancellationToken ct) =>
 {
-    var result = await service.AssignAsync(roomId, request.ItemId, request.CheckId, request.By, ct);
+    var result = await service.AssignAsync(roomId, request.ItemId, request.CheckId, ct);
     return await RespondAsync(result, broker, ct);
 });
 
@@ -102,17 +102,6 @@ rooms.MapPost("/{roomId}/reset", async (
     CancellationToken ct) =>
 {
     var result = await service.ResetAsync(roomId, ct);
-    return await RespondAsync(result, broker, ct);
-});
-
-rooms.MapPut("/{roomId}/name", async (
-    string roomId,
-    RenameRequest request,
-    RoomService service,
-    RoomBroker broker,
-    CancellationToken ct) =>
-{
-    var result = await service.RenameAsync(roomId, request.Name, ct);
     return await RespondAsync(result, broker, ct);
 });
 
@@ -186,6 +175,4 @@ static async Task<IResult> RespondAsync(RoomResult result, RoomBroker broker, Ca
     return Results.Ok(state);
 }
 
-record AssignRequest(string ItemId, string CheckId, string? By);
-
-record RenameRequest(string? Name);
+record AssignRequest(string ItemId, string CheckId);

@@ -123,8 +123,7 @@ public class DatabaseTests(PostgresFixture postgres) : IClassFixture<PostgresFix
         await using (var db = postgres.NewContext())
         {
             var service = new RoomService(db, catalog);
-            Assert.True((await service.AssignAsync(room, "lamp", "hc/sanctuary", "Andy")).Ok);
-            await service.RenameAsync(room, "Friday night race");
+            Assert.True((await service.AssignAsync(room, "lamp", "hc/sanctuary")).Ok);
         }
 
         // A separate connection, as a later request would use.
@@ -132,10 +131,8 @@ public class DatabaseTests(PostgresFixture postgres) : IClassFixture<PostgresFix
         {
             var reopened = await new RoomService(db, catalog).GetOrCreateAsync(room);
 
-            Assert.Equal("Friday night race", reopened.Name);
             var assignment = Assert.Single(reopened.Assignments);
             Assert.Equal("hc/sanctuary", assignment.CheckId);
-            Assert.Equal("Andy", assignment.By);
         }
     }
 

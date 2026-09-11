@@ -11,9 +11,7 @@
 const el = {
   status: document.getElementById('status'),
   players: document.getElementById('players'),
-  playerName: document.getElementById('player-name'),
   roomInput: document.getElementById('room-input'),
-  roomName: document.getElementById('room-name'),
   copyLink: document.getElementById('copy-link'),
   reset: document.getElementById('reset'),
   hint: document.getElementById('hint'),
@@ -227,9 +225,7 @@ function buildItemTile(item) {
       const check = state.checksById.get(entry.checkId);
       const row = document.createElement('li');
       row.className = 'item-location';
-      row.title = entry.by
-        ? 'Recorded by ' + entry.by + ' at ' + new Date(entry.at).toLocaleTimeString()
-        : 'Recorded at ' + new Date(entry.at).toLocaleTimeString();
+      row.title = 'Recorded at ' + new Date(entry.at).toLocaleTimeString();
 
       const region = document.createElement('span');
       region.className = 'loc-region';
@@ -543,12 +539,7 @@ function pickCheck(check) {
     showHint('Choose an item first, then click a check.');
     return;
   }
-  send({
-    type: 'assign',
-    itemId: state.armed,
-    checkId: check.id,
-    by: el.playerName.value.trim(),
-  });
+  send({ type: 'assign', itemId: state.armed, checkId: check.id });
   disarm();
 }
 
@@ -582,18 +573,12 @@ async function send(action) {
     request = fetch(roomUrl('/assignments'), {
       method: 'POST',
       ...json,
-      body: JSON.stringify({ itemId: action.itemId, checkId: action.checkId, by: action.by }),
+      body: JSON.stringify({ itemId: action.itemId, checkId: action.checkId }),
     });
   } else if (action.type === 'unassign') {
     request = fetch(roomUrl('/assignments/' + action.assignmentId), { method: 'DELETE' });
   } else if (action.type === 'reset') {
     request = fetch(roomUrl('/reset'), { method: 'POST' });
-  } else if (action.type === 'rename') {
-    request = fetch(roomUrl('/name'), {
-      method: 'PUT',
-      ...json,
-      body: JSON.stringify({ name: action.name }),
-    });
   } else {
     return;
   }
@@ -620,7 +605,6 @@ async function send(action) {
 
 function applyRoom(room) {
   state.room = room;
-  if (document.activeElement !== el.roomName) el.roomName.value = room.name;
   render();
 }
 
@@ -671,19 +655,10 @@ function setPlayers(count) {
 /* ------------------------------------------------------------------ init */
 
 el.roomInput.value = roomId;
-el.playerName.value = localStorage.getItem('alttp-player') || '';
 
 el.roomInput.addEventListener('change', () => {
   setRoom(el.roomInput.value);
   el.roomInput.value = roomId;
-});
-
-el.playerName.addEventListener('change', () => {
-  localStorage.setItem('alttp-player', el.playerName.value.trim());
-});
-
-el.roomName.addEventListener('change', () => {
-  send({ type: 'rename', name: el.roomName.value });
 });
 
 el.search.addEventListener('input', () => {

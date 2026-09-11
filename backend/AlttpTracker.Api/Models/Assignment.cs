@@ -19,8 +19,5 @@ public class Assignment
     /// <summary>Matches a check id from gamedata.json, e.g. "lw/links-house".</summary>
     public required string CheckId { get; set; }
 
-    /// <summary>Whoever recorded it, if they gave a name.</summary>
-    public string? By { get; set; }
-
     public DateTimeOffset At { get; set; }
 }

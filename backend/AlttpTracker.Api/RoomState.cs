@@ -2,7 +2,7 @@ using AlttpTracker.Api.Models;
 
 namespace AlttpTracker.Api;
 
-public record AssignmentState(Guid Id, string CheckId, string? By, long At);
+public record AssignmentState(Guid Id, string CheckId, long At);
 
 /// <summary>
 /// What a client receives. Assignments are grouped by item because that is how
@@ -10,14 +10,12 @@ public record AssignmentState(Guid Id, string CheckId, string? By, long At);
 /// </summary>
 public record RoomState(
     string Id,
-    string Name,
     long CreatedAt,
     long UpdatedAt,
     Dictionary<string, List<AssignmentState>> Assignments)
 {
     public static RoomState From(Room room) => new(
         room.Id,
-        room.Name,
         room.CreatedAt.ToUnixTimeMilliseconds(),
         room.UpdatedAt.ToUnixTimeMilliseconds(),
         room.Assignments
@@ -26,7 +24,7 @@ public record RoomState(
             .ToDictionary(
                 group => group.Key,
                 group => group
-                    .Select(a => new AssignmentState(a.Id, a.CheckId, a.By, a.At.ToUnixTimeMilliseconds()))
+                    .Select(a => new AssignmentState(a.Id, a.CheckId, a.At.ToUnixTimeMilliseconds()))
                     .ToList(),
                 StringComparer.Ordinal));
 }

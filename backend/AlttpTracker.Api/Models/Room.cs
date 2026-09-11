@@ -8,8 +8,6 @@ public class Room
 {
     public required string Id { get; set; }
 
-    public string Name { get; set; } = "Co-op Tracker";
-
     public DateTimeOffset CreatedAt { get; set; }
 
     public DateTimeOffset UpdatedAt { get; set; }
