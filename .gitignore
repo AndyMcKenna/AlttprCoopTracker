@@ -7,3 +7,9 @@ npm-debug.log*
 bin/
 obj/
 .vs/
+*.user
+
+# Local SQLite scratch files; the app runs on Postgres
+*.db
+*.db-shm
+*.db-wal
