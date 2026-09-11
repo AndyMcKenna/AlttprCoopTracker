@@ -5,10 +5,6 @@ npm-debug.log*
 *.log
 .DS_Store
 
-# Sprite images, kept out of the repo. The board falls back to its own drawn
-# pixel art when they are absent, so a clean checkout still runs.
-backend/AlttpTracker.Api/wwwroot/sprites/
-
 # .NET build output and IDE state
 bin/
 obj/
