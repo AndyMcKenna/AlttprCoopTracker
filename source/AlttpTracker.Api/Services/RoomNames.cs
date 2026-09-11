@@ -1,12 +1,19 @@
+using System.Security.Cryptography;
 using AlttpTracker.Api.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace AlttpTracker.Api.Services;
 
 /// <summary>
-/// Makes up room codes like "brave-deku" — two words a player can read out
+/// Makes up room codes like "brave-golden-deku" — words a player can read out
 /// over voice chat without spelling anything.
 /// </summary>
+/// <remarks>
+/// Three words rather than two on purpose. The code is the only thing that
+/// gates a room, and two words from these lists is about four thousand codes,
+/// few enough for someone to try them all and reset every live game. Three
+/// is a quarter of a million, which with the request limits is out of reach.
+/// </remarks>
 public static class RoomNames
 {
     private static readonly string[] Adjectives =
@@ -34,24 +41,26 @@ public static class RoomNames
     ];
 
     /// <summary>
-    /// A code nobody is using yet. Falls back to adding digits if the pairs it
+    /// A code nobody is using yet. Falls back to adding digits if the codes it
     /// tries are all taken, so this always returns something.
     /// </summary>
     public static async Task<string> SuggestAsync(TrackerDbContext db, CancellationToken cancellationToken = default)
     {
         for (var attempt = 0; attempt < 12; attempt += 1)
         {
-            var candidate = Pair();
+            var candidate = Triple();
             if (!await db.Rooms.AnyAsync(r => r.Id == candidate, cancellationToken))
             {
                 return candidate;
             }
         }
 
-        // Every pair tried is in use — rare, but the button still has to work.
+        // Every code tried is in use — rare, but the button still has to work.
+        // Two words here, not three: the longest three plus digits would not
+        // fit the 32 characters a room id has.
         for (var attempt = 0; attempt < 50; attempt += 1)
         {
-            var candidate = $"{Pair()}-{Random.Shared.Next(10, 100)}";
+            var candidate = $"{Pair()}-{RandomNumberGenerator.GetInt32(1000, 10000)}";
             if (!await db.Rooms.AnyAsync(r => r.Id == candidate, cancellationToken))
             {
                 return candidate;
@@ -61,6 +70,24 @@ public static class RoomNames
         return $"{Pair()}-{Guid.NewGuid().ToString("n")[..6]}";
     }
 
-    private static string Pair() =>
-        $"{Adjectives[Random.Shared.Next(Adjectives.Length)]}-{Nouns[Random.Shared.Next(Nouns.Length)]}";
+    /// <summary>Two adjectives and a noun, the second adjective never the first.</summary>
+    private static string Triple()
+    {
+        var first = Pick(Adjectives);
+        string second;
+        do
+        {
+            second = Pick(Adjectives);
+        }
+        while (second == first);
+
+        return $"{first}-{second}-{Pick(Nouns)}";
+    }
+
+    private static string Pair() => $"{Pick(Adjectives)}-{Pick(Nouns)}";
+
+    // The code is what admits a player to a room, so it is drawn from the
+    // system's random source rather than a seeded generator someone could
+    // follow along with.
+    private static string Pick(string[] words) => words[RandomNumberGenerator.GetInt32(words.Length)];
 }

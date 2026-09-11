@@ -243,7 +243,7 @@ function buildItemTile(item) {
       remove.textContent = '×';
       remove.title = 'Clear this location';
       remove.addEventListener('click', () =>
-        send({ type: 'unassign', itemId: item.id, assignmentId: entry.id })
+        send({ type: 'unassign', assignmentId: entry.id })
       );
       row.appendChild(remove);
 
@@ -604,14 +604,26 @@ async function send(action) {
     // A refused change is the sender's problem only — someone else may have
     // taken that check first. Everyone keeps the state the service has.
     const body = await response.json().catch(() => null);
-    showHint((body && body.error) || 'That change was refused.');
+    showHint(
+      (body && body.error) ||
+        (response.status === 429
+          ? 'Too many changes at once — wait a moment and try again.'
+          : 'That change was refused.')
+    );
     return;
   }
 
   applyRoom(await response.json());
 }
 
+/**
+ * States arrive from two directions — the response to this client's own
+ * request and the broadcast to the room — and several players' changes can be
+ * in flight at once, so they do not always arrive in the order they were made.
+ * One older than the board already shows is stale, and is dropped.
+ */
 function applyRoom(room) {
+  if (state.room && state.room.id === room.id && room.updatedAt < state.room.updatedAt) return;
   state.room = room;
   render();
 }

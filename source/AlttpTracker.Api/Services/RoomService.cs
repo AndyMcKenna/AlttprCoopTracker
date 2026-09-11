@@ -36,15 +36,43 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
         return cleaned.Length == 0 ? "lobby" : cleaned;
     }
 
-    /// <summary>Loads a room, creating it the first time anyone opens the code.</summary>
+    /// <summary>
+    /// Loads a room if it exists. Opening a code does not create anything:
+    /// only the first recorded location does, so nobody can fill the database
+    /// by asking for codes that were never used.
+    /// </summary>
+    public Task<Room?> GetAsync(string roomId, CancellationToken cancellationToken = default)
+    {
+        var id = NormalizeRoomId(roomId);
+        return db.Rooms
+            .Include(r => r.Assignments)
+            .FirstOrDefaultAsync(r => r.Id == id, cancellationToken);
+    }
+
+    /// <summary>
+    /// The room as a client should see it, whether or not it has been written
+    /// yet. An unknown code is simply an empty board.
+    /// </summary>
+    public async Task<RoomState> GetStateAsync(string roomId, CancellationToken cancellationToken = default)
+    {
+        var id = NormalizeRoomId(roomId);
+
+        // Untracked so that it is what the database holds right now, not a
+        // merge with whatever this context loaded earlier in the request.
+        var room = await db.Rooms
+            .AsNoTracking()
+            .Include(r => r.Assignments)
+            .FirstOrDefaultAsync(r => r.Id == id, cancellationToken);
+
+        return RoomState.From(room ?? Unwritten(id));
+    }
+
+    /// <summary>Loads a room, creating it the first time something is recorded.</summary>
     public async Task<Room> GetOrCreateAsync(string roomId, CancellationToken cancellationToken = default)
     {
         var id = NormalizeRoomId(roomId);
 
-        var room = await db.Rooms
-            .Include(r => r.Assignments)
-            .FirstOrDefaultAsync(r => r.Id == id, cancellationToken);
-
+        var room = await GetAsync(id, cancellationToken);
         if (room is not null)
         {
             return room;
@@ -64,10 +92,17 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
 
     public async Task<RoomResult> AssignAsync(
         string roomId,
-        string itemId,
-        string checkId,
+        string? itemId,
+        string? checkId,
         CancellationToken cancellationToken = default)
     {
+        // The body is whatever the client sent; a missing field is a bad
+        // request, not a crash.
+        if (string.IsNullOrEmpty(itemId) || string.IsNullOrEmpty(checkId))
+        {
+            return RoomResult.Failure("Both itemId and checkId are required");
+        }
+
         if (!catalog.Items.TryGetValue(itemId, out var item))
         {
             return RoomResult.Failure($"Unknown item: {itemId}");
@@ -125,7 +160,28 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
         db.Assignments.Add(assignment);
 
         room.UpdatedAt = DateTimeOffset.UtcNow;
-        await db.SaveChangesAsync(cancellationToken);
+
+        try
+        {
+            await db.SaveChangesAsync(cancellationToken);
+        }
+        catch (DbUpdateException)
+        {
+            // Two players recorded the same check in the same instant. The
+            // unique index let one through; this is the other, and it gets
+            // the answer it would have had a moment later.
+            db.Entry(assignment).State = EntityState.Detached;
+            room.Assignments.Remove(assignment);
+
+            var winner = await db.Assignments
+                .AsNoTracking()
+                .FirstOrDefaultAsync(a => a.RoomId == room.Id && a.CheckId == check.Id, cancellationToken);
+            var winnerName = winner is not null && catalog.Items.TryGetValue(winner.ItemId, out var won)
+                ? won.Name
+                : "another item";
+            return RoomResult.Failure($"{check.FullName} is already recorded as {winnerName}");
+        }
+
         return RoomResult.Success(room);
     }
 
@@ -134,7 +190,13 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
         Guid assignmentId,
         CancellationToken cancellationToken = default)
     {
-        var room = await GetOrCreateAsync(roomId, cancellationToken);
+        // A room nobody has written to has nothing to clear, and clearing it
+        // is not what should bring it into being.
+        var room = await GetAsync(roomId, cancellationToken);
+        if (room is null)
+        {
+            return RoomResult.Success(Unwritten(roomId));
+        }
 
         var assignment = room.Assignments.FirstOrDefault(a => a.Id == assignmentId);
         if (assignment is null)
@@ -152,13 +214,24 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
 
     public async Task<RoomResult> ResetAsync(string roomId, CancellationToken cancellationToken = default)
     {
-        var room = await GetOrCreateAsync(roomId, cancellationToken);
+        var room = await GetAsync(roomId, cancellationToken);
+        if (room is null)
+        {
+            return RoomResult.Success(Unwritten(roomId));
+        }
 
         db.Assignments.RemoveRange(room.Assignments);
         room.Assignments.Clear();
         room.UpdatedAt = DateTimeOffset.UtcNow;
         await db.SaveChangesAsync(cancellationToken);
         return RoomResult.Success(room);
+    }
+
+    /// <summary>A room that exists only as a code so far: not tracked, not saved.</summary>
+    private static Room Unwritten(string roomId)
+    {
+        var now = DateTimeOffset.UtcNow;
+        return new Room { Id = NormalizeRoomId(roomId), CreatedAt = now, UpdatedAt = now };
     }
 
     [GeneratedRegex("[^a-z0-9-]")]

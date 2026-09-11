@@ -10,14 +10,25 @@ namespace AlttpTracker.Api.Services;
 /// </summary>
 public class RoomBroker(ILogger<RoomBroker> logger)
 {
-    private readonly ConcurrentDictionary<string, ConcurrentDictionary<Guid, WebSocket>> _rooms = new(StringComparer.Ordinal);
+    /// <summary>
+    /// A socket allows one outstanding send at a time, so two players clicking
+    /// at once must queue behind each other rather than collide.
+    /// </summary>
+    private sealed record Connection(WebSocket Socket, SemaphoreSlim SendLock);
+
+    private readonly ConcurrentDictionary<string, ConcurrentDictionary<Guid, Connection>> _rooms = new(StringComparer.Ordinal);
 
     private static readonly JsonSerializerOptions JsonOptions = new(JsonSerializerDefaults.Web);
+
+    // A client that cannot take a message in this long is stuck; cancelling
+    // the send aborts its socket and it reconnects on its own.
+    private static readonly TimeSpan SendTimeout = TimeSpan.FromSeconds(10);
 
     public Guid Add(string roomId, WebSocket socket)
     {
         var id = Guid.NewGuid();
-        _rooms.GetOrAdd(roomId, _ => new ConcurrentDictionary<Guid, WebSocket>())[id] = socket;
+        var connection = new Connection(socket, new SemaphoreSlim(1, 1));
+        _rooms.GetOrAdd(roomId, _ => new ConcurrentDictionary<Guid, Connection>())[id] = connection;
         return id;
     }
 
@@ -41,14 +52,15 @@ public class RoomBroker(ILogger<RoomBroker> logger)
         _rooms.TryGetValue(roomId, out var sockets) ? sockets.Count : 0;
 
     /// <summary>Send the current state of a room to everyone watching it.</summary>
-    public Task BroadcastStateAsync(RoomState state, CancellationToken cancellationToken = default) =>
-        SendAsync(state.Id, new { type = "state", room = state, players = PlayerCount(state.Id) }, cancellationToken);
+    public Task BroadcastStateAsync(RoomState state) =>
+        SendAsync(state.Id, new { type = "state", room = state, players = PlayerCount(state.Id) });
 
-    /// <summary>Send to one socket, used to prime a client as it connects.</summary>
-    public Task SendStateAsync(WebSocket socket, RoomState state, CancellationToken cancellationToken = default) =>
-        SendToSocketAsync(socket, new { type = "state", room = state, players = PlayerCount(state.Id) }, cancellationToken);
-
-    private async Task SendAsync(string roomId, object message, CancellationToken cancellationToken)
+    /// <summary>
+    /// Deliberately takes no cancellation token: a broadcast is triggered by
+    /// one player's request, but it goes to everyone, and that player giving
+    /// up on their request must not abort the other players' sockets.
+    /// </summary>
+    private async Task SendAsync(string roomId, object message)
     {
         if (!_rooms.TryGetValue(roomId, out var sockets) || sockets.IsEmpty)
         {
@@ -63,7 +75,7 @@ public class RoomBroker(ILogger<RoomBroker> logger)
         {
             try
             {
-                await SendBytesAsync(pair.Value, payload, cancellationToken);
+                await SendBytesAsync(pair.Value, payload);
             }
             catch (Exception ex)
             {
@@ -75,19 +87,23 @@ public class RoomBroker(ILogger<RoomBroker> logger)
         await Task.WhenAll(sends);
     }
 
-    private static Task SendToSocketAsync(WebSocket socket, object message, CancellationToken cancellationToken) =>
-        SendBytesAsync(socket, JsonSerializer.SerializeToUtf8Bytes(message, JsonOptions), cancellationToken);
-
-    private static async Task SendBytesAsync(WebSocket socket, byte[] payload, CancellationToken cancellationToken)
+    private static async Task SendBytesAsync(Connection connection, byte[] payload)
     {
-        if (socket.State != WebSocketState.Open)
+        using var timeout = new CancellationTokenSource(SendTimeout);
+
+        await connection.SendLock.WaitAsync(timeout.Token);
+        try
         {
-            return;
+            if (connection.Socket.State != WebSocketState.Open)
+            {
+                return;
+            }
+
+            await connection.Socket.SendAsync(payload, WebSocketMessageType.Text, endOfMessage: true, timeout.Token);
         }
-
-        await socket.SendAsync(payload, WebSocketMessageType.Text, endOfMessage: true, cancellationToken);
+        finally
+        {
+            connection.SendLock.Release();
+        }
     }
-
-    public Task SendErrorAsync(WebSocket socket, string message, CancellationToken cancellationToken = default) =>
-        SendToSocketAsync(socket, new { type = "error", message }, cancellationToken);
 }

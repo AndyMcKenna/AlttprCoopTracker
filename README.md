@@ -30,6 +30,13 @@ tooling that carries it across.
 A change is a request to the API, and the API pushes the new state down the
 websocket to everyone in that room.
 
+There are no accounts. A room is whoever has its code, so the codes are three
+words drawn from a quarter-million combinations, and the API caps requests
+and open sockets per client address so that nobody can walk the code space or
+fill the database. Opening a code does not create a room — the first recorded
+location does — and rooms left empty for a day, or untouched for three months,
+are swept away.
+
 ## Running it
 
 ```sh
@@ -63,7 +70,7 @@ need Docker running; the other two do not.
 
 From the board, share the URL from **Copy invite link** with the other players.
 Anyone who opens it joins the same board. The room code is in the URL
-(`?room=brave-deku`) and can be edited in the header.
+(`?room=brave-golden-deku`) and can be edited in the header.
 
 ## Details worth knowing
 
@@ -109,7 +116,7 @@ Anyone who opens it joins the same board. The room code is in the URL
 | ------------------------------------------------ | ------------------------------- |
 | `GET /api/gamedata`                              | Everything the board draws from |
 | `GET /api/rooms/new-name`                        | An unused room code             |
-| `GET /api/rooms/{room}`                          | The room, created on first ask  |
+| `GET /api/rooms/{room}`                          | The room; empty if never written |
 | `POST /api/rooms/{room}/assignments`             | Record an item at a check       |
 | `DELETE /api/rooms/{room}/assignments/{id}`      | Clear one location              |
 | `POST /api/rooms/{room}/reset`                   | Clear the room                  |
@@ -131,9 +138,21 @@ have basic authentication switched off by default. Before the first deploy:
 3. Add a repository **variable** `AZURE_WEBAPP_NAME` (and `AZURE_WEBAPP_SLOT`
    if you deploy to a slot).
 4. On the App Service, set the connection string the app looks for:
-   `ConnectionStrings__tracker`, pointing at the Postgres you provisioned.
+   `ConnectionStrings__tracker`, pointing at the Postgres you provisioned. The
+   user in it needs to own the schema — migrations run from the app.
    Turn on **Web sockets** in the configuration — the live updates need it.
-5. Optionally, set `APPLICATIONINSIGHTS_CONNECTION_STRING` to an Application
+5. Set the app setting `ASPNETCORE_FORWARDEDHEADERS_ENABLED` to `true`. App
+   Service sits in front of the app as a proxy, and this is how the app learns
+   each player's own address from it. Without it every player is one client
+   as far as the request limits are concerned, and a busy evening looks like
+   one person hammering the API.
+6. Switch on **HTTPS Only** under the TLS settings, so an `http://` invite
+   link is bumped up rather than served. The app itself does not redirect:
+   behind the proxy it cannot tell which scheme the player used.
+7. If you use the App Service **Health check**, point it at `/alive`. That
+   says only that the process is up; `/health`, which also reports on the
+   database, is not exposed outside development.
+8. Optionally, set `APPLICATIONINSIGHTS_CONNECTION_STRING` to an Application
    Insights resource and traces, logs and metrics go there. Unset, nothing is
    sent — locally the Aspire dashboard is the only sink. Put a daily cap on
    the workspace (0.1 GB is plenty) and it stays inside the free 5 GB/month.
@@ -142,8 +161,15 @@ Migrations run when the app starts, so a deploy brings the schema up with it.
 That is fine for a single instance; if you ever scale out, apply them from the
 pipeline instead so two instances cannot race.
 
+The API is open, so it defends itself with limits rather than logins: 120
+requests a minute and 32 open sockets per client address, both set in
+`Program.cs`. A client over either gets a 429 and the board tells the player to
+wait a moment.
+
 Rooms live in the Postgres the app is pointed at. The **Reset** button clears
-the current room; dropping the `Rooms` table clears the lot.
+the current room; dropping the `Rooms` table clears the lot. A sweeper in the
+app deletes rooms that have sat empty for a day or untouched for three months,
+so the table only holds runs that are actually happening.
 
 The API has to know the same things the board does — which item and check ids
 exist, and how many locations an item holds — so `source/scripts/export-gamedata.js`
@@ -153,7 +179,11 @@ source of truth; run `npm run export-gamedata` after editing `checks.js` or
 
 ## Sprites
 
-The item art is original pixel art drawn as 12x12 character grids in
-`source/data/sprites.js`, rendered to inline SVG in the browser — no ripped game assets,
-and nothing to download. Each check tile gets a glyph based on what kind of
-location it is: chest, big chest, NPC, boss drop, tablet, or freestanding item.
+The tiles use game sprites from `wwwroot/sprites` where one exists, and fall
+back to 12x12 pixel art drawn as character grids in `source/data/sprites.js`,
+rendered to inline SVG in the browser. Each check tile gets a glyph based on
+what kind of location it is: chest, big chest, NPC, boss drop, tablet, or
+freestanding item.
+
+This is a fan-made tool. *The Legend of Zelda: A Link to the Past* and its
+artwork belong to Nintendo; nothing here is affiliated with or endorsed by them.

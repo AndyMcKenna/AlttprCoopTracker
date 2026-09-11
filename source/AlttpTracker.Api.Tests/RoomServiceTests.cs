@@ -225,6 +225,77 @@ public class RoomServiceTests : IDisposable
         }
     }
 
+    [Fact]
+    public async Task Opening_a_code_does_not_create_a_room()
+    {
+        var service = NewService(out var db);
+        using (db)
+        {
+            var state = await service.GetStateAsync("never-written");
+
+            Assert.Equal("never-written", state.Id);
+            Assert.Empty(state.Assignments);
+            Assert.Empty(db.Rooms);
+        }
+    }
+
+    [Fact]
+    public async Task Clearing_a_room_that_was_never_written_does_not_create_it()
+    {
+        var service = NewService(out var db);
+        using (db)
+        {
+            Assert.True((await service.ResetAsync("never-written")).Ok);
+            Assert.True((await service.UnassignAsync("never-written", Guid.NewGuid())).Ok);
+            Assert.Empty(db.Rooms);
+        }
+    }
+
+    [Fact]
+    public async Task The_first_recorded_location_is_what_creates_a_room()
+    {
+        var service = NewService(out var db);
+        using (db)
+        {
+            await service.AssignAsync("first-write", "lamp", "hc/sanctuary");
+
+            Assert.Single(db.Rooms);
+        }
+    }
+
+    [Theory]
+    [InlineData(null, "lw/library")]
+    [InlineData("lamp", null)]
+    [InlineData("", "")]
+    public async Task A_body_missing_a_field_is_refused_not_thrown(string? itemId, string? checkId)
+    {
+        var service = NewService(out var db);
+        using (db)
+        {
+            var result = await service.AssignAsync("test-room", itemId, checkId);
+
+            Assert.False(result.Ok);
+            Assert.Contains("required", result.Error);
+        }
+    }
+
+    [Fact]
+    public async Task Room_codes_are_three_words_that_fit_the_column()
+    {
+        var service = NewService(out var db);
+        using (db)
+        {
+            for (var i = 0; i < 20; i += 1)
+            {
+                var code = await RoomNames.SuggestAsync(db);
+
+                Assert.Equal(3, code.Split('-').Length);
+                Assert.InRange(code.Length, 1, 32);
+                Assert.Equal(code, RoomService.NormalizeRoomId(code));
+            }
+        }
+    }
+
     [Theory]
     [InlineData("  My Room!! ", "myroom")]
     [InlineData("", "lobby")]

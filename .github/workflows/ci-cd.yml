@@ -11,10 +11,10 @@ env:
   SOLUTION: source/AlttpTracker.slnx
   API_PROJECT: source/AlttpTracker.Api/AlttpTracker.Api.csproj
 
-# Deployment needs a token for the OIDC login to Azure.
+# Nothing here needs to write to the repository. The deploy job adds the one
+# extra permission it needs, an OIDC token, for itself alone.
 permissions:
   contents: read
-  id-token: write
 
 jobs:
   build-and-test:
@@ -85,6 +85,10 @@ jobs:
     needs: build-and-test
     # Only a merge to main ships. Pull requests stop at the tests above.
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    # The OIDC login to Azure needs a token minted for this job.
+    permissions:
+      contents: read
+      id-token: write
     environment:
       name: production
       url: ${{ steps.deploy.outputs.webapp-url }}

@@ -1,6 +1,8 @@
+using AlttpTracker.Api.Data;
 using AlttpTracker.Api.Models;
 using AlttpTracker.Api.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace AlttpTracker.Api.IntegrationTests;
@@ -134,6 +136,53 @@ public class DatabaseTests(PostgresFixture postgres) : IClassFixture<PostgresFix
 
             var assignment = Assert.Single(reopened.Assignments);
             Assert.Equal("hc/sanctuary", assignment.CheckId);
+        }
+    }
+
+    [Fact]
+    public async Task The_sweeper_drops_stale_rooms_and_keeps_live_ones()
+    {
+        var now = DateTimeOffset.UtcNow;
+        var tag = Guid.NewGuid().ToString("n")[..8];
+        var emptyOld = "sweep-empty-old-" + tag;
+        var emptyNew = "sweep-empty-new-" + tag;
+        var idle = "sweep-idle-" + tag;
+        var live = "sweep-live-" + tag;
+
+        await using (var db = postgres.NewContext())
+        {
+            db.Rooms.AddRange(
+                new Room { Id = emptyOld, CreatedAt = now.AddDays(-2), UpdatedAt = now.AddDays(-2) },
+                new Room { Id = emptyNew, CreatedAt = now, UpdatedAt = now },
+                new Room { Id = idle, CreatedAt = now.AddDays(-200), UpdatedAt = now.AddDays(-100) },
+                new Room { Id = live, CreatedAt = now.AddDays(-30), UpdatedAt = now.AddDays(-30) });
+            db.Assignments.AddRange(
+                NewAssignment(idle, "lamp", "hc/sanctuary"),
+                NewAssignment(live, "lamp", "hc/sanctuary"));
+            await db.SaveChangesAsync();
+        }
+
+        // The sweeper opens its own scope per pass, the way it does in the app.
+        var services = new ServiceCollection()
+            .AddDbContext<TrackerDbContext>(options => options.UseNpgsql(postgres.ConnectionString))
+            .BuildServiceProvider();
+        var sweeper = new RoomSweeper(
+            services.GetRequiredService<IServiceScopeFactory>(),
+            NullLogger<RoomSweeper>.Instance);
+
+        await sweeper.SweepAsync(CancellationToken.None);
+
+        await using (var db = postgres.NewContext())
+        {
+            var remaining = await db.Rooms
+                .Where(r => r.Id.EndsWith(tag))
+                .Select(r => r.Id)
+                .ToListAsync();
+
+            Assert.Equal([emptyNew, live], remaining.Order());
+
+            // The idle room's assignment went with it, through the cascade.
+            Assert.Empty(await db.Assignments.Where(a => a.RoomId == idle).ToListAsync());
         }
     }
 
