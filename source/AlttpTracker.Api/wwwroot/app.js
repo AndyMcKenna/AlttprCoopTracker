@@ -592,6 +592,14 @@ async function send(action) {
     return;
   }
 
+  if (response.status >= 500) {
+    // The service is down or mid-deploy: an HTML 503 page, not a rule. The
+    // click is lost, the board is not — the socket re-syncs when it returns.
+    setStatus('Service restarting', 'closed');
+    showHint('The tracker service is restarting — try that again in a moment.');
+    return;
+  }
+
   if (!response.ok) {
     // A refused change is the sender's problem only — someone else may have
     // taken that check first. Everyone keeps the state the service has.
