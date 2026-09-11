@@ -19,6 +19,8 @@ Everything is per-room and live: everyone on the same room code sees the same
 board over a WebSocket, and rooms are kept in a database, so closing the browser
 and coming back later picks the run up where it was.
 
+![The board part-way through a run: items on the left with where each was found, the 216 checks on the right](docs/board.png)
+
 ## Details worth knowing
 
 - **Progressive items have several slots.** Sword holds 4 locations, Shield 3,
