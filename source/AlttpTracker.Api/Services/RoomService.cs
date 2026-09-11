@@ -3,7 +3,7 @@ using AlttpTracker.Api.Data;
 using AlttpTracker.Api.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace AlttpTracker.Api;
+namespace AlttpTracker.Api.Services;
 
 /// <summary>The outcome of a change: either the new room state, or why not.</summary>
 public readonly record struct RoomResult(Room? Room, string? Error)

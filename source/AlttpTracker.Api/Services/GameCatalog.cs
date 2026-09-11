@@ -2,7 +2,7 @@ using AlttpTracker.Api.Data;
 using AlttpTracker.Api.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace AlttpTracker.Api;
+namespace AlttpTracker.Api.Services;
 
 public record CatalogItem(string Id, string Name, int Slots);
 

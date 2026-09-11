@@ -3,7 +3,7 @@ namespace AlttpTracker.Api.Models;
 /// <summary>
 /// One item recorded at one check. An item can hold several of these when it
 /// is progressive (four swords, four bottles), but a check holds exactly one,
-/// which is enforced by a unique index as well as in <see cref="RoomService"/>.
+/// which is enforced by a unique index as well as in <see cref="Services.RoomService"/>.
 /// </summary>
 public class Assignment
 {
