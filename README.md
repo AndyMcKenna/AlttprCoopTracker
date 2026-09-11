@@ -19,6 +19,29 @@ Everything is per-room and live: everyone on the same room code sees the same
 board over a WebSocket, and rooms are kept in a database, so closing the browser
 and coming back later picks the run up where it was.
 
+## Details worth knowing
+
+- **Progressive items have several slots.** Sword holds 4 locations, Shield 3,
+  Bottle 4, and Mail, Gloves and Bow 2 each — the Bow's second slot is the
+  silver arrows. These carry a `found/total` counter next to the name,
+  green once every slot is placed. Single-slot items simply move when you
+  re-assign them; multi-slot items fill up and then say so.
+- **A check holds one item.** Assigning an item to a check that already has one
+  is refused with a message naming the current holder — clear the old entry
+  (the `×` next to it) first. Nobody's note gets silently overwritten.
+- **Filtering.** Search by name, filter by region chips, or hide checks that are
+  already recorded to see what's left. Searching looks inside collapsed regions
+  and opens them, so results are never hidden behind a folded header.
+- **Collapsible regions.** Light World and Dark World start open, the dungeons
+  start folded; click any region header to toggle it.
+- **Keys.** The key panel is one line per dungeon, big key then small keys, and
+  works exactly like the item board. Small keys are interchangeable, so a
+  dungeon gets one box holding as many locations as it has keys — Palace of
+  Darkness 6, Turtle Rock and Ganon's Tower 4, and so on (11 big keys and 29
+  small keys, matching the game). Hyrule Castle and Castle Tower have no big
+  key; Eastern Palace has no small keys.
+- **Esc** cancels an armed item.
+
 ## Shape of it
 
 One ASP.NET Core app serves everything: the board out of `wwwroot`, the API it
@@ -71,29 +94,6 @@ need Docker running; the other two do not.
 From the board, share the URL from **Copy invite link** with the other players.
 Anyone who opens it joins the same board. The room code is in the URL
 (`?room=brave-golden-deku`) and can be edited in the header.
-
-## Details worth knowing
-
-- **Progressive items have several slots.** Sword holds 4 locations, Shield 3,
-  Bottle 4, and Mail, Gloves, Boomerang and Bow 2 each — the Bow's second slot
-  is the silver arrows. These carry a `found/total` counter next to the name,
-  green once every slot is placed. Single-slot items simply move when you
-  re-assign them; multi-slot items fill up and then say so.
-- **A check holds one item.** Assigning an item to a check that already has one
-  is refused with a message naming the current holder — clear the old entry
-  (the `×` next to it) first. Nobody's note gets silently overwritten.
-- **Filtering.** Search by name, filter by region chips, or hide checks that are
-  already recorded to see what's left. Searching looks inside collapsed regions
-  and opens them, so results are never hidden behind a folded header.
-- **Collapsible regions.** Light World and Dark World start open, the dungeons
-  start folded; click any region header to toggle it.
-- **Keys.** The key panel is one line per dungeon, big key then small keys, and
-  works exactly like the item board. Small keys are interchangeable, so a
-  dungeon gets one box holding as many locations as it has keys — Palace of
-  Darkness 6, Turtle Rock and Ganon's Tower 4, and so on (11 big keys and 29
-  small keys, matching the game). Hyrule Castle and Castle Tower have no big
-  key; Eastern Palace has no small keys.
-- **Esc** cancels an armed item.
 
 ## Layout
 
