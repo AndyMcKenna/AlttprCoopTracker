@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Slice the sprite-sheet rips in src/raw_sprites into one PNG per sprite.
+ * Slice the sprite-sheet rips in source/raw_sprites into one PNG per sprite.
  *
  *   node scripts/slice-sprites.js [--out <dir>] [--gap <px>] [--min <px>]
  *
@@ -26,7 +26,7 @@ const fs = require('fs');
 const path = require('path');
 const { PNG } = require('pngjs');
 
-const SOURCE_DIR = path.join(__dirname, '..', 'src', 'raw_sprites');
+const SOURCE_DIR = path.join(__dirname, '..', 'raw_sprites');
 
 const args = process.argv.slice(2);
 function arg(name, fallback) {

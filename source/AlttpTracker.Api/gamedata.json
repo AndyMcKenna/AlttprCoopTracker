@@ -1,5 +1,5 @@
 {
-  "generatedFrom": "src/checks.js, src/items.js, src/sprites.js",
+  "generatedFrom": "data/checks.js, data/items.js, data/sprites.js",
   "regions": [
     {
       "id": "lw",

@@ -14,11 +14,11 @@
 const fs = require('fs');
 const path = require('path');
 
-const { REGIONS, CHECKS } = require('../src/checks');
-const { ITEMS, KEY_PANEL } = require('../src/items');
-const { PALETTE, ITEM_SPRITES, ICON_SPRITES, kindForCheck } = require('../src/sprites');
+const { REGIONS, CHECKS } = require('../data/checks');
+const { ITEMS, KEY_PANEL } = require('../data/items');
+const { PALETTE, ITEM_SPRITES, ICON_SPRITES, kindForCheck } = require('../data/sprites');
 
-const OUT = path.join(__dirname, '..', 'backend', 'AlttpTracker.Api', 'gamedata.json');
+const OUT = path.join(__dirname, '..', 'AlttpTracker.Api', 'gamedata.json');
 
 const sprites = [
   ...Object.entries(ITEM_SPRITES).map(([name, rows]) => ({ name, kind: 'item', rows })),
@@ -26,7 +26,7 @@ const sprites = [
 ];
 
 const payload = {
-  generatedFrom: 'src/checks.js, src/items.js, src/sprites.js',
+  generatedFrom: 'data/checks.js, data/items.js, data/sprites.js',
 
   regions: REGIONS.map((region, ordinal) => ({
     id: region.id,

@@ -11,18 +11,26 @@ public static class RoomNames
 {
     private static readonly string[] Adjectives =
     [
-        "ancient", "azure", "bold", "brave", "bright", "clever", "crimson", "curious",
-        "daring", "eager", "fearless", "gentle", "golden", "hidden", "humble", "lucky",
-        "merry", "mighty", "misty", "noble", "quiet", "radiant", "roaming", "secret",
-        "shining", "silent", "steady", "sturdy", "sunlit", "swift", "valiant", "wandering",
+        "amber", "ancient", "azure", "blazing", "bold", "brave", "breezy", "bright",
+        "cheerful", "clever", "cosmic", "crimson", "curious", "daring", "dazzling", "eager",
+        "earnest", "emerald", "fabled", "fearless", "gallant", "gentle", "gleaming", "glowing",
+        "golden", "grand", "hidden", "hopeful", "humble", "jolly", "keen", "kindly",
+        "lively", "lucky", "mellow", "merry", "mighty", "misty", "nimble", "noble",
+        "plucky", "quiet", "radiant", "roaming", "rugged", "sapphire", "secret", "shining",
+        "silent", "silver", "spirited", "steady", "stormy", "sturdy", "sunlit", "swift",
+        "tidy", "twilight", "valiant", "velvet", "wandering", "whimsical", "winding", "wondrous",
     ];
 
     private static readonly string[] Nouns =
     [
-        "armos", "boomerang", "chest", "deku", "dungeon", "ether", "flippers", "flute",
-        "goron", "hookshot", "hyrule", "kakariko", "keese", "lantern", "medallion", "moblin",
-        "mushroom", "ocarina", "octorok", "peahat", "pendant", "pyramid", "quake", "rupee",
-        "sanctuary", "shield", "stalfos", "tektite", "triforce", "windmill", "zora",
+        "agahnim", "armos", "arrow", "beamos", "blacksmith", "bombos", "boomerang", "boots",
+        "bottle", "bumper", "cape", "catfish", "chest", "crystal", "cucco", "deku",
+        "dungeon", "ether", "fairy", "flippers", "flute", "ganon", "goron", "hammer",
+        "hookshot", "hyrule", "kakariko", "keese", "lantern", "lynel", "medallion", "mirror",
+        "moblin", "moldorm", "mothula", "mushroom", "ocarina", "octorok", "peahat", "pendant",
+        "powder", "pyramid", "quake", "quiver", "rupee", "sahasrahla", "sanctuary", "sheikah",
+        "shield", "shovel", "stalfos", "sword", "tablet", "tektite", "torch", "triforce",
+        "turtle", "vitreous", "waterfall", "windmill", "zelda", "zora",
     ];
 
     /// <summary>

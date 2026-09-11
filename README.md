@@ -23,9 +23,9 @@ and coming back later picks the run up where it was.
 
 One ASP.NET Core app serves everything: the board out of `wwwroot`, the API it
 calls, and the websocket it listens on — all the same origin. Postgres holds
-both the rooms and the game itself. The JS at the repository root is not a
-server; it is where the game is authored, plus the tooling that carries it
-across.
+both the rooms and the game itself. Everything lives under `source/`, and the
+JS in `source/data` is not a server; it is where the game is authored, plus the
+tooling that carries it across.
 
 A change is a request to the API, and the API pushes the new state down the
 websocket to everyone in that room.
@@ -33,7 +33,7 @@ websocket to everyone in that room.
 ## Running it
 
 ```sh
-dotnet run --project backend/AlttpTracker.AppHost
+dotnet run --project source/AlttpTracker.AppHost
 ```
 
 Aspire starts Postgres in a container, waits for it, applies any outstanding
@@ -46,15 +46,16 @@ Running the app on its own needs a Postgres to point at:
 
 ```sh
 ConnectionStrings__tracker="Host=localhost;Database=tracker;Username=postgres;Password=..." \
-  dotnet run --project backend/AlttpTracker.Api
+  dotnet run --project source/AlttpTracker.Api
 ```
 
 ### Tests
 
 ```sh
-npm test                                            # game tables and sprites
-dotnet test backend/AlttpTracker.Api.Tests          # the room rules, on SQLite
-dotnet test backend/AlttpTracker.Api.IntegrationTests  # migrations and indexes, on real Postgres
+cd source
+npm test                                       # game tables and sprites
+dotnet test AlttpTracker.Api.Tests             # the room rules, on SQLite
+dotnet test AlttpTracker.Api.IntegrationTests   # migrations and indexes, on real Postgres
 ```
 
 The integration tests start their own Postgres with Testcontainers, so they
@@ -89,18 +90,18 @@ Anyone who opens it joins the same board. The room code is in the URL
 
 ## Layout
 
-| Path                                | What it is                                                     |
-| ----------------------------------- | -------------------------------------------------------------- |
-| `src/checks.js`                          | The 216 checks, grouped into 15 regions                   |
-| `src/items.js`                           | Items and dungeon keys, and how many locations each holds |
-| `src/sprites.js`                         | Hand-drawn 12x12 pixel art for items and check icons      |
-| `scripts/export-gamedata.js`             | Carries those three to `gamedata.json` for the API        |
-| `test/smoke.test.js`                     | Game tables and sprites                                   |
-| `backend/AlttpTracker.AppHost`           | Aspire: Postgres, the app, and the migrations command     |
-| `backend/AlttpTracker.Api`               | The app: board, API, EF model, migrations, websockets     |
-| `backend/AlttpTracker.Api/wwwroot`       | The board — no build step, no framework                   |
-| `backend/AlttpTracker.Api.Tests`         | The room rules                                            |
-| `backend/AlttpTracker.Api.IntegrationTests` | Database behaviour, on real Postgres                   |
+| Path                                       | What it is                                                |
+| ------------------------------------------ | --------------------------------------------------------- |
+| `source/data/checks.js`                    | The 216 checks, grouped into 15 regions                   |
+| `source/data/items.js`                     | Items and dungeon keys, and how many locations each holds |
+| `source/data/sprites.js`                   | Hand-drawn 12x12 pixel art for items and check icons      |
+| `source/scripts/export-gamedata.js`        | Carries those three to `gamedata.json` for the API        |
+| `source/test/smoke.test.js`                | Game tables and sprites                                   |
+| `source/AlttpTracker.AppHost`              | Aspire: Postgres, the app, and the migrations command     |
+| `source/AlttpTracker.Api`                  | The app: board, API, EF model, migrations, websockets     |
+| `source/AlttpTracker.Api/wwwroot`          | The board — no build step, no framework                   |
+| `source/AlttpTracker.Api.Tests`            | The room rules                                            |
+| `source/AlttpTracker.Api.IntegrationTests` | Database behaviour, on real Postgres                      |
 
 ### The API
 
@@ -141,7 +142,7 @@ Rooms live in the Postgres the app is pointed at. The **Reset** button clears
 the current room; dropping the `Rooms` table clears the lot.
 
 The API has to know the same things the board does — which item and check ids
-exist, and how many locations an item holds — so `scripts/export-gamedata.js`
+exist, and how many locations an item holds — so `source/scripts/export-gamedata.js`
 writes them to `gamedata.json` from the JS modules. The JS files stay the single
 source of truth; run `npm run export-gamedata` after editing `checks.js` or
 `items.js`.
@@ -149,6 +150,6 @@ source of truth; run `npm run export-gamedata` after editing `checks.js` or
 ## Sprites
 
 The item art is original pixel art drawn as 12x12 character grids in
-`src/sprites.js`, rendered to inline SVG in the browser — no ripped game assets,
+`source/data/sprites.js`, rendered to inline SVG in the browser — no ripped game assets,
 and nothing to download. Each check tile gets a glyph based on what kind of
 location it is: chest, big chest, NPC, boss drop, tablet, or freestanding item.

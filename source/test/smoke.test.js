@@ -3,9 +3,9 @@
 const test = require('node:test');
 const assert = require('node:assert');
 
-const { CHECKS, REGIONS } = require('../src/checks');
-const { ITEMS, ITEMS_BY_ID, KEY_PANEL } = require('../src/items');
-const { PALETTE, ITEM_SPRITES, ICON_SPRITES, kindForCheck } = require('../src/sprites');
+const { CHECKS, REGIONS } = require('../data/checks');
+const { ITEMS, ITEMS_BY_ID, KEY_PANEL } = require('../data/items');
+const { PALETTE, ITEM_SPRITES, ICON_SPRITES, kindForCheck } = require('../data/sprites');
 
 test('the game has exactly 216 checks with unique ids', () => {
   assert.strictEqual(CHECKS.length, 216);

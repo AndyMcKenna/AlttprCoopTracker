@@ -2,7 +2,7 @@
   "name": "alttp-coop-tracker",
   "version": "1.0.0",
   "private": true,
-  "description": "Game tables and tooling for the ALTTP co-op tracker; the app itself lives in backend/.",
+  "description": "Game tables and tooling for the ALTTP co-op tracker; the app itself is the .NET solution alongside.",
   "scripts": {
     "test": "node test/smoke.test.js",
     "export-gamedata": "node scripts/export-gamedata.js"

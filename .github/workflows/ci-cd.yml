@@ -8,7 +8,8 @@ on:
 
 env:
   DOTNET_VERSION: '10.0.x'
-  API_PROJECT: backend/AlttpTracker.Api/AlttpTracker.Api.csproj
+  SOLUTION: source/AlttpTracker.slnx
+  API_PROJECT: source/AlttpTracker.Api/AlttpTracker.Api.csproj
 
 # Deployment needs a token for the OIDC login to Azure.
 permissions:
@@ -31,38 +32,40 @@ jobs:
         with:
           node-version: '22'
 
-      # The game is authored in the JS modules and carried to the API as
+      # The game is authored in source/data and carried to the API as
       # gamedata.json. Regenerating it here catches a checks.js edit that was
       # never exported — the app would otherwise seed yesterday's board.
       - name: Check the exported game data is current
+        working-directory: source
         run: |
           npm run export-gamedata
-          if ! git diff --quiet -- backend/AlttpTracker.Api/gamedata.json; then
-            echo "::error::gamedata.json is out of date. Run 'npm run export-gamedata' and commit the result."
-            git diff -- backend/AlttpTracker.Api/gamedata.json
+          if ! git diff --quiet -- AlttpTracker.Api/gamedata.json; then
+            echo "::error::gamedata.json is out of date. Run 'npm run export-gamedata' in source/ and commit the result."
+            git diff -- AlttpTracker.Api/gamedata.json
             exit 1
           fi
 
       - name: Test the game tables
+        working-directory: source
         run: npm test
 
       - name: Restore
-        run: dotnet restore backend/AlttpTracker.slnx
+        run: dotnet restore ${{ env.SOLUTION }}
 
       - name: Build
-        run: dotnet build backend/AlttpTracker.slnx --configuration Release --no-restore
+        run: dotnet build ${{ env.SOLUTION }} --configuration Release --no-restore
 
       # Rules and data shape; fast, no container.
       - name: Test the rules
         run: >-
-          dotnet test backend/AlttpTracker.Api.Tests
+          dotnet test source/AlttpTracker.Api.Tests
           --configuration Release --no-build --logger "console;verbosity=normal"
 
       # Migrations, the unique index and the seeding, against a real Postgres.
       # Testcontainers uses the Docker daemon that ubuntu-latest already has.
       - name: Test against Postgres
         run: >-
-          dotnet test backend/AlttpTracker.Api.IntegrationTests
+          dotnet test source/AlttpTracker.Api.IntegrationTests
           --configuration Release --no-build --logger "console;verbosity=normal"
 
       - name: Publish
