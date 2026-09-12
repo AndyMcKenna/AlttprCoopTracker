@@ -31,6 +31,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: npm
+          cache-dependency-path: source/package-lock.json
+
+      # The sprite sheet build reads PNGs with pngjs, a devDependency of the
+      # tooling under source/; the game tables and the export need nothing.
+      - name: Install the tooling
+        working-directory: source
+        run: npm ci
 
       # The game is authored in source/data and carried to the API as
       # gamedata.json. Regenerating it here catches a checks.js edit that was
