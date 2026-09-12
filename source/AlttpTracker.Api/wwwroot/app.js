@@ -18,6 +18,8 @@ const el = {
   hint: document.getElementById('hint'),
   items: document.getElementById('items'),
   itemsSummary: document.getElementById('items-summary'),
+  tabItems: document.getElementById('tab-items'),
+  tabKeys: document.getElementById('tab-keys'),
   checks: document.getElementById('checks'),
   checksSummary: document.getElementById('checks-summary'),
   regions: document.getElementById('regions'),
@@ -36,7 +38,7 @@ const state = {
   armedCheck: null, // check id waiting for an item click
   regionFilter: new Set(), // empty means "all regions"
   collapsed: new Set(), // region ids folded shut; filled in once data arrives
-  keysCollapsed: true, // the key board is long; it opens on request
+  tab: 'items', // which half of the item board is showing: items or keys
   spriteImages: new Set(), // sprite names that have a real image on disk
   checkImages: new Set(), // check glyphs that have a real image on disk
   hideUsed: false,
@@ -176,9 +178,16 @@ function render() {
   renderItems(owners);
   renderChecks(owners);
 
-  const mainItems = state.data.items.filter((item) => item.panel === 'items');
-  const found = mainItems.filter((item) => assignmentsFor(item.id).length).length;
-  el.itemsSummary.textContent = found + ' of ' + mainItems.length + ' located';
+  // The summary follows the tab. Items count tiles with at least one
+  // location; keys count individual keys, since a dungeon's 6 small keys
+  // share one box and each is worth finding.
+  const shown = state.data.items.filter((item) => item.panel === state.tab);
+  const found =
+    state.tab === 'keys'
+      ? shown.reduce((sum, item) => sum + assignmentsFor(item.id).length, 0)
+      : shown.filter((item) => assignmentsFor(item.id).length).length;
+  const total = state.tab === 'keys' ? shown.reduce((sum, item) => sum + item.slots, 0) : shown.length;
+  el.itemsSummary.textContent = found + ' of ' + total + ' located';
   const dead = state.room ? state.room.dead.length : 0;
   el.checksSummary.textContent =
     owners.size + ' of ' + state.data.checks.length + ' recorded' + (dead ? ', ' + dead + ' dead' : '');
@@ -281,41 +290,10 @@ function buildItemTile(item) {
 }
 
 /**
- * The Keys group: one row per dungeon, big key first, then the single
- * small-key box. Rendered as a third group inside the item board.
+ * The Keys tab: one row per dungeon, big key first, then the single
+ * small-key box.
  */
-function buildKeysGroup() {
-  const section = document.createElement('div');
-
-  const title = document.createElement('button');
-  title.className = 'item-group-title item-group-toggle';
-  title.type = 'button';
-  title.setAttribute('aria-expanded', String(!state.keysCollapsed));
-  title.addEventListener('click', () => {
-    state.keysCollapsed = !state.keysCollapsed;
-    render();
-  });
-
-  // Caret and label together, so the count still sits at the far right.
-  const label = document.createElement('span');
-  label.className = 'group-label';
-  const caret = document.createElement('span');
-  caret.className = 'group-caret';
-  caret.textContent = state.keysCollapsed ? '▸' : '▾';
-  label.appendChild(caret);
-  label.appendChild(document.createTextNode('Keys'));
-  title.appendChild(label);
-
-  // Keys count individual keys, not boxes: a dungeon's 6 small keys are 6.
-  const keyItems = state.data.items.filter((item) => item.panel === 'keys');
-  const found = keyItems.reduce((sum, item) => sum + assignmentsFor(item.id).length, 0);
-  const total = keyItems.reduce((sum, item) => sum + item.slots, 0);
-  const count = document.createElement('span');
-  count.className = 'group-count';
-  count.textContent = found + ' of ' + total + ' located';
-  title.appendChild(count);
-  section.appendChild(title);
-
+function buildKeysBoard() {
   const grid = document.createElement('div');
   grid.className = 'key-grid';
 
@@ -344,11 +322,25 @@ function buildKeysGroup() {
     grid.appendChild(row);
   }
 
-  if (!state.keysCollapsed) section.appendChild(grid);
-  return section;
+  return grid;
 }
 
+/**
+ * The item board is two tabs, Items and Keys, so that neither has to be
+ * scrolled past to reach the other: forty key tiles under the items made
+ * for a long panel. An armed item or check survives a tab switch, so a key
+ * can be paired with a check on either tab.
+ */
 function renderItems(owners) {
+  el.tabItems.setAttribute('aria-selected', String(state.tab === 'items'));
+  el.tabKeys.setAttribute('aria-selected', String(state.tab === 'keys'));
+  el.items.setAttribute('aria-labelledby', state.tab === 'keys' ? 'tab-keys' : 'tab-items');
+
+  if (state.tab === 'keys') {
+    el.items.replaceChildren(buildKeysBoard());
+    return;
+  }
+
   const frag = document.createDocumentFragment();
 
   for (const group of state.data.groups) {
@@ -370,7 +362,6 @@ function renderItems(owners) {
     frag.appendChild(section);
   }
 
-  frag.appendChild(buildKeysGroup());
   el.items.replaceChildren(frag);
 }
 
@@ -776,6 +767,14 @@ el.roomInput.addEventListener('change', () => {
   setRoom(el.roomInput.value);
   el.roomInput.value = roomId;
 });
+
+for (const [tab, button] of [['items', el.tabItems], ['keys', el.tabKeys]]) {
+  button.addEventListener('click', () => {
+    if (state.tab === tab) return;
+    state.tab = tab;
+    render();
+  });
+}
 
 el.hideUsed.addEventListener('change', () => {
   state.hideUsed = el.hideUsed.checked;
