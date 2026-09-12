@@ -275,9 +275,20 @@ h2 {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 8px;
+  cursor: pointer;
+  user-select: none;
 }
 
-.item.is-armed {
+/* The whole tile is the button that arms the item. */
+.item:hover,
+.item:focus-visible {
+  background: var(--bg-tile-hover);
+  border-color: var(--accent-dim);
+  outline: none;
+}
+
+.item.is-armed,
+.item.is-armed:hover {
   border-color: var(--accent);
   box-shadow: 0 0 0 1px var(--accent);
 }
@@ -305,8 +316,6 @@ h2 {
 
 .item-body {
   min-width: 0;
-  /* Leave room for the pencil parked in the corner. */
-  padding-right: 20px;
 }
 
 .item-name {
@@ -324,46 +333,6 @@ h2 {
 
 .item-count.is-full {
   color: var(--good);
-}
-
-.item-edit {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  display: grid;
-  place-items: center;
-  width: 20px;
-  height: 20px;
-  padding: 0;
-  background: none;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  color: var(--muted);
-  cursor: pointer;
-}
-
-.item-edit svg {
-  width: 12px;
-  height: 12px;
-  display: block;
-}
-
-.item-edit:hover,
-.item-edit:focus-visible {
-  background: var(--bg-tile-hover);
-  border-color: var(--accent-dim);
-  color: var(--accent);
-  outline: none;
-}
-
-.item-edit.is-full {
-  opacity: 0.4;
-}
-
-.item.is-armed .item-edit {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #201c05;
 }
 
 .item-locations {
@@ -405,7 +374,8 @@ h2 {
   cursor: pointer;
   font: inherit;
   line-height: 1;
-  padding: 0 2px;
+  /* A little wider than the glyph: it sits inside the tile's own click area. */
+  padding: 0 5px;
 }
 
 .loc-remove:hover {
