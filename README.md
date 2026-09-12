@@ -33,9 +33,14 @@ and coming back later picks the run up where it was.
 - **A check holds one item.** Assigning an item to a check that already has one
   is refused with a message naming the current holder — clear the old entry
   (the `×` next to it) first. Nobody's note gets silently overwritten.
+- **Dead checks.** The small ∅ at the edge of a check tile marks it as holding
+  nothing — looked at, and not worth anyone else's time. It dims and drops
+  out of "Hide recorded/dead"; click it again to bring it back if that was a
+  mistake. A check with an item recorded in it cannot be marked dead, and
+  recording an item at a dead check brings it back on its own.
 - **Filtering.** Filter by the region chips, or hide checks that are already
-  recorded to see what's left. There is nothing to type: the board is meant
-  to be worked with one hand while the other stays on the controller.
+  recorded or dead to see what's left. There is nothing to type: the board is
+  meant to be worked with one hand while the other stays on the controller.
 - **Collapsible regions.** Light World and Dark World start open, the dungeons
   start folded; click any region header to toggle it.
 - **Keys.** The key panel is one line per dungeon, big key then small keys, and
@@ -124,6 +129,7 @@ Anyone who opens it joins the same board. The room code is in the URL
 | `GET /api/rooms/{room}`                          | The room; empty if never written |
 | `POST /api/rooms/{room}/assignments`             | Record an item at a check       |
 | `DELETE /api/rooms/{room}/assignments/{id}`      | Clear one location              |
+| `PUT /api/rooms/{room}/dead`                     | Mark a check dead, or bring it back |
 | `POST /api/rooms/{room}/reset`                   | Clear the room                  |
 | `GET /ws?room={room}`                            | Listen for changes              |
 

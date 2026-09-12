@@ -13,4 +13,6 @@ public class Room
     public DateTimeOffset UpdatedAt { get; set; }
 
     public List<Assignment> Assignments { get; set; } = [];
+
+    public List<DeadCheck> DeadChecks { get; set; } = [];
 }
