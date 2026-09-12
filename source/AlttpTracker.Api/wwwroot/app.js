@@ -21,7 +21,6 @@ const el = {
   checks: document.getElementById('checks'),
   checksSummary: document.getElementById('checks-summary'),
   regions: document.getElementById('regions'),
-  search: document.getElementById('search'),
   hideUsed: document.getElementById('hide-used'),
   assignBar: document.getElementById('assign-bar'),
   assignBarText: document.getElementById('assign-bar-text'),
@@ -40,7 +39,6 @@ const state = {
   keysCollapsed: true, // the key board is long; it opens on request
   spriteImages: new Set(), // sprite names that have a real image on disk
   checkImages: new Set(), // check glyphs that have a real image on disk
-  search: '',
   hideUsed: false,
   spriteCache: new Map(),
 };
@@ -376,7 +374,6 @@ function renderItems(owners) {
 
 function renderChecks(owners) {
   const scroll = el.checks.scrollTop;
-  const needle = state.search.trim().toLowerCase();
   const frag = document.createDocumentFragment();
   let shown = 0;
 
@@ -386,14 +383,12 @@ function renderChecks(owners) {
     const matches = state.data.checks.filter((check) => {
       if (check.region !== region.id) return false;
       if (state.hideUsed && owners.has(check.id)) return false;
-      if (needle && !check.fullName.toLowerCase().includes(needle)) return false;
       return true;
     });
     if (!matches.length) continue;
     shown += matches.length;
 
-    // A search should never hide its own results behind a collapsed header.
-    const collapsed = !needle && state.collapsed.has(region.id);
+    const collapsed = state.collapsed.has(region.id);
 
     const block = document.createElement('div');
     block.className = 'region-block';
@@ -730,11 +725,6 @@ el.roomInput.value = roomId;
 el.roomInput.addEventListener('change', () => {
   setRoom(el.roomInput.value);
   el.roomInput.value = roomId;
-});
-
-el.search.addEventListener('input', () => {
-  state.search = el.search.value;
-  render();
 });
 
 el.hideUsed.addEventListener('change', () => {

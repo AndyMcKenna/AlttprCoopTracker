@@ -441,21 +441,14 @@ h2 {
 
 /* ---------- checks ---------- */
 
+/* Region chips on the left, the hide switch on the right. Nothing to type:
+   the board is meant to be worked one-handed, with the other still on the
+   controller. */
 .filters {
   display: flex;
   gap: 10px;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.search {
-  flex: 1;
-  background: var(--bg-tile);
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  color: var(--text);
-  font: inherit;
-  padding: 5px 8px;
+  align-items: flex-start;
+  margin-bottom: 10px;
 }
 
 .toggle {
@@ -465,13 +458,15 @@ h2 {
   color: var(--muted);
   font-size: 12px;
   white-space: nowrap;
+  /* Sit on the chips' line, not above it. */
+  padding-top: 2px;
 }
 
 .region-filters {
+  flex: 1;
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
-  margin-bottom: 10px;
 }
 
 .region-chip {
