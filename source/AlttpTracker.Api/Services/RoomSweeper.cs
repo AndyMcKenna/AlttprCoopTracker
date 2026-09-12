@@ -54,9 +54,12 @@ public class RoomSweeper(IServiceScopeFactory scopes, ILogger<RoomSweeper> logge
         var emptyBefore = now - EmptyRoomAge;
         var idleBefore = now - IdleRoomAge;
 
-        // Assignments go with their room: the foreign key cascades.
+        // Assignments and dead marks go with their room: the foreign keys
+        // cascade. A room with only dead marks is still a run in progress.
         var deleted = await db.Rooms
-            .Where(r => (r.UpdatedAt < emptyBefore && !r.Assignments.Any()) || r.UpdatedAt < idleBefore)
+            .Where(r =>
+                (r.UpdatedAt < emptyBefore && !r.Assignments.Any() && !r.DeadChecks.Any())
+                || r.UpdatedAt < idleBefore)
             .ExecuteDeleteAsync(cancellationToken);
 
         if (deleted > 0)

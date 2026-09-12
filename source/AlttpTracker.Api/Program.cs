@@ -134,6 +134,19 @@ rooms.MapDelete("/{roomId}/assignments/{assignmentId:guid}", async (
     return await RespondAsync(result, service, broker, ct);
 });
 
+// Mark a check as holding nothing, or bring it back. One route with a flag
+// rather than a toggle, so a repeated click cannot undo another player's.
+rooms.MapPut("/{roomId}/dead", async (
+    string roomId,
+    DeadRequest request,
+    RoomService service,
+    RoomBroker broker,
+    CancellationToken ct) =>
+{
+    var result = await service.SetDeadAsync(roomId, request.CheckId, request.Dead, ct);
+    return await RespondAsync(result, service, broker, ct);
+});
+
 rooms.MapPost("/{roomId}/reset", async (
     string roomId,
     RoomService service,
@@ -234,3 +247,5 @@ static string ClientAddress(HttpContext context) =>
     context.Connection.RemoteIpAddress?.ToString() ?? "unknown";
 
 record AssignRequest(string? ItemId, string? CheckId);
+
+record DeadRequest(string? CheckId, bool Dead);
