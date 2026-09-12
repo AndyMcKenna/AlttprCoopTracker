@@ -11,7 +11,9 @@ Fire Rod again?"*
 1. Each of the 30 main items is a sprite tile on the left, with the dungeon
    keys as a third group under Equipment and Items.
 2. Click the **item** — anywhere on its tile — and the tracker arms it.
-3. Click one of the **216 checks** on the right.
+3. Click one of the **216 checks** on the right. Or do it the other way
+   round: click the check first, then the item — either order records the
+   same thing.
 4. The check's name is stored next to the item's sprite as text, and the check
    tile is marked with the item it holds.
 
@@ -42,7 +44,7 @@ and coming back later picks the run up where it was.
   Darkness 6, Turtle Rock and Ganon's Tower 4, and so on (11 big keys and 29
   small keys, matching the game). Hyrule Castle and Castle Tower have no big
   key; Eastern Palace has no small keys.
-- **Esc** cancels an armed item.
+- **Esc** cancels an armed item or check.
 
 ## Shape of it
 
