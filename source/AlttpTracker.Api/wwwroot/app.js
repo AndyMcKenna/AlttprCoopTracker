@@ -113,6 +113,23 @@ function spriteUrl(cacheKey, grid) {
   return url;
 }
 
+// The real sprites all live in one sheet (sprites/sheet.png) and sheet.css
+// knows where each one sits, so a tile is an empty element with two classes:
+// one for the sheet and one for the sprite. One image fetch draws the board.
+function sheetSprite(kind, name) {
+  const sprite = document.createElement('span');
+  sprite.className = 'sprite sprite--' + kind + '-' + name;
+  return sprite;
+}
+
+// The drawn pixel art has no sheet; it is still an <img> of its SVG.
+function drawnSprite(url) {
+  const sprite = document.createElement('img');
+  sprite.alt = '';
+  sprite.src = url;
+  return sprite;
+}
+
 // The one bit of chrome that isn't game art: a pencil for "record a location".
 const PENCIL_ICON =
   '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">' +
@@ -180,13 +197,11 @@ function buildItemTile(item) {
   if (state.armed === item.id) tile.classList.add('is-armed');
   tile.classList.add(entries.length ? 'is-found' : 'is-empty');
 
-  const sprite = document.createElement('img');
-  sprite.className = 'item-sprite';
-  sprite.alt = '';
   // A real image wins over the drawn pixel art when one exists for this sprite.
-  sprite.src = state.spriteImages.has(item.sprite)
-    ? 'sprites/items/' + item.sprite + '.png'
-    : spriteUrl('item:' + item.sprite, state.data.itemSprites[item.sprite]);
+  const sprite = state.spriteImages.has(item.sprite)
+    ? sheetSprite('items', item.sprite)
+    : drawnSprite(spriteUrl('item:' + item.sprite, state.data.itemSprites[item.sprite]));
+  sprite.classList.add('item-sprite');
   tile.appendChild(sprite);
 
   const body = document.createElement('div');
@@ -414,18 +429,16 @@ function renderChecks(owners) {
       tile.title = check.fullName + (owner ? ' — holds ' + owner.name : '');
       if (owner) tile.classList.add('is-used');
 
-      const icon = document.createElement('img');
-      icon.className = 'check-icon';
-      icon.alt = '';
       // A real image for this glyph wins; failing that, the real chest, so a
       // glyph with no art of its own still looks like the rest of the board
       // rather than falling back to the drawn pixel art. Drop in a PNG named
-      // after the glyph and those tiles pick it up.
-      icon.src = state.checkImages.has(check.icon)
-        ? 'sprites/checks/' + check.icon + '.png'
+      // after the glyph, rebuild the sheet, and those tiles pick it up.
+      const icon = state.checkImages.has(check.icon)
+        ? sheetSprite('checks', check.icon)
         : state.checkImages.has('chest')
-          ? 'sprites/checks/chest.png'
-          : spriteUrl('icon:' + check.icon, state.data.iconSprites[check.icon]);
+          ? sheetSprite('checks', 'chest')
+          : drawnSprite(spriteUrl('icon:' + check.icon, state.data.iconSprites[check.icon]));
+      icon.classList.add('check-icon');
       tile.appendChild(icon);
 
       const label = document.createElement('span');

@@ -2,10 +2,12 @@
 
 const test = require('node:test');
 const assert = require('node:assert');
+const fs = require('node:fs');
 
 const { CHECKS, REGIONS } = require('../data/checks');
 const { ITEMS, ITEMS_BY_ID, KEY_PANEL } = require('../data/items');
 const { PALETTE, ITEM_SPRITES, ICON_SPRITES, kindForCheck } = require('../data/sprites');
+const spriteSheet = require('../scripts/build-spritesheet');
 
 test('the game has exactly 216 checks with unique ids', () => {
   assert.strictEqual(CHECKS.length, 216);
@@ -68,5 +70,20 @@ test('the key panel matches the game: 11 big keys, 29 small keys', () => {
 test('every check resolves to a known tile icon', () => {
   for (const check of CHECKS) {
     assert.ok(ICON_SPRITES[kindForCheck(check)], 'no icon for ' + check.fullName);
+  }
+});
+
+test('the sprite sheet matches the PNGs it was built from', () => {
+  const css = fs.readFileSync(spriteSheet.SHEET_CSS, 'utf8');
+  const sprites = spriteSheet.loadSprites();
+  const stamp = /\/\* sources: ([0-9a-f]+) \*\//.exec(css);
+  assert.ok(stamp, 'sheet.css has no sources fingerprint');
+  assert.strictEqual(
+    stamp[1],
+    spriteSheet.fingerprint(sprites),
+    'sheet.css is behind wwwroot/sprites; run npm run build-sprites'
+  );
+  for (const sprite of sprites) {
+    assert.ok(css.includes('.sprite--' + sprite.kind + '-' + sprite.name + ' {'), 'no class for ' + sprite.kind + '/' + sprite.name);
   }
 });

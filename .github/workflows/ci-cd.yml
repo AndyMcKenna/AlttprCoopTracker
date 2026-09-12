@@ -45,6 +45,21 @@ jobs:
             exit 1
           fi
 
+      # The board draws its sprites from one packed sheet built out of the PNGs
+      # in wwwroot/sprites. Rebuilding it here catches a sprite that was added
+      # or redrawn without the sheet being regenerated. Only the CSS is
+      # compared: it carries a fingerprint of the source pixels, and the PNG's
+      # bytes can differ between zlib versions without the picture changing.
+      - name: Check the sprite sheet is current
+        working-directory: source
+        run: |
+          npm run build-sprites
+          if ! git diff --quiet -- AlttpTracker.Api/wwwroot/sprites/sheet.css; then
+            echo "::error::The sprite sheet is out of date. Run 'npm run build-sprites' in source/ and commit sheet.png and sheet.css."
+            git diff -- AlttpTracker.Api/wwwroot/sprites/sheet.css
+            exit 1
+          fi
+
       - name: Test the game tables
         working-directory: source
         run: npm test
