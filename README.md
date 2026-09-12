@@ -109,6 +109,7 @@ Anyone who opens it joins the same board. The room code is in the URL
 
 | Path                                       | What it is                                                |
 | ------------------------------------------ | --------------------------------------------------------- |
+| `docs/specs/`                              | The specifications: how every part of the tracker behaves |
 | `source/data/checks.js`                    | The 216 checks, grouped into 15 regions                   |
 | `source/data/items.js`                     | Items and dungeon keys, and how many locations each holds |
 | `source/data/sprites.js`                   | Hand-drawn 12x12 pixel art for items and check icons      |
