@@ -58,7 +58,11 @@ function backgroundColour(png) {
   const { data, width, height } = png;
   for (let i = 0; i < width * height; i += 1) {
     const at = i * 4;
-    if (data[at + 3] === 0) continue; // already transparent
+    // already transparent
+
+    if (data[at + 3] === 0) {
+      continue;
+    }
     const key = (data[at] << 16) | (data[at + 1] << 8) | data[at + 2];
     counts.set(key, (counts.get(key) || 0) + 1);
   }
@@ -76,16 +80,22 @@ function backgroundColour(png) {
 
 /** Grow a boolean mask by `radius`, as two 1-D passes. */
 function dilate(mask, width, height, radius) {
-  if (radius <= 0) return mask;
+  if (radius <= 0) {
+    return mask;
+  }
 
   const horizontal = new Uint8Array(mask.length);
   for (let y = 0; y < height; y += 1) {
     const row = y * width;
     for (let x = 0; x < width; x += 1) {
-      if (!mask[row + x]) continue;
+      if (!mask[row + x]) {
+        continue;
+      }
       const from = Math.max(0, x - radius);
       const to = Math.min(width - 1, x + radius);
-      for (let k = from; k <= to; k += 1) horizontal[row + k] = 1;
+      for (let k = from; k <= to; k += 1) {
+        horizontal[row + k] = 1;
+      }
     }
   }
 
@@ -93,10 +103,14 @@ function dilate(mask, width, height, radius) {
   for (let y = 0; y < height; y += 1) {
     const row = y * width;
     for (let x = 0; x < width; x += 1) {
-      if (!horizontal[row + x]) continue;
+      if (!horizontal[row + x]) {
+        continue;
+      }
       const from = Math.max(0, y - radius);
       const to = Math.min(height - 1, y + radius);
-      for (let k = from; k <= to; k += 1) grown[k * width + x] = 1;
+      for (let k = from; k <= to; k += 1) {
+        grown[k * width + x] = 1;
+      }
     }
   }
   return grown;
@@ -112,7 +126,9 @@ function findBlobs(grown, ink, width, height) {
   const blobs = [];
 
   for (let start = 0; start < grown.length; start += 1) {
-    if (!grown[start] || seen[start]) continue;
+    if (!grown[start] || seen[start]) {
+      continue;
+    }
 
     let head = 0;
     let tail = 0;
@@ -132,18 +148,30 @@ function findBlobs(grown, ink, width, height) {
 
       if (ink[at]) {
         inkCount += 1;
-        if (x < minX) minX = x;
-        if (x > maxX) maxX = x;
-        if (y < minY) minY = y;
-        if (y > maxY) maxY = y;
+        if (x < minX) {
+          minX = x;
+        }
+        if (x > maxX) {
+          maxX = x;
+        }
+        if (y < minY) {
+          minY = y;
+        }
+        if (y > maxY) {
+          maxY = y;
+        }
       }
 
       for (let dy = -1; dy <= 1; dy += 1) {
         const ny = y + dy;
-        if (ny < 0 || ny >= height) continue;
+        if (ny < 0 || ny >= height) {
+          continue;
+        }
         for (let dx = -1; dx <= 1; dx += 1) {
           const nx = x + dx;
-          if (nx < 0 || nx >= width) continue;
+          if (nx < 0 || nx >= width) {
+            continue;
+          }
           const next = ny * width + nx;
           if (grown[next] && !seen[next]) {
             seen[next] = 1;
@@ -153,7 +181,9 @@ function findBlobs(grown, ink, width, height) {
       }
     }
 
-    if (inkCount === 0) continue;
+    if (inkCount === 0) {
+      continue;
+    }
     blobs.push({
       x: minX,
       y: minY,
@@ -203,7 +233,9 @@ function dominantBorderColour(png) {
 
   const look = (x, y) => {
     const at = (y * width + x) * 4;
-    if (data[at + 3] === 0) return;
+    if (data[at + 3] === 0) {
+      return;
+    }
     const key = (data[at] << 16) | (data[at + 1] << 8) | data[at + 2];
     counts.set(key, (counts.get(key) || 0) + 1);
   };
@@ -225,14 +257,18 @@ function dominantBorderColour(png) {
       bestCount = count;
     }
   }
-  if (best === null) return null;
+  if (best === null) {
+    return null;
+  }
 
   // Measured against the whole ring, not just its opaque pixels: a box fills
   // its ring completely, while a sprite or a caption only touches it here and
   // there — counting opaque pixels alone would read a caption's letters as a
   // "background" and eat every stroke joined to the edge.
   const ring = 2 * width + 2 * height - 4;
-  if (bestCount / ring < 0.7) return null;
+  if (bestCount / ring < 0.7) {
+    return null;
+  }
   return { r: (best >> 16) & 255, g: (best >> 8) & 255, b: best & 255 };
 }
 
@@ -255,7 +291,9 @@ function clearBoxColour(png, colour) {
     data[at * 4 + 2] === colour.b;
 
   const push = (at) => {
-    if (fill[at] || !matches(at)) return;
+    if (fill[at] || !matches(at)) {
+      return;
+    }
     fill[at] = 1;
     queue[tail++] = at;
   };
@@ -273,20 +311,36 @@ function clearBoxColour(png, colour) {
     const at = queue[head];
     const x = at % width;
     const y = (at - x) / width;
-    if (x > 0) push(at - 1);
-    if (x < width - 1) push(at + 1);
-    if (y > 0) push(at - width);
-    if (y < height - 1) push(at + width);
+    if (x > 0) {
+      push(at - 1);
+    }
+    if (x < width - 1) {
+      push(at + 1);
+    }
+    if (y > 0) {
+      push(at - width);
+    }
+    if (y < height - 1) {
+      push(at + width);
+    }
   }
 
   let opaque = 0;
-  for (let i = 0; i < total; i += 1) if (data[i * 4 + 3] !== 0) opaque += 1;
+  for (let i = 0; i < total; i += 1) {
+    if (data[i * 4 + 3] !== 0) {
+      opaque += 1;
+    }
+  }
   // If the "box" is nearly the whole image this was a solid swatch, not an
   // icon on a background; clearing it would leave nothing meaningful.
-  if (tail === 0 || tail > opaque * 0.95) return 0;
+  if (tail === 0 || tail > opaque * 0.95) {
+    return 0;
+  }
 
   for (let i = 0; i < total; i += 1) {
-    if (fill[i]) data[i * 4 + 3] = 0;
+    if (fill[i]) {
+      data[i * 4 + 3] = 0;
+    }
   }
   return tail;
 }
@@ -301,15 +355,27 @@ function opaqueBounds(png) {
 
   for (let y = 0; y < height; y += 1) {
     for (let x = 0; x < width; x += 1) {
-      if (data[(y * width + x) * 4 + 3] === 0) continue;
-      if (x < minX) minX = x;
-      if (x > maxX) maxX = x;
-      if (y < minY) minY = y;
-      if (y > maxY) maxY = y;
+      if (data[(y * width + x) * 4 + 3] === 0) {
+        continue;
+      }
+      if (x < minX) {
+        minX = x;
+      }
+      if (x > maxX) {
+        maxX = x;
+      }
+      if (y < minY) {
+        minY = y;
+      }
+      if (y > maxY) {
+        maxY = y;
+      }
     }
   }
 
-  if (maxX < 0) return null;
+  if (maxX < 0) {
+    return null;
+  }
   return { x: minX, y: minY, width: maxX - minX + 1, height: maxY - minY + 1 };
 }
 
@@ -338,14 +404,20 @@ function stripIconBox(png) {
   let cleared = 0;
   for (let pass = 0; pass < 3; pass += 1) {
     const colour = dominantBorderColour(png);
-    if (!colour) break;
+    if (!colour) {
+      break;
+    }
     const removed = clearBoxColour(png, colour);
-    if (removed === 0) break;
+    if (removed === 0) {
+      break;
+    }
     cleared += removed;
   }
 
   const bounds = opaqueBounds(png);
-  if (!bounds) return null;
+  if (!bounds) {
+    return null;
+  }
   const tightened = bounds.width !== png.width || bounds.height !== png.height;
   return { png: tightened ? subImage(png, bounds) : png, offset: bounds, cleared };
 }
@@ -363,8 +435,12 @@ function sliceSheet(file) {
   const ink = new Uint8Array(width * height);
   for (let i = 0; i < ink.length; i += 1) {
     const at = i * 4;
-    if (png.data[at + 3] === 0) continue;
-    if (png.data[at] === bg.r && png.data[at + 1] === bg.g && png.data[at + 2] === bg.b) continue;
+    if (png.data[at + 3] === 0) {
+      continue;
+    }
+    if (png.data[at] === bg.r && png.data[at + 1] === bg.g && png.data[at + 2] === bg.b) {
+      continue;
+    }
     ink[i] = 1;
   }
 
@@ -377,7 +453,9 @@ function sliceSheet(file) {
   for (;;) {
     blobs = findBlobs(dilate(ink, width, height, gap), ink, width, height);
     const biggest = blobs.reduce((max, blob) => Math.max(max, blob.width * blob.height), 0);
-    if (gap === 0 || biggest < width * height * 0.5) break;
+    if (gap === 0 || biggest < width * height * 0.5) {
+      break;
+    }
     gap -= 1;
   }
 
@@ -393,10 +471,14 @@ function sliceSheet(file) {
   for (const blob of blobs) {
     const stripped = stripIconBox(crop(png, blob, bg));
     // Nothing but box: a palette swatch or a filled rectangle, not a sprite.
-    if (!stripped) continue;
+    if (!stripped) {
+      continue;
+    }
 
     const { png: sprite, offset, cleared } = stripped;
-    if (sprite.width < MIN_SIDE || sprite.height < MIN_SIDE) continue;
+    if (sprite.width < MIN_SIDE || sprite.height < MIN_SIDE) {
+      continue;
+    }
 
     const id = String(manifest.length + 1).padStart(3, '0');
     fs.writeFileSync(path.join(dir, id + '.png'), PNG.sync.write(sprite));

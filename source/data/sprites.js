@@ -660,17 +660,33 @@ const FREESTANDING = [
 // Which glyph a check tile gets.
 function kindForCheck(check) {
   const name = check.name;
-  if (CHECK_ICONS.has(name)) return CHECK_ICONS.get(name);
+  if (CHECK_ICONS.has(name)) {
+    return CHECK_ICONS.get(name);
+  }
   // The whole cave is gated behind the hookshot, so every chest in it says so.
-  if (name.startsWith('Hookshot Cave')) return 'hookshot';
+  if (name.startsWith('Hookshot Cave')) {
+    return 'hookshot';
+  }
   // Ahead of the "- Guy" rule below, so the generous guy in each matches too.
-  if (name.startsWith('MMC')) return 'mmc';
-  if (name.startsWith('Hype Cave')) return 'bomb';
-  if (BOSSES.includes(name)) return 'boss';
+  if (name.startsWith('MMC')) {
+    return 'mmc';
+  }
+  if (name.startsWith('Hype Cave')) {
+    return 'bomb';
+  }
+  if (BOSSES.includes(name)) {
+    return 'boss';
+  }
   // "MMC - Guy" / "Hype Cave - Guy" are the generous-guy chest rooms.
-  if (NPCS.includes(name) || /- Guy$/.test(name)) return 'npc';
-  if (FREESTANDING.includes(name)) return 'sparkle';
-  if (/^Big Chest$/.test(name)) return 'bigchest';
+  if (NPCS.includes(name) || /- Guy$/.test(name)) {
+    return 'npc';
+  }
+  if (FREESTANDING.includes(name)) {
+    return 'sparkle';
+  }
+  if (/^Big Chest$/.test(name)) {
+    return 'bigchest';
+  }
   return 'chest';
 }
 

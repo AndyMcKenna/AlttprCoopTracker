@@ -68,7 +68,9 @@ let roomId = roomFromUrl();
 
 function setRoom(next) {
   const normalized = normalizeRoom(next);
-  if (normalized === roomId) return;
+  if (normalized === roomId) {
+    return;
+  }
   roomId = normalized;
   localStorage.setItem('alttp-room', roomId);
   el.roomInput.value = roomId;
@@ -85,7 +87,9 @@ function setRoom(next) {
 // A pixel grid becomes an SVG of horizontal run-length rects, used as an
 // <img> source so the browser scales it crisply at any tile size.
 function spriteUrl(cacheKey, grid) {
-  if (state.spriteCache.has(cacheKey)) return state.spriteCache.get(cacheKey);
+  if (state.spriteCache.has(cacheKey)) {
+    return state.spriteCache.get(cacheKey);
+  }
 
   const palette = state.data.palette;
   const rects = [];
@@ -98,7 +102,9 @@ function spriteUrl(cacheKey, grid) {
         continue;
       }
       let run = 1;
-      while (x + run < row.length && row[x + run] === ch) run += 1;
+      while (x + run < row.length && row[x + run] === ch) {
+        run += 1;
+      }
       rects.push(
         '<rect x="' + x + '" y="' + y + '" width="' + run + '" height="1" fill="' + palette[ch] + '"/>'
       );
@@ -161,7 +167,9 @@ function assignmentsFor(itemId) {
 /** checkId -> the item recorded there, for the "already used" markers. */
 function buildOwners() {
   const owners = new Map();
-  if (!state.room) return owners;
+  if (!state.room) {
+    return owners;
+  }
   for (const item of state.data.items) {
     for (const entry of assignmentsFor(item.id)) {
       owners.set(entry.checkId, item);
@@ -173,7 +181,9 @@ function buildOwners() {
 /* ---------------------------------------------------------------- render */
 
 function render() {
-  if (!state.data) return;
+  if (!state.data) {
+    return;
+  }
   const owners = buildOwners();
   renderItems(owners);
   renderChecks(owners);
@@ -210,7 +220,9 @@ function buildItemTile(item) {
   tile.dataset.item = item.id;
   tile.setAttribute('role', 'button');
   tile.tabIndex = 0;
-  if (state.armed === item.id) tile.classList.add('is-armed');
+  if (state.armed === item.id) {
+    tile.classList.add('is-armed');
+  }
   tile.classList.add(entries.length ? 'is-found' : 'is-empty');
   const tileText = tileLabel(item, entries.length, full);
   tile.title = tileText;
@@ -242,7 +254,9 @@ function buildItemTile(item) {
   if (item.slots > 1 || item.alwaysCount) {
     const count = document.createElement('span');
     count.className = 'item-count';
-    if (full) count.classList.add('is-full');
+    if (full) {
+      count.classList.add('is-full');
+    }
     count.textContent = entries.length + '/' + item.slots;
     name.appendChild(count);
   }
@@ -311,12 +325,16 @@ function buildKeysBoard() {
     heading.appendChild(document.createTextNode(dungeon.name));
     row.appendChild(heading);
 
-    if (dungeon.bigKey) row.appendChild(buildItemTile(state.itemsById.get(dungeon.bigKey)));
+    if (dungeon.bigKey) {
+      row.appendChild(buildItemTile(state.itemsById.get(dungeon.bigKey)));
+    }
 
     if (dungeon.smallKey) {
       const tile = buildItemTile(state.itemsById.get(dungeon.smallKey));
       // Keep the small-key column aligned when a dungeon has no big key.
-      if (!dungeon.bigKey) tile.classList.add('is-small-only');
+      if (!dungeon.bigKey) {
+        tile.classList.add('is-small-only');
+      }
       row.appendChild(tile);
     }
 
@@ -377,10 +395,16 @@ function buildCheckTile(check, owner, dead) {
   tile.className = 'check';
   // The id is what the browser tests address a tile by; names are not unique.
   tile.dataset.check = check.id;
-  if (owner) tile.classList.add('is-used');
-  if (dead) tile.classList.add('is-dead');
+  if (owner) {
+    tile.classList.add('is-used');
+  }
+  if (dead) {
+    tile.classList.add('is-dead');
+  }
   const armed = state.armedCheck === check.id;
-  if (armed) tile.classList.add('is-armed');
+  if (armed) {
+    tile.classList.add('is-armed');
+  }
 
   const main = document.createElement('button');
   main.className = 'check-main';
@@ -441,14 +465,22 @@ function renderChecks(owners) {
   let shown = 0;
 
   for (const region of state.data.regions) {
-    if (state.regionFilter.size && !state.regionFilter.has(region.id)) continue;
+    if (state.regionFilter.size && !state.regionFilter.has(region.id)) {
+      continue;
+    }
 
     const matches = state.data.checks.filter((check) => {
-      if (check.region !== region.id) return false;
-      if (state.hideUsed && (owners.has(check.id) || dead.has(check.id))) return false;
+      if (check.region !== region.id) {
+        return false;
+      }
+      if (state.hideUsed && (owners.has(check.id) || dead.has(check.id))) {
+        return false;
+      }
       return true;
     });
-    if (!matches.length) continue;
+    if (!matches.length) {
+      continue;
+    }
     shown += matches.length;
 
     const collapsed = state.collapsed.has(region.id);
@@ -472,8 +504,11 @@ function renderChecks(owners) {
     title.appendChild(swatch);
     title.appendChild(document.createTextNode(region.name + ' (' + matches.length + ')'));
     title.addEventListener('click', () => {
-      if (state.collapsed.has(region.id)) state.collapsed.delete(region.id);
-      else state.collapsed.add(region.id);
+      if (state.collapsed.has(region.id)) {
+        state.collapsed.delete(region.id);
+      } else {
+        state.collapsed.add(region.id);
+      }
       render();
     });
     block.appendChild(title);
@@ -534,8 +569,11 @@ function renderRegionFilters() {
       chip.style.borderColor = region.color;
     }
     chip.addEventListener('click', () => {
-      if (state.regionFilter.has(region.id)) state.regionFilter.delete(region.id);
-      else state.regionFilter.add(region.id);
+      if (state.regionFilter.has(region.id)) {
+        state.regionFilter.delete(region.id);
+      } else {
+        state.regionFilter.add(region.id);
+      }
       syncCollapsedToFilter();
       renderRegionFilters();
       render();
@@ -604,12 +642,16 @@ function pickCheck(check, owner, dead) {
 
 function setDead(check, dead) {
   // A check waiting for its item and then declared empty is no longer waiting.
-  if (state.armedCheck === check.id) disarm();
+  if (state.armedCheck === check.id) {
+    disarm();
+  }
   send({ type: 'dead', checkId: check.id, dead });
 }
 
 function disarm() {
-  if (!state.armed && !state.armedCheck) return;
+  if (!state.armed && !state.armedCheck) {
+    return;
+  }
   state.armed = null;
   state.armedCheck = null;
   syncAssignBar();
@@ -623,8 +665,12 @@ function syncAssignBar() {
   document.body.classList.toggle('is-assigning', Boolean(item));
   document.body.classList.toggle('is-picking-item', Boolean(check));
   el.assignBar.hidden = !item && !check;
-  if (item) el.assignBarText.textContent = 'Click the check where ' + item.name + ' was found';
-  if (check) el.assignBarText.textContent = 'Click the item found at ' + check.fullName;
+  if (item) {
+    el.assignBarText.textContent = 'Click the check where ' + item.name + ' was found';
+  }
+  if (check) {
+    el.assignBarText.textContent = 'Click the item found at ' + check.fullName;
+  }
 }
 
 function showHint(message) {
@@ -713,7 +759,9 @@ async function send(action) {
  * One older than the board already shows is stale, and is dropped.
  */
 function applyRoom(room) {
-  if (state.room && state.room.id === room.id && room.updatedAt < state.room.updatedAt) return;
+  if (state.room && state.room.id === room.id && room.updatedAt < state.room.updatedAt) {
+    return;
+  }
   state.room = room;
   render();
 }
@@ -773,7 +821,9 @@ el.roomInput.addEventListener('change', () => {
 
 for (const [tab, button] of [['items', el.tabItems], ['keys', el.tabKeys]]) {
   button.addEventListener('click', () => {
-    if (state.tab === tab) return;
+    if (state.tab === tab) {
+      return;
+    }
     state.tab = tab;
     render();
   });
@@ -804,7 +854,9 @@ el.reset.addEventListener('click', () => {
 });
 
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') disarm();
+  if (event.key === 'Escape') {
+    disarm();
+  }
 });
 
 fetch('api/gamedata')

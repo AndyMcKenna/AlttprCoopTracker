@@ -27,7 +27,9 @@ generate.addEventListener('click', async () => {
   try {
     // The service picks the name: it can see which codes are already taken.
     const response = await fetch('api/rooms/new-name');
-    if (!response.ok) throw new Error(String(response.status));
+    if (!response.ok) {
+      throw new Error(String(response.status));
+    }
     const { room } = await response.json();
     openBoard(room);
   } catch {
