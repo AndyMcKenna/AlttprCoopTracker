@@ -29,7 +29,7 @@ is drawn.
   on load. Switching tabs changes nothing else — in particular whatever is
   armed stays armed.
 - **BOARD-5** The item panel's summary follows the tab: Items counts tiles
-  with at least one location out of 30; Keys counts keys found out of 40 (a
+  with at least one location out of 32; Keys counts keys found out of 40 (a
   box with 2 of 6 counts 2).
 - **BOARD-6** The check panel lists checks by region under a header that
   folds the region. Light World and Dark World start open; the dungeons

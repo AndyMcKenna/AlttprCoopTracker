@@ -4,15 +4,17 @@ The point of the tracker: which check each item was found at.
 
 ## Items
 
-- **ITEM-1** There are 30 main items, in two groups. Equipment: Sword,
-  Shield, Mail, Gloves, Pegasus Boots, Flippers, Moon Pearl. Items: Bow, Blue
+- **ITEM-1** There are 32 main items, in two groups. Equipment: Sword,
+  Shield, Mail, Gloves, Pegasus Boots, Flippers, Moon Pearl, Heart
+  Container, 300 Rupees. Items: Bow, Blue
   Boomerang, Red Boomerang, Hookshot, Mushroom, Magic Powder, Fire Rod, Ice
   Rod, Bombos, Ether, Quake, Lamp, Hammer, Shovel, Flute, Bug Net, Book of
   Mudora, Bottle, Cane of Somaria, Cane of Byrna, Magic Cape, Magic Mirror,
   Half Magic.
 - **ITEM-2** Each item has a number of **slots**: how many separate locations
-  it can hold. Sword 4, Bottle 4, Shield 3, Mail 2, Gloves 2, Bow 2 (the
-  second is the silver arrows). Every other main item has 1. The two
+  it can hold. Heart Container 11, Sword 4, Bottle 4, 300 Rupees 4, Shield
+  3, Mail 2, Gloves 2, Bow 2 (the second is the silver arrows). Every other
+  main item has 1. The two
   boomerangs are separate items, not one progressive one.
 - **ITEM-3** Keys are items too, one per dungeon per kind: a big-key box
   with 1 slot, and a small-key box with as many slots as the dungeon has

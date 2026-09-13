@@ -10,8 +10,8 @@ test.describe('the board', () => {
   test('draws the items, the region chips, and the two overworlds open', async ({ page }) => {
     await openBoard(page, newRoom());
 
-    await expect(page.locator('#items .item')).toHaveCount(30);
-    await expect(page.locator('#items-summary')).toHaveText('0 of 30 located');
+    await expect(page.locator('#items .item')).toHaveCount(32);
+    await expect(page.locator('#items-summary')).toHaveText('0 of 32 located');
     await expect(page.locator('#checks-summary')).toHaveText('0 of 216 recorded');
 
     // Fifteen regions and All.
@@ -38,7 +38,7 @@ test.describe('the board', () => {
     await expect(item(page, 'hookshot').locator('.loc-name')).toHaveText("Link's House");
     await expect(check(page, 'lw/links-house')).toHaveClass(/is-used/);
     await expect(check(page, 'lw/links-house').locator('.check-holder')).toHaveText('Hookshot');
-    await expect(page.locator('#items-summary')).toHaveText('1 of 30 located');
+    await expect(page.locator('#items-summary')).toHaveText('1 of 32 located');
     await expect(page.locator('#checks-summary')).toHaveText('1 of 216 recorded');
     await expect(page.locator('#assign-bar')).toBeHidden();
   });
@@ -127,6 +127,23 @@ test.describe('the board', () => {
     await expect(page.locator('#hint')).toHaveText('Bottle already has 4 locations');
   });
 
+  test('heart containers and 300 rupees count up like any progressive item', async ({ page }) => {
+    await openBoard(page, newRoom());
+    await expect(item(page, 'heartcontainer').locator('.item-count')).toHaveText('0/11');
+    await expect(item(page, 'rupees300').locator('.item-count')).toHaveText('0/4');
+
+    await item(page, 'heartcontainer').click();
+    await checkBody(page, 'lw/links-house').click();
+    await expect(check(page, 'lw/links-house')).toHaveClass(/is-used/);
+    await item(page, 'heartcontainer').click();
+    await checkBody(page, 'lw/links-uncle').click();
+    await expect(check(page, 'lw/links-uncle')).toHaveClass(/is-used/);
+
+    await expect(item(page, 'heartcontainer').locator('.item-count')).toHaveText('2/11');
+    await expect(item(page, 'heartcontainer').locator('.item-location')).toHaveCount(2);
+    await expect(check(page, 'lw/links-house').locator('.check-holder')).toHaveText('Heart Container');
+  });
+
   test('the × clears one location without arming the tile', async ({ page }) => {
     await openBoard(page, newRoom());
     await item(page, 'bottle').click();
@@ -197,8 +214,8 @@ test.describe('the board', () => {
     await expect(page.locator('#items-summary')).toHaveText('1 of 40 located');
 
     await page.locator('#tab-items').click();
-    await expect(page.locator('#items .item')).toHaveCount(30);
-    await expect(page.locator('#items-summary')).toHaveText('0 of 30 located');
+    await expect(page.locator('#items .item')).toHaveCount(32);
+    await expect(page.locator('#items-summary')).toHaveText('0 of 32 located');
   });
 
   test('region chips filter the list and open the region', async ({ page }) => {
@@ -228,7 +245,7 @@ test.describe('the board', () => {
     });
     await page.locator('#reset').click();
 
-    await expect(page.locator('#items-summary')).toHaveText('0 of 30 located');
+    await expect(page.locator('#items-summary')).toHaveText('0 of 32 located');
     await expect(page.locator('#checks-summary')).toHaveText('0 of 216 recorded');
     await expect(check(page, 'dw/catfish')).not.toHaveClass(/is-dead/);
   });
