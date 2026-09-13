@@ -44,9 +44,13 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
     public Task<Room?> GetAsync(string roomId, CancellationToken cancellationToken = default)
     {
         var id = NormalizeRoomId(roomId);
+        // Two collections on one room: loaded as two queries rather than one
+        // join, which would return assignments times dead marks and leave EF
+        // to fold the duplicates away.
         return db.Rooms
             .Include(r => r.Assignments)
             .Include(r => r.DeadChecks)
+            .AsSplitQuery()
             .FirstOrDefaultAsync(r => r.Id == id, cancellationToken);
     }
 
@@ -64,6 +68,7 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
             .AsNoTracking()
             .Include(r => r.Assignments)
             .Include(r => r.DeadChecks)
+            .AsSplitQuery()
             .FirstOrDefaultAsync(r => r.Id == id, cancellationToken);
 
         return RoomState.From(room ?? Unwritten(id));
