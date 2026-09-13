@@ -88,7 +88,9 @@ function cellColour(img, cols, rows, cx, cy) {
 function gridColours(img, cols, rows) {
   const colours = [];
   for (let cy = 0; cy < rows; cy += 1) {
-    for (let cx = 0; cx < cols; cx += 1) colours.push(cellColour(img, cols, rows, cx, cy));
+    for (let cx = 0; cx < cols; cx += 1) {
+      colours.push(cellColour(img, cols, rows, cx, cy));
+    }
   }
   return colours;
 }
@@ -143,7 +145,9 @@ function detectGrid(img, tolerance = 1.35) {
   // Prefer the smallest grid that is nearly as good, so a 16-wide sprite is
   // not reported as the 32-wide one that trivially also fits it.
   for (let cols = MIN_SIZE; cols <= best; cols += 1) {
-    if (errors.get(cols) <= bestError * tolerance) return { cols, rows: rowsFor(cols) };
+    if (errors.get(cols) <= bestError * tolerance) {
+      return { cols, rows: rowsFor(cols) };
+    }
   }
   return { cols: best, rows: rowsFor(best) };
 }
@@ -206,7 +210,9 @@ function main() {
     // after a pass, whatever the cleared cells have exposed.
     const exposed = [];
     for (let i = 0; i < grid.length; i += 1) {
-      if (gone[i]) continue;
+      if (gone[i]) {
+        continue;
+      }
       const x = i % cols;
       const y = (i - x) / cols;
       const edge =
@@ -218,9 +224,13 @@ function main() {
         gone[i + 1] ||
         gone[i - cols] ||
         gone[i + cols];
-      if (edge) exposed.push(i);
+      if (edge) {
+        exposed.push(i);
+      }
     }
-    if (exposed.length === 0) break;
+    if (exposed.length === 0) {
+      break;
+    }
 
     // The backdrop is what the outermost surviving corners agree on. Corners
     // are used rather than the whole ring because sprite art often runs right
@@ -240,24 +250,34 @@ function main() {
       grid[nearestTo(cols - 1, rows - 1)],
     ];
     const backdrop = forcedBackdrop || corners[0];
-    if (!forcedBackdrop && corners.filter((c) => near(c, backdrop)).length < 3) break;
+    if (!forcedBackdrop && corners.filter((c) => near(c, backdrop)).length < 3) {
+      break;
+    }
 
     // Cleared wholesale, not flood-filled: in this art the outline is the same
     // colour as the backdrop it sits on, and the sprite reads better without
     // it once the surrounding block is gone.
     const doomed = [];
     for (let i = 0; i < grid.length; i += 1) {
-      if (!gone[i] && near(grid[i], backdrop)) doomed.push(i);
+      if (!gone[i] && near(grid[i], backdrop)) {
+        doomed.push(i);
+      }
     }
-    if (doomed.length === 0) break;
+    if (doomed.length === 0) {
+      break;
+    }
 
     // Once the backdrop and any frame are gone, the next colour out at the
     // corners is the sprite itself. Refuse a pass that would eat it: peeling
     // must leave most of the picture standing.
     const remaining = grid.length - cleared - doomed.length;
-    if (remaining < grid.length * 0.25) break;
+    if (remaining < grid.length * 0.25) {
+      break;
+    }
 
-    for (const i of doomed) gone[i] = 1;
+    for (const i of doomed) {
+      gone[i] = 1;
+    }
     cleared += doomed.length;
   }
 
@@ -287,11 +307,21 @@ function main() {
     let maxY = -1;
     for (let y = 0; y < rows; y += 1) {
       for (let x = 0; x < cols; x += 1) {
-        if (out.data[(y * cols + x) * 4 + 3] === 0) continue;
-        if (x < minX) minX = x;
-        if (x > maxX) maxX = x;
-        if (y < minY) minY = y;
-        if (y > maxY) maxY = y;
+        if (out.data[(y * cols + x) * 4 + 3] === 0) {
+          continue;
+        }
+        if (x < minX) {
+          minX = x;
+        }
+        if (x > maxX) {
+          maxX = x;
+        }
+        if (y < minY) {
+          minY = y;
+        }
+        if (y > maxY) {
+          maxY = y;
+        }
       }
     }
     if (maxX >= 0 && (minX > 0 || minY > 0 || maxX < cols - 1 || maxY < rows - 1)) {

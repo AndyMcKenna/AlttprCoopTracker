@@ -104,7 +104,9 @@ const ITEMS = [...MAIN_ITEMS, ...KEY_ITEMS];
 const ITEMS_BY_ID = new Map(ITEMS.map((item) => [item.id, item]));
 
 const GROUPS = MAIN_ITEMS.reduce((acc, item) => {
-  if (!acc.includes(item.group)) acc.push(item.group);
+  if (!acc.includes(item.group)) {
+    acc.push(item.group);
+  }
   return acc;
 }, []);
 
