@@ -31,6 +31,22 @@ builder.Services.AddSingleton<GameCatalog>();
 // Behind a proxy that hides the client address (Azure App Service on Linux,
 // for one) the address has to come from the forwarded headers, or every
 // player looks like the same client — see the README.
+//
+// The numbers live in appsettings.json (RateLimits) so that everything
+// configurable is in the one place, and can be raised for the one client
+// that legitimately looks like a script: the browser test suite, which
+// opens every board from one address and would otherwise trip the cap.
+var apiPerMinute = builder.Configuration.GetValue<int>("RateLimits:ApiPerMinute");
+var socketsPerAddress = builder.Configuration.GetValue<int>("RateLimits:SocketsPerAddress");
+
+// A limit that is missing reads as zero, which would refuse everyone; better
+// to refuse to start.
+if (apiPerMinute <= 0 || socketsPerAddress <= 0)
+{
+    throw new InvalidOperationException(
+        "RateLimits:ApiPerMinute and RateLimits:SocketsPerAddress must be set above zero (see appsettings.json).");
+}
+
 builder.Services.AddRateLimiter(options =>
 {
     options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
@@ -39,7 +55,7 @@ builder.Services.AddRateLimiter(options =>
         ClientAddress(context),
         _ => new FixedWindowRateLimiterOptions
         {
-            PermitLimit = 120,
+            PermitLimit = apiPerMinute,
             Window = TimeSpan.FromMinutes(1),
             QueueLimit = 0,
         }));
@@ -50,7 +66,7 @@ builder.Services.AddRateLimiter(options =>
         ClientAddress(context),
         _ => new ConcurrencyLimiterOptions
         {
-            PermitLimit = 32,
+            PermitLimit = socketsPerAddress,
             QueueLimit = 0,
         }));
 });

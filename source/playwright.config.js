@@ -38,6 +38,10 @@ module.exports = defineConfig({
       ASPNETCORE_URLS: 'http://localhost:' + port,
       ASPNETCORE_ENVIRONMENT: 'Development',
       ConnectionStrings__tracker: connection,
+      // Every test is one client address, and together they look like a
+      // script; the caps are for scripts, not for this.
+      RateLimits__ApiPerMinute: '100000',
+      RateLimits__SocketsPerAddress: '1000',
     },
   },
 });
