@@ -610,8 +610,16 @@ h2 {
   opacity: 0.6;
 }
 
-/* Only meaningful while an item is armed, but harmless otherwise. */
-.is-assigning .check:hover {
+/* A check clicked first, waiting for its item. */
+.check.is-armed,
+.check.is-armed:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+/* Whichever half of the pair is still to be clicked lights up on hover. */
+.is-assigning .check:hover,
+.is-picking-item .item:hover {
   border-color: var(--accent);
   box-shadow: 0 0 0 1px var(--accent);
 }

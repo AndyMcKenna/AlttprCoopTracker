@@ -3,7 +3,8 @@
 /**
  * Co-op tracker client.
  *
- * Flow: click an item tile to arm it, then click one of the 216 check tiles.
+ * Flow: click an item tile and then the check it was found at — or the check
+ * first and then the item; either order makes the same pairing.
  * The pairing goes to the server, which broadcasts the whole room state back
  * to everyone connected to the same room code.
  */
@@ -33,6 +34,7 @@ const state = {
   data: null,
   room: null,
   armed: null, // item id waiting for a check click
+  armedCheck: null, // check id waiting for an item click
   regionFilter: new Set(), // empty means "all regions"
   collapsed: new Set(), // region ids folded shut; filled in once data arrives
   keysCollapsed: true, // the key board is long; it opens on request
@@ -132,6 +134,10 @@ function drawnSprite(url) {
 
 // What clicking the tile will do, for its tooltip and for screen readers.
 function tileLabel(item, count, full) {
+  if (state.armedCheck) {
+    const check = state.checksById.get(state.armedCheck);
+    return 'Record ' + item.name + ' at ' + (check ? check.fullName : state.armedCheck);
+  }
   if (state.armed === item.id) {
     return 'Click the check where ' + item.name + ' was found (Esc to cancel)';
   }
@@ -430,6 +436,12 @@ function renderChecks(owners) {
       tile.type = 'button';
       tile.title = check.fullName + (owner ? ' — holds ' + owner.name : '');
       if (owner) tile.classList.add('is-used');
+      const armed = state.armedCheck === check.id;
+      if (armed) {
+        tile.classList.add('is-armed');
+        tile.title = 'Click the item found at ' + check.fullName + ' (Esc to cancel)';
+      }
+      tile.setAttribute('aria-pressed', String(armed));
 
       // A real image for this glyph wins; failing that, the real chest, so a
       // glyph with no art of its own still looks like the rest of the board
@@ -454,7 +466,7 @@ function renderChecks(owners) {
       }
       tile.appendChild(label);
 
-      tile.addEventListener('click', () => pickCheck(check));
+      tile.addEventListener('click', () => pickCheck(check, owner));
       grid.appendChild(tile);
     }
 
@@ -529,33 +541,57 @@ function renderRegionFilters() {
 
 /* ------------------------------------------------------------ assignment */
 
+/**
+ * A pairing is one item and one check, clicked in either order. Whichever is
+ * clicked first is "armed" and waits; the second click completes the pair.
+ * Clicking the armed thing again puts it down, and clicking a different
+ * thing of the same kind swaps it in.
+ */
 function toggleArm(itemId) {
+  if (state.armedCheck) {
+    send({ type: 'assign', itemId, checkId: state.armedCheck });
+    disarm();
+    return;
+  }
   state.armed = state.armed === itemId ? null : itemId;
   syncAssignBar();
   render();
 }
 
+function pickCheck(check, owner) {
+  if (state.armed) {
+    send({ type: 'assign', itemId: state.armed, checkId: check.id });
+    disarm();
+    return;
+  }
+  // A check holds one item, so arming a taken one could only end in the
+  // service refusing it. Say so now, and say what to do instead.
+  if (owner) {
+    showHint(check.fullName + ' already holds ' + owner.name + ' — clear it from ' + owner.name + ' first.');
+    return;
+  }
+  state.armedCheck = state.armedCheck === check.id ? null : check.id;
+  syncAssignBar();
+  render();
+}
+
 function disarm() {
-  if (!state.armed) return;
+  if (!state.armed && !state.armedCheck) return;
   state.armed = null;
+  state.armedCheck = null;
   syncAssignBar();
   render();
 }
 
 function syncAssignBar() {
-  const item = state.armed && state.data.items.find((entry) => entry.id === state.armed);
+  const item = state.armed && state.itemsById.get(state.armed);
+  const check = state.armedCheck && state.checksById.get(state.armedCheck);
+  // Each class lights up the tiles that would complete the pair on hover.
   document.body.classList.toggle('is-assigning', Boolean(item));
-  el.assignBar.hidden = !item;
+  document.body.classList.toggle('is-picking-item', Boolean(check));
+  el.assignBar.hidden = !item && !check;
   if (item) el.assignBarText.textContent = 'Click the check where ' + item.name + ' was found';
-}
-
-function pickCheck(check) {
-  if (!state.armed) {
-    showHint('Choose an item first, then click a check.');
-    return;
-  }
-  send({ type: 'assign', itemId: state.armed, checkId: check.id });
-  disarm();
+  if (check) el.assignBarText.textContent = 'Click the item found at ' + check.fullName;
 }
 
 function showHint(message) {
