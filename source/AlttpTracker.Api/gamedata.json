@@ -6,8 +6,16 @@
       "name": "Light World",
       "short": "LW",
       "color": "#3f9e55",
-      "count": 68,
+      "count": 54,
       "ordinal": 0
+    },
+    {
+      "id": "dm",
+      "name": "Death Mountain",
+      "short": "DM",
+      "color": "#b5762f",
+      "count": 14,
+      "ordinal": 1
     },
     {
       "id": "dw",
@@ -15,7 +23,7 @@
       "short": "DW",
       "color": "#8f4fb5",
       "count": 25,
-      "ordinal": 1
+      "ordinal": 2
     },
     {
       "id": "hc",
@@ -23,7 +31,7 @@
       "short": "HC",
       "color": "#5f86bf",
       "count": 8,
-      "ordinal": 2
+      "ordinal": 3
     },
     {
       "id": "ep",
@@ -31,7 +39,7 @@
       "short": "EP",
       "color": "#2fa877",
       "count": 6,
-      "ordinal": 3
+      "ordinal": 4
     },
     {
       "id": "dp",
@@ -39,7 +47,7 @@
       "short": "DP",
       "color": "#d1a72b",
       "count": 6,
-      "ordinal": 4
+      "ordinal": 5
     },
     {
       "id": "toh",
@@ -47,7 +55,7 @@
       "short": "ToH",
       "color": "#d97e42",
       "count": 6,
-      "ordinal": 5
+      "ordinal": 6
     },
     {
       "id": "ct",
@@ -55,7 +63,7 @@
       "short": "CT",
       "color": "#9295a3",
       "count": 2,
-      "ordinal": 6
+      "ordinal": 7
     },
     {
       "id": "pod",
@@ -63,7 +71,7 @@
       "short": "PoD",
       "color": "#5257a0",
       "count": 14,
-      "ordinal": 7
+      "ordinal": 8
     },
     {
       "id": "sp",
@@ -71,7 +79,7 @@
       "short": "SP",
       "color": "#2f9aa8",
       "count": 10,
-      "ordinal": 8
+      "ordinal": 9
     },
     {
       "id": "sw",
@@ -79,7 +87,7 @@
       "short": "SW",
       "color": "#74854f",
       "count": 8,
-      "ordinal": 9
+      "ordinal": 10
     },
     {
       "id": "tt",
@@ -87,7 +95,7 @@
       "short": "TT",
       "color": "#a86333",
       "count": 8,
-      "ordinal": 10
+      "ordinal": 11
     },
     {
       "id": "ip",
@@ -95,7 +103,7 @@
       "short": "IP",
       "color": "#4fb3d4",
       "count": 8,
-      "ordinal": 11
+      "ordinal": 12
     },
     {
       "id": "mm",
@@ -103,7 +111,7 @@
       "short": "MM",
       "color": "#8272a8",
       "count": 8,
-      "ordinal": 12
+      "ordinal": 13
     },
     {
       "id": "tr",
@@ -111,7 +119,7 @@
       "short": "TR",
       "color": "#c04a41",
       "count": 12,
-      "ordinal": 13
+      "ordinal": 14
     },
     {
       "id": "gt",
@@ -119,7 +127,7 @@
       "short": "GT",
       "color": "#ab4283",
       "count": 27,
-      "ordinal": 14
+      "ordinal": 15
     }
   ],
   "checks": [
@@ -454,16 +462,6 @@
       "ordinal": 32
     },
     {
-      "id": "lw/ether-tablet",
-      "name": "Ether Tablet",
-      "fullName": "Light World - Ether Tablet",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "book",
-      "ordinal": 33
-    },
-    {
       "id": "lw/king-zora",
       "name": "King Zora",
       "fullName": "Light World - King Zora",
@@ -471,7 +469,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "zora",
-      "ordinal": 34
+      "ordinal": 33
     },
     {
       "id": "lw/lost-woods-hideout",
@@ -481,7 +479,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "sparkle",
-      "ordinal": 35
+      "ordinal": 34
     },
     {
       "id": "lw/lumberjack-tree",
@@ -491,7 +489,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "boots",
-      "ordinal": 36
+      "ordinal": 35
     },
     {
       "id": "lw/cave-45",
@@ -501,7 +499,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "mirror",
-      "ordinal": 37
+      "ordinal": 36
     },
     {
       "id": "lw/graveyard-ledge",
@@ -511,7 +509,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "mirror",
-      "ordinal": 38
+      "ordinal": 37
     },
     {
       "id": "lw/checkerboard-cave",
@@ -521,7 +519,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "mirror",
-      "ordinal": 39
+      "ordinal": 38
     },
     {
       "id": "lw/library",
@@ -531,7 +529,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "boots",
-      "ordinal": 40
+      "ordinal": 39
     },
     {
       "id": "lw/mushroom",
@@ -541,7 +539,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "mushroom",
-      "ordinal": 41
+      "ordinal": 40
     },
     {
       "id": "lw/potion-shop",
@@ -551,7 +549,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "npc",
-      "ordinal": 42
+      "ordinal": 41
     },
     {
       "id": "lw/maze-race",
@@ -561,7 +559,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "npc",
-      "ordinal": 43
+      "ordinal": 42
     },
     {
       "id": "lw/desert-ledge",
@@ -571,7 +569,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "sparkle",
-      "ordinal": 44
+      "ordinal": 43
     },
     {
       "id": "lw/lake-hylia-island",
@@ -581,7 +579,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "mirror",
-      "ordinal": 45
+      "ordinal": 44
     },
     {
       "id": "lw/sunken-treasure",
@@ -591,7 +589,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "sparkle",
-      "ordinal": 46
+      "ordinal": 45
     },
     {
       "id": "lw/floodgate-chest",
@@ -601,7 +599,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "chest",
-      "ordinal": 47
+      "ordinal": 46
     },
     {
       "id": "lw/zoras-ledge",
@@ -611,7 +609,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "flippers",
-      "ordinal": 48
+      "ordinal": 47
     },
     {
       "id": "lw/dig-spot",
@@ -621,7 +619,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "shovel",
-      "ordinal": 49
+      "ordinal": 48
     },
     {
       "id": "lw/waterfall-fairy-left",
@@ -631,7 +629,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "flippers",
-      "ordinal": 50
+      "ordinal": 49
     },
     {
       "id": "lw/waterfall-fairy-right",
@@ -641,7 +639,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "flippers",
-      "ordinal": 51
+      "ordinal": 50
     },
     {
       "id": "lw/blacksmith",
@@ -651,7 +649,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "glove",
-      "ordinal": 52
+      "ordinal": 51
     },
     {
       "id": "lw/purple-chest",
@@ -661,137 +659,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "purplechest",
-      "ordinal": 53
-    },
-    {
-      "id": "lw/old-man",
-      "name": "Old Man",
-      "fullName": "Light World - Old Man",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "oldman",
-      "ordinal": 54
-    },
-    {
-      "id": "lw/spectacle-rock-cave",
-      "name": "Spectacle Rock Cave",
-      "fullName": "Light World - Spectacle Rock Cave",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "chest",
-      "ordinal": 55
-    },
-    {
-      "id": "lw/spectacle-rock",
-      "name": "Spectacle Rock",
-      "fullName": "Light World - Spectacle Rock",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "mirror",
-      "ordinal": 56
-    },
-    {
-      "id": "lw/spiral-cave",
-      "name": "Spiral Cave",
-      "fullName": "Light World - Spiral Cave",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "chest",
-      "ordinal": 57
-    },
-    {
-      "id": "lw/mimic-cave",
-      "name": "Mimic Cave",
-      "fullName": "Light World - Mimic Cave",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "mirror",
-      "ordinal": 58
-    },
-    {
-      "id": "lw/paradox-lower-far-left",
-      "name": "Paradox Lower - Far Left",
-      "fullName": "Light World - Paradox Lower - Far Left",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "chest",
-      "ordinal": 59
-    },
-    {
-      "id": "lw/paradox-lower-left",
-      "name": "Paradox Lower - Left",
-      "fullName": "Light World - Paradox Lower - Left",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "chest",
-      "ordinal": 60
-    },
-    {
-      "id": "lw/paradox-lower-middle",
-      "name": "Paradox Lower - Middle",
-      "fullName": "Light World - Paradox Lower - Middle",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "chest",
-      "ordinal": 61
-    },
-    {
-      "id": "lw/paradox-lower-right",
-      "name": "Paradox Lower - Right",
-      "fullName": "Light World - Paradox Lower - Right",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "chest",
-      "ordinal": 62
-    },
-    {
-      "id": "lw/paradox-lower-far-right",
-      "name": "Paradox Lower - Far Right",
-      "fullName": "Light World - Paradox Lower - Far Right",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "chest",
-      "ordinal": 63
-    },
-    {
-      "id": "lw/paradox-upper-left",
-      "name": "Paradox Upper - Left",
-      "fullName": "Light World - Paradox Upper - Left",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "chest",
-      "ordinal": 64
-    },
-    {
-      "id": "lw/paradox-upper-right",
-      "name": "Paradox Upper - Right",
-      "fullName": "Light World - Paradox Upper - Right",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "chest",
-      "ordinal": 65
-    },
-    {
-      "id": "lw/floating-island",
-      "name": "Floating Island",
-      "fullName": "Light World - Floating Island",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "mirror",
-      "ordinal": 66
+      "ordinal": 52
     },
     {
       "id": "lw/master-sword-pedestal",
@@ -801,6 +669,146 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "sword",
+      "ordinal": 53
+    },
+    {
+      "id": "dm/old-man",
+      "name": "Old Man",
+      "fullName": "Death Mountain - Old Man",
+      "region": "dm",
+      "regionName": "Death Mountain",
+      "regionShort": "DM",
+      "icon": "oldman",
+      "ordinal": 54
+    },
+    {
+      "id": "dm/spectacle-rock-cave",
+      "name": "Spectacle Rock Cave",
+      "fullName": "Death Mountain - Spectacle Rock Cave",
+      "region": "dm",
+      "regionName": "Death Mountain",
+      "regionShort": "DM",
+      "icon": "chest",
+      "ordinal": 55
+    },
+    {
+      "id": "dm/spectacle-rock",
+      "name": "Spectacle Rock",
+      "fullName": "Death Mountain - Spectacle Rock",
+      "region": "dm",
+      "regionName": "Death Mountain",
+      "regionShort": "DM",
+      "icon": "mirror",
+      "ordinal": 56
+    },
+    {
+      "id": "dm/ether-tablet",
+      "name": "Ether Tablet",
+      "fullName": "Death Mountain - Ether Tablet",
+      "region": "dm",
+      "regionName": "Death Mountain",
+      "regionShort": "DM",
+      "icon": "book",
+      "ordinal": 57
+    },
+    {
+      "id": "dm/spiral-cave",
+      "name": "Spiral Cave",
+      "fullName": "Death Mountain - Spiral Cave",
+      "region": "dm",
+      "regionName": "Death Mountain",
+      "regionShort": "DM",
+      "icon": "chest",
+      "ordinal": 58
+    },
+    {
+      "id": "dm/mimic-cave",
+      "name": "Mimic Cave",
+      "fullName": "Death Mountain - Mimic Cave",
+      "region": "dm",
+      "regionName": "Death Mountain",
+      "regionShort": "DM",
+      "icon": "mirror",
+      "ordinal": 59
+    },
+    {
+      "id": "dm/paradox-lower-far-left",
+      "name": "Paradox Lower - Far Left",
+      "fullName": "Death Mountain - Paradox Lower - Far Left",
+      "region": "dm",
+      "regionName": "Death Mountain",
+      "regionShort": "DM",
+      "icon": "chest",
+      "ordinal": 60
+    },
+    {
+      "id": "dm/paradox-lower-left",
+      "name": "Paradox Lower - Left",
+      "fullName": "Death Mountain - Paradox Lower - Left",
+      "region": "dm",
+      "regionName": "Death Mountain",
+      "regionShort": "DM",
+      "icon": "chest",
+      "ordinal": 61
+    },
+    {
+      "id": "dm/paradox-lower-middle",
+      "name": "Paradox Lower - Middle",
+      "fullName": "Death Mountain - Paradox Lower - Middle",
+      "region": "dm",
+      "regionName": "Death Mountain",
+      "regionShort": "DM",
+      "icon": "chest",
+      "ordinal": 62
+    },
+    {
+      "id": "dm/paradox-lower-right",
+      "name": "Paradox Lower - Right",
+      "fullName": "Death Mountain - Paradox Lower - Right",
+      "region": "dm",
+      "regionName": "Death Mountain",
+      "regionShort": "DM",
+      "icon": "chest",
+      "ordinal": 63
+    },
+    {
+      "id": "dm/paradox-lower-far-right",
+      "name": "Paradox Lower - Far Right",
+      "fullName": "Death Mountain - Paradox Lower - Far Right",
+      "region": "dm",
+      "regionName": "Death Mountain",
+      "regionShort": "DM",
+      "icon": "chest",
+      "ordinal": 64
+    },
+    {
+      "id": "dm/paradox-upper-left",
+      "name": "Paradox Upper - Left",
+      "fullName": "Death Mountain - Paradox Upper - Left",
+      "region": "dm",
+      "regionName": "Death Mountain",
+      "regionShort": "DM",
+      "icon": "chest",
+      "ordinal": 65
+    },
+    {
+      "id": "dm/paradox-upper-right",
+      "name": "Paradox Upper - Right",
+      "fullName": "Death Mountain - Paradox Upper - Right",
+      "region": "dm",
+      "regionName": "Death Mountain",
+      "regionShort": "DM",
+      "icon": "chest",
+      "ordinal": 66
+    },
+    {
+      "id": "dm/floating-island",
+      "name": "Floating Island",
+      "fullName": "Death Mountain - Floating Island",
+      "region": "dm",
+      "regionName": "Death Mountain",
+      "regionShort": "DM",
+      "icon": "mirror",
       "ordinal": 67
     },
     {

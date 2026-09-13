@@ -14,12 +14,12 @@ test.describe('the board', () => {
     await expect(page.locator('#items-summary')).toHaveText('0 of 32 located');
     await expect(page.locator('#checks-summary')).toHaveText('0 of 216 recorded');
 
-    // Fifteen regions and All.
-    await expect(page.locator('.region-chip')).toHaveCount(16);
+    // Sixteen regions and All.
+    await expect(page.locator('.region-chip')).toHaveCount(17);
 
-    // Light World and Dark World start open; the dungeons start folded.
-    await expect(page.locator('.check')).toHaveCount(68 + 25);
-    await expect(page.locator('.region-title').first()).toContainText('Light World (68)');
+    // The overworlds and Death Mountain start open; the dungeons start folded.
+    await expect(page.locator('.check')).toHaveCount(54 + 14 + 25);
+    await expect(page.locator('.region-title')).toContainText(['Light World (54)', 'Death Mountain (14)', 'Dark World (25)']);
     await expect(page.locator('.region-title[aria-expanded="false"]')).toHaveCount(13);
 
     // Nothing to type: the filter box is gone.
