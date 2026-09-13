@@ -96,10 +96,23 @@ cd source
 npm test                                       # game tables and sprites
 dotnet test AlttpTracker.Api.Tests             # the room rules, on SQLite
 dotnet test AlttpTracker.Api.IntegrationTests   # migrations and indexes, on real Postgres
+npm run test:e2e                               # the board in a browser, against the running app
 ```
 
 The integration tests start their own Postgres with Testcontainers, so they
-need Docker running; the other two do not.
+need Docker running; the first two do not.
+
+The browser tests (Playwright, under `source/e2e`) start the app themselves
+and need a Postgres to point it at — by default one on `localhost:5432` with
+the password `postgres`, which is what this gives you:
+
+```sh
+docker run -d --name tracker-e2e -e POSTGRES_PASSWORD=postgres -p 5432:5432 postgres:17
+npx playwright install chromium                # once
+```
+
+Set `TRACKER_E2E_CONNECTION` to use a different one. Each test makes its own
+room, so a database that has seen earlier runs is fine.
 
 From the board, share the URL from **Copy invite link** with the other players.
 Anyone who opens it joins the same board. The room code is in the URL

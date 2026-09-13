@@ -54,3 +54,8 @@ Where the game is written down, and how it reaches the app.
   database's own responsibilities — migrations, the unique index, cascades,
   the sweeper — are tested on real Postgres in a container
   (`AlttpTracker.Api.IntegrationTests`).
+- **DATA-11** The board is tested in a real browser with Playwright
+  (`source/e2e`), against the app running on a real Postgres: what it
+  draws, what each click does, what two boards on one room see of each
+  other. Every item and check tile carries its id as `data-item` or
+  `data-check` for the tests to address it by; names are not unique.

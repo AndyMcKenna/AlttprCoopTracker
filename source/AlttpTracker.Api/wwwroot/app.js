@@ -207,6 +207,7 @@ function buildItemTile(item) {
 
   const tile = document.createElement('div');
   tile.className = 'item';
+  tile.dataset.item = item.id;
   tile.setAttribute('role', 'button');
   tile.tabIndex = 0;
   if (state.armed === item.id) tile.classList.add('is-armed');
@@ -374,6 +375,8 @@ function renderItems(owners) {
 function buildCheckTile(check, owner, dead) {
   const tile = document.createElement('div');
   tile.className = 'check';
+  // The id is what the browser tests address a tile by; names are not unique.
+  tile.dataset.check = check.id;
   if (owner) tile.classList.add('is-used');
   if (dead) tile.classList.add('is-dead');
   const armed = state.armedCheck === check.id;

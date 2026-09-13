@@ -15,3 +15,7 @@ obj/
 *.db-wal
 .neon
 .env.local
+
+# Playwright output
+source/test-results/
+source/playwright-report/

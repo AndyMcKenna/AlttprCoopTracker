@@ -28,18 +28,22 @@ what the tracker is and how to run it; this file is about how to change it.
 
 ## Tests
 
-Run what your change touches before opening a PR; CI runs all three.
+Run what your change touches before opening a PR; CI runs all four.
 
 ```sh
 cd source
 npm test                                        # game tables and sprites
 dotnet test AlttpTracker.Api.Tests              # the room rules, on SQLite
 dotnet test AlttpTracker.Api.IntegrationTests   # migrations and indexes, on Postgres (needs Docker)
+npm run test:e2e                                # the board in a browser (needs a Postgres on :5432; see README)
 ```
 
 A new rule in `RoomService` gets a test in `RoomServiceTests`. Anything the
 database itself is responsible for — an index, a cascade, a migration — gets
-one in `DatabaseTests`.
+one in `DatabaseTests`. Anything a player sees or clicks — a tile, a gesture,
+a filter, what the board shows after a change — gets a Playwright test under
+`source/e2e`, written against the statement in `docs/specs` it proves. Tiles
+are addressed by `data-item` and `data-check` ids, never by their text.
 
 ## Changelog
 
