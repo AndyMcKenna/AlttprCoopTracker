@@ -80,7 +80,10 @@ is drawn.
 ## Filters
 
 - **BOARD-18** Region chips, one per region plus **All**, filter the check
-  list. Chips can be combined; All clears them. There is no text search.
+  list. Chips can be combined; All clears them. With no filter on, All works
+  the folds instead: it opens every region, and, when every region is
+  already open, folds them back to the default (BOARD-6). All is drawn as
+  selected whenever no filter is on. There is no text search.
 - **BOARD-19** **Hide recorded/dead** hides every check that holds an item
   or is dead, leaving what is still worth visiting. Region headers count
   what is shown.

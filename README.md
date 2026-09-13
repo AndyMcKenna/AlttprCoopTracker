@@ -44,6 +44,8 @@ and coming back later picks the run up where it was.
   meant to be worked with one hand while the other stays on the controller.
 - **Collapsible regions.** Light World, Death Mountain and Dark World start
   open, the dungeons start folded; click any region header to toggle it.
+  Click **All** with no filter on to open every region at once, and again to
+  fold them back.
 - **Keys.** The Keys tab is one line per dungeon, big key then small keys, and
   works exactly like the item board — an armed item or check survives the
   switch, so a key can be paired with a check from either tab. Small keys are

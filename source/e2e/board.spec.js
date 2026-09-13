@@ -231,6 +231,25 @@ test.describe('the board', () => {
     await expect(page.locator('.check')).toHaveCount(93);
   });
 
+  test('All, clicked again, opens every region, and again folds them back', async ({ page }) => {
+    await openBoard(page, newRoom());
+    const all = page.locator('.region-chip-all');
+    await expect(all).toHaveAttribute('aria-pressed', 'true');
+
+    await all.click();
+    await expect(page.locator('.region-title[aria-expanded="false"]')).toHaveCount(0);
+    await expect(page.locator('.check')).toHaveCount(216);
+
+    await all.click();
+    await expect(page.locator('.region-title[aria-expanded="false"]')).toHaveCount(13);
+    await expect(page.locator('.check')).toHaveCount(93);
+
+    // One dungeon opened by hand still counts as not all open: All opens the rest.
+    await page.locator('.region-title', { hasText: 'Hyrule Castle' }).click();
+    await all.click();
+    await expect(page.locator('.check')).toHaveCount(216);
+  });
+
   test('Reset asks first, then clears the room', async ({ page }) => {
     await openBoard(page, newRoom());
     await item(page, 'lamp').click();
