@@ -125,61 +125,6 @@ Anyone who opens it joins the same board. The room code is in the URL
 | `POST /api/rooms/{room}/reset`                   | Clear the room                  |
 | `GET /ws?room={room}`                            | Listen for changes              |
 
-## Deploying
-
-`.github/workflows/ci-cd.yml` builds, runs all three test suites, and — only on
-a push to `main` — publishes and deploys to an Azure App Service. Pull requests
-stop at the tests.
-
-It signs in with OIDC rather than a publish profile, because new App Services
-have basic authentication switched off by default. Before the first deploy:
-
-1. Create an Entra app registration with a federated credential for this
-   repository, and give it the **Contributor** role on the App Service.
-2. Add repository **secrets** `AZURE_CLIENT_ID`, `AZURE_TENANT_ID` and
-   `AZURE_SUBSCRIPTION_ID`.
-3. Add a repository **variable** `AZURE_WEBAPP_NAME` (and `AZURE_WEBAPP_SLOT`
-   if you deploy to a slot).
-4. On the App Service, set the connection string the app looks for:
-   `ConnectionStrings__tracker`, pointing at the Postgres you provisioned. The
-   user in it needs to own the schema — migrations run from the app.
-   Turn on **Web sockets** in the configuration — the live updates need it.
-5. Set the app setting `ASPNETCORE_FORWARDEDHEADERS_ENABLED` to `true`. App
-   Service sits in front of the app as a proxy, and this is how the app learns
-   each player's own address from it. Without it every player is one client
-   as far as the request limits are concerned, and a busy evening looks like
-   one person hammering the API.
-6. Switch on **HTTPS Only** under the TLS settings, so an `http://` invite
-   link is bumped up rather than served. The app itself does not redirect:
-   behind the proxy it cannot tell which scheme the player used.
-7. If you use the App Service **Health check**, point it at `/alive`. That
-   says only that the process is up; `/health`, which also reports on the
-   database, is not exposed outside development.
-8. Optionally, set `APPLICATIONINSIGHTS_CONNECTION_STRING` to an Application
-   Insights resource and traces, logs and metrics go there. Unset, nothing is
-   sent — locally the Aspire dashboard is the only sink. Put a daily cap on
-   the workspace (0.1 GB is plenty) and it stays inside the free 5 GB/month.
-
-Migrations run when the app starts, so a deploy brings the schema up with it.
-That is fine for a single instance; if you ever scale out, apply them from the
-pipeline instead so two instances cannot race.
-
-The API is open, so it defends itself with limits rather than logins: 120
-requests a minute and 32 open sockets per client address, both set in
-`Program.cs`. A client over either gets a 429 and the board tells the player to
-wait a moment.
-
-Rooms live in the Postgres the app is pointed at. The **Reset** button clears
-the current room; dropping the `Rooms` table clears the lot. A sweeper in the
-app deletes rooms that have sat empty for a day or untouched for three months,
-so the table only holds runs that are actually happening.
-
-The API has to know the same things the board does — which item and check ids
-exist, and how many locations an item holds — so `source/scripts/export-gamedata.js`
-writes them to `gamedata.json` from the JS modules. The JS files stay the single
-source of truth; run `npm run export-gamedata` after editing `checks.js` or
-`items.js`.
-
 ## Sprites
 
 The tiles use game sprites from `wwwroot/sprites` where one exists, and fall
