@@ -27,6 +27,9 @@ const el = {
   assignBar: document.getElementById('assign-bar'),
   assignBarText: document.getElementById('assign-bar-text'),
   assignCancel: document.getElementById('assign-cancel'),
+  layout: document.querySelector('.layout'),
+  itemsPanel: document.querySelector('.panel-items'),
+  splitter: document.getElementById('splitter'),
 };
 
 const OPEN_BY_DEFAULT = new Set(['lw', 'dw']);
@@ -809,6 +812,131 @@ function setPlayers(count) {
   const n = count || 1;
   el.players.textContent = n + (n === 1 ? ' player' : ' players');
 }
+
+/* -------------------------------------------------------------- splitter */
+
+/**
+ * The seam between the item panel and the checks can be dragged to give
+ * either side more room. The width is a pixel value on --items-width, kept
+ * in this browser so it is the same next time; nothing about it goes to the
+ * room. Double-clicking the seam goes back to the default share.
+ */
+const ITEMS_WIDTH_KEY = 'alttp-items-width';
+const ITEMS_WIDTH_MIN = 300;
+const CHECKS_WIDTH_MIN = 360;
+const ITEMS_WIDTH_STEP = 16;
+
+function itemsWidthBounds() {
+  const style = getComputedStyle(el.layout);
+  const inner =
+    el.layout.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+  const max = inner - el.splitter.offsetWidth - CHECKS_WIDTH_MIN;
+  return { min: ITEMS_WIDTH_MIN, max: Math.max(max, ITEMS_WIDTH_MIN) };
+}
+
+function setItemsWidth(px) {
+  const bounds = itemsWidthBounds();
+  const width = Math.round(Math.min(Math.max(px, bounds.min), bounds.max));
+  el.layout.style.setProperty('--items-width', width + 'px');
+  el.splitter.setAttribute('aria-valuenow', String(width));
+  return width;
+}
+
+function saveItemsWidth(width) {
+  try {
+    localStorage.setItem(ITEMS_WIDTH_KEY, String(width));
+  } catch {
+    // Private mode or storage off: the width still holds for this page.
+  }
+}
+
+function resetItemsWidth() {
+  el.layout.style.removeProperty('--items-width');
+  el.splitter.removeAttribute('aria-valuenow');
+  try {
+    localStorage.removeItem(ITEMS_WIDTH_KEY);
+  } catch {
+    // Nothing stored to clear.
+  }
+}
+
+function restoreItemsWidth() {
+  let saved = null;
+  try {
+    saved = localStorage.getItem(ITEMS_WIDTH_KEY);
+  } catch {
+    return;
+  }
+  const px = Number(saved);
+  if (saved !== null && Number.isFinite(px) && px > 0) {
+    setItemsWidth(px);
+  }
+}
+
+function currentItemsWidth() {
+  return el.itemsPanel.getBoundingClientRect().width;
+}
+
+let drag = null;
+
+el.splitter.addEventListener('pointerdown', (event) => {
+  if (event.button !== 0) {
+    return;
+  }
+  drag = { startX: event.clientX, startWidth: currentItemsWidth() };
+  el.splitter.setPointerCapture(event.pointerId);
+  document.body.classList.add('is-resizing');
+  event.preventDefault();
+});
+
+el.splitter.addEventListener('pointermove', (event) => {
+  if (!drag) {
+    return;
+  }
+  setItemsWidth(drag.startWidth + (event.clientX - drag.startX));
+});
+
+function endDrag(event) {
+  if (!drag) {
+    return;
+  }
+  drag = null;
+  document.body.classList.remove('is-resizing');
+  if (el.splitter.hasPointerCapture(event.pointerId)) {
+    el.splitter.releasePointerCapture(event.pointerId);
+  }
+  saveItemsWidth(currentItemsWidth());
+}
+
+el.splitter.addEventListener('pointerup', endDrag);
+el.splitter.addEventListener('pointercancel', endDrag);
+
+el.splitter.addEventListener('dblclick', resetItemsWidth);
+
+// The seam can be worked from the keyboard too: arrows nudge it, and
+// Backspace or Delete puts it back.
+el.splitter.addEventListener('keydown', (event) => {
+  if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+    const delta = event.key === 'ArrowLeft' ? -ITEMS_WIDTH_STEP : ITEMS_WIDTH_STEP;
+    saveItemsWidth(setItemsWidth(currentItemsWidth() + delta));
+    event.preventDefault();
+  } else if (event.key === 'Backspace' || event.key === 'Delete') {
+    resetItemsWidth();
+    event.preventDefault();
+  }
+});
+
+// A saved width that no longer fits — the window got smaller — is pulled
+// back inside the bounds rather than pushing the checks off the page.
+window.addEventListener('resize', () => {
+  // On a narrow page the layout is one column and the seam is not shown;
+  // the bounds mean nothing there, so leave the saved width alone.
+  if (el.splitter.offsetWidth && el.layout.style.getPropertyValue('--items-width')) {
+    setItemsWidth(currentItemsWidth());
+  }
+});
+
+restoreItemsWidth();
 
 /* ------------------------------------------------------------------ init */
 
