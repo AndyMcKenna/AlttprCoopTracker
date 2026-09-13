@@ -58,8 +58,10 @@ is drawn.
   button; the armed tile is outlined; and tiles of the other kind light up
   as the pointer passes over them.
 - **BOARD-14** Clicking the armed tile again puts it down. Clicking a
-  different tile of the same kind arms that one instead. **Esc** and the
-  Cancel button put down whatever is armed.
+  different tile of the same kind arms that one instead. **Esc**, a
+  **right-click** anywhere on the page, and the Cancel button put down
+  whatever is armed. A right-click that cancels something does not open the
+  browser's menu; one with nothing armed is left to the browser.
 - **BOARD-15** A check that holds an item cannot be armed. Clicking it with
   nothing armed shows a hint naming the holder and saying to clear it from
   that item first. (With an item armed, the click is sent and the service
