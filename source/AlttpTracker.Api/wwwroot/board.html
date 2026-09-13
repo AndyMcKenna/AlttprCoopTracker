@@ -29,12 +29,15 @@
     <p id="hint" class="hint" hidden></p>
 
     <main class="layout">
-      <section class="panel panel-items" aria-labelledby="items-heading">
+      <section class="panel panel-items" aria-label="Items and keys">
         <div class="panel-head">
-          <h2 id="items-heading">Items</h2>
+          <div class="tabs" role="tablist" aria-label="Item board">
+            <button id="tab-items" class="tab" type="button" role="tab" aria-selected="true" aria-controls="items">Items</button>
+            <button id="tab-keys" class="tab" type="button" role="tab" aria-selected="false" aria-controls="items">Keys</button>
+          </div>
           <span id="items-summary" class="muted"></span>
         </div>
-        <div id="items" class="items"></div>
+        <div id="items" class="items" role="tabpanel" aria-labelledby="tab-items"></div>
       </section>
 
       <section class="panel panel-checks" aria-labelledby="checks-heading">
