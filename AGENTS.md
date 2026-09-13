@@ -63,3 +63,10 @@ that describes it in the same PR.
   the reasoning and anything non-obvious about the change.
 - One issue per branch, one PR per issue. Stack PRs when one depends on
   another, and say so in the PR description.
+- Work in a git worktree, not on a branch switched in place, so that two
+  pieces of work never share a working copy. Worktrees live beside the
+  repository in `C:sourcelttp-coop-tracker.worktrees`, one folder per
+  piece of work, named `<issue-number>-<short-description>`
+  (`20-resizable-panel`); leave the number off when there is no issue
+  (`readme-drop-deploying`). Each worktree needs its own `npm ci` in
+  `source/` before the tooling or the browser tests will run there.
