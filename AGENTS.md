@@ -57,6 +57,14 @@ that describes it in the same PR.
 ## Style
 
 - Comments say why, not what. Match the density of the surrounding code.
+- Every conditional and loop body goes in braces, even a single line —
+  in C# and in JavaScript alike. Not `if (!x) return;` but
+
+  ```js
+  if (!x) {
+    return;
+  }
+  ```
 - The board stays 100% clickable: nothing should need typing mid-run
   beyond the room code.
 - Commit messages: an imperative summary line, then a body that explains
