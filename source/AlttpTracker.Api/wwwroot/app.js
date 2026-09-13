@@ -179,7 +179,9 @@ function render() {
   const mainItems = state.data.items.filter((item) => item.panel === 'items');
   const found = mainItems.filter((item) => assignmentsFor(item.id).length).length;
   el.itemsSummary.textContent = found + ' of ' + mainItems.length + ' located';
-  el.checksSummary.textContent = owners.size + ' of ' + state.data.checks.length + ' recorded';
+  const dead = state.room ? state.room.dead.length : 0;
+  el.checksSummary.textContent =
+    owners.size + ' of ' + state.data.checks.length + ' recorded' + (dead ? ', ' + dead + ' dead' : '');
 }
 
 /**
@@ -372,8 +374,75 @@ function renderItems(owners) {
   el.items.replaceChildren(frag);
 }
 
+/**
+ * One check tile. The tile is the button that pairs it with an item; the
+ * small "nothing here" button at its edge marks it dead — looked at, found
+ * to hold nothing, so it can be dimmed and taken off the table. Two buttons
+ * cannot nest, so the tile is a div around the pair.
+ */
+function buildCheckTile(check, owner, dead) {
+  const tile = document.createElement('div');
+  tile.className = 'check';
+  if (owner) tile.classList.add('is-used');
+  if (dead) tile.classList.add('is-dead');
+  const armed = state.armedCheck === check.id;
+  if (armed) tile.classList.add('is-armed');
+
+  const main = document.createElement('button');
+  main.className = 'check-main';
+  main.type = 'button';
+  main.title = armed
+    ? 'Click the item found at ' + check.fullName + ' (Esc to cancel)'
+    : dead
+      ? check.fullName + ' — nothing here (click to bring it back)'
+      : check.fullName + (owner ? ' — holds ' + owner.name : '');
+  main.setAttribute('aria-pressed', String(armed));
+
+  // A real image for this glyph wins; failing that, the real chest, so a
+  // glyph with no art of its own still looks like the rest of the board
+  // rather than falling back to the drawn pixel art. Drop in a PNG named
+  // after the glyph, rebuild the sheet, and those tiles pick it up.
+  const icon = state.checkImages.has(check.icon)
+    ? sheetSprite('checks', check.icon)
+    : state.checkImages.has('chest')
+      ? sheetSprite('checks', 'chest')
+      : drawnSprite(spriteUrl('icon:' + check.icon, state.data.iconSprites[check.icon]));
+  icon.classList.add('check-icon');
+  main.appendChild(icon);
+
+  const label = document.createElement('span');
+  label.className = 'check-label';
+  label.textContent = check.name;
+  if (owner || dead) {
+    const holder = document.createElement('span');
+    holder.className = 'check-holder';
+    holder.textContent = owner ? owner.name : 'nothing';
+    label.appendChild(holder);
+  }
+  main.appendChild(label);
+  main.addEventListener('click', () => pickCheck(check, owner, dead));
+  tile.appendChild(main);
+
+  // A check with an item in it is not nothing; the service would refuse the
+  // mark, so the button is not offered.
+  if (!owner) {
+    const toggle = document.createElement('button');
+    toggle.className = 'check-dead';
+    toggle.type = 'button';
+    toggle.textContent = '∅';
+    toggle.title = dead ? 'Bring ' + check.name + ' back' : 'Nothing at ' + check.name;
+    toggle.setAttribute('aria-label', toggle.title);
+    toggle.setAttribute('aria-pressed', String(dead));
+    toggle.addEventListener('click', () => setDead(check, !dead));
+    tile.appendChild(toggle);
+  }
+
+  return tile;
+}
+
 function renderChecks(owners) {
   const scroll = el.checks.scrollTop;
+  const dead = new Set((state.room && state.room.dead) || []);
   const frag = document.createDocumentFragment();
   let shown = 0;
 
@@ -382,7 +451,7 @@ function renderChecks(owners) {
 
     const matches = state.data.checks.filter((check) => {
       if (check.region !== region.id) return false;
-      if (state.hideUsed && owners.has(check.id)) return false;
+      if (state.hideUsed && (owners.has(check.id) || dead.has(check.id))) return false;
       return true;
     });
     if (!matches.length) continue;
@@ -424,45 +493,7 @@ function renderChecks(owners) {
     grid.className = 'check-grid';
 
     for (const check of matches) {
-      const owner = owners.get(check.id);
-
-      const tile = document.createElement('button');
-      tile.className = 'check';
-      tile.type = 'button';
-      tile.title = check.fullName + (owner ? ' — holds ' + owner.name : '');
-      if (owner) tile.classList.add('is-used');
-      const armed = state.armedCheck === check.id;
-      if (armed) {
-        tile.classList.add('is-armed');
-        tile.title = 'Click the item found at ' + check.fullName + ' (Esc to cancel)';
-      }
-      tile.setAttribute('aria-pressed', String(armed));
-
-      // A real image for this glyph wins; failing that, the real chest, so a
-      // glyph with no art of its own still looks like the rest of the board
-      // rather than falling back to the drawn pixel art. Drop in a PNG named
-      // after the glyph, rebuild the sheet, and those tiles pick it up.
-      const icon = state.checkImages.has(check.icon)
-        ? sheetSprite('checks', check.icon)
-        : state.checkImages.has('chest')
-          ? sheetSprite('checks', 'chest')
-          : drawnSprite(spriteUrl('icon:' + check.icon, state.data.iconSprites[check.icon]));
-      icon.classList.add('check-icon');
-      tile.appendChild(icon);
-
-      const label = document.createElement('span');
-      label.className = 'check-label';
-      label.textContent = check.name;
-      if (owner) {
-        const holder = document.createElement('span');
-        holder.className = 'check-holder';
-        holder.textContent = owner.name;
-        label.appendChild(holder);
-      }
-      tile.appendChild(label);
-
-      tile.addEventListener('click', () => pickCheck(check, owner));
-      grid.appendChild(tile);
+      grid.appendChild(buildCheckTile(check, owners.get(check.id), dead.has(check.id)));
     }
 
     block.appendChild(grid);
@@ -553,10 +584,17 @@ function toggleArm(itemId) {
   render();
 }
 
-function pickCheck(check, owner) {
+function pickCheck(check, owner, dead) {
   if (state.armed) {
+    // Recording an item at a dead check brings it back; the service does that.
     send({ type: 'assign', itemId: state.armed, checkId: check.id });
     disarm();
+    return;
+  }
+  // A dead check's click is "that was a mistake": it comes back, rather than
+  // arming, since there is nothing to record at a check that holds nothing.
+  if (dead) {
+    setDead(check, false);
     return;
   }
   // A check holds one item, so arming a taken one could only end in the
@@ -568,6 +606,12 @@ function pickCheck(check, owner) {
   state.armedCheck = state.armedCheck === check.id ? null : check.id;
   syncAssignBar();
   render();
+}
+
+function setDead(check, dead) {
+  // A check waiting for its item and then declared empty is no longer waiting.
+  if (state.armedCheck === check.id) disarm();
+  send({ type: 'dead', checkId: check.id, dead });
 }
 
 function disarm() {
@@ -623,6 +667,12 @@ async function send(action) {
     });
   } else if (action.type === 'unassign') {
     request = fetch(roomUrl('/assignments/' + action.assignmentId), { method: 'DELETE' });
+  } else if (action.type === 'dead') {
+    request = fetch(roomUrl('/dead'), {
+      method: 'PUT',
+      ...json,
+      body: JSON.stringify({ checkId: action.checkId, dead: action.dead }),
+    });
   } else if (action.type === 'reset') {
     request = fetch(roomUrl('/reset'), { method: 'POST' });
   } else {

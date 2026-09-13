@@ -46,6 +46,7 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
         var id = NormalizeRoomId(roomId);
         return db.Rooms
             .Include(r => r.Assignments)
+            .Include(r => r.DeadChecks)
             .FirstOrDefaultAsync(r => r.Id == id, cancellationToken);
     }
 
@@ -62,6 +63,7 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
         var room = await db.Rooms
             .AsNoTracking()
             .Include(r => r.Assignments)
+            .Include(r => r.DeadChecks)
             .FirstOrDefaultAsync(r => r.Id == id, cancellationToken);
 
         return RoomState.From(room ?? Unwritten(id));
@@ -143,6 +145,15 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
             }
         }
 
+        // Finding an item at a check is the proof that it was not dead after
+        // all; the player should not have to bring it back before recording.
+        var dead = room.DeadChecks.FirstOrDefault(d => d.CheckId == check.Id);
+        if (dead is not null)
+        {
+            room.DeadChecks.Remove(dead);
+            db.DeadChecks.Remove(dead);
+        }
+
         var assignment = new Assignment
         {
             Id = Guid.NewGuid(),
@@ -212,6 +223,90 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
         return RoomResult.Success(room);
     }
 
+    /// <summary>
+    /// Marks a check as holding nothing, or takes that mark back. Explicit
+    /// rather than a toggle so that two players clicking at once agree on the
+    /// outcome instead of cancelling each other out.
+    /// </summary>
+    public async Task<RoomResult> SetDeadAsync(
+        string roomId,
+        string? checkId,
+        bool dead,
+        CancellationToken cancellationToken = default)
+    {
+        if (string.IsNullOrEmpty(checkId))
+        {
+            return RoomResult.Failure("checkId is required");
+        }
+
+        if (!catalog.Checks.TryGetValue(checkId, out var check))
+        {
+            return RoomResult.Failure($"Unknown check: {checkId}");
+        }
+
+        if (!dead)
+        {
+            // Bringing a check back in a room nobody has written to is a
+            // no-op, and not what should bring the room into being.
+            var existing = await GetAsync(roomId, cancellationToken);
+            if (existing is null)
+            {
+                return RoomResult.Success(Unwritten(roomId));
+            }
+
+            var mark = existing.DeadChecks.FirstOrDefault(d => d.CheckId == check.Id);
+            if (mark is null)
+            {
+                return RoomResult.Success(existing);
+            }
+
+            existing.DeadChecks.Remove(mark);
+            db.DeadChecks.Remove(mark);
+            existing.UpdatedAt = DateTimeOffset.UtcNow;
+            await db.SaveChangesAsync(cancellationToken);
+            return RoomResult.Success(existing);
+        }
+
+        var room = await GetOrCreateAsync(roomId, cancellationToken);
+
+        // A check with an item in it is not "nothing". Clearing the item is
+        // the deliberate act; this refuses rather than doing it on the side.
+        var holder = room.Assignments.FirstOrDefault(a => a.CheckId == check.Id);
+        if (holder is not null)
+        {
+            var holderName = catalog.Items.TryGetValue(holder.ItemId, out var held) ? held.Name : holder.ItemId;
+            return RoomResult.Failure($"{check.FullName} is recorded as {holderName} — clear that first");
+        }
+
+        if (room.DeadChecks.Any(d => d.CheckId == check.Id))
+        {
+            // Already dead: two players marking the same check is not an error.
+            return RoomResult.Success(room);
+        }
+
+        db.DeadChecks.Add(new DeadCheck
+        {
+            RoomId = room.Id,
+            CheckId = check.Id,
+            At = DateTimeOffset.UtcNow,
+        });
+        room.UpdatedAt = DateTimeOffset.UtcNow;
+
+        try
+        {
+            await db.SaveChangesAsync(cancellationToken);
+        }
+        catch (DbUpdateException)
+        {
+            // Two players marked it in the same instant; the key let one
+            // through, and the other wanted the same thing anyway.
+            db.ChangeTracker.Clear();
+            return RoomResult.Success((await GetAsync(roomId, cancellationToken)) ?? room);
+        }
+
+        return RoomResult.Success(room);
+    }
+
     public async Task<RoomResult> ResetAsync(string roomId, CancellationToken cancellationToken = default)
     {
         var room = await GetAsync(roomId, cancellationToken);
@@ -222,6 +317,8 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
 
         db.Assignments.RemoveRange(room.Assignments);
         room.Assignments.Clear();
+        db.DeadChecks.RemoveRange(room.DeadChecks);
+        room.DeadChecks.Clear();
         room.UpdatedAt = DateTimeOffset.UtcNow;
         await db.SaveChangesAsync(cancellationToken);
         return RoomResult.Success(room);

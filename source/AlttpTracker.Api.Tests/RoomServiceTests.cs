@@ -197,12 +197,99 @@ public class RoomServiceTests : IDisposable
         using (db)
         {
             await service.AssignAsync("test-room", "lamp", "hc/sanctuary");
+            await service.SetDeadAsync("test-room", "dw/bumper-cave-ledge", dead: true);
 
             var result = await service.ResetAsync("test-room");
 
             Assert.True(result.Ok);
             Assert.Empty(result.Room!.Assignments);
+            Assert.Empty(result.Room!.DeadChecks);
             Assert.Empty(db.Assignments);
+            Assert.Empty(db.DeadChecks);
+        }
+    }
+
+    [Fact]
+    public async Task A_check_can_be_marked_dead_and_brought_back()
+    {
+        var service = NewService(out var db);
+        using (db)
+        {
+            var dead = await service.SetDeadAsync("test-room", "dw/bumper-cave-ledge", dead: true);
+            Assert.True(dead.Ok);
+            Assert.Equal("dw/bumper-cave-ledge", Assert.Single(dead.Room!.DeadChecks).CheckId);
+            Assert.Contains("dw/bumper-cave-ledge", RoomState.From(dead.Room!).Dead);
+
+            // Marking it again is not an error: two players may both have looked.
+            Assert.True((await service.SetDeadAsync("test-room", "dw/bumper-cave-ledge", dead: true)).Ok);
+            Assert.Single(db.DeadChecks);
+
+            var back = await service.SetDeadAsync("test-room", "dw/bumper-cave-ledge", dead: false);
+            Assert.True(back.Ok);
+            Assert.Empty(back.Room!.DeadChecks);
+            Assert.Empty(db.DeadChecks);
+        }
+    }
+
+    [Fact]
+    public async Task A_check_holding_an_item_cannot_be_marked_dead()
+    {
+        var service = NewService(out var db);
+        using (db)
+        {
+            await service.AssignAsync("test-room", "hookshot", "ep/big-chest");
+
+            var result = await service.SetDeadAsync("test-room", "ep/big-chest", dead: true);
+
+            Assert.False(result.Ok);
+            Assert.Contains("recorded as Hookshot", result.Error);
+            Assert.Empty(db.DeadChecks);
+        }
+    }
+
+    [Fact]
+    public async Task Recording_an_item_at_a_dead_check_brings_it_back()
+    {
+        var service = NewService(out var db);
+        using (db)
+        {
+            await service.SetDeadAsync("test-room", "ep/big-chest", dead: true);
+
+            var result = await service.AssignAsync("test-room", "hookshot", "ep/big-chest");
+
+            Assert.True(result.Ok);
+            Assert.Empty(result.Room!.DeadChecks);
+            Assert.Equal("ep/big-chest", Assert.Single(result.Room!.Assignments).CheckId);
+        }
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("lw/nope")]
+    public async Task Marking_a_check_that_does_not_exist_is_refused(string? checkId)
+    {
+        var service = NewService(out var db);
+        using (db)
+        {
+            var result = await service.SetDeadAsync("test-room", checkId, dead: true);
+
+            Assert.False(result.Ok);
+            Assert.Empty(db.Rooms);
+        }
+    }
+
+    [Fact]
+    public async Task Marking_a_check_dead_creates_the_room_but_bringing_one_back_does_not()
+    {
+        var service = NewService(out var db);
+        using (db)
+        {
+            Assert.True((await service.SetDeadAsync("never-written", "lw/library", dead: false)).Ok);
+            Assert.Empty(db.Rooms);
+
+            Assert.True((await service.SetDeadAsync("first-dead", "lw/library", dead: true)).Ok);
+            Assert.Single(db.Rooms);
         }
     }
 
