@@ -11,6 +11,8 @@ public class TrackerDbContext(DbContextOptions<TrackerDbContext> options) : DbCo
 
     public DbSet<Assignment> Assignments => Set<Assignment>();
 
+    public DbSet<DeadCheck> DeadChecks => Set<DeadCheck>();
+
     // The game itself, seeded from gamedata.json and served to the board.
     public DbSet<GameRegion> GameRegions => Set<GameRegion>();
 
@@ -38,6 +40,18 @@ public class TrackerDbContext(DbContextOptions<TrackerDbContext> options) : DbCo
                 .HasForeignKey(a => a.RoomId)
                 // Clearing a room should take its assignments with it.
                 .OnDelete(DeleteBehavior.Cascade);
+
+            room.HasMany(r => r.DeadChecks)
+                .WithOne(d => d.Room)
+                .HasForeignKey(d => d.RoomId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        modelBuilder.Entity<DeadCheck>(dead =>
+        {
+            // Dead or not: the pair is the whole fact, so it is the key too.
+            dead.HasKey(d => new { d.RoomId, d.CheckId });
+            dead.Property(d => d.CheckId).HasMaxLength(64);
         });
 
         modelBuilder.Entity<Assignment>(assignment =>

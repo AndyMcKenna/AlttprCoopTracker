@@ -9,9 +9,11 @@ Fire Rod again?"*
 ## How it works
 
 1. Each of the 30 main items is a sprite tile on the left, with the dungeon
-   keys as a third group under Equipment and Items.
+   keys on a **Keys** tab beside them.
 2. Click the **item** — anywhere on its tile — and the tracker arms it.
-3. Click one of the **216 checks** on the right.
+3. Click one of the **216 checks** on the right. Or do it the other way
+   round: click the check first, then the item — either order records the
+   same thing.
 4. The check's name is stored next to the item's sprite as text, and the check
    tile is marked with the item it holds.
 
@@ -31,18 +33,24 @@ and coming back later picks the run up where it was.
 - **A check holds one item.** Assigning an item to a check that already has one
   is refused with a message naming the current holder — clear the old entry
   (the `×` next to it) first. Nobody's note gets silently overwritten.
-- **Filtering.** Search by name, filter by region chips, or hide checks that are
-  already recorded to see what's left. Searching looks inside collapsed regions
-  and opens them, so results are never hidden behind a folded header.
+- **Dead checks.** The small ∅ at the edge of a check tile marks it as holding
+  nothing — looked at, and not worth anyone else's time. It dims and drops
+  out of "Hide recorded/dead"; click it again to bring it back if that was a
+  mistake. A check with an item recorded in it cannot be marked dead, and
+  recording an item at a dead check brings it back on its own.
+- **Filtering.** Filter by the region chips, or hide checks that are already
+  recorded or dead to see what's left. There is nothing to type: the board is
+  meant to be worked with one hand while the other stays on the controller.
 - **Collapsible regions.** Light World and Dark World start open, the dungeons
   start folded; click any region header to toggle it.
-- **Keys.** The key panel is one line per dungeon, big key then small keys, and
-  works exactly like the item board. Small keys are interchangeable, so a
-  dungeon gets one box holding as many locations as it has keys — Palace of
-  Darkness 6, Turtle Rock and Ganon's Tower 4, and so on (11 big keys and 29
-  small keys, matching the game). Hyrule Castle and Castle Tower have no big
-  key; Eastern Palace has no small keys.
-- **Esc** cancels an armed item.
+- **Keys.** The Keys tab is one line per dungeon, big key then small keys, and
+  works exactly like the item board — an armed item or check survives the
+  switch, so a key can be paired with a check from either tab. Small keys are
+  interchangeable, so a dungeon gets one box holding as many locations as it
+  has keys — Palace of Darkness 6, Turtle Rock and Ganon's Tower 4, and so on
+  (11 big keys and 29 small keys, matching the game). Hyrule Castle and Castle
+  Tower have no big key; Eastern Palace has no small keys.
+- **Esc** cancels an armed item or check.
 
 ## Shape of it
 
@@ -101,6 +109,7 @@ Anyone who opens it joins the same board. The room code is in the URL
 
 | Path                                       | What it is                                                |
 | ------------------------------------------ | --------------------------------------------------------- |
+| `docs/specs/`                              | The specifications: how every part of the tracker behaves |
 | `source/data/checks.js`                    | The 216 checks, grouped into 15 regions                   |
 | `source/data/items.js`                     | Items and dungeon keys, and how many locations each holds |
 | `source/data/sprites.js`                   | Hand-drawn 12x12 pixel art for items and check icons      |
@@ -122,6 +131,7 @@ Anyone who opens it joins the same board. The room code is in the URL
 | `GET /api/rooms/{room}`                          | The room; empty if never written |
 | `POST /api/rooms/{room}/assignments`             | Record an item at a check       |
 | `DELETE /api/rooms/{room}/assignments/{id}`      | Clear one location              |
+| `PUT /api/rooms/{room}/dead`                     | Mark a check dead, or bring it back |
 | `POST /api/rooms/{room}/reset`                   | Clear the room                  |
 | `GET /ws?room={room}`                            | Listen for changes              |
 

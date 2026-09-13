@@ -3,7 +3,8 @@
 /**
  * Co-op tracker client.
  *
- * Flow: click an item tile to arm it, then click one of the 216 check tiles.
+ * Flow: click an item tile and then the check it was found at — or the check
+ * first and then the item; either order makes the same pairing.
  * The pairing goes to the server, which broadcasts the whole room state back
  * to everyone connected to the same room code.
  */
@@ -17,10 +18,11 @@ const el = {
   hint: document.getElementById('hint'),
   items: document.getElementById('items'),
   itemsSummary: document.getElementById('items-summary'),
+  tabItems: document.getElementById('tab-items'),
+  tabKeys: document.getElementById('tab-keys'),
   checks: document.getElementById('checks'),
   checksSummary: document.getElementById('checks-summary'),
   regions: document.getElementById('regions'),
-  search: document.getElementById('search'),
   hideUsed: document.getElementById('hide-used'),
   assignBar: document.getElementById('assign-bar'),
   assignBarText: document.getElementById('assign-bar-text'),
@@ -33,12 +35,12 @@ const state = {
   data: null,
   room: null,
   armed: null, // item id waiting for a check click
+  armedCheck: null, // check id waiting for an item click
   regionFilter: new Set(), // empty means "all regions"
   collapsed: new Set(), // region ids folded shut; filled in once data arrives
-  keysCollapsed: true, // the key board is long; it opens on request
+  tab: 'items', // which half of the item board is showing: items or keys
   spriteImages: new Set(), // sprite names that have a real image on disk
   checkImages: new Set(), // check glyphs that have a real image on disk
-  search: '',
   hideUsed: false,
   spriteCache: new Map(),
 };
@@ -132,6 +134,10 @@ function drawnSprite(url) {
 
 // What clicking the tile will do, for its tooltip and for screen readers.
 function tileLabel(item, count, full) {
+  if (state.armedCheck) {
+    const check = state.checksById.get(state.armedCheck);
+    return 'Record ' + item.name + ' at ' + (check ? check.fullName : state.armedCheck);
+  }
   if (state.armed === item.id) {
     return 'Click the check where ' + item.name + ' was found (Esc to cancel)';
   }
@@ -172,10 +178,19 @@ function render() {
   renderItems(owners);
   renderChecks(owners);
 
-  const mainItems = state.data.items.filter((item) => item.panel === 'items');
-  const found = mainItems.filter((item) => assignmentsFor(item.id).length).length;
-  el.itemsSummary.textContent = found + ' of ' + mainItems.length + ' located';
-  el.checksSummary.textContent = owners.size + ' of ' + state.data.checks.length + ' recorded';
+  // The summary follows the tab. Items count tiles with at least one
+  // location; keys count individual keys, since a dungeon's 6 small keys
+  // share one box and each is worth finding.
+  const shown = state.data.items.filter((item) => item.panel === state.tab);
+  const found =
+    state.tab === 'keys'
+      ? shown.reduce((sum, item) => sum + assignmentsFor(item.id).length, 0)
+      : shown.filter((item) => assignmentsFor(item.id).length).length;
+  const total = state.tab === 'keys' ? shown.reduce((sum, item) => sum + item.slots, 0) : shown.length;
+  el.itemsSummary.textContent = found + ' of ' + total + ' located';
+  const dead = state.room ? state.room.dead.length : 0;
+  el.checksSummary.textContent =
+    owners.size + ' of ' + state.data.checks.length + ' recorded' + (dead ? ', ' + dead + ' dead' : '');
 }
 
 /**
@@ -275,41 +290,10 @@ function buildItemTile(item) {
 }
 
 /**
- * The Keys group: one row per dungeon, big key first, then the single
- * small-key box. Rendered as a third group inside the item board.
+ * The Keys tab: one row per dungeon, big key first, then the single
+ * small-key box.
  */
-function buildKeysGroup() {
-  const section = document.createElement('div');
-
-  const title = document.createElement('button');
-  title.className = 'item-group-title item-group-toggle';
-  title.type = 'button';
-  title.setAttribute('aria-expanded', String(!state.keysCollapsed));
-  title.addEventListener('click', () => {
-    state.keysCollapsed = !state.keysCollapsed;
-    render();
-  });
-
-  // Caret and label together, so the count still sits at the far right.
-  const label = document.createElement('span');
-  label.className = 'group-label';
-  const caret = document.createElement('span');
-  caret.className = 'group-caret';
-  caret.textContent = state.keysCollapsed ? '▸' : '▾';
-  label.appendChild(caret);
-  label.appendChild(document.createTextNode('Keys'));
-  title.appendChild(label);
-
-  // Keys count individual keys, not boxes: a dungeon's 6 small keys are 6.
-  const keyItems = state.data.items.filter((item) => item.panel === 'keys');
-  const found = keyItems.reduce((sum, item) => sum + assignmentsFor(item.id).length, 0);
-  const total = keyItems.reduce((sum, item) => sum + item.slots, 0);
-  const count = document.createElement('span');
-  count.className = 'group-count';
-  count.textContent = found + ' of ' + total + ' located';
-  title.appendChild(count);
-  section.appendChild(title);
-
+function buildKeysBoard() {
   const grid = document.createElement('div');
   grid.className = 'key-grid';
 
@@ -338,11 +322,25 @@ function buildKeysGroup() {
     grid.appendChild(row);
   }
 
-  if (!state.keysCollapsed) section.appendChild(grid);
-  return section;
+  return grid;
 }
 
+/**
+ * The item board is two tabs, Items and Keys, so that neither has to be
+ * scrolled past to reach the other: forty key tiles under the items made
+ * for a long panel. An armed item or check survives a tab switch, so a key
+ * can be paired with a check on either tab.
+ */
 function renderItems(owners) {
+  el.tabItems.setAttribute('aria-selected', String(state.tab === 'items'));
+  el.tabKeys.setAttribute('aria-selected', String(state.tab === 'keys'));
+  el.items.setAttribute('aria-labelledby', state.tab === 'keys' ? 'tab-keys' : 'tab-items');
+
+  if (state.tab === 'keys') {
+    el.items.replaceChildren(buildKeysBoard());
+    return;
+  }
+
   const frag = document.createDocumentFragment();
 
   for (const group of state.data.groups) {
@@ -364,13 +362,78 @@ function renderItems(owners) {
     frag.appendChild(section);
   }
 
-  frag.appendChild(buildKeysGroup());
   el.items.replaceChildren(frag);
+}
+
+/**
+ * One check tile. The tile is the button that pairs it with an item; the
+ * small "nothing here" button at its edge marks it dead — looked at, found
+ * to hold nothing, so it can be dimmed and taken off the table. Two buttons
+ * cannot nest, so the tile is a div around the pair.
+ */
+function buildCheckTile(check, owner, dead) {
+  const tile = document.createElement('div');
+  tile.className = 'check';
+  if (owner) tile.classList.add('is-used');
+  if (dead) tile.classList.add('is-dead');
+  const armed = state.armedCheck === check.id;
+  if (armed) tile.classList.add('is-armed');
+
+  const main = document.createElement('button');
+  main.className = 'check-main';
+  main.type = 'button';
+  main.title = armed
+    ? 'Click the item found at ' + check.fullName + ' (Esc to cancel)'
+    : dead
+      ? check.fullName + ' — nothing here (click to bring it back)'
+      : check.fullName + (owner ? ' — holds ' + owner.name : '');
+  main.setAttribute('aria-pressed', String(armed));
+
+  // A real image for this glyph wins; failing that, the real chest, so a
+  // glyph with no art of its own still looks like the rest of the board
+  // rather than falling back to the drawn pixel art. Drop in a PNG named
+  // after the glyph, rebuild the sheet, and those tiles pick it up.
+  const icon = state.checkImages.has(check.icon)
+    ? sheetSprite('checks', check.icon)
+    : state.checkImages.has('chest')
+      ? sheetSprite('checks', 'chest')
+      : drawnSprite(spriteUrl('icon:' + check.icon, state.data.iconSprites[check.icon]));
+  icon.classList.add('check-icon');
+  main.appendChild(icon);
+
+  const label = document.createElement('span');
+  label.className = 'check-label';
+  label.textContent = check.name;
+  if (owner || dead) {
+    const holder = document.createElement('span');
+    holder.className = 'check-holder';
+    holder.textContent = owner ? owner.name : 'nothing';
+    label.appendChild(holder);
+  }
+  main.appendChild(label);
+  main.addEventListener('click', () => pickCheck(check, owner, dead));
+  tile.appendChild(main);
+
+  // A check with an item in it is not nothing; the service would refuse the
+  // mark, so the button is not offered.
+  if (!owner) {
+    const toggle = document.createElement('button');
+    toggle.className = 'check-dead';
+    toggle.type = 'button';
+    toggle.textContent = '∅';
+    toggle.title = dead ? 'Bring ' + check.name + ' back' : 'Nothing at ' + check.name;
+    toggle.setAttribute('aria-label', toggle.title);
+    toggle.setAttribute('aria-pressed', String(dead));
+    toggle.addEventListener('click', () => setDead(check, !dead));
+    tile.appendChild(toggle);
+  }
+
+  return tile;
 }
 
 function renderChecks(owners) {
   const scroll = el.checks.scrollTop;
-  const needle = state.search.trim().toLowerCase();
+  const dead = new Set((state.room && state.room.dead) || []);
   const frag = document.createDocumentFragment();
   let shown = 0;
 
@@ -379,15 +442,13 @@ function renderChecks(owners) {
 
     const matches = state.data.checks.filter((check) => {
       if (check.region !== region.id) return false;
-      if (state.hideUsed && owners.has(check.id)) return false;
-      if (needle && !check.fullName.toLowerCase().includes(needle)) return false;
+      if (state.hideUsed && (owners.has(check.id) || dead.has(check.id))) return false;
       return true;
     });
     if (!matches.length) continue;
     shown += matches.length;
 
-    // A search should never hide its own results behind a collapsed header.
-    const collapsed = !needle && state.collapsed.has(region.id);
+    const collapsed = state.collapsed.has(region.id);
 
     const block = document.createElement('div');
     block.className = 'region-block';
@@ -423,39 +484,7 @@ function renderChecks(owners) {
     grid.className = 'check-grid';
 
     for (const check of matches) {
-      const owner = owners.get(check.id);
-
-      const tile = document.createElement('button');
-      tile.className = 'check';
-      tile.type = 'button';
-      tile.title = check.fullName + (owner ? ' — holds ' + owner.name : '');
-      if (owner) tile.classList.add('is-used');
-
-      // A real image for this glyph wins; failing that, the real chest, so a
-      // glyph with no art of its own still looks like the rest of the board
-      // rather than falling back to the drawn pixel art. Drop in a PNG named
-      // after the glyph, rebuild the sheet, and those tiles pick it up.
-      const icon = state.checkImages.has(check.icon)
-        ? sheetSprite('checks', check.icon)
-        : state.checkImages.has('chest')
-          ? sheetSprite('checks', 'chest')
-          : drawnSprite(spriteUrl('icon:' + check.icon, state.data.iconSprites[check.icon]));
-      icon.classList.add('check-icon');
-      tile.appendChild(icon);
-
-      const label = document.createElement('span');
-      label.className = 'check-label';
-      label.textContent = check.name;
-      if (owner) {
-        const holder = document.createElement('span');
-        holder.className = 'check-holder';
-        holder.textContent = owner.name;
-        label.appendChild(holder);
-      }
-      tile.appendChild(label);
-
-      tile.addEventListener('click', () => pickCheck(check));
-      grid.appendChild(tile);
+      grid.appendChild(buildCheckTile(check, owners.get(check.id), dead.has(check.id)));
     }
 
     block.appendChild(grid);
@@ -529,33 +558,70 @@ function renderRegionFilters() {
 
 /* ------------------------------------------------------------ assignment */
 
+/**
+ * A pairing is one item and one check, clicked in either order. Whichever is
+ * clicked first is "armed" and waits; the second click completes the pair.
+ * Clicking the armed thing again puts it down, and clicking a different
+ * thing of the same kind swaps it in.
+ */
 function toggleArm(itemId) {
+  if (state.armedCheck) {
+    send({ type: 'assign', itemId, checkId: state.armedCheck });
+    disarm();
+    return;
+  }
   state.armed = state.armed === itemId ? null : itemId;
   syncAssignBar();
   render();
 }
 
+function pickCheck(check, owner, dead) {
+  if (state.armed) {
+    // Recording an item at a dead check brings it back; the service does that.
+    send({ type: 'assign', itemId: state.armed, checkId: check.id });
+    disarm();
+    return;
+  }
+  // A dead check's click is "that was a mistake": it comes back, rather than
+  // arming, since there is nothing to record at a check that holds nothing.
+  if (dead) {
+    setDead(check, false);
+    return;
+  }
+  // A check holds one item, so arming a taken one could only end in the
+  // service refusing it. Say so now, and say what to do instead.
+  if (owner) {
+    showHint(check.fullName + ' already holds ' + owner.name + ' — clear it from ' + owner.name + ' first.');
+    return;
+  }
+  state.armedCheck = state.armedCheck === check.id ? null : check.id;
+  syncAssignBar();
+  render();
+}
+
+function setDead(check, dead) {
+  // A check waiting for its item and then declared empty is no longer waiting.
+  if (state.armedCheck === check.id) disarm();
+  send({ type: 'dead', checkId: check.id, dead });
+}
+
 function disarm() {
-  if (!state.armed) return;
+  if (!state.armed && !state.armedCheck) return;
   state.armed = null;
+  state.armedCheck = null;
   syncAssignBar();
   render();
 }
 
 function syncAssignBar() {
-  const item = state.armed && state.data.items.find((entry) => entry.id === state.armed);
+  const item = state.armed && state.itemsById.get(state.armed);
+  const check = state.armedCheck && state.checksById.get(state.armedCheck);
+  // Each class lights up the tiles that would complete the pair on hover.
   document.body.classList.toggle('is-assigning', Boolean(item));
-  el.assignBar.hidden = !item;
+  document.body.classList.toggle('is-picking-item', Boolean(check));
+  el.assignBar.hidden = !item && !check;
   if (item) el.assignBarText.textContent = 'Click the check where ' + item.name + ' was found';
-}
-
-function pickCheck(check) {
-  if (!state.armed) {
-    showHint('Choose an item first, then click a check.');
-    return;
-  }
-  send({ type: 'assign', itemId: state.armed, checkId: check.id });
-  disarm();
+  if (check) el.assignBarText.textContent = 'Click the item found at ' + check.fullName;
 }
 
 function showHint(message) {
@@ -592,6 +658,12 @@ async function send(action) {
     });
   } else if (action.type === 'unassign') {
     request = fetch(roomUrl('/assignments/' + action.assignmentId), { method: 'DELETE' });
+  } else if (action.type === 'dead') {
+    request = fetch(roomUrl('/dead'), {
+      method: 'PUT',
+      ...json,
+      body: JSON.stringify({ checkId: action.checkId, dead: action.dead }),
+    });
   } else if (action.type === 'reset') {
     request = fetch(roomUrl('/reset'), { method: 'POST' });
   } else {
@@ -696,10 +768,13 @@ el.roomInput.addEventListener('change', () => {
   el.roomInput.value = roomId;
 });
 
-el.search.addEventListener('input', () => {
-  state.search = el.search.value;
-  render();
-});
+for (const [tab, button] of [['items', el.tabItems], ['keys', el.tabKeys]]) {
+  button.addEventListener('click', () => {
+    if (state.tab === tab) return;
+    state.tab = tab;
+    render();
+  });
+}
 
 el.hideUsed.addEventListener('change', () => {
   state.hideUsed = el.hideUsed.checked;

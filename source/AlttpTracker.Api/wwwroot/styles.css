@@ -211,46 +211,36 @@ h2 {
   margin-bottom: 6px;
 }
 
-.group-count {
-  font-size: 11px;
-  letter-spacing: normal;
-  text-transform: none;
+/* Items and Keys are two tabs on one panel; the selected one is drawn like
+   the panel heading it replaces, the other a muted click away. */
+.tabs {
+  display: flex;
+  gap: 4px;
 }
 
-/* A group heading that folds its contents away. */
-.item-group-toggle {
-  width: 100%;
+.tab {
   background: none;
   border: none;
-  border-radius: 4px;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
   cursor: pointer;
   font: inherit;
-  font-size: 11px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--muted);
-  padding: 3px 4px;
-  margin-left: -4px;
+  padding: 0 6px 8px;
 }
 
-.item-group-toggle:hover,
-.item-group-toggle:focus-visible {
-  background: var(--bg-tile);
+.tab:hover,
+.tab:focus-visible {
   color: var(--text);
   outline: none;
 }
 
-.group-label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.group-caret {
-  width: 9px;
-  flex: none;
-  font-size: 10px;
-  line-height: 1;
+.tab[aria-selected='true'] {
+  color: var(--text);
+  border-bottom-color: var(--accent);
 }
 
 .item-grid {
@@ -441,21 +431,14 @@ h2 {
 
 /* ---------- checks ---------- */
 
+/* Region chips on the left, the hide switch on the right. Nothing to type:
+   the board is meant to be worked one-handed, with the other still on the
+   controller. */
 .filters {
   display: flex;
   gap: 10px;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.search {
-  flex: 1;
-  background: var(--bg-tile);
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  color: var(--text);
-  font: inherit;
-  padding: 5px 8px;
+  align-items: flex-start;
+  margin-bottom: 10px;
 }
 
 .toggle {
@@ -465,13 +448,15 @@ h2 {
   color: var(--muted);
   font-size: 12px;
   white-space: nowrap;
+  /* Sit on the chips' line, not above it. */
+  padding-top: 2px;
 }
 
 .region-filters {
+  flex: 1;
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
-  margin-bottom: 10px;
 }
 
 .region-chip {
@@ -558,24 +543,88 @@ h2 {
   margin-top: 5px;
 }
 
+/* Two buttons side by side: the tile itself, and the sliver at its edge that
+   marks it dead. The frame belongs to the wrapper so both share one outline. */
 .check {
-  display: grid;
-  grid-template-columns: 22px 1fr;
-  gap: 6px;
-  align-items: center;
+  display: flex;
+  align-items: stretch;
   background: var(--bg-tile);
   border: 1px solid var(--line);
   border-radius: 5px;
-  cursor: pointer;
-  font: inherit;
   color: var(--text);
-  padding: 4px 6px;
-  text-align: left;
+  overflow: hidden;
 }
 
 .check:hover {
   background: var(--bg-tile-hover);
   border-color: var(--accent-dim);
+}
+
+.check-main {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 6px;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  padding: 4px 6px;
+  text-align: left;
+}
+
+.check-main:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: -1px;
+}
+
+.check-dead {
+  flex: none;
+  width: 20px;
+  background: none;
+  border: none;
+  border-left: 1px solid var(--line);
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1;
+  padding: 0;
+  opacity: 0.55;
+}
+
+.check-dead:hover,
+.check-dead:focus-visible {
+  background: var(--bg-tile);
+  color: var(--bad);
+  opacity: 1;
+  outline: none;
+}
+
+/* Looked at, nothing there: dimmed and off the table until it is clicked back. */
+.check.is-dead {
+  border-style: dashed;
+  opacity: 0.45;
+}
+
+.check.is-dead:hover {
+  opacity: 0.8;
+}
+
+.check.is-dead .check-icon {
+  filter: grayscale(1);
+}
+
+.check.is-dead .check-holder {
+  color: var(--muted);
+}
+
+.check.is-dead .check-dead {
+  color: var(--accent);
+  opacity: 1;
 }
 
 .check-icon {
@@ -610,8 +659,16 @@ h2 {
   opacity: 0.6;
 }
 
-/* Only meaningful while an item is armed, but harmless otherwise. */
-.is-assigning .check:hover {
+/* A check clicked first, waiting for its item. */
+.check.is-armed,
+.check.is-armed:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+/* Whichever half of the pair is still to be clicked lights up on hover. */
+.is-assigning .check:hover,
+.is-picking-item .item:hover {
   border-color: var(--accent);
   box-shadow: 0 0 0 1px var(--accent);
 }
