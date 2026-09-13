@@ -2370,6 +2370,30 @@
       "ordinal": 6
     },
     {
+      "id": "heartcontainer",
+      "name": "Heart Container",
+      "label": null,
+      "sprite": "heartcontainer",
+      "slots": 11,
+      "group": "Equipment",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 7
+    },
+    {
+      "id": "rupees300",
+      "name": "300 Rupees",
+      "label": null,
+      "sprite": "rupees300",
+      "slots": 4,
+      "group": "Equipment",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "ordinal": 8
+    },
+    {
       "id": "bow",
       "name": "Bow",
       "label": null,
@@ -2379,7 +2403,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
-      "ordinal": 7
+      "ordinal": 9
     },
     {
       "id": "blueboomerang",
@@ -2391,7 +2415,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
-      "ordinal": 8
+      "ordinal": 10
     },
     {
       "id": "redboomerang",
@@ -2403,7 +2427,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
-      "ordinal": 9
+      "ordinal": 11
     },
     {
       "id": "hookshot",
@@ -2415,7 +2439,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
-      "ordinal": 10
+      "ordinal": 12
     },
     {
       "id": "mushroom",
@@ -2427,7 +2451,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
-      "ordinal": 11
+      "ordinal": 13
     },
     {
       "id": "powder",
@@ -2439,7 +2463,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
-      "ordinal": 12
+      "ordinal": 14
     },
     {
       "id": "firerod",
@@ -2451,7 +2475,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
-      "ordinal": 13
+      "ordinal": 15
     },
     {
       "id": "icerod",
@@ -2463,7 +2487,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
-      "ordinal": 14
+      "ordinal": 16
     },
     {
       "id": "bombos",
@@ -2475,7 +2499,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
-      "ordinal": 15
+      "ordinal": 17
     },
     {
       "id": "ether",
@@ -2487,7 +2511,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
-      "ordinal": 16
+      "ordinal": 18
     },
     {
       "id": "quake",
@@ -2499,7 +2523,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
-      "ordinal": 17
+      "ordinal": 19
     },
     {
       "id": "lamp",
@@ -2511,7 +2535,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
-      "ordinal": 18
+      "ordinal": 20
     },
     {
       "id": "hammer",
@@ -2523,7 +2547,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
-      "ordinal": 19
+      "ordinal": 21
     },
     {
       "id": "shovel",
@@ -2535,7 +2559,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
-      "ordinal": 20
+      "ordinal": 22
     },
     {
       "id": "flute",
@@ -2547,7 +2571,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
-      "ordinal": 21
+      "ordinal": 23
     },
     {
       "id": "bugnet",
@@ -2559,7 +2583,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
-      "ordinal": 22
+      "ordinal": 24
     },
     {
       "id": "book",
@@ -2571,7 +2595,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
-      "ordinal": 23
+      "ordinal": 25
     },
     {
       "id": "bottle",
@@ -2583,7 +2607,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
-      "ordinal": 24
+      "ordinal": 26
     },
     {
       "id": "somaria",
@@ -2595,7 +2619,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
-      "ordinal": 25
+      "ordinal": 27
     },
     {
       "id": "byrna",
@@ -2607,7 +2631,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
-      "ordinal": 26
+      "ordinal": 28
     },
     {
       "id": "cape",
@@ -2619,7 +2643,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
-      "ordinal": 27
+      "ordinal": 29
     },
     {
       "id": "mirror",
@@ -2631,7 +2655,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
-      "ordinal": 28
+      "ordinal": 30
     },
     {
       "id": "halfmagic",
@@ -2643,7 +2667,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
-      "ordinal": 29
+      "ordinal": 31
     },
     {
       "id": "sk-hc",
@@ -2655,7 +2679,7 @@
       "panel": "keys",
       "dungeon": "hc",
       "alwaysCount": true,
-      "ordinal": 30
+      "ordinal": 32
     },
     {
       "id": "sk-ct",
@@ -2667,7 +2691,7 @@
       "panel": "keys",
       "dungeon": "ct",
       "alwaysCount": true,
-      "ordinal": 31
+      "ordinal": 33
     },
     {
       "id": "bk-ep",
@@ -2679,7 +2703,7 @@
       "panel": "keys",
       "dungeon": "ep",
       "alwaysCount": false,
-      "ordinal": 32
+      "ordinal": 34
     },
     {
       "id": "bk-dp",
@@ -2691,7 +2715,7 @@
       "panel": "keys",
       "dungeon": "dp",
       "alwaysCount": false,
-      "ordinal": 33
+      "ordinal": 35
     },
     {
       "id": "sk-dp",
@@ -2703,7 +2727,7 @@
       "panel": "keys",
       "dungeon": "dp",
       "alwaysCount": true,
-      "ordinal": 34
+      "ordinal": 36
     },
     {
       "id": "bk-toh",
@@ -2715,7 +2739,7 @@
       "panel": "keys",
       "dungeon": "toh",
       "alwaysCount": false,
-      "ordinal": 35
+      "ordinal": 37
     },
     {
       "id": "sk-toh",
@@ -2727,7 +2751,7 @@
       "panel": "keys",
       "dungeon": "toh",
       "alwaysCount": true,
-      "ordinal": 36
+      "ordinal": 38
     },
     {
       "id": "bk-pod",
@@ -2739,7 +2763,7 @@
       "panel": "keys",
       "dungeon": "pod",
       "alwaysCount": false,
-      "ordinal": 37
+      "ordinal": 39
     },
     {
       "id": "sk-pod",
@@ -2751,7 +2775,7 @@
       "panel": "keys",
       "dungeon": "pod",
       "alwaysCount": true,
-      "ordinal": 38
+      "ordinal": 40
     },
     {
       "id": "bk-sp",
@@ -2763,7 +2787,7 @@
       "panel": "keys",
       "dungeon": "sp",
       "alwaysCount": false,
-      "ordinal": 39
+      "ordinal": 41
     },
     {
       "id": "sk-sp",
@@ -2775,7 +2799,7 @@
       "panel": "keys",
       "dungeon": "sp",
       "alwaysCount": true,
-      "ordinal": 40
+      "ordinal": 42
     },
     {
       "id": "bk-sw",
@@ -2787,7 +2811,7 @@
       "panel": "keys",
       "dungeon": "sw",
       "alwaysCount": false,
-      "ordinal": 41
+      "ordinal": 43
     },
     {
       "id": "sk-sw",
@@ -2799,7 +2823,7 @@
       "panel": "keys",
       "dungeon": "sw",
       "alwaysCount": true,
-      "ordinal": 42
+      "ordinal": 44
     },
     {
       "id": "bk-tt",
@@ -2811,7 +2835,7 @@
       "panel": "keys",
       "dungeon": "tt",
       "alwaysCount": false,
-      "ordinal": 43
+      "ordinal": 45
     },
     {
       "id": "sk-tt",
@@ -2823,7 +2847,7 @@
       "panel": "keys",
       "dungeon": "tt",
       "alwaysCount": true,
-      "ordinal": 44
+      "ordinal": 46
     },
     {
       "id": "bk-ip",
@@ -2835,7 +2859,7 @@
       "panel": "keys",
       "dungeon": "ip",
       "alwaysCount": false,
-      "ordinal": 45
+      "ordinal": 47
     },
     {
       "id": "sk-ip",
@@ -2847,7 +2871,7 @@
       "panel": "keys",
       "dungeon": "ip",
       "alwaysCount": true,
-      "ordinal": 46
+      "ordinal": 48
     },
     {
       "id": "bk-mm",
@@ -2859,7 +2883,7 @@
       "panel": "keys",
       "dungeon": "mm",
       "alwaysCount": false,
-      "ordinal": 47
+      "ordinal": 49
     },
     {
       "id": "sk-mm",
@@ -2871,7 +2895,7 @@
       "panel": "keys",
       "dungeon": "mm",
       "alwaysCount": true,
-      "ordinal": 48
+      "ordinal": 50
     },
     {
       "id": "bk-tr",
@@ -2883,7 +2907,7 @@
       "panel": "keys",
       "dungeon": "tr",
       "alwaysCount": false,
-      "ordinal": 49
+      "ordinal": 51
     },
     {
       "id": "sk-tr",
@@ -2895,7 +2919,7 @@
       "panel": "keys",
       "dungeon": "tr",
       "alwaysCount": true,
-      "ordinal": 50
+      "ordinal": 52
     },
     {
       "id": "bk-gt",
@@ -2907,7 +2931,7 @@
       "panel": "keys",
       "dungeon": "gt",
       "alwaysCount": false,
-      "ordinal": 51
+      "ordinal": 53
     },
     {
       "id": "sk-gt",
@@ -2919,7 +2943,7 @@
       "panel": "keys",
       "dungeon": "gt",
       "alwaysCount": true,
-      "ordinal": 52
+      "ordinal": 54
     }
   ],
   "keyPanel": [
@@ -3676,6 +3700,42 @@
         "....kskk....",
         "....kkk.....",
         "............"
+      ]
+    },
+    {
+      "name": "heartcontainer",
+      "kind": "item",
+      "rows": [
+        "............",
+        "..kkk..kkk..",
+        ".krrrkkrrrk.",
+        "krwrrrrrrrrk",
+        "krrrrrrrrrrk",
+        "kRrrrrrrrrRk",
+        ".kRrrrrrrRk.",
+        "..kRrrrrRk..",
+        "...kRrrRk...",
+        "....kRRk....",
+        ".....kk.....",
+        "............"
+      ]
+    },
+    {
+      "name": "rupees300",
+      "kind": "item",
+      "rows": [
+        ".....kk.....",
+        "....kggk....",
+        "...kgGGgk...",
+        "...kgGGgk...",
+        "....kggk....",
+        ".....kk.....",
+        "............",
+        "www.www.www.",
+        "..w.w.w.w.w.",
+        "www.w.w.w.w.",
+        "..w.w.w.w.w.",
+        "www.www.www."
       ]
     },
     {

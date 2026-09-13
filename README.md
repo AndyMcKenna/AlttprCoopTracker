@@ -8,7 +8,7 @@ Fire Rod again?"*
 
 ## How it works
 
-1. Each of the 30 main items is a sprite tile on the left, with the dungeon
+1. Each of the 32 main items is a sprite tile on the left, with the dungeon
    keys on a **Keys** tab beside them.
 2. Click the **item** — anywhere on its tile — and the tracker arms it.
 3. Click one of the **216 checks** on the right. Or do it the other way
@@ -27,7 +27,8 @@ and coming back later picks the run up where it was.
 
 - **Progressive items have several slots.** Sword holds 4 locations, Shield 3,
   Bottle 4, and Mail, Gloves and Bow 2 each — the Bow's second slot is the
-  silver arrows. These carry a `found/total` counter next to the name,
+  silver arrows. Heart Container holds 11 and 300 Rupees 4, one per prize in
+  the game. These carry a `found/total` counter next to the name,
   green once every slot is placed. Single-slot items simply move when you
   re-assign them; multi-slot items fill up and then say so.
 - **A check holds one item.** Assigning an item to a check that already has one

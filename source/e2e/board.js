@@ -13,7 +13,7 @@ function newRoom(prefix) {
 async function openBoard(page, room) {
   await page.goto('/board.html?room=' + encodeURIComponent(room));
   await expect(page.locator('#status')).toHaveText('Connected');
-  await expect(page.locator('#items .item')).toHaveCount(30);
+  await expect(page.locator('#items .item')).toHaveCount(32);
 }
 
 function item(page, id) {
