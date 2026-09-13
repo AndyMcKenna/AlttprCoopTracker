@@ -15,7 +15,13 @@ is drawn.
 - **BOARD-2** A top bar: the title (a link home), the connection status, how
   many players are in the room, the room code box, **Copy invite link** and
   **Reset**.
-- **BOARD-3** Two panels. Left: the item board. Right: the checks.
+- **BOARD-3** Two panels. Left: the item board. Right: the checks. The seam
+  between them can be dragged to give either side more room, or nudged with
+  the arrow keys once focused; the width is kept in the browser and comes
+  back on the next visit. Double-clicking the seam (or Backspace/Delete on
+  it) returns to the default split. Neither panel can be dragged narrower
+  than it needs to draw its tiles. On a page too narrow for two columns the
+  panels stack and the seam is not offered.
 - **BOARD-4** The item board is two tabs, **Items** and **Keys**. Items
   shows the Equipment and Items groups as tiles; Keys shows one line per
   dungeon with its big-key box then its small-key box (or the small-key box

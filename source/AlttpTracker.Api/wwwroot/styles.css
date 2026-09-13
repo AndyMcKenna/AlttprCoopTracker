@@ -162,17 +162,66 @@ h2 {
 
 /* ---------- layout ---------- */
 
+/* Items | splitter | checks. The item column is --items-width, which starts
+   as a share of the page and becomes a pixel width once the player drags the
+   splitter; the check column takes whatever is left. */
 .layout {
+  --items-width: minmax(340px, 2fr);
+  --splitter-width: 12px;
   display: grid;
-  grid-template-columns: minmax(340px, 2fr) minmax(360px, 3fr);
-  gap: 12px;
+  grid-template-columns: var(--items-width) var(--splitter-width) minmax(360px, 3fr);
   padding: 12px 16px 72px;
   align-items: stretch;
+}
+
+/* The seam between the panels: the whole column is the drag target, and a
+   thin bar in the middle of it shows on hover so it reads as a handle. */
+.splitter {
+  position: relative;
+  cursor: col-resize;
+  touch-action: none;
+}
+
+.splitter::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  margin-left: -1px;
+  border-radius: 1px;
+  background: var(--line);
+  opacity: 0;
+  transition: opacity 0.12s;
+}
+
+.splitter:hover::before,
+.splitter:focus-visible::before,
+.is-resizing .splitter::before {
+  opacity: 1;
+  background: var(--accent-dim);
+}
+
+.splitter:focus-visible {
+  outline: none;
+}
+
+/* Mid-drag, the pointer must not select text or change shape over the panels. */
+.is-resizing {
+  cursor: col-resize;
+  user-select: none;
 }
 
 @media (max-width: 1000px) {
   .layout {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  /* One column: nothing to resize, and the saved width is ignored. */
+  .splitter {
+    display: none;
   }
 }
 
