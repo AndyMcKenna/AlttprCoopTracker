@@ -57,7 +57,7 @@ test.describe('the board', () => {
     await expect(page.locator('#assign-bar')).toBeHidden();
   });
 
-  test('clicking the armed tile again puts it down, and so does Esc', async ({ page }) => {
+  test('clicking the armed tile again puts it down, and so do Esc and a right-click', async ({ page }) => {
     await openBoard(page, newRoom());
 
     await item(page, 'lamp').click();
@@ -70,6 +70,18 @@ test.describe('the board', () => {
     await page.keyboard.press('Escape');
     await expect(check(page, 'lw/library')).not.toHaveClass(/is-armed/);
     await expect(page.locator('#assign-bar')).toBeHidden();
+
+    // A right-click anywhere is Esc for the hand on the mouse.
+    await item(page, 'lamp').click();
+    await expect(item(page, 'lamp')).toHaveClass(/is-armed/);
+    await page.locator('#checks').click({ button: 'right', position: { x: 5, y: 5 } });
+    await expect(item(page, 'lamp')).not.toHaveClass(/is-armed/);
+    await expect(page.locator('#assign-bar')).toBeHidden();
+
+    await checkBody(page, 'lw/library').click();
+    await expect(check(page, 'lw/library')).toHaveClass(/is-armed/);
+    await page.locator('.brand').click({ button: 'right' });
+    await expect(check(page, 'lw/library')).not.toHaveClass(/is-armed/);
   });
 
   test('a check holds one item, and the refusal names the holder', async ({ page }) => {

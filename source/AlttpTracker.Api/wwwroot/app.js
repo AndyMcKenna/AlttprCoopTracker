@@ -859,6 +859,17 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
+// The hand on the mouse should not have to reach for Esc: a right-click
+// anywhere puts down whatever is armed. The context menu is only kept back
+// when the click actually cancelled something; otherwise it is the
+// browser's as usual.
+document.addEventListener('contextmenu', (event) => {
+  if (state.armed || state.armedCheck) {
+    event.preventDefault();
+    disarm();
+  }
+});
+
 fetch('api/gamedata')
   .then((response) => response.json())
   .then((data) => {

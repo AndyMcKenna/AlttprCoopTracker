@@ -50,7 +50,7 @@ and coming back later picks the run up where it was.
   has keys — Palace of Darkness 6, Turtle Rock and Ganon's Tower 4, and so on
   (11 big keys and 29 small keys, matching the game). Hyrule Castle and Castle
   Tower have no big key; Eastern Palace has no small keys.
-- **Esc** cancels an armed item or check.
+- **Esc** or a **right-click** anywhere cancels an armed item or check.
 
 ## Shape of it
 
