@@ -3,7 +3,7 @@
 /**
  * Co-op tracker client.
  *
- * Flow: pick an item ("Set location"), then click one of the 216 check tiles.
+ * Flow: click an item tile to arm it, then click one of the 216 check tiles.
  * The pairing goes to the server, which broadcasts the whole room state back
  * to everyone connected to the same room code.
  */
@@ -130,14 +130,8 @@ function drawnSprite(url) {
   return sprite;
 }
 
-// The one bit of chrome that isn't game art: a pencil for "record a location".
-const PENCIL_ICON =
-  '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">' +
-  '<path d="M11.0 1.2 L14.8 5.0 L4.9 14.9 L0.7 15.3 L1.1 11.1 Z" fill="currentColor"/>' +
-  '<path d="M9.1 3.1 L12.9 6.9" stroke="var(--bg-tile)" stroke-width="1.2" fill="none"/>' +
-  '</svg>';
-
-function editLabel(item, count, full) {
+// What clicking the tile will do, for its tooltip and for screen readers.
+function tileLabel(item, count, full) {
   if (state.armed === item.id) {
     return 'Click the check where ' + item.name + ' was found (Esc to cancel)';
   }
@@ -185,8 +179,12 @@ function render() {
 }
 
 /**
- * One item tile: sprite, name, the pencil that arms it, and the list of
- * locations recorded against it. Shared by the item board and the key panel.
+ * One item tile: sprite, name, and the list of locations recorded against
+ * it. The whole tile is the button that arms it — a player mid-run should
+ * not have to aim at a corner. It cannot literally be a <button>, since the
+ * location rows carry their own clear buttons and a button may not contain
+ * another, so it takes the role and the keyboard handling instead.
+ * Shared by the item board and the key panel.
  */
 function buildItemTile(item) {
   const entries = assignmentsFor(item.id);
@@ -194,8 +192,21 @@ function buildItemTile(item) {
 
   const tile = document.createElement('div');
   tile.className = 'item';
+  tile.setAttribute('role', 'button');
+  tile.tabIndex = 0;
   if (state.armed === item.id) tile.classList.add('is-armed');
   tile.classList.add(entries.length ? 'is-found' : 'is-empty');
+  const tileText = tileLabel(item, entries.length, full);
+  tile.title = tileText;
+  tile.setAttribute('aria-label', tileText);
+  tile.setAttribute('aria-pressed', String(state.armed === item.id));
+  tile.addEventListener('click', () => toggleArm(item.id));
+  tile.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      toggleArm(item.id);
+    }
+  });
 
   // A real image wins over the drawn pixel art when one exists for this sprite.
   const sprite = state.spriteImages.has(item.sprite)
@@ -220,17 +231,6 @@ function buildItemTile(item) {
     name.appendChild(count);
   }
   body.appendChild(name);
-
-  const edit = document.createElement('button');
-  edit.className = 'item-edit';
-  edit.type = 'button';
-  edit.innerHTML = PENCIL_ICON;
-  if (full && state.armed !== item.id) edit.classList.add('is-full');
-  const editText = editLabel(item, entries.length, full);
-  edit.title = editText;
-  edit.setAttribute('aria-label', editText);
-  edit.addEventListener('click', () => toggleArm(item.id));
-  tile.appendChild(edit);
 
   if (entries.length) {
     const list = document.createElement('ul');
@@ -257,9 +257,11 @@ function buildItemTile(item) {
       remove.type = 'button';
       remove.textContent = '×';
       remove.title = 'Clear this location';
-      remove.addEventListener('click', () =>
-        send({ type: 'unassign', assignmentId: entry.id })
-      );
+      // The tile around it arms the item; clearing a row must not also do that.
+      remove.addEventListener('click', (event) => {
+        event.stopPropagation();
+        send({ type: 'unassign', assignmentId: entry.id });
+      });
       row.appendChild(remove);
 
       list.appendChild(row);
