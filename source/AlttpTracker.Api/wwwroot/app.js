@@ -190,6 +190,8 @@ function render() {
   const owners = buildOwners();
   renderItems(owners);
   renderChecks(owners);
+  // The All chip's tooltip depends on what is folded, so the chips follow.
+  renderRegionFilters();
 
   // The summary follows the tab. Items count tiles with at least one
   // location; keys count individual keys, since a dungeon's 6 small keys
@@ -579,21 +581,36 @@ function renderRegionFilters() {
         state.regionFilter.add(region.id);
       }
       syncCollapsedToFilter();
-      renderRegionFilters();
       render();
     });
     frag.appendChild(chip);
   }
 
   const all = document.createElement('button');
-  all.className = 'region-chip';
+  all.className = 'region-chip region-chip-all';
   all.type = 'button';
   all.textContent = 'All';
-  all.setAttribute('aria-pressed', String(state.regionFilter.size === 0));
+  const showingAll = state.regionFilter.size === 0;
+  all.setAttribute('aria-pressed', String(showingAll));
+  all.title = showingAll
+    ? state.collapsed.size
+      ? 'Open every region'
+      : 'Fold the dungeons back up'
+    : 'Show every region';
   all.addEventListener('click', () => {
-    state.regionFilter.clear();
-    syncCollapsedToFilter();
-    renderRegionFilters();
+    // With no filter on, All has nothing to clear, so it works the folds
+    // instead: open every region, or, if they are all open, back to the
+    // default with the dungeons folded.
+    if (showingAll) {
+      if (state.collapsed.size) {
+        state.collapsed.clear();
+      } else {
+        syncCollapsedToFilter();
+      }
+    } else {
+      state.regionFilter.clear();
+      syncCollapsedToFilter();
+    }
     render();
   });
   frag.appendChild(all);
@@ -1009,7 +1026,6 @@ fetch('api/gamedata')
     state.checkImages = new Set(data.checkImages || []);
     // The overworlds and Death Mountain start open; the dungeons are folded away.
     syncCollapsedToFilter();
-    renderRegionFilters();
     render();
     connect();
   })

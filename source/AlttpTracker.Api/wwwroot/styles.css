@@ -524,6 +524,14 @@ h2 {
   font-weight: 600;
 }
 
+/* Region chips paint themselves in their region's colour when pressed; All
+   has no colour of its own, so it takes the text colour, or it would be dark
+   on dark and look like nothing was selected. */
+.region-chip-all[aria-pressed='true'] {
+  background: var(--text);
+  border-color: var(--text);
+}
+
 /* The check list fills whatever height the item board sets, scrolling inside
    itself rather than leaving dead space beside a tall board. */
 .panel-checks {
