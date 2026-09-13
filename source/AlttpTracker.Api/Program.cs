@@ -31,6 +31,14 @@ builder.Services.AddSingleton<GameCatalog>();
 // Behind a proxy that hides the client address (Azure App Service on Linux,
 // for one) the address has to come from the forwarded headers, or every
 // player looks like the same client — see the README.
+//
+// The numbers can be raised through configuration (RateLimits:ApiPerMinute,
+// RateLimits:SocketsPerAddress) for the one client that legitimately looks
+// like a script: the browser test suite, which opens every board from one
+// address and would otherwise trip the cap as it grows.
+var apiPerMinute = builder.Configuration.GetValue("RateLimits:ApiPerMinute", 120);
+var socketsPerAddress = builder.Configuration.GetValue("RateLimits:SocketsPerAddress", 32);
+
 builder.Services.AddRateLimiter(options =>
 {
     options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
@@ -39,7 +47,7 @@ builder.Services.AddRateLimiter(options =>
         ClientAddress(context),
         _ => new FixedWindowRateLimiterOptions
         {
-            PermitLimit = 120,
+            PermitLimit = apiPerMinute,
             Window = TimeSpan.FromMinutes(1),
             QueueLimit = 0,
         }));
@@ -50,7 +58,7 @@ builder.Services.AddRateLimiter(options =>
         ClientAddress(context),
         _ => new ConcurrencyLimiterOptions
         {
-            PermitLimit = 32,
+            PermitLimit = socketsPerAddress,
             QueueLimit = 0,
         }));
 });

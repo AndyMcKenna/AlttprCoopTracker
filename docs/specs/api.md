@@ -70,6 +70,10 @@ limits rather than logins.
   that is `429`, with nothing queued.
 - **API-9** `/ws` allows 32 open sockets per client address. The 33rd is
   refused with `429`.
+- **API-9a** Both numbers are the defaults and can be raised through
+  configuration (`RateLimits:ApiPerMinute`, `RateLimits:SocketsPerAddress`).
+  The browser test suite does, since all of its boards come from one
+  address; nothing else should.
 - **API-10** The client address is the connection's, or the forwarded
   address when the host is configured to trust its proxy's forwarded
   headers. Without that, behind a proxy, every player is one client.
