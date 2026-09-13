@@ -140,6 +140,31 @@ public class DatabaseTests(PostgresFixture postgres) : IClassFixture<PostgresFix
     }
 
     [Fact]
+    public async Task Two_first_writes_to_a_new_room_at_once_both_land()
+    {
+        var catalog = await postgres.SeedAndLoadAsync();
+
+        // The race is between two requests each finding no room and each
+        // creating it; the primary key lets one through. Run it a few times
+        // so that the two actually overlap at least once.
+        for (var attempt = 0; attempt < 10; attempt += 1)
+        {
+            var room = "race-" + Guid.NewGuid().ToString("n")[..8];
+            await using var first = postgres.NewContext();
+            await using var second = postgres.NewContext();
+
+            var results = await Task.WhenAll(
+                new RoomService(first, catalog).AssignAsync(room, "lamp", "lw/hobo"),
+                new RoomService(second, catalog).AssignAsync(room, "hookshot", "lw/library"));
+
+            Assert.All(results, result => Assert.True(result.Ok, result.Error));
+
+            await using var db = postgres.NewContext();
+            Assert.Equal(2, await db.Assignments.CountAsync(a => a.RoomId == room));
+        }
+    }
+
+    [Fact]
     public async Task The_sweeper_drops_stale_rooms_and_keeps_live_ones()
     {
         var now = DateTimeOffset.UtcNow;

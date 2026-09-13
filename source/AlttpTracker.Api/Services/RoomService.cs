@@ -88,7 +88,20 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
         };
 
         db.Rooms.Add(room);
-        await db.SaveChangesAsync(cancellationToken);
+        try
+        {
+            await db.SaveChangesAsync(cancellationToken);
+        }
+        catch (DbUpdateException)
+        {
+            // Two players' first writes to a new room arrived together, and
+            // the other one created it a moment ago. Theirs is the room now;
+            // this write carries on against it rather than failing.
+            db.Entry(room).State = EntityState.Detached;
+            return await GetAsync(id, cancellationToken)
+                ?? throw new InvalidOperationException($"Room {id} could neither be created nor found.");
+        }
+
         return room;
     }
 

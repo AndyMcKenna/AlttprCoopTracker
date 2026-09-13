@@ -30,7 +30,9 @@ same board. There are no accounts and no owners.
   been written to reads as an empty board with no rows in the database.
 - **ROOM-7** A room is created by its first write: recording a location or
   marking a check dead. Clearing a location, bringing a check back or
-  resetting a room that does not exist succeeds and creates nothing.
+  resetting a room that does not exist succeeds and creates nothing. Two
+  first writes arriving together both succeed: one creates the room and the
+  other lands in it.
 - **ROOM-8** A room records when it was created and when it was last
   changed. Every write updates the latter.
 
