@@ -31,6 +31,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: npm
+          cache-dependency-path: source/package-lock.json
+
+      # The sprite sheet build reads PNGs with pngjs, a devDependency of the
+      # tooling under source/; the game tables and the export need nothing.
+      - name: Install the tooling
+        working-directory: source
+        run: npm ci
 
       # The game is authored in source/data and carried to the API as
       # gamedata.json. Regenerating it here catches a checks.js edit that was
@@ -42,6 +50,21 @@ jobs:
           if ! git diff --quiet -- AlttpTracker.Api/gamedata.json; then
             echo "::error::gamedata.json is out of date. Run 'npm run export-gamedata' in source/ and commit the result."
             git diff -- AlttpTracker.Api/gamedata.json
+            exit 1
+          fi
+
+      # The board draws its sprites from one packed sheet built out of the PNGs
+      # in wwwroot/sprites. Rebuilding it here catches a sprite that was added
+      # or redrawn without the sheet being regenerated. Only the CSS is
+      # compared: it carries a fingerprint of the source pixels, and the PNG's
+      # bytes can differ between zlib versions without the picture changing.
+      - name: Check the sprite sheet is current
+        working-directory: source
+        run: |
+          npm run build-sprites
+          if ! git diff --quiet -- AlttpTracker.Api/wwwroot/sprites/sheet.css; then
+            echo "::error::The sprite sheet is out of date. Run 'npm run build-sprites' in source/ and commit sheet.png and sheet.css."
+            git diff -- AlttpTracker.Api/wwwroot/sprites/sheet.css
             exit 1
           fi
 

@@ -5,7 +5,8 @@
   "description": "Game tables and tooling for the ALTTP co-op tracker; the app itself is the .NET solution alongside.",
   "scripts": {
     "test": "node test/smoke.test.js",
-    "export-gamedata": "node scripts/export-gamedata.js"
+    "export-gamedata": "node scripts/export-gamedata.js",
+    "build-sprites": "node scripts/build-spritesheet.js"
   },
   "engines": {
     "node": ">=18"

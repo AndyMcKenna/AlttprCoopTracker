@@ -105,6 +105,7 @@ Anyone who opens it joins the same board. The room code is in the URL
 | `source/data/items.js`                     | Items and dungeon keys, and how many locations each holds |
 | `source/data/sprites.js`                   | Hand-drawn 12x12 pixel art for items and check icons      |
 | `source/scripts/export-gamedata.js`        | Carries those three to `gamedata.json` for the API        |
+| `source/scripts/build-spritesheet.js`      | Packs the sprite PNGs into one sheet, one CSS class each  |
 | `source/test/smoke.test.js`                | Game tables and sprites                                   |
 | `source/AlttpTracker.AppHost`              | Aspire: Postgres, the app, and the migrations command     |
 | `source/AlttpTracker.Api`                  | The app: board, API, EF model, migrations, websockets     |
@@ -183,7 +184,14 @@ source of truth; run `npm run export-gamedata` after editing `checks.js` or
 
 The tiles use game sprites from `wwwroot/sprites` where one exists, and fall
 back to 12x12 pixel art drawn as character grids in `source/data/sprites.js`,
-rendered to inline SVG in the browser. Each check tile gets a glyph based on
+rendered to inline SVG in the browser.
+
+The individual PNGs in `wwwroot/sprites/items` and `wwwroot/sprites/checks`
+are the source, but the board does not fetch them one by one: `npm run
+build-sprites` packs them into `wwwroot/sprites/sheet.png` and writes
+`sheet.css` with a class per sprite, so the whole board draws from a single
+image. Run it after adding or redrawing a sprite and commit both generated
+files; `npm test` and CI fail when the sheet is behind its sources. Each check tile gets a glyph based on
 what kind of location it is: chest, big chest, NPC, boss drop, tablet, or
 freestanding item.
 
