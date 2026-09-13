@@ -33,9 +33,9 @@ and coming back later picks the run up where it was.
 - **A check holds one item.** Assigning an item to a check that already has one
   is refused with a message naming the current holder — clear the old entry
   (the `×` next to it) first. Nobody's note gets silently overwritten.
-- **Filtering.** Search by name, filter by region chips, or hide checks that are
-  already recorded to see what's left. Searching looks inside collapsed regions
-  and opens them, so results are never hidden behind a folded header.
+- **Filtering.** Filter by the region chips, or hide checks that are already
+  recorded to see what's left. There is nothing to type: the board is meant
+  to be worked with one hand while the other stays on the controller.
 - **Collapsible regions.** Light World and Dark World start open, the dungeons
   start folded; click any region header to toggle it.
 - **Keys.** The key panel is one line per dungeon, big key then small keys, and
