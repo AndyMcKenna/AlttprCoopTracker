@@ -791,6 +791,36 @@ h2 {
   text-transform: uppercase;
 }
 
+/* The title line itself, when it has something beside it (the GitHub mark
+   on the changelog): a row, in the heading's own type, not the subtitle's. */
+.home-head h1 .home-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  text-transform: none;
+}
+
+.github-mark {
+  display: inline-flex;
+  color: var(--muted);
+  line-height: 0;
+}
+
+.github-mark svg {
+  width: 24px;
+  height: 24px;
+}
+
+.github-mark:hover,
+.github-mark:focus-visible {
+  color: var(--accent);
+  outline: none;
+}
+
 .home-lede {
   margin: 14px 0 0;
   color: var(--muted);
