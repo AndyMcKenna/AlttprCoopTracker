@@ -16,6 +16,7 @@ public class RoomServiceTests : IDisposable
     private readonly SqliteConnection _connection;
     private readonly DbContextOptions<TrackerDbContext> _options;
     private readonly GameCatalog _catalog;
+    private readonly RoomLocks _locks = new();
 
     public RoomServiceTests()
     {
@@ -68,7 +69,7 @@ public class RoomServiceTests : IDisposable
     private RoomService NewService(out TrackerDbContext db)
     {
         db = new TrackerDbContext(_options);
-        return new RoomService(db, _catalog);
+        return new RoomService(db, _catalog, _locks);
     }
 
     public void Dispose() => _connection.Dispose();
