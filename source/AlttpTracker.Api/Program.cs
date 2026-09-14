@@ -164,6 +164,19 @@ rooms.MapPut("/{roomId}/dead", async (
     return await RespondAsync(result, service, broker, ct);
 });
 
+// Keydrop on or off for the room. A flag, not a toggle, for the same reason
+// as the dead marks: two players clicking at once should agree.
+rooms.MapPut("/{roomId}/keydrop", async (
+    string roomId,
+    KeydropRequest request,
+    RoomService service,
+    RoomBroker broker,
+    CancellationToken ct) =>
+{
+    var result = await service.SetKeydropAsync(roomId, request.Keydrop, ct);
+    return await RespondAsync(result, service, broker, ct);
+});
+
 rooms.MapPost("/{roomId}/reset", async (
     string roomId,
     RoomService service,
@@ -266,3 +279,5 @@ static string ClientAddress(HttpContext context) =>
 record AssignRequest(string? ItemId, string? CheckId);
 
 record DeadRequest(string? CheckId, bool Dead);
+
+record KeydropRequest(bool Keydrop);

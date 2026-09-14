@@ -23,6 +23,9 @@ public class GameRegion
     /// <summary>How many checks the region holds, shown on its filter chip.</summary>
     public int Count { get; set; }
 
+    /// <summary>How many more it holds when the room is playing keydrop.</summary>
+    public int KeydropCount { get; set; }
+
     public int Ordinal { get; set; }
 }
 
@@ -44,6 +47,9 @@ public class GameCheck
     /// <summary>Which glyph the tile shows: chest, boss, mirror, and so on.</summary>
     public required string Icon { get; set; }
 
+    /// <summary>A key under a pot or on an enemy: only in play when the room is playing keydrop.</summary>
+    public bool Keydrop { get; set; }
+
     public int Ordinal { get; set; }
 }
 
@@ -61,6 +67,15 @@ public class GameItem
 
     /// <summary>How many locations it can hold; 4 for the sword, 1 for the lamp.</summary>
     public int Slots { get; set; }
+
+    /// <summary>How many when the room is playing keydrop; the same for everything but small keys.</summary>
+    public int KeydropSlots { get; set; }
+
+    /// <summary>Exists only in keydrop: Hyrule Castle's big key, Eastern Palace's small keys.</summary>
+    public bool KeydropOnly { get; set; }
+
+    /// <summary>The key-row label in keydrop, where a box may hold more keys.</summary>
+    public string? KeydropLabel { get; set; }
 
     /// <summary>Equipment or Items; null for keys, which are grouped by dungeon.</summary>
     public string? Group { get; set; }

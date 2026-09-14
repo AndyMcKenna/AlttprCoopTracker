@@ -13,6 +13,7 @@ same origin, so the board's requests are relative (`api/rooms/...`).
 | `POST /api/rooms/{room}/assignments`        | Body `{ itemId, checkId }`. Records a location (ITEM-5 to ITEM-13)  |
 | `DELETE /api/rooms/{room}/assignments/{id}` | Clears one location by assignment id (ITEM-10)                      |
 | `PUT /api/rooms/{room}/dead`                | Body `{ checkId, dead: true\|false }`. Marks or brings back (DEAD-*) |
+| `PUT /api/rooms/{room}/keydrop`             | Body `{ keydrop: true\|false }`. The room's keydrop setting (ROOM-13) |
 | `POST /api/rooms/{room}/reset`              | Clears the room (ROOM-10)                                           |
 | `GET /ws?room={room}`                       | The websocket ([live-updates.md](live-updates.md))                  |
 | `GET /alive`                                | Liveness: the process is up                                         |
@@ -28,7 +29,9 @@ same origin, so the board's requests are relative (`api/rooms/...`).
 - **API-3** `GET /api/gamedata` returns the items (id, name, label, sprite,
   slots, group, panel, dungeon, alwaysCount), the item groups in display
   order, the key panel rows, the regions (id, name, short, color, count),
-  the checks (id, name, fullName, region, regionName, regionShort, icon),
+  the checks (id, name, fullName, region, regionName, regionShort, icon,
+  keydrop), the items' keydrop slot counts and labels and which exist only
+  in keydrop, each region's keydrop count,
   the pixel-art palette and sprites, and which sprite PNGs exist on disk.
   It is loaded once at startup and does not change while the app runs.
 - **API-4** A room state is:
@@ -38,6 +41,7 @@ same origin, so the board's requests are relative (`api/rooms/...`).
     "id": "brave-golden-deku",
     "createdAt": 1789249478622,
     "updatedAt": 1789249503364,
+    "keydrop": false,
     "assignments": {
       "lamp": [{ "id": "<guid>", "checkId": "lw/links-uncle", "at": 1789249484241 }]
     },
@@ -47,7 +51,8 @@ same origin, so the board's requests are relative (`api/rooms/...`).
 
   Times are Unix milliseconds. Assignments are grouped by item id, each
   list in the order recorded (ITEM-13); items with no location are absent.
-  Dead checks are ids in the order marked (DEAD-8).
+  Dead checks are ids in the order marked (DEAD-8). `keydrop` is the room's
+  setting (ROOM-13).
 
 ## Refusals and errors
 

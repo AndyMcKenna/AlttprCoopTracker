@@ -13,8 +13,9 @@ is drawn.
 ## Layout
 
 - **BOARD-2** A top bar: the title (a link home), the connection status, how
-  many players are in the room, the room code box, **Copy invite link** and
-  **Reset**.
+  many players are in the room, the room code box, the **Keydrop** switch
+  (ROOM-13), **Copy invite link** and **Reset**. The switch shows the room's
+  setting and changes it for everyone.
 - **BOARD-3** Two panels. Left: the item board. Right: the checks. The seam
   between them can be dragged to give either side more room, or nudged with
   the arrow keys once focused; the width is kept in the browser and comes
@@ -35,8 +36,9 @@ is drawn.
   folds the region. Light World, Death Mountain and Dark World start open;
   the dungeons start folded. Filtering to a region opens it; dropping the filter returns
   every region to its default.
-- **BOARD-7** The check panel's summary reads `<recorded> of 216 recorded`,
-  followed by `, <n> dead` when any are.
+- **BOARD-7** The check panel's summary reads `<recorded> of 216 recorded`
+  (249 in keydrop), followed by `, <n> dead` when any are. Only checks in
+  play are counted on either side.
 
 ## Tiles
 
