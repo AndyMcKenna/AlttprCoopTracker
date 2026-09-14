@@ -20,7 +20,7 @@ Each statement is numbered so that a test, an issue or a PR can point at it
 
 Words used throughout:
 
-- **Item** — one of the 30 main items, or a dungeon's big-key or small-key box.
+- **Item** — one of the 32 main items, or a dungeon's big-key or small-key box.
 - **Check** — one of the 216 item locations in the game.
 - **Location** (of an item) — a check the item has been recorded at. One row
   in the item's tile.

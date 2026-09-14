@@ -15,7 +15,13 @@ is drawn.
 - **BOARD-2** A top bar: the title (a link home), the connection status, how
   many players are in the room, the room code box, **Copy invite link** and
   **Reset**.
-- **BOARD-3** Two panels. Left: the item board. Right: the checks.
+- **BOARD-3** Two panels. Left: the item board. Right: the checks. The seam
+  between them can be dragged to give either side more room, or nudged with
+  the arrow keys once focused; the width is kept in the browser and comes
+  back on the next visit. Double-clicking the seam (or Backspace/Delete on
+  it) returns to the default split. Neither panel can be dragged narrower
+  than it needs to draw its tiles. On a page too narrow for two columns the
+  panels stack and the seam is not offered.
 - **BOARD-4** The item board is two tabs, **Items** and **Keys**. Items
   shows the Equipment and Items groups as tiles; Keys shows one line per
   dungeon with its big-key box then its small-key box (or the small-key box
@@ -23,11 +29,11 @@ is drawn.
   on load. Switching tabs changes nothing else — in particular whatever is
   armed stays armed.
 - **BOARD-5** The item panel's summary follows the tab: Items counts tiles
-  with at least one location out of 30; Keys counts keys found out of 40 (a
+  with at least one location out of 32; Keys counts keys found out of 40 (a
   box with 2 of 6 counts 2).
 - **BOARD-6** The check panel lists checks by region under a header that
-  folds the region. Light World and Dark World start open; the dungeons
-  start folded. Filtering to a region opens it; dropping the filter returns
+  folds the region. Light World, Death Mountain and Dark World start open;
+  the dungeons start folded. Filtering to a region opens it; dropping the filter returns
   every region to its default.
 - **BOARD-7** The check panel's summary reads `<recorded> of 216 recorded`,
   followed by `, <n> dead` when any are.
@@ -58,8 +64,10 @@ is drawn.
   button; the armed tile is outlined; and tiles of the other kind light up
   as the pointer passes over them.
 - **BOARD-14** Clicking the armed tile again puts it down. Clicking a
-  different tile of the same kind arms that one instead. **Esc** and the
-  Cancel button put down whatever is armed.
+  different tile of the same kind arms that one instead. **Esc**, a
+  **right-click** anywhere on the page, and the Cancel button put down
+  whatever is armed. A right-click that cancels something does not open the
+  browser's menu; one with nothing armed is left to the browser.
 - **BOARD-15** A check that holds an item cannot be armed. Clicking it with
   nothing armed shows a hint naming the holder and saying to clear it from
   that item first. (With an item armed, the click is sent and the service
@@ -72,7 +80,10 @@ is drawn.
 ## Filters
 
 - **BOARD-18** Region chips, one per region plus **All**, filter the check
-  list. Chips can be combined; All clears them. There is no text search.
+  list. Chips can be combined; All clears them. With no filter on, All works
+  the folds instead: it opens every region, and, when every region is
+  already open, folds them back to the default (BOARD-6). All is drawn as
+  selected whenever no filter is on. There is no text search.
 - **BOARD-19** **Hide recorded/dead** hides every check that holds an item
   or is dead, leaving what is still worth visiting. Region headers count
   what is shown.

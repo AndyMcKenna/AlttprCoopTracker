@@ -10,16 +10,16 @@ test.describe('the board', () => {
   test('draws the items, the region chips, and the two overworlds open', async ({ page }) => {
     await openBoard(page, newRoom());
 
-    await expect(page.locator('#items .item')).toHaveCount(30);
-    await expect(page.locator('#items-summary')).toHaveText('0 of 30 located');
+    await expect(page.locator('#items .item')).toHaveCount(32);
+    await expect(page.locator('#items-summary')).toHaveText('0 of 32 located');
     await expect(page.locator('#checks-summary')).toHaveText('0 of 216 recorded');
 
-    // Fifteen regions and All.
-    await expect(page.locator('.region-chip')).toHaveCount(16);
+    // Sixteen regions and All.
+    await expect(page.locator('.region-chip')).toHaveCount(17);
 
-    // Light World and Dark World start open; the dungeons start folded.
-    await expect(page.locator('.check')).toHaveCount(68 + 25);
-    await expect(page.locator('.region-title').first()).toContainText('Light World (68)');
+    // The overworlds and Death Mountain start open; the dungeons start folded.
+    await expect(page.locator('.check')).toHaveCount(54 + 14 + 25);
+    await expect(page.locator('.region-title')).toContainText(['Light World (54)', 'Death Mountain (14)', 'Dark World (25)']);
     await expect(page.locator('.region-title[aria-expanded="false"]')).toHaveCount(13);
 
     // Nothing to type: the filter box is gone.
@@ -38,7 +38,7 @@ test.describe('the board', () => {
     await expect(item(page, 'hookshot').locator('.loc-name')).toHaveText("Link's House");
     await expect(check(page, 'lw/links-house')).toHaveClass(/is-used/);
     await expect(check(page, 'lw/links-house').locator('.check-holder')).toHaveText('Hookshot');
-    await expect(page.locator('#items-summary')).toHaveText('1 of 30 located');
+    await expect(page.locator('#items-summary')).toHaveText('1 of 32 located');
     await expect(page.locator('#checks-summary')).toHaveText('1 of 216 recorded');
     await expect(page.locator('#assign-bar')).toBeHidden();
   });
@@ -57,7 +57,7 @@ test.describe('the board', () => {
     await expect(page.locator('#assign-bar')).toBeHidden();
   });
 
-  test('clicking the armed tile again puts it down, and so does Esc', async ({ page }) => {
+  test('clicking the armed tile again puts it down, and so do Esc and a right-click', async ({ page }) => {
     await openBoard(page, newRoom());
 
     await item(page, 'lamp').click();
@@ -70,6 +70,18 @@ test.describe('the board', () => {
     await page.keyboard.press('Escape');
     await expect(check(page, 'lw/library')).not.toHaveClass(/is-armed/);
     await expect(page.locator('#assign-bar')).toBeHidden();
+
+    // A right-click anywhere is Esc for the hand on the mouse.
+    await item(page, 'lamp').click();
+    await expect(item(page, 'lamp')).toHaveClass(/is-armed/);
+    await page.locator('#checks').click({ button: 'right', position: { x: 5, y: 5 } });
+    await expect(item(page, 'lamp')).not.toHaveClass(/is-armed/);
+    await expect(page.locator('#assign-bar')).toBeHidden();
+
+    await checkBody(page, 'lw/library').click();
+    await expect(check(page, 'lw/library')).toHaveClass(/is-armed/);
+    await page.locator('.brand').click({ button: 'right' });
+    await expect(check(page, 'lw/library')).not.toHaveClass(/is-armed/);
   });
 
   test('a check holds one item, and the refusal names the holder', async ({ page }) => {
@@ -113,6 +125,23 @@ test.describe('the board', () => {
     await item(page, 'bottle').click();
     await checkBody(page, 'lw/mushroom').click();
     await expect(page.locator('#hint')).toHaveText('Bottle already has 4 locations');
+  });
+
+  test('heart containers and 300 rupees count up like any progressive item', async ({ page }) => {
+    await openBoard(page, newRoom());
+    await expect(item(page, 'heartcontainer').locator('.item-count')).toHaveText('0/11');
+    await expect(item(page, 'rupees300').locator('.item-count')).toHaveText('0/4');
+
+    await item(page, 'heartcontainer').click();
+    await checkBody(page, 'lw/links-house').click();
+    await expect(check(page, 'lw/links-house')).toHaveClass(/is-used/);
+    await item(page, 'heartcontainer').click();
+    await checkBody(page, 'lw/links-uncle').click();
+    await expect(check(page, 'lw/links-uncle')).toHaveClass(/is-used/);
+
+    await expect(item(page, 'heartcontainer').locator('.item-count')).toHaveText('2/11');
+    await expect(item(page, 'heartcontainer').locator('.item-location')).toHaveCount(2);
+    await expect(check(page, 'lw/links-house').locator('.check-holder')).toHaveText('Heart Container');
   });
 
   test('the × clears one location without arming the tile', async ({ page }) => {
@@ -185,8 +214,8 @@ test.describe('the board', () => {
     await expect(page.locator('#items-summary')).toHaveText('1 of 40 located');
 
     await page.locator('#tab-items').click();
-    await expect(page.locator('#items .item')).toHaveCount(30);
-    await expect(page.locator('#items-summary')).toHaveText('0 of 30 located');
+    await expect(page.locator('#items .item')).toHaveCount(32);
+    await expect(page.locator('#items-summary')).toHaveText('0 of 32 located');
   });
 
   test('region chips filter the list and open the region', async ({ page }) => {
@@ -200,6 +229,25 @@ test.describe('the board', () => {
 
     await page.locator('.region-chip', { hasText: 'All' }).click();
     await expect(page.locator('.check')).toHaveCount(93);
+  });
+
+  test('All, clicked again, opens every region, and again folds them back', async ({ page }) => {
+    await openBoard(page, newRoom());
+    const all = page.locator('.region-chip-all');
+    await expect(all).toHaveAttribute('aria-pressed', 'true');
+
+    await all.click();
+    await expect(page.locator('.region-title[aria-expanded="false"]')).toHaveCount(0);
+    await expect(page.locator('.check')).toHaveCount(216);
+
+    await all.click();
+    await expect(page.locator('.region-title[aria-expanded="false"]')).toHaveCount(13);
+    await expect(page.locator('.check')).toHaveCount(93);
+
+    // One dungeon opened by hand still counts as not all open: All opens the rest.
+    await page.locator('.region-title', { hasText: 'Hyrule Castle' }).click();
+    await all.click();
+    await expect(page.locator('.check')).toHaveCount(216);
   });
 
   test('Reset asks first, then clears the room', async ({ page }) => {
@@ -216,7 +264,7 @@ test.describe('the board', () => {
     });
     await page.locator('#reset').click();
 
-    await expect(page.locator('#items-summary')).toHaveText('0 of 30 located');
+    await expect(page.locator('#items-summary')).toHaveText('0 of 32 located');
     await expect(page.locator('#checks-summary')).toHaveText('0 of 216 recorded');
     await expect(check(page, 'dw/catfish')).not.toHaveClass(/is-dead/);
   });

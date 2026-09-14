@@ -2,6 +2,8 @@ using AlttpTracker.Api.Data;
 using AlttpTracker.Api.Models;
 using AlttpTracker.Api.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
 
@@ -29,7 +31,7 @@ public class DatabaseTests(PostgresFixture postgres) : IClassFixture<PostgresFix
         await using var db = postgres.NewContext();
 
         Assert.Equal(216, await db.GameChecks.CountAsync());
-        Assert.Equal(15, await db.GameRegions.CountAsync());
+        Assert.Equal(16, await db.GameRegions.CountAsync());
         Assert.Equal(13, await db.GameKeyRows.CountAsync());
         Assert.NotEmpty(await db.GamePalette.ToListAsync());
 
@@ -161,6 +163,40 @@ public class DatabaseTests(PostgresFixture postgres) : IClassFixture<PostgresFix
 
             await using var db = postgres.NewContext();
             Assert.Equal(2, await db.Assignments.CountAsync(a => a.RoomId == room));
+        }
+    }
+
+    [Fact]
+    public async Task Moving_the_Death_Mountain_checks_carries_rooms_across()
+    {
+        var room = "dm-" + Guid.NewGuid().ToString("n")[..8];
+
+        // Step the schema back to before the move, record against the old
+        // ids the way a Beta 2 room would have, then bring it forward.
+        await using (var db = postgres.NewContext())
+        {
+            await db.GetService<IMigrator>().MigrateAsync("AddDeadChecks");
+
+            db.Rooms.Add(new Room { Id = room, CreatedAt = DateTimeOffset.UtcNow, UpdatedAt = DateTimeOffset.UtcNow });
+            db.Assignments.Add(NewAssignment(room, "lamp", "lw/old-man"));
+            db.Assignments.Add(NewAssignment(room, "hookshot", "lw/library"));
+            db.DeadChecks.Add(new DeadCheck { RoomId = room, CheckId = "lw/floating-island", At = DateTimeOffset.UtcNow });
+            await db.SaveChangesAsync();
+
+            await db.Database.MigrateAsync();
+        }
+
+        await using (var check = postgres.NewContext())
+        {
+            var ids = await check.Assignments
+                .Where(a => a.RoomId == room)
+                .OrderBy(a => a.ItemId)
+                .Select(a => a.ItemId + "@" + a.CheckId)
+                .ToListAsync();
+            Assert.Equal(["hookshot@lw/library", "lamp@dm/old-man"], ids);
+
+            var dead = Assert.Single(await check.DeadChecks.Where(d => d.RoomId == room).ToListAsync());
+            Assert.Equal("dm/floating-island", dead.CheckId);
         }
     }
 

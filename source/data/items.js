@@ -14,6 +14,10 @@ const MAIN_ITEMS = [
   { id: 'boots', name: 'Pegasus Boots', sprite: 'boots', slots: 1, group: 'Equipment' },
   { id: 'flippers', name: 'Flippers', sprite: 'flippers', slots: 1, group: 'Equipment' },
   { id: 'moonpearl', name: 'Moon Pearl', sprite: 'moonpearl', slots: 1, group: 'Equipment' },
+  // Not equipment as such, but worth tracking and there was room: eleven
+  // heart containers and four 300-rupee prizes, each a progressive count.
+  { id: 'heartcontainer', name: 'Heart Container', sprite: 'heartcontainer', slots: 11, group: 'Equipment' },
+  { id: 'rupees300', name: '300 Rupees', sprite: 'rupees300', slots: 4, group: 'Equipment' },
 
   { id: 'bow', name: 'Bow', sprite: 'bow', slots: 2, group: 'Items' },
   // Two separate boomerangs, not one progressive item: the red one is its own

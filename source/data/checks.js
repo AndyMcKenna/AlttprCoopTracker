@@ -44,7 +44,6 @@ const REGIONS = [
       'Sick Kid',
       'Hobo',
       'Bombos Tablet',
-      'Ether Tablet',
       'King Zora',
       'Lost Woods Hideout',
       'Lumberjack Tree',
@@ -65,11 +64,21 @@ const REGIONS = [
       'Waterfall Fairy - Right',
       'Blacksmith',
       'Purple Chest',
-
-      // Death Mountain is light world territory, so its checks live here too.
+      'Master Sword Pedestal',
+    ],
+  },
+  // Death Mountain is light world territory, but it is its own trip up the
+  // mountain, so it gets its own region between the two overworlds.
+  {
+    id: 'dm',
+    name: 'Death Mountain',
+    short: 'DM',
+    color: '#b5762f',
+    checks: [
       'Old Man',
       'Spectacle Rock Cave',
       'Spectacle Rock',
+      'Ether Tablet',
       'Spiral Cave',
       'Mimic Cave',
       'Paradox Lower - Far Left',
@@ -80,8 +89,6 @@ const REGIONS = [
       'Paradox Upper - Left',
       'Paradox Upper - Right',
       'Floating Island',
-
-      'Master Sword Pedestal',
     ],
   },
   {

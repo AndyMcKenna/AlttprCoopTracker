@@ -27,9 +27,12 @@ const el = {
   assignBar: document.getElementById('assign-bar'),
   assignBarText: document.getElementById('assign-bar-text'),
   assignCancel: document.getElementById('assign-cancel'),
+  layout: document.querySelector('.layout'),
+  itemsPanel: document.querySelector('.panel-items'),
+  splitter: document.getElementById('splitter'),
 };
 
-const OPEN_BY_DEFAULT = new Set(['lw', 'dw']);
+const OPEN_BY_DEFAULT = new Set(['lw', 'dm', 'dw']);
 
 const state = {
   data: null,
@@ -187,6 +190,8 @@ function render() {
   const owners = buildOwners();
   renderItems(owners);
   renderChecks(owners);
+  // The All chip's tooltip depends on what is folded, so the chips follow.
+  renderRegionFilters();
 
   // The summary follows the tab. Items count tiles with at least one
   // location; keys count individual keys, since a dungeon's 6 small keys
@@ -542,8 +547,9 @@ function renderChecks(owners) {
 
 /**
  * Filtering to a region is a statement of interest, so that region opens.
- * Dropping the filter falls back to the default: the two overworlds open and
- * every dungeon folded. Regions still pinned by another chip stay open.
+ * Dropping the filter falls back to the default: the two overworlds and Death
+ * Mountain open, every dungeon folded. Regions still pinned by another chip
+ * stay open.
  */
 function syncCollapsedToFilter() {
   state.collapsed = new Set(
@@ -575,21 +581,36 @@ function renderRegionFilters() {
         state.regionFilter.add(region.id);
       }
       syncCollapsedToFilter();
-      renderRegionFilters();
       render();
     });
     frag.appendChild(chip);
   }
 
   const all = document.createElement('button');
-  all.className = 'region-chip';
+  all.className = 'region-chip region-chip-all';
   all.type = 'button';
   all.textContent = 'All';
-  all.setAttribute('aria-pressed', String(state.regionFilter.size === 0));
+  const showingAll = state.regionFilter.size === 0;
+  all.setAttribute('aria-pressed', String(showingAll));
+  all.title = showingAll
+    ? state.collapsed.size
+      ? 'Open every region'
+      : 'Fold the dungeons back up'
+    : 'Show every region';
   all.addEventListener('click', () => {
-    state.regionFilter.clear();
-    syncCollapsedToFilter();
-    renderRegionFilters();
+    // With no filter on, All has nothing to clear, so it works the folds
+    // instead: open every region, or, if they are all open, back to the
+    // default with the dungeons folded.
+    if (showingAll) {
+      if (state.collapsed.size) {
+        state.collapsed.clear();
+      } else {
+        syncCollapsedToFilter();
+      }
+    } else {
+      state.regionFilter.clear();
+      syncCollapsedToFilter();
+    }
     render();
   });
   frag.appendChild(all);
@@ -810,6 +831,131 @@ function setPlayers(count) {
   el.players.textContent = n + (n === 1 ? ' player' : ' players');
 }
 
+/* -------------------------------------------------------------- splitter */
+
+/**
+ * The seam between the item panel and the checks can be dragged to give
+ * either side more room. The width is a pixel value on --items-width, kept
+ * in this browser so it is the same next time; nothing about it goes to the
+ * room. Double-clicking the seam goes back to the default share.
+ */
+const ITEMS_WIDTH_KEY = 'alttp-items-width';
+const ITEMS_WIDTH_MIN = 300;
+const CHECKS_WIDTH_MIN = 360;
+const ITEMS_WIDTH_STEP = 16;
+
+function itemsWidthBounds() {
+  const style = getComputedStyle(el.layout);
+  const inner =
+    el.layout.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+  const max = inner - el.splitter.offsetWidth - CHECKS_WIDTH_MIN;
+  return { min: ITEMS_WIDTH_MIN, max: Math.max(max, ITEMS_WIDTH_MIN) };
+}
+
+function setItemsWidth(px) {
+  const bounds = itemsWidthBounds();
+  const width = Math.round(Math.min(Math.max(px, bounds.min), bounds.max));
+  el.layout.style.setProperty('--items-width', width + 'px');
+  el.splitter.setAttribute('aria-valuenow', String(width));
+  return width;
+}
+
+function saveItemsWidth(width) {
+  try {
+    localStorage.setItem(ITEMS_WIDTH_KEY, String(width));
+  } catch {
+    // Private mode or storage off: the width still holds for this page.
+  }
+}
+
+function resetItemsWidth() {
+  el.layout.style.removeProperty('--items-width');
+  el.splitter.removeAttribute('aria-valuenow');
+  try {
+    localStorage.removeItem(ITEMS_WIDTH_KEY);
+  } catch {
+    // Nothing stored to clear.
+  }
+}
+
+function restoreItemsWidth() {
+  let saved = null;
+  try {
+    saved = localStorage.getItem(ITEMS_WIDTH_KEY);
+  } catch {
+    return;
+  }
+  const px = Number(saved);
+  if (saved !== null && Number.isFinite(px) && px > 0) {
+    setItemsWidth(px);
+  }
+}
+
+function currentItemsWidth() {
+  return el.itemsPanel.getBoundingClientRect().width;
+}
+
+let drag = null;
+
+el.splitter.addEventListener('pointerdown', (event) => {
+  if (event.button !== 0) {
+    return;
+  }
+  drag = { startX: event.clientX, startWidth: currentItemsWidth() };
+  el.splitter.setPointerCapture(event.pointerId);
+  document.body.classList.add('is-resizing');
+  event.preventDefault();
+});
+
+el.splitter.addEventListener('pointermove', (event) => {
+  if (!drag) {
+    return;
+  }
+  setItemsWidth(drag.startWidth + (event.clientX - drag.startX));
+});
+
+function endDrag(event) {
+  if (!drag) {
+    return;
+  }
+  drag = null;
+  document.body.classList.remove('is-resizing');
+  if (el.splitter.hasPointerCapture(event.pointerId)) {
+    el.splitter.releasePointerCapture(event.pointerId);
+  }
+  saveItemsWidth(currentItemsWidth());
+}
+
+el.splitter.addEventListener('pointerup', endDrag);
+el.splitter.addEventListener('pointercancel', endDrag);
+
+el.splitter.addEventListener('dblclick', resetItemsWidth);
+
+// The seam can be worked from the keyboard too: arrows nudge it, and
+// Backspace or Delete puts it back.
+el.splitter.addEventListener('keydown', (event) => {
+  if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+    const delta = event.key === 'ArrowLeft' ? -ITEMS_WIDTH_STEP : ITEMS_WIDTH_STEP;
+    saveItemsWidth(setItemsWidth(currentItemsWidth() + delta));
+    event.preventDefault();
+  } else if (event.key === 'Backspace' || event.key === 'Delete') {
+    resetItemsWidth();
+    event.preventDefault();
+  }
+});
+
+// A saved width that no longer fits — the window got smaller — is pulled
+// back inside the bounds rather than pushing the checks off the page.
+window.addEventListener('resize', () => {
+  // On a narrow page the layout is one column and the seam is not shown;
+  // the bounds mean nothing there, so leave the saved width alone.
+  if (el.splitter.offsetWidth && el.layout.style.getPropertyValue('--items-width')) {
+    setItemsWidth(currentItemsWidth());
+  }
+});
+
+restoreItemsWidth();
+
 /* ------------------------------------------------------------------ init */
 
 el.roomInput.value = roomId;
@@ -859,6 +1005,17 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
+// The hand on the mouse should not have to reach for Esc: a right-click
+// anywhere puts down whatever is armed. The context menu is only kept back
+// when the click actually cancelled something; otherwise it is the
+// browser's as usual.
+document.addEventListener('contextmenu', (event) => {
+  if (state.armed || state.armedCheck) {
+    event.preventDefault();
+    disarm();
+  }
+});
+
 fetch('api/gamedata')
   .then((response) => response.json())
   .then((data) => {
@@ -867,9 +1024,8 @@ fetch('api/gamedata')
     state.itemsById = new Map(data.items.map((item) => [item.id, item]));
     state.spriteImages = new Set(data.spriteImages || []);
     state.checkImages = new Set(data.checkImages || []);
-    // The two overworlds start open; the dungeons are folded away until needed.
+    // The overworlds and Death Mountain start open; the dungeons are folded away.
     syncCollapsedToFilter();
-    renderRegionFilters();
     render();
     connect();
   })

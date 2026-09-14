@@ -8,7 +8,7 @@ Fire Rod again?"*
 
 ## How it works
 
-1. Each of the 30 main items is a sprite tile on the left, with the dungeon
+1. Each of the 32 main items is a sprite tile on the left, with the dungeon
    keys on a **Keys** tab beside them.
 2. Click the **item** — anywhere on its tile — and the tracker arms it.
 3. Click one of the **216 checks** on the right. Or do it the other way
@@ -27,7 +27,8 @@ and coming back later picks the run up where it was.
 
 - **Progressive items have several slots.** Sword holds 4 locations, Shield 3,
   Bottle 4, and Mail, Gloves and Bow 2 each — the Bow's second slot is the
-  silver arrows. These carry a `found/total` counter next to the name,
+  silver arrows. Heart Container holds 11 and 300 Rupees 4, one per prize in
+  the game. These carry a `found/total` counter next to the name,
   green once every slot is placed. Single-slot items simply move when you
   re-assign them; multi-slot items fill up and then say so.
 - **A check holds one item.** Assigning an item to a check that already has one
@@ -41,8 +42,10 @@ and coming back later picks the run up where it was.
 - **Filtering.** Filter by the region chips, or hide checks that are already
   recorded or dead to see what's left. There is nothing to type: the board is
   meant to be worked with one hand while the other stays on the controller.
-- **Collapsible regions.** Light World and Dark World start open, the dungeons
-  start folded; click any region header to toggle it.
+- **Collapsible regions.** Light World, Death Mountain and Dark World start
+  open, the dungeons start folded; click any region header to toggle it.
+  Click **All** with no filter on to open every region at once, and again to
+  fold them back.
 - **Keys.** The Keys tab is one line per dungeon, big key then small keys, and
   works exactly like the item board — an armed item or check survives the
   switch, so a key can be paired with a check from either tab. Small keys are
@@ -50,7 +53,10 @@ and coming back later picks the run up where it was.
   has keys — Palace of Darkness 6, Turtle Rock and Ganon's Tower 4, and so on
   (11 big keys and 29 small keys, matching the game). Hyrule Castle and Castle
   Tower have no big key; Eastern Palace has no small keys.
-- **Esc** cancels an armed item or check.
+- **Resizable panels.** Drag the seam between the items and the checks to
+  give either side more room; double-click it to go back to the default.
+  The width is remembered in your browser.
+- **Esc** or a **right-click** anywhere cancels an armed item or check.
 
 ## Shape of it
 
@@ -123,7 +129,7 @@ Anyone who opens it joins the same board. The room code is in the URL
 | Path                                       | What it is                                                |
 | ------------------------------------------ | --------------------------------------------------------- |
 | `docs/specs/`                              | The specifications: how every part of the tracker behaves |
-| `source/data/checks.js`                    | The 216 checks, grouped into 15 regions                   |
+| `source/data/checks.js`                    | The 216 checks, grouped into 16 regions                   |
 | `source/data/items.js`                     | Items and dungeon keys, and how many locations each holds |
 | `source/data/sprites.js`                   | Hand-drawn 12x12 pixel art for items and check icons      |
 | `source/scripts/export-gamedata.js`        | Carries those three to `gamedata.json` for the API        |
