@@ -14,6 +14,9 @@ namespace AlttpTracker.Api.IntegrationTests;
 /// </summary>
 public class DatabaseTests(PostgresFixture postgres) : IClassFixture<PostgresFixture>
 {
+    // One lock table for the class, as the app has one for the process.
+    private static readonly RoomLocks Locks = new();
+
     [Fact]
     public async Task Migrations_apply_and_leave_nothing_pending()
     {
@@ -127,14 +130,14 @@ public class DatabaseTests(PostgresFixture postgres) : IClassFixture<PostgresFix
 
         await using (var db = postgres.NewContext())
         {
-            var service = new RoomService(db, catalog);
+            var service = new RoomService(db, catalog, Locks);
             Assert.True((await service.AssignAsync(room, "lamp", "hc/sanctuary")).Ok);
         }
 
         // A separate connection, as a later request would use.
         await using (var db = postgres.NewContext())
         {
-            var reopened = await new RoomService(db, catalog).GetOrCreateAsync(room);
+            var reopened = await new RoomService(db, catalog, Locks).GetOrCreateAsync(room);
 
             var assignment = Assert.Single(reopened.Assignments);
             Assert.Equal("hc/sanctuary", assignment.CheckId);
@@ -156,13 +159,45 @@ public class DatabaseTests(PostgresFixture postgres) : IClassFixture<PostgresFix
             await using var second = postgres.NewContext();
 
             var results = await Task.WhenAll(
-                new RoomService(first, catalog).AssignAsync(room, "lamp", "lw/hobo"),
-                new RoomService(second, catalog).AssignAsync(room, "hookshot", "lw/library"));
+                new RoomService(first, catalog, Locks).AssignAsync(room, "lamp", "lw/hobo"),
+                new RoomService(second, catalog, Locks).AssignAsync(room, "hookshot", "lw/library"));
 
             Assert.All(results, result => Assert.True(result.Ok, result.Error));
 
             await using var db = postgres.NewContext();
             Assert.Equal(2, await db.Assignments.CountAsync(a => a.RoomId == room));
+        }
+    }
+
+    [Fact]
+    public async Task Two_moves_of_a_single_slot_item_at_once_leave_it_one_location()
+    {
+        var catalog = await postgres.SeedAndLoadAsync();
+
+        // Both requests read the room, both see the Lamp with room to move,
+        // and without the room lock both would insert. Ten rounds so that
+        // the two actually overlap.
+        for (var attempt = 0; attempt < 10; attempt += 1)
+        {
+            var room = "move-" + Guid.NewGuid().ToString("n")[..8];
+            await using (var seed = postgres.NewContext())
+            {
+                Assert.True((await new RoomService(seed, catalog, Locks).AssignAsync(room, "lamp", "lw/hobo")).Ok);
+            }
+
+            await using var first = postgres.NewContext();
+            await using var second = postgres.NewContext();
+
+            var results = await Task.WhenAll(
+                new RoomService(first, catalog, Locks).AssignAsync(room, "lamp", "lw/library"),
+                new RoomService(second, catalog, Locks).AssignAsync(room, "lamp", "lw/sick-kid"));
+
+            Assert.All(results, result => Assert.True(result.Ok, result.Error));
+
+            await using var db = postgres.NewContext();
+            var lamp = await db.Assignments.Where(a => a.RoomId == room && a.ItemId == "lamp").ToListAsync();
+            var where = Assert.Single(lamp).CheckId;
+            Assert.Contains(where, new[] { "lw/library", "lw/sick-kid" });
         }
     }
 

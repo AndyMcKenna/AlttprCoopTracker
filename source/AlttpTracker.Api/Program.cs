@@ -16,6 +16,7 @@ builder.Services.AddProblemDetails();
 builder.AddNpgsqlDbContext<TrackerDbContext>("tracker");
 
 builder.Services.AddScoped<RoomService>();
+builder.Services.AddSingleton<RoomLocks>();
 builder.Services.AddScoped<GameDataSeeder>();
 builder.Services.AddSingleton<RoomBroker>();
 builder.Services.AddHostedService<RoomSweeper>();
