@@ -13,14 +13,7 @@ namespace AlttpTracker.Api.Data.Migrations
     /// </summary>
     public partial class SwapParadoxNames : Migration
     {
-        private static readonly (string Lower, string Upper)[] Pairs =
-        [
-            ("dm/paradox-lower-far-left", "dm/paradox-upper-far-left"),
-            ("dm/paradox-lower-left", "dm/paradox-upper-left"),
-            ("dm/paradox-lower-middle", "dm/paradox-upper-middle"),
-            ("dm/paradox-lower-right", "dm/paradox-upper-right"),
-            ("dm/paradox-lower-far-right", "dm/paradox-upper-far-right"),
-        ];
+        private static readonly string[] Slugs = ["far-left", "left", "middle", "right", "far-right"];
 
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -36,26 +29,30 @@ namespace AlttpTracker.Api.Data.Migrations
 
         private static void Swap(MigrationBuilder migrationBuilder)
         {
-            // One statement per table, so that a lower id becoming upper can
-            // never be caught by the upper-to-lower rewrite of the same run.
-            var cases = string.Join("\n", Pairs.SelectMany(p => new[]
-            {
-                $"WHEN '{p.Lower}' THEN '{p.Upper}'",
-                $"WHEN '{p.Upper}' THEN '{p.Lower}'",
-            }).Select(line => "        " + line));
-            var ids = string.Join(", ", Pairs.SelectMany(p => new[] { $"'{p.Lower}'", $"'{p.Upper}'" }));
-
+            // Three steps through a prefix nothing else uses. A single UPDATE
+            // with a CASE is not enough: (RoomId, CheckId) is unique and
+            // Postgres checks it row by row, so a room holding both
+            // paradox-lower-left and paradox-upper-left collides with itself
+            // halfway through — which is exactly what took Beta 4 down.
             foreach (var table in new[] { "Assignments", "DeadChecks" })
             {
-                migrationBuilder.Sql(
-                    $"""
-                    UPDATE "{table}"
-                    SET "CheckId" = CASE "CheckId"
-                    {cases}
-                    END
-                    WHERE "CheckId" IN ({ids});
-                    """);
+                Rename(migrationBuilder, table, from: "dm/paradox-lower-", to: "dm/paradox-swap-");
+                Rename(migrationBuilder, table, from: "dm/paradox-upper-", to: "dm/paradox-lower-");
+                Rename(migrationBuilder, table, from: "dm/paradox-swap-", to: "dm/paradox-upper-");
             }
+        }
+
+        private static void Rename(MigrationBuilder migrationBuilder, string table, string from, string to)
+        {
+            var ids = string.Join(", ", Slugs.Select(slug => $"'{from}{slug}'"));
+
+            // substr is 1-based: keep the slug after the old prefix.
+            migrationBuilder.Sql(
+                $"""
+                UPDATE "{table}"
+                SET "CheckId" = '{to}' || substr("CheckId", {from.Length + 1})
+                WHERE "CheckId" IN ({ids});
+                """);
         }
     }
 }
