@@ -83,13 +83,16 @@ const REGIONS = [
       'Ether Tablet',
       'Spiral Cave',
       'Mimic Cave',
-      'Paradox Lower - Far Left',
-      'Paradox Lower - Left',
-      'Paradox Lower - Middle',
-      'Paradox Lower - Right',
-      'Paradox Lower - Far Right',
+      // The randomizer calls the five-chest room Lower and the two-chest
+      // room Upper. Players think of it the other way round, so the names
+      // here are swapped on purpose (issue #47).
+      'Paradox Upper - Far Left',
       'Paradox Upper - Left',
+      'Paradox Upper - Middle',
       'Paradox Upper - Right',
+      'Paradox Upper - Far Right',
+      'Paradox Lower - Left',
+      'Paradox Lower - Right',
       'Floating Island',
     ],
   },
