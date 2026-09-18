@@ -1,8 +1,10 @@
 'use strict';
 
-// The 216 item locations ("checks") of A Link to the Past, grouped by region.
-// Names follow the community/randomizer convention so they can be matched
-// against spoiler logs, other trackers and route notes.
+// The 216 item locations ("checks") of A Link to the Past, grouped by region,
+// plus the 33 keydrop locations — small keys under pots or dropped by enemies
+// that are only shuffled when a room is playing keydrop. Names follow the
+// community/randomizer convention so they can be matched against spoiler
+// logs, other trackers and route notes.
 
 const REGIONS = [
   {
@@ -139,6 +141,12 @@ const REGIONS = [
       'Sewers - Secret Room Right',
       'Sanctuary',
     ],
+    keydrop: [
+      'Map Guard Key Drop',
+      'Boomerang Guard Key Drop',
+      'Key Rat Key Drop',
+      'Big Key Drop',
+    ],
   },
   {
     id: 'ep',
@@ -153,6 +161,10 @@ const REGIONS = [
       'Big Key Chest',
       'Armos Knights',
     ],
+    keydrop: [
+      'Dark Square Pot Key',
+      'Dark Eyegore Key Drop',
+    ],
   },
   {
     id: 'dp',
@@ -166,6 +178,11 @@ const REGIONS = [
       'Big Key Chest',
       'Big Chest',
       'Lanmolas',
+    ],
+    keydrop: [
+      'Desert Tiles 1 Pot Key',
+      'Beamos Hall Pot Key',
+      'Desert Tiles 2 Pot Key',
     ],
   },
   {
@@ -188,6 +205,7 @@ const REGIONS = [
     short: 'CT',
     color: '#9295a3',
     checks: ['Room 03', 'Dark Maze'],
+    keydrop: ['Dark Archer Key Drop', 'Circle of Pots Key Drop'],
   },
   {
     id: 'pod',
@@ -228,6 +246,13 @@ const REGIONS = [
       'Waterfall Room',
       'Arrghus',
     ],
+    keydrop: [
+      'Pot Row Pot Key',
+      'Trench 1 Pot Key',
+      'Hookshot Pot Key',
+      'Trench 2 Pot Key',
+      'Waterway Pot Key',
+    ],
   },
   {
     id: 'sw',
@@ -243,6 +268,10 @@ const REGIONS = [
       'Pot Prison',
       'Pinball Room',
       'Mothula',
+    ],
+    keydrop: [
+      'West Lobby Pot Key',
+      'Spike Corner Key Drop',
     ],
   },
   {
@@ -260,6 +289,10 @@ const REGIONS = [
       'Big Chest',
       'Blind',
     ],
+    keydrop: [
+      'Hallway Pot Key',
+      'Spike Switch Pot Key',
+    ],
   },
   {
     id: 'ip',
@@ -276,6 +309,12 @@ const REGIONS = [
       'Big Chest',
       'Kholdstare',
     ],
+    keydrop: [
+      'Jelly Key Drop',
+      'Conveyor Key Drop',
+      'Hammer Block Key Drop',
+      'Many Pots Pot Key',
+    ],
   },
   {
     id: 'mm',
@@ -291,6 +330,11 @@ const REGIONS = [
       'Big Key Chest',
       'Big Chest',
       'Vitreous',
+    ],
+    keydrop: [
+      'Spikes Pot Key',
+      'Fishbone Pot Key',
+      'Conveyor Crystal Key Drop',
     ],
   },
   {
@@ -311,6 +355,10 @@ const REGIONS = [
       'Laser Bridge - Bottom Left',
       'Laser Bridge - Bottom Right',
       'Trinexx',
+    ],
+    keydrop: [
+      'Pokey 1 Key Drop',
+      'Pokey 2 Key Drop',
     ],
   },
   {
@@ -348,6 +396,12 @@ const REGIONS = [
       'Pre-Moldorm Chest',
       'Moldorm Chest',
     ],
+    keydrop: [
+      'Conveyor Cross Pot Key',
+      'Double Switch Pot Key',
+      'Conveyor Star Pits Pot Key',
+      'Mini Helmasaur Key Drop',
+    ],
   },
 ];
 
@@ -363,13 +417,17 @@ function slug(text) {
 // Dungeon check names repeat across dungeons ("Big Chest"), so the region
 // prefix is what makes an id unique.
 const CHECKS = REGIONS.flatMap((region) =>
-  region.checks.map((name) => ({
+  [
+    ...region.checks.map((name) => ({ name, keydrop: false })),
+    ...(region.keydrop || []).map((name) => ({ name, keydrop: true })),
+  ].map(({ name, keydrop }) => ({
     id: region.id + '/' + slug(name),
     name,
     region: region.id,
     regionName: region.name,
     regionShort: region.short,
     fullName: region.name + ' - ' + name,
+    keydrop,
   }))
 );
 

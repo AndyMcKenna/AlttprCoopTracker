@@ -583,6 +583,34 @@ const ICON_SPRITES = {
   shovel: ITEM_SPRITES.shovel,
   icerod: ITEM_SPRITES.icerod,
   mushroom: ITEM_SPRITES.mushroom,
+  pot: [
+    '............',
+    '....kkkk....',
+    '...knnnnk...',
+    '....kkkk....',
+    '...knnnnk...',
+    '..knnnnnnk..',
+    '.knnnnnnnnk.',
+    '.knnNnnnnnk.',
+    '.knnnnnnnnk.',
+    '..knnnnnnk..',
+    '...kkkkkk...',
+    '............',
+  ],
+  enemy: [
+    '............',
+    '...kkkkkk...',
+    '..kggggggk..',
+    '.kgwkggkwgk.',
+    '.kgkkggkkgk.',
+    '.kggggggggk.',
+    '.kgGGGGGGgk.',
+    '..kggggggk..',
+    '..kgkggkgk..',
+    '...kk..kk...',
+    '............',
+    '............',
+  ],
   sparkle: [
     '............',
     '.....kk.....',
@@ -690,6 +718,13 @@ function kindForCheck(check) {
   const name = check.name;
   if (CHECK_ICONS.has(name)) {
     return CHECK_ICONS.get(name);
+  }
+  // Keydrop locations: a key under a pot, or one an enemy drops.
+  if (/ Pot Key$/.test(name)) {
+    return 'pot';
+  }
+  if (/ Key Drop$/.test(name)) {
+    return 'enemy';
   }
   // The whole cave is gated behind the hookshot, so every chest in it says so.
   if (name.startsWith('Hookshot Cave')) {

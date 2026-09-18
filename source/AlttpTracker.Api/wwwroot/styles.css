@@ -501,6 +501,13 @@ h2 {
   padding-top: 2px;
 }
 
+/* The keydrop switch sits in the top bar with the buttons. */
+.toggle-keydrop {
+  padding: 0 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
 .region-filters {
   flex: 1;
   display: flex;

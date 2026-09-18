@@ -144,6 +144,19 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog, RoomL
 
         var room = await GetOrCreateAsync(roomId, cancellationToken);
 
+        // The keydrop locations and keys are only in play when the room is
+        // playing keydrop; recording against them otherwise would put things
+        // on a board nobody can see.
+        if (check.Keydrop && !room.Keydrop)
+        {
+            return RoomResult.Failure($"{check.FullName} is a keydrop location — turn on Keydrop for this room first");
+        }
+
+        if (item.KeydropOnly && !room.Keydrop)
+        {
+            return RoomResult.Failure($"{item.Name} only exists in keydrop — turn on Keydrop for this room first");
+        }
+
         // A check holds one item, so refuse rather than overwrite someone
         // else's note. Clearing the old entry first is a deliberate act.
         var holder = room.Assignments.FirstOrDefault(a => a.CheckId == check.Id);
@@ -153,10 +166,11 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog, RoomL
             return RoomResult.Failure($"{check.FullName} is already recorded as {holderName}");
         }
 
+        var slots = item.SlotsFor(room.Keydrop);
         var existing = room.Assignments.Where(a => a.ItemId == item.Id).ToList();
-        if (existing.Count >= item.Slots)
+        if (existing.Count >= slots)
         {
-            if (item.Slots == 1)
+            if (slots == 1)
             {
                 // Single-slot items move to the new location rather than
                 // making the player clear the old one first.
@@ -168,7 +182,7 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog, RoomL
             }
             else
             {
-                return RoomResult.Failure($"{item.Name} already has {item.Slots} locations");
+                return RoomResult.Failure($"{item.Name} already has {slots} locations");
             }
         }
 
@@ -309,6 +323,11 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog, RoomL
 
         var room = await GetOrCreateAsync(roomId, cancellationToken);
 
+        if (check.Keydrop && !room.Keydrop)
+        {
+            return RoomResult.Failure($"{check.FullName} is a keydrop location — turn on Keydrop for this room first");
+        }
+
         // A check with an item in it is not "nothing". Clearing the item is
         // the deliberate act; this refuses rather than doing it on the side.
         var holder = room.Assignments.FirstOrDefault(a => a.CheckId == check.Id);
@@ -342,6 +361,47 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog, RoomL
             // through, and the other wanted the same thing anyway.
             db.ChangeTracker.Clear();
             return RoomResult.Success((await GetAsync(roomId, cancellationToken)) ?? room);
+        }
+
+        return RoomResult.Success(room);
+    }
+
+    /// <summary>
+    /// Turns keydrop on or off for the room. Off hides the keydrop locations
+    /// and the extra keys; whatever was recorded against them is kept and
+    /// comes back when it is turned on again.
+    /// </summary>
+    public Task<RoomResult> SetKeydropAsync(string roomId, bool keydrop, CancellationToken cancellationToken = default) =>
+        locks.RunAsync(NormalizeRoomId(roomId), () => SetKeydropLockedAsync(roomId, keydrop, cancellationToken), cancellationToken);
+
+    private async Task<RoomResult> SetKeydropLockedAsync(string roomId, bool keydrop, CancellationToken cancellationToken)
+    {
+        if (!keydrop)
+        {
+            // Turning it off in a room nobody has written to changes nothing
+            // and is not what should bring the room into being.
+            var existing = await GetAsync(roomId, cancellationToken);
+            if (existing is null)
+            {
+                return RoomResult.Success(Unwritten(roomId));
+            }
+
+            if (existing.Keydrop)
+            {
+                existing.Keydrop = false;
+                existing.UpdatedAt = DateTimeOffset.UtcNow;
+                await db.SaveChangesAsync(cancellationToken);
+            }
+
+            return RoomResult.Success(existing);
+        }
+
+        var room = await GetOrCreateAsync(roomId, cancellationToken);
+        if (!room.Keydrop)
+        {
+            room.Keydrop = true;
+            room.UpdatedAt = DateTimeOffset.UtcNow;
+            await db.SaveChangesAsync(cancellationToken);
         }
 
         return RoomResult.Success(room);

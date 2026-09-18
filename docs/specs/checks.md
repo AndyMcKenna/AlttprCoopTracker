@@ -19,9 +19,30 @@ on them.
   used by the region chips, region headers and the location rows on item
   tiles.
 - **CHECK-4** Each check has a glyph saying what kind of location it is —
-  chest, big chest, NPC, boss drop, tablet, standing item and so on — drawn
-  from the sprite sheet when there is a PNG for it, and from the plain chest
-  when there is not.
+  chest, big chest, NPC, boss drop, tablet, standing item, pot, enemy and so
+  on — drawn from the sprite sheet when there is a PNG for it, and from the
+  plain chest when there is not.
+
+## Keydrop
+
+In keydrop, the small keys that sit under pots or are dropped by enemies
+are shuffled with everything else, so where they turn up is worth recording.
+
+- **KEYDROP-1** There are 33 keydrop locations, all in dungeons: Hyrule
+  Castle 4 (three key drops and the Big Key Drop), Eastern Palace 2, Desert
+  Palace 3, Castle Tower 2, Swamp Palace 5, Skull Woods 2, Thieves' Town 2,
+  Ice Palace 4, Misery Mire 3, Turtle Rock 2, Ganon's Tower 4. Palace of
+  Darkness and Tower of Hera have none. Names end in `Pot Key` (under a pot,
+  pot glyph) or `Key Drop` (from an enemy, enemy glyph); ids follow CHECK-2.
+- **KEYDROP-2** Keydrop is a setting of the room (ROOM-13). When it is on the
+  keydrop locations are checks like any other: they are listed in their
+  dungeon after the regular checks, counted by the chips and the summary
+  (249 in all), and can hold an item or be marked dead.
+- **KEYDROP-3** When it is off they are not shown, and recording an item at
+  one, or marking one dead, is refused with a message saying to turn on
+  Keydrop for the room. Anything already recorded against one is kept and
+  shown again when keydrop is turned back on; while off it is not counted as
+  recorded.
 
 ## Dead checks
 

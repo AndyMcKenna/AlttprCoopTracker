@@ -34,6 +34,7 @@ const payload = {
     short: region.short,
     color: region.color,
     count: region.checks.length,
+    keydropCount: (region.keydrop || []).length,
     ordinal,
   })),
 
@@ -45,6 +46,7 @@ const payload = {
     regionName: check.regionName,
     regionShort: check.regionShort,
     icon: kindForCheck(check),
+    keydrop: check.keydrop === true,
     ordinal,
   })),
 
@@ -54,6 +56,9 @@ const payload = {
     label: item.label ?? null,
     sprite: item.sprite,
     slots: item.slots,
+    keydropSlots: item.keydropSlots ?? item.slots,
+    keydropOnly: item.keydropOnly === true,
+    keydropLabel: item.keydropLabel ?? null,
     group: item.group ?? null,
     panel: item.panel,
     dungeon: item.dungeon ?? null,

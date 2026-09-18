@@ -49,20 +49,24 @@ const MAIN_ITEMS = [
 // Keys, by dungeon. `small` is how many small keys the dungeon holds — they
 // are interchangeable, so one box tracks all of them. Hyrule Castle and
 // Castle Tower have no big key; Eastern Palace has no small keys.
+//
+// `keydropSmall` is the count when the room is playing keydrop, where the
+// keys under pots and on enemies are shuffled too; Hyrule Castle then has a
+// big key as well (`keydropBig`), dropped by the ball-and-chain guard.
 const DUNGEON_KEYS = [
-  { region: 'hc', small: 1, big: false },
-  { region: 'ct', small: 2, big: false },
-  { region: 'ep', small: 0, big: true },
-  { region: 'dp', small: 1, big: true },
-  { region: 'toh', small: 1, big: true },
-  { region: 'pod', small: 6, big: true },
-  { region: 'sp', small: 1, big: true },
-  { region: 'sw', small: 3, big: true },
-  { region: 'tt', small: 1, big: true },
-  { region: 'ip', small: 2, big: true },
-  { region: 'mm', small: 3, big: true },
-  { region: 'tr', small: 4, big: true },
-  { region: 'gt', small: 4, big: true },
+  { region: 'hc', small: 1, keydropSmall: 4, big: false, keydropBig: true },
+  { region: 'ct', small: 2, keydropSmall: 4, big: false, keydropBig: false },
+  { region: 'ep', small: 0, keydropSmall: 2, big: true, keydropBig: true },
+  { region: 'dp', small: 1, keydropSmall: 4, big: true, keydropBig: true },
+  { region: 'toh', small: 1, keydropSmall: 1, big: true, keydropBig: true },
+  { region: 'pod', small: 6, keydropSmall: 6, big: true, keydropBig: true },
+  { region: 'sp', small: 1, keydropSmall: 6, big: true, keydropBig: true },
+  { region: 'sw', small: 3, keydropSmall: 5, big: true, keydropBig: true },
+  { region: 'tt', small: 1, keydropSmall: 3, big: true, keydropBig: true },
+  { region: 'ip', small: 2, keydropSmall: 6, big: true, keydropBig: true },
+  { region: 'mm', small: 3, keydropSmall: 6, big: true, keydropBig: true },
+  { region: 'tr', small: 4, keydropSmall: 6, big: true, keydropBig: true },
+  { region: 'gt', small: 4, keydropSmall: 8, big: true, keydropBig: true },
 ];
 
 const REGIONS_BY_ID = new Map(REGIONS.map((region) => [region.id, region]));
@@ -74,25 +78,31 @@ const KEY_ITEMS = DUNGEON_KEYS.flatMap((dungeon) => {
   const region = REGIONS_BY_ID.get(dungeon.region);
   const made = [];
 
-  if (dungeon.big) {
+  if (dungeon.big || dungeon.keydropBig) {
     made.push({
       id: 'bk-' + dungeon.region,
       name: region.short + ' Big Key',
       label: 'Big Key',
       sprite: 'bigkey',
       slots: 1,
+      keydropSlots: 1,
       panel: 'keys',
       dungeon: dungeon.region,
+      // A big key that only exists in keydrop is only offered in keydrop.
+      keydropOnly: !dungeon.big,
     });
   }
 
-  if (dungeon.small > 0) {
+  if (dungeon.small > 0 || dungeon.keydropSmall > 0) {
     made.push({
       id: 'sk-' + dungeon.region,
       name: region.short + ' Small Key',
       label: dungeon.small === 1 ? 'Small Key' : 'Small Keys',
+      keydropLabel: dungeon.keydropSmall === 1 ? 'Small Key' : 'Small Keys',
       sprite: 'smallkey',
       slots: dungeon.small,
+      keydropSlots: dungeon.keydropSmall,
+      keydropOnly: dungeon.small === 0,
       panel: 'keys',
       dungeon: dungeon.region,
       // Worth seeing "2/6" even before the box is full.
@@ -122,8 +132,8 @@ const KEY_PANEL = DUNGEON_KEYS.map((dungeon) => {
     name: region.name,
     short: region.short,
     color: region.color,
-    bigKey: dungeon.big ? 'bk-' + dungeon.region : null,
-    smallKey: dungeon.small > 0 ? 'sk-' + dungeon.region : null,
+    bigKey: dungeon.big || dungeon.keydropBig ? 'bk-' + dungeon.region : null,
+    smallKey: dungeon.small > 0 || dungeon.keydropSmall > 0 ? 'sk-' + dungeon.region : null,
   };
 });
 

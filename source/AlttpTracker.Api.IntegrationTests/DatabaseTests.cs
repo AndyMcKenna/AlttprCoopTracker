@@ -33,7 +33,8 @@ public class DatabaseTests(PostgresFixture postgres) : IClassFixture<PostgresFix
 
         await using var db = postgres.NewContext();
 
-        Assert.Equal(216, await db.GameChecks.CountAsync());
+        Assert.Equal(249, await db.GameChecks.CountAsync());
+        Assert.Equal(216, await db.GameChecks.CountAsync(c => !c.Keydrop));
         Assert.Equal(16, await db.GameRegions.CountAsync());
         Assert.Equal(13, await db.GameKeyRows.CountAsync());
         Assert.NotEmpty(await db.GamePalette.ToListAsync());
@@ -62,7 +63,7 @@ public class DatabaseTests(PostgresFixture postgres) : IClassFixture<PostgresFix
         // Untouched, so the fingerprint short-circuit is doing its job.
         Assert.Equal(before.Hash, version.Hash);
         Assert.Equal(before.SeededAt, version.SeededAt);
-        Assert.Equal(216, await after.GameChecks.CountAsync());
+        Assert.Equal(249, await after.GameChecks.CountAsync());
     }
 
     [Fact]
@@ -212,11 +213,17 @@ public class DatabaseTests(PostgresFixture postgres) : IClassFixture<PostgresFix
         {
             await db.GetService<IMigrator>().MigrateAsync("AddDeadChecks");
 
-            db.Rooms.Add(new Room { Id = room, CreatedAt = DateTimeOffset.UtcNow, UpdatedAt = DateTimeOffset.UtcNow });
-            db.Assignments.Add(NewAssignment(room, "lamp", "lw/old-man"));
-            db.Assignments.Add(NewAssignment(room, "hookshot", "lw/library"));
-            db.DeadChecks.Add(new DeadCheck { RoomId = room, CheckId = "lw/floating-island", At = DateTimeOffset.UtcNow });
-            await db.SaveChangesAsync();
+            // Plain SQL rather than the entities: the schema at that point has
+            // none of the columns added since, and the model would ask for them.
+            var now = DateTimeOffset.UtcNow;
+            await db.Database.ExecuteSqlAsync(
+                $"""INSERT INTO "Rooms" ("Id", "CreatedAt", "UpdatedAt") VALUES ({room}, {now}, {now})""");
+            await db.Database.ExecuteSqlAsync(
+                $"""INSERT INTO "Assignments" ("Id", "RoomId", "ItemId", "CheckId", "At") VALUES ({Guid.NewGuid()}, {room}, {"lamp"}, {"lw/old-man"}, {now})""");
+            await db.Database.ExecuteSqlAsync(
+                $"""INSERT INTO "Assignments" ("Id", "RoomId", "ItemId", "CheckId", "At") VALUES ({Guid.NewGuid()}, {room}, {"hookshot"}, {"lw/library"}, {now})""");
+            await db.Database.ExecuteSqlAsync(
+                $"""INSERT INTO "DeadChecks" ("RoomId", "CheckId", "At") VALUES ({room}, {"lw/floating-island"}, {now})""");
 
             await db.Database.MigrateAsync();
         }

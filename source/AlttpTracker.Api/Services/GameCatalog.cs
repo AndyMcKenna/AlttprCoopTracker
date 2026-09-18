@@ -4,9 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AlttpTracker.Api.Services;
 
-public record CatalogItem(string Id, string Name, int Slots);
+public record CatalogItem(string Id, string Name, int Slots, int KeydropSlots, bool KeydropOnly)
+{
+    /// <summary>How many locations the item holds in a room playing, or not playing, keydrop.</summary>
+    public int SlotsFor(bool keydrop) => keydrop ? KeydropSlots : Slots;
+}
 
-public record CatalogCheck(string Id, string FullName);
+public record CatalogCheck(string Id, string FullName, bool Keydrop);
 
 /// <summary>
 /// The game data, read out of the database once at startup and held in memory.
@@ -47,8 +51,11 @@ public class GameCatalog
             throw new InvalidOperationException("Game data is empty; the seeder should have run first.");
         }
 
-        _items = items.ToDictionary(i => i.Id, i => new CatalogItem(i.Id, i.Name, i.Slots), StringComparer.Ordinal);
-        _checks = checks.ToDictionary(c => c.Id, c => new CatalogCheck(c.Id, c.FullName), StringComparer.Ordinal);
+        _items = items.ToDictionary(
+            i => i.Id,
+            i => new CatalogItem(i.Id, i.Name, i.Slots, i.KeydropSlots, i.KeydropOnly),
+            StringComparer.Ordinal);
+        _checks = checks.ToDictionary(c => c.Id, c => new CatalogCheck(c.Id, c.FullName, c.Keydrop), StringComparer.Ordinal);
 
         // Shaped the way the board reads it: sprites and palette by name, and
         // the item groups in the order they should appear.
@@ -61,6 +68,9 @@ public class GameCatalog
                 label = i.Label,
                 sprite = i.Sprite,
                 slots = i.Slots,
+                keydropSlots = i.KeydropSlots,
+                keydropOnly = i.KeydropOnly,
+                keydropLabel = i.KeydropLabel,
                 group = i.Group,
                 panel = i.Panel,
                 dungeon = i.Dungeon,
@@ -83,6 +93,7 @@ public class GameCatalog
                 @short = r.Short,
                 color = r.Color,
                 count = r.Count,
+                keydropCount = r.KeydropCount,
             }),
             checks = checks.Select(c => new
             {
@@ -93,6 +104,7 @@ public class GameCatalog
                 regionName = c.RegionName,
                 regionShort = c.RegionShort,
                 icon = c.Icon,
+                keydrop = c.Keydrop,
             }),
             palette = palette.ToDictionary(p => p.Symbol, p => p.Color, StringComparer.Ordinal),
             itemSprites = SpritesOfKind(sprites, "item"),

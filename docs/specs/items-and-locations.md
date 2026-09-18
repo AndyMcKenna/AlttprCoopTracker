@@ -24,6 +24,16 @@ The point of the tracker: which check each item was found at.
   Ice Palace 2; Skull Woods and Misery Mire 3; Turtle Rock and Ganon's
   Tower 4; Palace of Darkness 6. That is 11 big keys and 29 small keys, 40
   in all, in 23 boxes.
+- **ITEM-3a** In keydrop (ROOM-13) the dungeons hold more keys, and the
+  boxes grow to match: Hyrule Castle 4 small keys and a big key of its own,
+  Castle Tower 4, Eastern Palace 2, Desert Palace 4, Swamp Palace 6, Skull
+  Woods 5, Thieves' Town 3, Ice Palace 6, Misery Mire 6, Turtle Rock 6,
+  Ganon's Tower 8; Tower of Hera and Palace of Darkness are unchanged. That
+  is 12 big keys and 61 small keys, 73 in all. Hyrule Castle's big key and
+  Eastern Palace's small keys exist only in keydrop: they are not shown, and
+  cannot be recorded, while it is off. A box that holds more locations than
+  its slots — filled in keydrop, then keydrop turned off — keeps them and
+  shows the count over the smaller total.
 - **ITEM-4** Keys follow exactly the same rules as main items. Nothing below
   distinguishes them.
 
