@@ -205,6 +205,7 @@ const REGIONS = [
     short: 'CT',
     color: '#9295a3',
     checks: ['Room 03', 'Dark Maze'],
+    keydrop: ['Dark Archer Key Drop', 'Circle of Pots Key Drop'],
   },
   {
     id: 'pod',
@@ -226,10 +227,6 @@ const REGIONS = [
       'Big Chest',
       'Harmless Hellway',
       'Helmasaur King',
-    ],
-    keydrop: [
-      'Dark Archer Key Drop',
-      'Circle of Pots Key Drop',
     ],
   },
   {
