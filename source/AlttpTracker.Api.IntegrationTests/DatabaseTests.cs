@@ -247,18 +247,21 @@ public class DatabaseTests(PostgresFixture postgres) : IClassFixture<PostgresFix
     {
         var room = "paradox-" + Guid.NewGuid().ToString("n")[..8];
 
-        // Step the schema back to before the swap and record against both
-        // rooms, so that the test proves neither side is caught by the other
-        // half of the rewrite.
+        // Step the schema back to before the swap and record both halves of
+        // a pair in the same room, for locations and for dead marks. Both
+        // tables are unique on (RoomId, CheckId), so a rewrite that lets
+        // lower-left become upper-left while upper-left is still there
+        // collides with itself — which is what took Beta 4 down.
         await using (var db = postgres.NewContext())
         {
             await db.GetService<IMigrator>().MigrateAsync("AddKeydrop");
 
             db.Rooms.Add(new Room { Id = room, CreatedAt = DateTimeOffset.UtcNow, UpdatedAt = DateTimeOffset.UtcNow });
-            db.Assignments.Add(NewAssignment(room, "lamp", "dm/paradox-lower-far-left"));
+            db.Assignments.Add(NewAssignment(room, "lamp", "dm/paradox-lower-left"));
             db.Assignments.Add(NewAssignment(room, "hookshot", "dm/paradox-upper-left"));
             db.Assignments.Add(NewAssignment(room, "boots", "dm/mimic-cave"));
-            db.DeadChecks.Add(new DeadCheck { RoomId = room, CheckId = "dm/paradox-lower-left", At = DateTimeOffset.UtcNow });
+            db.DeadChecks.Add(new DeadCheck { RoomId = room, CheckId = "dm/paradox-lower-right", At = DateTimeOffset.UtcNow });
+            db.DeadChecks.Add(new DeadCheck { RoomId = room, CheckId = "dm/paradox-upper-right", At = DateTimeOffset.UtcNow });
             await db.SaveChangesAsync();
 
             await db.Database.MigrateAsync();
@@ -271,10 +274,11 @@ public class DatabaseTests(PostgresFixture postgres) : IClassFixture<PostgresFix
                 .OrderBy(a => a.ItemId)
                 .Select(a => a.ItemId + "@" + a.CheckId)
                 .ToListAsync();
-            Assert.Equal(["boots@dm/mimic-cave", "hookshot@dm/paradox-lower-left", "lamp@dm/paradox-upper-far-left"], ids);
+            Assert.Equal(["boots@dm/mimic-cave", "hookshot@dm/paradox-lower-left", "lamp@dm/paradox-upper-left"], ids);
 
-            var dead = Assert.Single(await check.DeadChecks.Where(d => d.RoomId == room).ToListAsync());
-            Assert.Equal("dm/paradox-upper-left", dead.CheckId);
+            // Both dead marks survive, swapped; the At columns are untouched.
+            var dead = await check.DeadChecks.Where(d => d.RoomId == room).Select(d => d.CheckId).OrderBy(id => id).ToListAsync();
+            Assert.Equal(["dm/paradox-lower-right", "dm/paradox-upper-right"], dead);
         }
     }
 
