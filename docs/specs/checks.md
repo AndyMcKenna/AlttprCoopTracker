@@ -14,7 +14,10 @@ on them.
   match spoiler logs and route notes. A check's id is `<region>/<slug>` —
   `dw/bumper-cave-ledge` — because names such as "Big Chest" repeat across
   dungeons. Its full name is `<region name> - <name>`, and that is what
-  refusals and tooltips say.
+  refusals and tooltips say. The one deliberate departure is Paradox Cave:
+  the randomizer calls the five-chest room Lower and the two-chest room
+  Upper, but players think of them the other way round, so the tracker
+  names them Paradox Upper (five) and Paradox Lower (two).
 - **CHECK-3** Each region has a short label (`LW`, `PoD`, `GT`) and a colour,
   used by the region chips, region headers and the location rows on item
   tiles.

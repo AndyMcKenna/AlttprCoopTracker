@@ -808,59 +808,15 @@
       "ordinal": 59
     },
     {
-      "id": "dm/paradox-lower-far-left",
-      "name": "Paradox Lower - Far Left",
-      "fullName": "Death Mountain - Paradox Lower - Far Left",
+      "id": "dm/paradox-upper-far-left",
+      "name": "Paradox Upper - Far Left",
+      "fullName": "Death Mountain - Paradox Upper - Far Left",
       "region": "dm",
       "regionName": "Death Mountain",
       "regionShort": "DM",
       "icon": "chest",
       "keydrop": false,
       "ordinal": 60
-    },
-    {
-      "id": "dm/paradox-lower-left",
-      "name": "Paradox Lower - Left",
-      "fullName": "Death Mountain - Paradox Lower - Left",
-      "region": "dm",
-      "regionName": "Death Mountain",
-      "regionShort": "DM",
-      "icon": "chest",
-      "keydrop": false,
-      "ordinal": 61
-    },
-    {
-      "id": "dm/paradox-lower-middle",
-      "name": "Paradox Lower - Middle",
-      "fullName": "Death Mountain - Paradox Lower - Middle",
-      "region": "dm",
-      "regionName": "Death Mountain",
-      "regionShort": "DM",
-      "icon": "chest",
-      "keydrop": false,
-      "ordinal": 62
-    },
-    {
-      "id": "dm/paradox-lower-right",
-      "name": "Paradox Lower - Right",
-      "fullName": "Death Mountain - Paradox Lower - Right",
-      "region": "dm",
-      "regionName": "Death Mountain",
-      "regionShort": "DM",
-      "icon": "chest",
-      "keydrop": false,
-      "ordinal": 63
-    },
-    {
-      "id": "dm/paradox-lower-far-right",
-      "name": "Paradox Lower - Far Right",
-      "fullName": "Death Mountain - Paradox Lower - Far Right",
-      "region": "dm",
-      "regionName": "Death Mountain",
-      "regionShort": "DM",
-      "icon": "chest",
-      "keydrop": false,
-      "ordinal": 64
     },
     {
       "id": "dm/paradox-upper-left",
@@ -871,12 +827,56 @@
       "regionShort": "DM",
       "icon": "chest",
       "keydrop": false,
-      "ordinal": 65
+      "ordinal": 61
+    },
+    {
+      "id": "dm/paradox-upper-middle",
+      "name": "Paradox Upper - Middle",
+      "fullName": "Death Mountain - Paradox Upper - Middle",
+      "region": "dm",
+      "regionName": "Death Mountain",
+      "regionShort": "DM",
+      "icon": "chest",
+      "keydrop": false,
+      "ordinal": 62
     },
     {
       "id": "dm/paradox-upper-right",
       "name": "Paradox Upper - Right",
       "fullName": "Death Mountain - Paradox Upper - Right",
+      "region": "dm",
+      "regionName": "Death Mountain",
+      "regionShort": "DM",
+      "icon": "chest",
+      "keydrop": false,
+      "ordinal": 63
+    },
+    {
+      "id": "dm/paradox-upper-far-right",
+      "name": "Paradox Upper - Far Right",
+      "fullName": "Death Mountain - Paradox Upper - Far Right",
+      "region": "dm",
+      "regionName": "Death Mountain",
+      "regionShort": "DM",
+      "icon": "chest",
+      "keydrop": false,
+      "ordinal": 64
+    },
+    {
+      "id": "dm/paradox-lower-left",
+      "name": "Paradox Lower - Left",
+      "fullName": "Death Mountain - Paradox Lower - Left",
+      "region": "dm",
+      "regionName": "Death Mountain",
+      "regionShort": "DM",
+      "icon": "chest",
+      "keydrop": false,
+      "ordinal": 65
+    },
+    {
+      "id": "dm/paradox-lower-right",
+      "name": "Paradox Lower - Right",
+      "fullName": "Death Mountain - Paradox Lower - Right",
       "region": "dm",
       "regionName": "Death Mountain",
       "regionShort": "DM",
