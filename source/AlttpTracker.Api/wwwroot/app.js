@@ -24,6 +24,7 @@ const el = {
   checksSummary: document.getElementById('checks-summary'),
   regions: document.getElementById('regions'),
   hideUsed: document.getElementById('hide-used'),
+  keydrop: document.getElementById('keydrop'),
   assignBar: document.getElementById('assign-bar'),
   assignBarText: document.getElementById('assign-bar-text'),
   assignCancel: document.getElementById('assign-cancel'),
@@ -150,13 +151,14 @@ function tileLabel(item, count, full) {
   if (state.armed === item.id) {
     return 'Click the check where ' + item.name + ' was found (Esc to cancel)';
   }
+  const slots = slotsFor(item);
   if (full) {
-    return item.slots > 1
-      ? item.name + ' already has all ' + item.slots + ' locations'
+    return slots > 1
+      ? item.name + ' already has all ' + slots + ' locations'
       : 'Change where ' + item.name + ' was found';
   }
   if (count) {
-    return 'Record another location for ' + item.name + ' (' + count + ' of ' + item.slots + ')';
+    return 'Record another location for ' + item.name + ' (' + count + ' of ' + slots + ')';
   }
   return 'Record where ' + item.name + ' was found';
 }
@@ -165,6 +167,29 @@ function tileLabel(item, count, full) {
 
 function assignmentsFor(itemId) {
   return (state.room && state.room.assignments[itemId]) || [];
+}
+
+/**
+ * Keydrop is a setting of the room, shared like everything else in it. When
+ * it is on, the keys under pots and on enemies are checks too, and the
+ * dungeons hold more keys; when it is off those checks and keys are not
+ * shown, though anything recorded against them is kept.
+ */
+function keydrop() {
+  return Boolean(state.room && state.room.keydrop);
+}
+
+function slotsFor(item) {
+  return keydrop() ? item.keydropSlots : item.slots;
+}
+
+function labelFor(item) {
+  return (keydrop() && item.keydropLabel) || item.label || item.name;
+}
+
+/** Whether a check or key item is on the board at all in this room. */
+function inPlay(entry) {
+  return keydrop() || !(entry.keydrop || entry.keydropOnly);
 }
 
 /** checkId -> the item recorded there, for the "already used" markers. */
@@ -196,16 +221,21 @@ function render() {
   // The summary follows the tab. Items count tiles with at least one
   // location; keys count individual keys, since a dungeon's 6 small keys
   // share one box and each is worth finding.
-  const shown = state.data.items.filter((item) => item.panel === state.tab);
+  const shown = state.data.items.filter((item) => item.panel === state.tab && inPlay(item));
   const found =
     state.tab === 'keys'
       ? shown.reduce((sum, item) => sum + assignmentsFor(item.id).length, 0)
       : shown.filter((item) => assignmentsFor(item.id).length).length;
-  const total = state.tab === 'keys' ? shown.reduce((sum, item) => sum + item.slots, 0) : shown.length;
+  const total = state.tab === 'keys' ? shown.reduce((sum, item) => sum + slotsFor(item), 0) : shown.length;
   el.itemsSummary.textContent = found + ' of ' + total + ' located';
   const dead = state.room ? state.room.dead.length : 0;
+  // With keydrop off, a location recorded at a key drop is kept but not
+  // shown, so it is not counted either.
+  const checksInPlay = state.data.checks.filter(inPlay).length;
+  const recorded = [...owners.keys()].filter((id) => inPlay(state.checksById.get(id) || {})).length;
   el.checksSummary.textContent =
-    owners.size + ' of ' + state.data.checks.length + ' recorded' + (dead ? ', ' + dead + ' dead' : '');
+    recorded + ' of ' + checksInPlay + ' recorded' + (dead ? ', ' + dead + ' dead' : '');
+  el.keydrop.checked = keydrop();
 }
 
 /**
@@ -218,7 +248,7 @@ function render() {
  */
 function buildItemTile(item) {
   const entries = assignmentsFor(item.id);
-  const full = entries.length >= item.slots;
+  const full = entries.length >= slotsFor(item);
 
   const tile = document.createElement('div');
   tile.className = 'item';
@@ -254,15 +284,15 @@ function buildItemTile(item) {
   const name = document.createElement('div');
   name.className = 'item-name';
   // Key tiles use the short label; the dungeon is already the row heading.
-  name.textContent = item.label || item.name;
+  name.textContent = labelFor(item);
   // Progressive items say how many of their locations are pinned down.
-  if (item.slots > 1 || item.alwaysCount) {
+  if (slotsFor(item) > 1 || item.alwaysCount) {
     const count = document.createElement('span');
     count.className = 'item-count';
     if (full) {
       count.classList.add('is-full');
     }
-    count.textContent = entries.length + '/' + item.slots;
+    count.textContent = entries.length + '/' + slotsFor(item);
     name.appendChild(count);
   }
   body.appendChild(name);
@@ -330,14 +360,17 @@ function buildKeysBoard() {
     heading.appendChild(document.createTextNode(dungeon.name));
     row.appendChild(heading);
 
-    if (dungeon.bigKey) {
-      row.appendChild(buildItemTile(state.itemsById.get(dungeon.bigKey)));
+    const bigKey = dungeon.bigKey && state.itemsById.get(dungeon.bigKey);
+    const smallKey = dungeon.smallKey && state.itemsById.get(dungeon.smallKey);
+
+    if (bigKey && inPlay(bigKey)) {
+      row.appendChild(buildItemTile(bigKey));
     }
 
-    if (dungeon.smallKey) {
-      const tile = buildItemTile(state.itemsById.get(dungeon.smallKey));
+    if (smallKey && inPlay(smallKey)) {
+      const tile = buildItemTile(smallKey);
       // Keep the small-key column aligned when a dungeon has no big key.
-      if (!dungeon.bigKey) {
+      if (!bigKey || !inPlay(bigKey)) {
         tile.classList.add('is-small-only');
       }
       row.appendChild(tile);
@@ -475,7 +508,7 @@ function renderChecks(owners) {
     }
 
     const matches = state.data.checks.filter((check) => {
-      if (check.region !== region.id) {
+      if (check.region !== region.id || !inPlay(check)) {
         return false;
       }
       if (state.hideUsed && (owners.has(check.id) || dead.has(check.id))) {
@@ -566,7 +599,7 @@ function renderRegionFilters() {
     const chip = document.createElement('button');
     chip.className = 'region-chip';
     chip.type = 'button';
-    chip.textContent = region.short + ' ' + region.count;
+    chip.textContent = region.short + ' ' + (region.count + (keydrop() ? region.keydropCount : 0));
     chip.title = region.name;
     const active = state.regionFilter.has(region.id);
     chip.setAttribute('aria-pressed', String(active));
@@ -728,6 +761,12 @@ async function send(action) {
     });
   } else if (action.type === 'unassign') {
     request = fetch(roomUrl('/assignments/' + action.assignmentId), { method: 'DELETE' });
+  } else if (action.type === 'keydrop') {
+    request = fetch(roomUrl('/keydrop'), {
+      method: 'PUT',
+      ...json,
+      body: JSON.stringify({ keydrop: action.keydrop }),
+    });
   } else if (action.type === 'dead') {
     request = fetch(roomUrl('/dead'), {
       method: 'PUT',
@@ -974,6 +1013,10 @@ for (const [tab, button] of [['items', el.tabItems], ['keys', el.tabKeys]]) {
     render();
   });
 }
+
+el.keydrop.addEventListener('change', () => {
+  send({ type: 'keydrop', keydrop: el.keydrop.checked });
+});
 
 el.hideUsed.addEventListener('change', () => {
   state.hideUsed = el.hideUsed.checked;

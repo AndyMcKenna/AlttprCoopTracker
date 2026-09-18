@@ -13,6 +13,7 @@ public record RoomState(
     string Id,
     long CreatedAt,
     long UpdatedAt,
+    bool Keydrop,
     Dictionary<string, List<AssignmentState>> Assignments,
     List<string> Dead)
 {
@@ -20,6 +21,7 @@ public record RoomState(
         room.Id,
         room.CreatedAt.ToUnixTimeMilliseconds(),
         room.UpdatedAt.ToUnixTimeMilliseconds(),
+        room.Keydrop,
         room.Assignments
             .OrderBy(a => a.At)
             .GroupBy(a => a.ItemId, StringComparer.Ordinal)

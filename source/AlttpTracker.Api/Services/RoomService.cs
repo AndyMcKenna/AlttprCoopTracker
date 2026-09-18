@@ -18,8 +18,10 @@ public readonly record struct RoomResult(Room? Room, string? Error)
 /// <summary>
 /// Every rule about what may be recorded where. Kept in one place so the HTTP
 /// endpoints stay thin and the rules can be tested without a web server.
+/// Every write takes the room's lock (<see cref="RoomLocks"/>) first, so two
+/// players' clicks on one room are applied one after the other.
 /// </summary>
-public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
+public partial class RoomService(TrackerDbContext db, GameCatalog catalog, RoomLocks locks)
 {
     /// <summary>
     /// Room codes are typed by hand and shared, so they are folded to a
@@ -110,11 +112,18 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
         return room;
     }
 
-    public async Task<RoomResult> AssignAsync(
+    public Task<RoomResult> AssignAsync(
         string roomId,
         string? itemId,
         string? checkId,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default) =>
+        locks.RunAsync(NormalizeRoomId(roomId), () => AssignLockedAsync(roomId, itemId, checkId, cancellationToken), cancellationToken);
+
+    private async Task<RoomResult> AssignLockedAsync(
+        string roomId,
+        string? itemId,
+        string? checkId,
+        CancellationToken cancellationToken)
     {
         // The body is whatever the client sent; a missing field is a bad
         // request, not a crash.
@@ -135,6 +144,19 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
 
         var room = await GetOrCreateAsync(roomId, cancellationToken);
 
+        // The keydrop locations and keys are only in play when the room is
+        // playing keydrop; recording against them otherwise would put things
+        // on a board nobody can see.
+        if (check.Keydrop && !room.Keydrop)
+        {
+            return RoomResult.Failure($"{check.FullName} is a keydrop location — turn on Keydrop for this room first");
+        }
+
+        if (item.KeydropOnly && !room.Keydrop)
+        {
+            return RoomResult.Failure($"{item.Name} only exists in keydrop — turn on Keydrop for this room first");
+        }
+
         // A check holds one item, so refuse rather than overwrite someone
         // else's note. Clearing the old entry first is a deliberate act.
         var holder = room.Assignments.FirstOrDefault(a => a.CheckId == check.Id);
@@ -144,10 +166,11 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
             return RoomResult.Failure($"{check.FullName} is already recorded as {holderName}");
         }
 
+        var slots = item.SlotsFor(room.Keydrop);
         var existing = room.Assignments.Where(a => a.ItemId == item.Id).ToList();
-        if (existing.Count >= item.Slots)
+        if (existing.Count >= slots)
         {
-            if (item.Slots == 1)
+            if (slots == 1)
             {
                 // Single-slot items move to the new location rather than
                 // making the player clear the old one first.
@@ -159,7 +182,7 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
             }
             else
             {
-                return RoomResult.Failure($"{item.Name} already has {item.Slots} locations");
+                return RoomResult.Failure($"{item.Name} already has {slots} locations");
             }
         }
 
@@ -214,10 +237,16 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
         return RoomResult.Success(room);
     }
 
-    public async Task<RoomResult> UnassignAsync(
+    public Task<RoomResult> UnassignAsync(
         string roomId,
         Guid assignmentId,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default) =>
+        locks.RunAsync(NormalizeRoomId(roomId), () => UnassignLockedAsync(roomId, assignmentId, cancellationToken), cancellationToken);
+
+    private async Task<RoomResult> UnassignLockedAsync(
+        string roomId,
+        Guid assignmentId,
+        CancellationToken cancellationToken)
     {
         // A room nobody has written to has nothing to clear, and clearing it
         // is not what should bring it into being.
@@ -246,11 +275,18 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
     /// rather than a toggle so that two players clicking at once agree on the
     /// outcome instead of cancelling each other out.
     /// </summary>
-    public async Task<RoomResult> SetDeadAsync(
+    public Task<RoomResult> SetDeadAsync(
         string roomId,
         string? checkId,
         bool dead,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default) =>
+        locks.RunAsync(NormalizeRoomId(roomId), () => SetDeadLockedAsync(roomId, checkId, dead, cancellationToken), cancellationToken);
+
+    private async Task<RoomResult> SetDeadLockedAsync(
+        string roomId,
+        string? checkId,
+        bool dead,
+        CancellationToken cancellationToken)
     {
         if (string.IsNullOrEmpty(checkId))
         {
@@ -286,6 +322,11 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
         }
 
         var room = await GetOrCreateAsync(roomId, cancellationToken);
+
+        if (check.Keydrop && !room.Keydrop)
+        {
+            return RoomResult.Failure($"{check.FullName} is a keydrop location — turn on Keydrop for this room first");
+        }
 
         // A check with an item in it is not "nothing". Clearing the item is
         // the deliberate act; this refuses rather than doing it on the side.
@@ -325,7 +366,51 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog)
         return RoomResult.Success(room);
     }
 
-    public async Task<RoomResult> ResetAsync(string roomId, CancellationToken cancellationToken = default)
+    /// <summary>
+    /// Turns keydrop on or off for the room. Off hides the keydrop locations
+    /// and the extra keys; whatever was recorded against them is kept and
+    /// comes back when it is turned on again.
+    /// </summary>
+    public Task<RoomResult> SetKeydropAsync(string roomId, bool keydrop, CancellationToken cancellationToken = default) =>
+        locks.RunAsync(NormalizeRoomId(roomId), () => SetKeydropLockedAsync(roomId, keydrop, cancellationToken), cancellationToken);
+
+    private async Task<RoomResult> SetKeydropLockedAsync(string roomId, bool keydrop, CancellationToken cancellationToken)
+    {
+        if (!keydrop)
+        {
+            // Turning it off in a room nobody has written to changes nothing
+            // and is not what should bring the room into being.
+            var existing = await GetAsync(roomId, cancellationToken);
+            if (existing is null)
+            {
+                return RoomResult.Success(Unwritten(roomId));
+            }
+
+            if (existing.Keydrop)
+            {
+                existing.Keydrop = false;
+                existing.UpdatedAt = DateTimeOffset.UtcNow;
+                await db.SaveChangesAsync(cancellationToken);
+            }
+
+            return RoomResult.Success(existing);
+        }
+
+        var room = await GetOrCreateAsync(roomId, cancellationToken);
+        if (!room.Keydrop)
+        {
+            room.Keydrop = true;
+            room.UpdatedAt = DateTimeOffset.UtcNow;
+            await db.SaveChangesAsync(cancellationToken);
+        }
+
+        return RoomResult.Success(room);
+    }
+
+    public Task<RoomResult> ResetAsync(string roomId, CancellationToken cancellationToken = default) =>
+        locks.RunAsync(NormalizeRoomId(roomId), () => ResetLockedAsync(roomId, cancellationToken), cancellationToken);
+
+    private async Task<RoomResult> ResetLockedAsync(string roomId, CancellationToken cancellationToken)
     {
         var room = await GetAsync(roomId, cancellationToken);
         if (room is null)

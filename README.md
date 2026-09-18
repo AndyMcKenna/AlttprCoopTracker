@@ -46,6 +46,11 @@ and coming back later picks the run up where it was.
   open, the dungeons start folded; click any region header to toggle it.
   Click **All** with no filter on to open every region at once, and again to
   fold them back.
+- **Keydrop.** Playing key drop shuffle? Tick **Keydrop** in the top bar and
+  the 33 keys under pots and on enemies join their dungeons as checks (pot
+  and enemy glyphs), the key boxes grow to the keydrop counts, and Hyrule
+  Castle gets its big key. It is a room setting, so everyone sees the same.
+  Untick it and they fold away again; anything recorded on them is kept.
 - **Keys.** The Keys tab is one line per dungeon, big key then small keys, and
   works exactly like the item board — an armed item or check survives the
   switch, so a key can be paired with a check from either tab. Small keys are
@@ -151,6 +156,7 @@ Anyone who opens it joins the same board. The room code is in the URL
 | `POST /api/rooms/{room}/assignments`             | Record an item at a check       |
 | `DELETE /api/rooms/{room}/assignments/{id}`      | Clear one location              |
 | `PUT /api/rooms/{room}/dead`                     | Mark a check dead, or bring it back |
+| `PUT /api/rooms/{room}/keydrop`                  | Turn keydrop on or off for the room |
 | `POST /api/rooms/{room}/reset`                   | Clear the room                  |
 | `GET /ws?room={room}`                            | Listen for changes              |
 

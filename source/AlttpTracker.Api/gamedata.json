@@ -7,6 +7,7 @@
       "short": "LW",
       "color": "#3f9e55",
       "count": 54,
+      "keydropCount": 0,
       "ordinal": 0
     },
     {
@@ -15,6 +16,7 @@
       "short": "DM",
       "color": "#b5762f",
       "count": 14,
+      "keydropCount": 0,
       "ordinal": 1
     },
     {
@@ -23,6 +25,7 @@
       "short": "DW",
       "color": "#8f4fb5",
       "count": 25,
+      "keydropCount": 0,
       "ordinal": 2
     },
     {
@@ -31,6 +34,7 @@
       "short": "HC",
       "color": "#5f86bf",
       "count": 8,
+      "keydropCount": 4,
       "ordinal": 3
     },
     {
@@ -39,6 +43,7 @@
       "short": "EP",
       "color": "#2fa877",
       "count": 6,
+      "keydropCount": 2,
       "ordinal": 4
     },
     {
@@ -47,6 +52,7 @@
       "short": "DP",
       "color": "#d1a72b",
       "count": 6,
+      "keydropCount": 3,
       "ordinal": 5
     },
     {
@@ -55,6 +61,7 @@
       "short": "ToH",
       "color": "#d97e42",
       "count": 6,
+      "keydropCount": 0,
       "ordinal": 6
     },
     {
@@ -63,6 +70,7 @@
       "short": "CT",
       "color": "#9295a3",
       "count": 2,
+      "keydropCount": 2,
       "ordinal": 7
     },
     {
@@ -71,6 +79,7 @@
       "short": "PoD",
       "color": "#5257a0",
       "count": 14,
+      "keydropCount": 0,
       "ordinal": 8
     },
     {
@@ -79,6 +88,7 @@
       "short": "SP",
       "color": "#2f9aa8",
       "count": 10,
+      "keydropCount": 5,
       "ordinal": 9
     },
     {
@@ -87,6 +97,7 @@
       "short": "SW",
       "color": "#74854f",
       "count": 8,
+      "keydropCount": 2,
       "ordinal": 10
     },
     {
@@ -95,6 +106,7 @@
       "short": "TT",
       "color": "#a86333",
       "count": 8,
+      "keydropCount": 2,
       "ordinal": 11
     },
     {
@@ -103,6 +115,7 @@
       "short": "IP",
       "color": "#4fb3d4",
       "count": 8,
+      "keydropCount": 4,
       "ordinal": 12
     },
     {
@@ -111,6 +124,7 @@
       "short": "MM",
       "color": "#8272a8",
       "count": 8,
+      "keydropCount": 3,
       "ordinal": 13
     },
     {
@@ -119,6 +133,7 @@
       "short": "TR",
       "color": "#c04a41",
       "count": 12,
+      "keydropCount": 2,
       "ordinal": 14
     },
     {
@@ -127,6 +142,7 @@
       "short": "GT",
       "color": "#ab4283",
       "count": 27,
+      "keydropCount": 4,
       "ordinal": 15
     }
   ],
@@ -139,6 +155,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "link",
+      "keydrop": false,
       "ordinal": 0
     },
     {
@@ -149,6 +166,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "uncle",
+      "keydrop": false,
       "ordinal": 1
     },
     {
@@ -159,6 +177,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "sparkle",
+      "keydrop": false,
       "ordinal": 2
     },
     {
@@ -169,6 +188,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "boots",
+      "keydrop": false,
       "ordinal": 3
     },
     {
@@ -179,6 +199,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 4
     },
     {
@@ -189,6 +210,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "chicken",
+      "keydrop": false,
       "ordinal": 5
     },
     {
@@ -199,6 +221,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "bomb",
+      "keydrop": false,
       "ordinal": 6
     },
     {
@@ -209,6 +232,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 7
     },
     {
@@ -219,6 +243,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 8
     },
     {
@@ -229,6 +254,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 9
     },
     {
@@ -239,6 +265,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "greenpendant",
+      "keydrop": false,
       "ordinal": 10
     },
     {
@@ -249,6 +276,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 11
     },
     {
@@ -259,6 +287,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 12
     },
     {
@@ -269,6 +298,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 13
     },
     {
@@ -279,6 +309,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 14
     },
     {
@@ -289,6 +320,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 15
     },
     {
@@ -299,6 +331,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 16
     },
     {
@@ -309,6 +342,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 17
     },
     {
@@ -319,6 +353,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 18
     },
     {
@@ -329,6 +364,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 19
     },
     {
@@ -339,6 +375,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 20
     },
     {
@@ -349,6 +386,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "boots",
+      "keydrop": false,
       "ordinal": 21
     },
     {
@@ -359,6 +397,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "mmc",
+      "keydrop": false,
       "ordinal": 22
     },
     {
@@ -369,6 +408,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "mmc",
+      "keydrop": false,
       "ordinal": 23
     },
     {
@@ -379,6 +419,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "mmc",
+      "keydrop": false,
       "ordinal": 24
     },
     {
@@ -389,6 +430,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "mmc",
+      "keydrop": false,
       "ordinal": 25
     },
     {
@@ -399,6 +441,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "mmc",
+      "keydrop": false,
       "ordinal": 26
     },
     {
@@ -409,6 +452,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "icerod",
+      "keydrop": false,
       "ordinal": 27
     },
     {
@@ -419,6 +463,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "rupee",
+      "keydrop": false,
       "ordinal": 28
     },
     {
@@ -429,6 +474,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "powder",
+      "keydrop": false,
       "ordinal": 29
     },
     {
@@ -439,6 +485,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "bottle",
+      "keydrop": false,
       "ordinal": 30
     },
     {
@@ -449,6 +496,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "flippers",
+      "keydrop": false,
       "ordinal": 31
     },
     {
@@ -459,6 +507,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "book",
+      "keydrop": false,
       "ordinal": 32
     },
     {
@@ -469,6 +518,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "zora",
+      "keydrop": false,
       "ordinal": 33
     },
     {
@@ -479,6 +529,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "sparkle",
+      "keydrop": false,
       "ordinal": 34
     },
     {
@@ -489,6 +540,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "boots",
+      "keydrop": false,
       "ordinal": 35
     },
     {
@@ -499,6 +551,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "mirror",
+      "keydrop": false,
       "ordinal": 36
     },
     {
@@ -509,6 +562,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "mirror",
+      "keydrop": false,
       "ordinal": 37
     },
     {
@@ -519,6 +573,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "mirror",
+      "keydrop": false,
       "ordinal": 38
     },
     {
@@ -529,6 +584,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "boots",
+      "keydrop": false,
       "ordinal": 39
     },
     {
@@ -539,6 +595,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "mushroom",
+      "keydrop": false,
       "ordinal": 40
     },
     {
@@ -549,6 +606,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "npc",
+      "keydrop": false,
       "ordinal": 41
     },
     {
@@ -559,6 +617,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "npc",
+      "keydrop": false,
       "ordinal": 42
     },
     {
@@ -569,6 +628,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "sparkle",
+      "keydrop": false,
       "ordinal": 43
     },
     {
@@ -579,6 +639,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "mirror",
+      "keydrop": false,
       "ordinal": 44
     },
     {
@@ -589,6 +650,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "sparkle",
+      "keydrop": false,
       "ordinal": 45
     },
     {
@@ -599,6 +661,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 46
     },
     {
@@ -609,6 +672,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "flippers",
+      "keydrop": false,
       "ordinal": 47
     },
     {
@@ -619,6 +683,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "shovel",
+      "keydrop": false,
       "ordinal": 48
     },
     {
@@ -629,6 +694,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "flippers",
+      "keydrop": false,
       "ordinal": 49
     },
     {
@@ -639,6 +705,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "flippers",
+      "keydrop": false,
       "ordinal": 50
     },
     {
@@ -649,6 +716,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "glove",
+      "keydrop": false,
       "ordinal": 51
     },
     {
@@ -659,6 +727,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "purplechest",
+      "keydrop": false,
       "ordinal": 52
     },
     {
@@ -669,6 +738,7 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "sword",
+      "keydrop": false,
       "ordinal": 53
     },
     {
@@ -679,6 +749,7 @@
       "regionName": "Death Mountain",
       "regionShort": "DM",
       "icon": "oldman",
+      "keydrop": false,
       "ordinal": 54
     },
     {
@@ -689,6 +760,7 @@
       "regionName": "Death Mountain",
       "regionShort": "DM",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 55
     },
     {
@@ -699,6 +771,7 @@
       "regionName": "Death Mountain",
       "regionShort": "DM",
       "icon": "mirror",
+      "keydrop": false,
       "ordinal": 56
     },
     {
@@ -709,6 +782,7 @@
       "regionName": "Death Mountain",
       "regionShort": "DM",
       "icon": "book",
+      "keydrop": false,
       "ordinal": 57
     },
     {
@@ -719,6 +793,7 @@
       "regionName": "Death Mountain",
       "regionShort": "DM",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 58
     },
     {
@@ -729,57 +804,19 @@
       "regionName": "Death Mountain",
       "regionShort": "DM",
       "icon": "mirror",
+      "keydrop": false,
       "ordinal": 59
     },
     {
-      "id": "dm/paradox-lower-far-left",
-      "name": "Paradox Lower - Far Left",
-      "fullName": "Death Mountain - Paradox Lower - Far Left",
+      "id": "dm/paradox-upper-far-left",
+      "name": "Paradox Upper - Far Left",
+      "fullName": "Death Mountain - Paradox Upper - Far Left",
       "region": "dm",
       "regionName": "Death Mountain",
       "regionShort": "DM",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 60
-    },
-    {
-      "id": "dm/paradox-lower-left",
-      "name": "Paradox Lower - Left",
-      "fullName": "Death Mountain - Paradox Lower - Left",
-      "region": "dm",
-      "regionName": "Death Mountain",
-      "regionShort": "DM",
-      "icon": "chest",
-      "ordinal": 61
-    },
-    {
-      "id": "dm/paradox-lower-middle",
-      "name": "Paradox Lower - Middle",
-      "fullName": "Death Mountain - Paradox Lower - Middle",
-      "region": "dm",
-      "regionName": "Death Mountain",
-      "regionShort": "DM",
-      "icon": "chest",
-      "ordinal": 62
-    },
-    {
-      "id": "dm/paradox-lower-right",
-      "name": "Paradox Lower - Right",
-      "fullName": "Death Mountain - Paradox Lower - Right",
-      "region": "dm",
-      "regionName": "Death Mountain",
-      "regionShort": "DM",
-      "icon": "chest",
-      "ordinal": 63
-    },
-    {
-      "id": "dm/paradox-lower-far-right",
-      "name": "Paradox Lower - Far Right",
-      "fullName": "Death Mountain - Paradox Lower - Far Right",
-      "region": "dm",
-      "regionName": "Death Mountain",
-      "regionShort": "DM",
-      "icon": "chest",
-      "ordinal": 64
     },
     {
       "id": "dm/paradox-upper-left",
@@ -789,7 +826,19 @@
       "regionName": "Death Mountain",
       "regionShort": "DM",
       "icon": "chest",
-      "ordinal": 65
+      "keydrop": false,
+      "ordinal": 61
+    },
+    {
+      "id": "dm/paradox-upper-middle",
+      "name": "Paradox Upper - Middle",
+      "fullName": "Death Mountain - Paradox Upper - Middle",
+      "region": "dm",
+      "regionName": "Death Mountain",
+      "regionShort": "DM",
+      "icon": "chest",
+      "keydrop": false,
+      "ordinal": 62
     },
     {
       "id": "dm/paradox-upper-right",
@@ -799,6 +848,40 @@
       "regionName": "Death Mountain",
       "regionShort": "DM",
       "icon": "chest",
+      "keydrop": false,
+      "ordinal": 63
+    },
+    {
+      "id": "dm/paradox-upper-far-right",
+      "name": "Paradox Upper - Far Right",
+      "fullName": "Death Mountain - Paradox Upper - Far Right",
+      "region": "dm",
+      "regionName": "Death Mountain",
+      "regionShort": "DM",
+      "icon": "chest",
+      "keydrop": false,
+      "ordinal": 64
+    },
+    {
+      "id": "dm/paradox-lower-left",
+      "name": "Paradox Lower - Left",
+      "fullName": "Death Mountain - Paradox Lower - Left",
+      "region": "dm",
+      "regionName": "Death Mountain",
+      "regionShort": "DM",
+      "icon": "chest",
+      "keydrop": false,
+      "ordinal": 65
+    },
+    {
+      "id": "dm/paradox-lower-right",
+      "name": "Paradox Lower - Right",
+      "fullName": "Death Mountain - Paradox Lower - Right",
+      "region": "dm",
+      "regionName": "Death Mountain",
+      "regionShort": "DM",
+      "icon": "chest",
+      "keydrop": false,
       "ordinal": 66
     },
     {
@@ -809,6 +892,7 @@
       "regionName": "Death Mountain",
       "regionShort": "DM",
       "icon": "mirror",
+      "keydrop": false,
       "ordinal": 67
     },
     {
@@ -819,6 +903,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "cape",
+      "keydrop": false,
       "ordinal": 68
     },
     {
@@ -829,6 +914,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "catfish",
+      "keydrop": false,
       "ordinal": 69
     },
     {
@@ -839,6 +925,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "pyramid",
+      "keydrop": false,
       "ordinal": 70
     },
     {
@@ -849,6 +936,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "superbomb",
+      "keydrop": false,
       "ordinal": 71
     },
     {
@@ -859,6 +947,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "superbomb",
+      "keydrop": false,
       "ordinal": 72
     },
     {
@@ -869,6 +958,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 73
     },
     {
@@ -879,6 +969,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 74
     },
     {
@@ -889,6 +980,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 75
     },
     {
@@ -899,6 +991,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "hammer",
+      "keydrop": false,
       "ordinal": 76
     },
     {
@@ -909,6 +1002,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "stumpy",
+      "keydrop": false,
       "ordinal": 77
     },
     {
@@ -919,6 +1013,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "shovel",
+      "keydrop": false,
       "ordinal": 78
     },
     {
@@ -929,6 +1024,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "bomb",
+      "keydrop": false,
       "ordinal": 79
     },
     {
@@ -939,6 +1035,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "bomb",
+      "keydrop": false,
       "ordinal": 80
     },
     {
@@ -949,6 +1046,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "bomb",
+      "keydrop": false,
       "ordinal": 81
     },
     {
@@ -959,6 +1057,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "bomb",
+      "keydrop": false,
       "ordinal": 82
     },
     {
@@ -969,6 +1068,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "bomb",
+      "keydrop": false,
       "ordinal": 83
     },
     {
@@ -979,6 +1079,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "mireshed",
+      "keydrop": false,
       "ordinal": 84
     },
     {
@@ -989,6 +1090,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "mireshed",
+      "keydrop": false,
       "ordinal": 85
     },
     {
@@ -999,6 +1101,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "bunny",
+      "keydrop": false,
       "ordinal": 86
     },
     {
@@ -1009,6 +1112,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "bunny",
+      "keydrop": false,
       "ordinal": 87
     },
     {
@@ -1019,6 +1123,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "spike",
+      "keydrop": false,
       "ordinal": 88
     },
     {
@@ -1029,6 +1134,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "hookshot",
+      "keydrop": false,
       "ordinal": 89
     },
     {
@@ -1039,6 +1145,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "hookshot",
+      "keydrop": false,
       "ordinal": 90
     },
     {
@@ -1049,6 +1156,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "hookshot",
+      "keydrop": false,
       "ordinal": 91
     },
     {
@@ -1059,6 +1167,7 @@
       "regionName": "Dark World",
       "regionShort": "DW",
       "icon": "hookshot",
+      "keydrop": false,
       "ordinal": 92
     },
     {
@@ -1069,6 +1178,7 @@
       "regionName": "Hyrule Castle",
       "regionShort": "HC",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 93
     },
     {
@@ -1079,6 +1189,7 @@
       "regionName": "Hyrule Castle",
       "regionShort": "HC",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 94
     },
     {
@@ -1089,6 +1200,7 @@
       "regionName": "Hyrule Castle",
       "regionShort": "HC",
       "icon": "sparkle",
+      "keydrop": false,
       "ordinal": 95
     },
     {
@@ -1099,6 +1211,7 @@
       "regionName": "Hyrule Castle",
       "regionShort": "HC",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 96
     },
     {
@@ -1109,6 +1222,7 @@
       "regionName": "Hyrule Castle",
       "regionShort": "HC",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 97
     },
     {
@@ -1119,6 +1233,7 @@
       "regionName": "Hyrule Castle",
       "regionShort": "HC",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 98
     },
     {
@@ -1129,6 +1244,7 @@
       "regionName": "Hyrule Castle",
       "regionShort": "HC",
       "icon": "chest",
+      "keydrop": false,
       "ordinal": 99
     },
     {
@@ -1139,7 +1255,52 @@
       "regionName": "Hyrule Castle",
       "regionShort": "HC",
       "icon": "sparkle",
+      "keydrop": false,
       "ordinal": 100
+    },
+    {
+      "id": "hc/map-guard-key-drop",
+      "name": "Map Guard Key Drop",
+      "fullName": "Hyrule Castle - Map Guard Key Drop",
+      "region": "hc",
+      "regionName": "Hyrule Castle",
+      "regionShort": "HC",
+      "icon": "enemy",
+      "keydrop": true,
+      "ordinal": 101
+    },
+    {
+      "id": "hc/boomerang-guard-key-drop",
+      "name": "Boomerang Guard Key Drop",
+      "fullName": "Hyrule Castle - Boomerang Guard Key Drop",
+      "region": "hc",
+      "regionName": "Hyrule Castle",
+      "regionShort": "HC",
+      "icon": "enemy",
+      "keydrop": true,
+      "ordinal": 102
+    },
+    {
+      "id": "hc/key-rat-key-drop",
+      "name": "Key Rat Key Drop",
+      "fullName": "Hyrule Castle - Key Rat Key Drop",
+      "region": "hc",
+      "regionName": "Hyrule Castle",
+      "regionShort": "HC",
+      "icon": "enemy",
+      "keydrop": true,
+      "ordinal": 103
+    },
+    {
+      "id": "hc/big-key-drop",
+      "name": "Big Key Drop",
+      "fullName": "Hyrule Castle - Big Key Drop",
+      "region": "hc",
+      "regionName": "Hyrule Castle",
+      "regionShort": "HC",
+      "icon": "enemy",
+      "keydrop": true,
+      "ordinal": 104
     },
     {
       "id": "ep/cannonball-chest",
@@ -1149,7 +1310,8 @@
       "regionName": "Eastern Palace",
       "regionShort": "EP",
       "icon": "chest",
-      "ordinal": 101
+      "keydrop": false,
+      "ordinal": 105
     },
     {
       "id": "ep/map-chest",
@@ -1159,7 +1321,8 @@
       "regionName": "Eastern Palace",
       "regionShort": "EP",
       "icon": "chest",
-      "ordinal": 102
+      "keydrop": false,
+      "ordinal": 106
     },
     {
       "id": "ep/compass-chest",
@@ -1169,7 +1332,8 @@
       "regionName": "Eastern Palace",
       "regionShort": "EP",
       "icon": "chest",
-      "ordinal": 103
+      "keydrop": false,
+      "ordinal": 107
     },
     {
       "id": "ep/big-chest",
@@ -1179,7 +1343,8 @@
       "regionName": "Eastern Palace",
       "regionShort": "EP",
       "icon": "bigchest",
-      "ordinal": 104
+      "keydrop": false,
+      "ordinal": 108
     },
     {
       "id": "ep/big-key-chest",
@@ -1189,7 +1354,8 @@
       "regionName": "Eastern Palace",
       "regionShort": "EP",
       "icon": "chest",
-      "ordinal": 105
+      "keydrop": false,
+      "ordinal": 109
     },
     {
       "id": "ep/armos-knights",
@@ -1199,7 +1365,30 @@
       "regionName": "Eastern Palace",
       "regionShort": "EP",
       "icon": "boss",
-      "ordinal": 106
+      "keydrop": false,
+      "ordinal": 110
+    },
+    {
+      "id": "ep/dark-square-pot-key",
+      "name": "Dark Square Pot Key",
+      "fullName": "Eastern Palace - Dark Square Pot Key",
+      "region": "ep",
+      "regionName": "Eastern Palace",
+      "regionShort": "EP",
+      "icon": "pot",
+      "keydrop": true,
+      "ordinal": 111
+    },
+    {
+      "id": "ep/dark-eyegore-key-drop",
+      "name": "Dark Eyegore Key Drop",
+      "fullName": "Eastern Palace - Dark Eyegore Key Drop",
+      "region": "ep",
+      "regionName": "Eastern Palace",
+      "regionShort": "EP",
+      "icon": "enemy",
+      "keydrop": true,
+      "ordinal": 112
     },
     {
       "id": "dp/map-chest",
@@ -1209,7 +1398,8 @@
       "regionName": "Desert Palace",
       "regionShort": "DP",
       "icon": "chest",
-      "ordinal": 107
+      "keydrop": false,
+      "ordinal": 113
     },
     {
       "id": "dp/torch",
@@ -1219,7 +1409,8 @@
       "regionName": "Desert Palace",
       "regionShort": "DP",
       "icon": "sparkle",
-      "ordinal": 108
+      "keydrop": false,
+      "ordinal": 114
     },
     {
       "id": "dp/compass-chest",
@@ -1229,7 +1420,8 @@
       "regionName": "Desert Palace",
       "regionShort": "DP",
       "icon": "chest",
-      "ordinal": 109
+      "keydrop": false,
+      "ordinal": 115
     },
     {
       "id": "dp/big-key-chest",
@@ -1239,7 +1431,8 @@
       "regionName": "Desert Palace",
       "regionShort": "DP",
       "icon": "chest",
-      "ordinal": 110
+      "keydrop": false,
+      "ordinal": 116
     },
     {
       "id": "dp/big-chest",
@@ -1249,7 +1442,8 @@
       "regionName": "Desert Palace",
       "regionShort": "DP",
       "icon": "bigchest",
-      "ordinal": 111
+      "keydrop": false,
+      "ordinal": 117
     },
     {
       "id": "dp/lanmolas",
@@ -1259,7 +1453,41 @@
       "regionName": "Desert Palace",
       "regionShort": "DP",
       "icon": "boss",
-      "ordinal": 112
+      "keydrop": false,
+      "ordinal": 118
+    },
+    {
+      "id": "dp/desert-tiles-1-pot-key",
+      "name": "Desert Tiles 1 Pot Key",
+      "fullName": "Desert Palace - Desert Tiles 1 Pot Key",
+      "region": "dp",
+      "regionName": "Desert Palace",
+      "regionShort": "DP",
+      "icon": "pot",
+      "keydrop": true,
+      "ordinal": 119
+    },
+    {
+      "id": "dp/beamos-hall-pot-key",
+      "name": "Beamos Hall Pot Key",
+      "fullName": "Desert Palace - Beamos Hall Pot Key",
+      "region": "dp",
+      "regionName": "Desert Palace",
+      "regionShort": "DP",
+      "icon": "pot",
+      "keydrop": true,
+      "ordinal": 120
+    },
+    {
+      "id": "dp/desert-tiles-2-pot-key",
+      "name": "Desert Tiles 2 Pot Key",
+      "fullName": "Desert Palace - Desert Tiles 2 Pot Key",
+      "region": "dp",
+      "regionName": "Desert Palace",
+      "regionShort": "DP",
+      "icon": "pot",
+      "keydrop": true,
+      "ordinal": 121
     },
     {
       "id": "toh/basement-cage",
@@ -1269,7 +1497,8 @@
       "regionName": "Tower of Hera",
       "regionShort": "ToH",
       "icon": "chest",
-      "ordinal": 113
+      "keydrop": false,
+      "ordinal": 122
     },
     {
       "id": "toh/map-chest",
@@ -1279,7 +1508,8 @@
       "regionName": "Tower of Hera",
       "regionShort": "ToH",
       "icon": "chest",
-      "ordinal": 114
+      "keydrop": false,
+      "ordinal": 123
     },
     {
       "id": "toh/big-key-chest",
@@ -1289,7 +1519,8 @@
       "regionName": "Tower of Hera",
       "regionShort": "ToH",
       "icon": "chest",
-      "ordinal": 115
+      "keydrop": false,
+      "ordinal": 124
     },
     {
       "id": "toh/compass-chest",
@@ -1299,7 +1530,8 @@
       "regionName": "Tower of Hera",
       "regionShort": "ToH",
       "icon": "chest",
-      "ordinal": 116
+      "keydrop": false,
+      "ordinal": 125
     },
     {
       "id": "toh/big-chest",
@@ -1309,7 +1541,8 @@
       "regionName": "Tower of Hera",
       "regionShort": "ToH",
       "icon": "bigchest",
-      "ordinal": 117
+      "keydrop": false,
+      "ordinal": 126
     },
     {
       "id": "toh/moldorm",
@@ -1319,7 +1552,8 @@
       "regionName": "Tower of Hera",
       "regionShort": "ToH",
       "icon": "boss",
-      "ordinal": 118
+      "keydrop": false,
+      "ordinal": 127
     },
     {
       "id": "ct/room-03",
@@ -1329,7 +1563,8 @@
       "regionName": "Castle Tower",
       "regionShort": "CT",
       "icon": "chest",
-      "ordinal": 119
+      "keydrop": false,
+      "ordinal": 128
     },
     {
       "id": "ct/dark-maze",
@@ -1339,7 +1574,30 @@
       "regionName": "Castle Tower",
       "regionShort": "CT",
       "icon": "chest",
-      "ordinal": 120
+      "keydrop": false,
+      "ordinal": 129
+    },
+    {
+      "id": "ct/dark-archer-key-drop",
+      "name": "Dark Archer Key Drop",
+      "fullName": "Castle Tower - Dark Archer Key Drop",
+      "region": "ct",
+      "regionName": "Castle Tower",
+      "regionShort": "CT",
+      "icon": "enemy",
+      "keydrop": true,
+      "ordinal": 130
+    },
+    {
+      "id": "ct/circle-of-pots-key-drop",
+      "name": "Circle of Pots Key Drop",
+      "fullName": "Castle Tower - Circle of Pots Key Drop",
+      "region": "ct",
+      "regionName": "Castle Tower",
+      "regionShort": "CT",
+      "icon": "enemy",
+      "keydrop": true,
+      "ordinal": 131
     },
     {
       "id": "pod/shooter-room",
@@ -1349,7 +1607,8 @@
       "regionName": "Palace of Darkness",
       "regionShort": "PoD",
       "icon": "chest",
-      "ordinal": 121
+      "keydrop": false,
+      "ordinal": 132
     },
     {
       "id": "pod/big-key-chest",
@@ -1359,7 +1618,8 @@
       "regionName": "Palace of Darkness",
       "regionShort": "PoD",
       "icon": "chest",
-      "ordinal": 122
+      "keydrop": false,
+      "ordinal": 133
     },
     {
       "id": "pod/stalfos-basement",
@@ -1369,7 +1629,8 @@
       "regionName": "Palace of Darkness",
       "regionShort": "PoD",
       "icon": "chest",
-      "ordinal": 123
+      "keydrop": false,
+      "ordinal": 134
     },
     {
       "id": "pod/the-arena-ledge",
@@ -1379,7 +1640,8 @@
       "regionName": "Palace of Darkness",
       "regionShort": "PoD",
       "icon": "chest",
-      "ordinal": 124
+      "keydrop": false,
+      "ordinal": 135
     },
     {
       "id": "pod/the-arena-bridge",
@@ -1389,7 +1651,8 @@
       "regionName": "Palace of Darkness",
       "regionShort": "PoD",
       "icon": "chest",
-      "ordinal": 125
+      "keydrop": false,
+      "ordinal": 136
     },
     {
       "id": "pod/map-chest",
@@ -1399,7 +1662,8 @@
       "regionName": "Palace of Darkness",
       "regionShort": "PoD",
       "icon": "chest",
-      "ordinal": 126
+      "keydrop": false,
+      "ordinal": 137
     },
     {
       "id": "pod/compass-chest",
@@ -1409,7 +1673,8 @@
       "regionName": "Palace of Darkness",
       "regionShort": "PoD",
       "icon": "chest",
-      "ordinal": 127
+      "keydrop": false,
+      "ordinal": 138
     },
     {
       "id": "pod/dark-basement-left",
@@ -1419,7 +1684,8 @@
       "regionName": "Palace of Darkness",
       "regionShort": "PoD",
       "icon": "chest",
-      "ordinal": 128
+      "keydrop": false,
+      "ordinal": 139
     },
     {
       "id": "pod/dark-basement-right",
@@ -1429,7 +1695,8 @@
       "regionName": "Palace of Darkness",
       "regionShort": "PoD",
       "icon": "chest",
-      "ordinal": 129
+      "keydrop": false,
+      "ordinal": 140
     },
     {
       "id": "pod/dark-maze-top",
@@ -1439,7 +1706,8 @@
       "regionName": "Palace of Darkness",
       "regionShort": "PoD",
       "icon": "chest",
-      "ordinal": 130
+      "keydrop": false,
+      "ordinal": 141
     },
     {
       "id": "pod/dark-maze-bottom",
@@ -1449,7 +1717,8 @@
       "regionName": "Palace of Darkness",
       "regionShort": "PoD",
       "icon": "chest",
-      "ordinal": 131
+      "keydrop": false,
+      "ordinal": 142
     },
     {
       "id": "pod/big-chest",
@@ -1459,7 +1728,8 @@
       "regionName": "Palace of Darkness",
       "regionShort": "PoD",
       "icon": "bigchest",
-      "ordinal": 132
+      "keydrop": false,
+      "ordinal": 143
     },
     {
       "id": "pod/harmless-hellway",
@@ -1469,7 +1739,8 @@
       "regionName": "Palace of Darkness",
       "regionShort": "PoD",
       "icon": "chest",
-      "ordinal": 133
+      "keydrop": false,
+      "ordinal": 144
     },
     {
       "id": "pod/helmasaur-king",
@@ -1479,7 +1750,8 @@
       "regionName": "Palace of Darkness",
       "regionShort": "PoD",
       "icon": "boss",
-      "ordinal": 134
+      "keydrop": false,
+      "ordinal": 145
     },
     {
       "id": "sp/entrance",
@@ -1489,7 +1761,8 @@
       "regionName": "Swamp Palace",
       "regionShort": "SP",
       "icon": "chest",
-      "ordinal": 135
+      "keydrop": false,
+      "ordinal": 146
     },
     {
       "id": "sp/map-chest",
@@ -1499,7 +1772,8 @@
       "regionName": "Swamp Palace",
       "regionShort": "SP",
       "icon": "chest",
-      "ordinal": 136
+      "keydrop": false,
+      "ordinal": 147
     },
     {
       "id": "sp/big-chest",
@@ -1509,7 +1783,8 @@
       "regionName": "Swamp Palace",
       "regionShort": "SP",
       "icon": "bigchest",
-      "ordinal": 137
+      "keydrop": false,
+      "ordinal": 148
     },
     {
       "id": "sp/compass-chest",
@@ -1519,7 +1794,8 @@
       "regionName": "Swamp Palace",
       "regionShort": "SP",
       "icon": "chest",
-      "ordinal": 138
+      "keydrop": false,
+      "ordinal": 149
     },
     {
       "id": "sp/west-chest",
@@ -1529,7 +1805,8 @@
       "regionName": "Swamp Palace",
       "regionShort": "SP",
       "icon": "chest",
-      "ordinal": 139
+      "keydrop": false,
+      "ordinal": 150
     },
     {
       "id": "sp/big-key-chest",
@@ -1539,7 +1816,8 @@
       "regionName": "Swamp Palace",
       "regionShort": "SP",
       "icon": "chest",
-      "ordinal": 140
+      "keydrop": false,
+      "ordinal": 151
     },
     {
       "id": "sp/flooded-room-left",
@@ -1549,7 +1827,8 @@
       "regionName": "Swamp Palace",
       "regionShort": "SP",
       "icon": "chest",
-      "ordinal": 141
+      "keydrop": false,
+      "ordinal": 152
     },
     {
       "id": "sp/flooded-room-right",
@@ -1559,7 +1838,8 @@
       "regionName": "Swamp Palace",
       "regionShort": "SP",
       "icon": "chest",
-      "ordinal": 142
+      "keydrop": false,
+      "ordinal": 153
     },
     {
       "id": "sp/waterfall-room",
@@ -1569,7 +1849,8 @@
       "regionName": "Swamp Palace",
       "regionShort": "SP",
       "icon": "chest",
-      "ordinal": 143
+      "keydrop": false,
+      "ordinal": 154
     },
     {
       "id": "sp/arrghus",
@@ -1579,7 +1860,63 @@
       "regionName": "Swamp Palace",
       "regionShort": "SP",
       "icon": "boss",
-      "ordinal": 144
+      "keydrop": false,
+      "ordinal": 155
+    },
+    {
+      "id": "sp/pot-row-pot-key",
+      "name": "Pot Row Pot Key",
+      "fullName": "Swamp Palace - Pot Row Pot Key",
+      "region": "sp",
+      "regionName": "Swamp Palace",
+      "regionShort": "SP",
+      "icon": "pot",
+      "keydrop": true,
+      "ordinal": 156
+    },
+    {
+      "id": "sp/trench-1-pot-key",
+      "name": "Trench 1 Pot Key",
+      "fullName": "Swamp Palace - Trench 1 Pot Key",
+      "region": "sp",
+      "regionName": "Swamp Palace",
+      "regionShort": "SP",
+      "icon": "pot",
+      "keydrop": true,
+      "ordinal": 157
+    },
+    {
+      "id": "sp/hookshot-pot-key",
+      "name": "Hookshot Pot Key",
+      "fullName": "Swamp Palace - Hookshot Pot Key",
+      "region": "sp",
+      "regionName": "Swamp Palace",
+      "regionShort": "SP",
+      "icon": "pot",
+      "keydrop": true,
+      "ordinal": 158
+    },
+    {
+      "id": "sp/trench-2-pot-key",
+      "name": "Trench 2 Pot Key",
+      "fullName": "Swamp Palace - Trench 2 Pot Key",
+      "region": "sp",
+      "regionName": "Swamp Palace",
+      "regionShort": "SP",
+      "icon": "pot",
+      "keydrop": true,
+      "ordinal": 159
+    },
+    {
+      "id": "sp/waterway-pot-key",
+      "name": "Waterway Pot Key",
+      "fullName": "Swamp Palace - Waterway Pot Key",
+      "region": "sp",
+      "regionName": "Swamp Palace",
+      "regionShort": "SP",
+      "icon": "pot",
+      "keydrop": true,
+      "ordinal": 160
     },
     {
       "id": "sw/big-chest",
@@ -1589,7 +1926,8 @@
       "regionName": "Skull Woods",
       "regionShort": "SW",
       "icon": "bigchest",
-      "ordinal": 145
+      "keydrop": false,
+      "ordinal": 161
     },
     {
       "id": "sw/big-key-chest",
@@ -1599,7 +1937,8 @@
       "regionName": "Skull Woods",
       "regionShort": "SW",
       "icon": "chest",
-      "ordinal": 146
+      "keydrop": false,
+      "ordinal": 162
     },
     {
       "id": "sw/compass-chest",
@@ -1609,7 +1948,8 @@
       "regionName": "Skull Woods",
       "regionShort": "SW",
       "icon": "chest",
-      "ordinal": 147
+      "keydrop": false,
+      "ordinal": 163
     },
     {
       "id": "sw/map-chest",
@@ -1619,7 +1959,8 @@
       "regionName": "Skull Woods",
       "regionShort": "SW",
       "icon": "chest",
-      "ordinal": 148
+      "keydrop": false,
+      "ordinal": 164
     },
     {
       "id": "sw/bridge-room",
@@ -1629,7 +1970,8 @@
       "regionName": "Skull Woods",
       "regionShort": "SW",
       "icon": "chest",
-      "ordinal": 149
+      "keydrop": false,
+      "ordinal": 165
     },
     {
       "id": "sw/pot-prison",
@@ -1639,7 +1981,8 @@
       "regionName": "Skull Woods",
       "regionShort": "SW",
       "icon": "chest",
-      "ordinal": 150
+      "keydrop": false,
+      "ordinal": 166
     },
     {
       "id": "sw/pinball-room",
@@ -1649,7 +1992,8 @@
       "regionName": "Skull Woods",
       "regionShort": "SW",
       "icon": "chest",
-      "ordinal": 151
+      "keydrop": false,
+      "ordinal": 167
     },
     {
       "id": "sw/mothula",
@@ -1659,7 +2003,30 @@
       "regionName": "Skull Woods",
       "regionShort": "SW",
       "icon": "boss",
-      "ordinal": 152
+      "keydrop": false,
+      "ordinal": 168
+    },
+    {
+      "id": "sw/west-lobby-pot-key",
+      "name": "West Lobby Pot Key",
+      "fullName": "Skull Woods - West Lobby Pot Key",
+      "region": "sw",
+      "regionName": "Skull Woods",
+      "regionShort": "SW",
+      "icon": "pot",
+      "keydrop": true,
+      "ordinal": 169
+    },
+    {
+      "id": "sw/spike-corner-key-drop",
+      "name": "Spike Corner Key Drop",
+      "fullName": "Skull Woods - Spike Corner Key Drop",
+      "region": "sw",
+      "regionName": "Skull Woods",
+      "regionShort": "SW",
+      "icon": "enemy",
+      "keydrop": true,
+      "ordinal": 170
     },
     {
       "id": "tt/map-chest",
@@ -1669,7 +2036,8 @@
       "regionName": "Thieves' Town",
       "regionShort": "TT",
       "icon": "chest",
-      "ordinal": 153
+      "keydrop": false,
+      "ordinal": 171
     },
     {
       "id": "tt/ambush-chest",
@@ -1679,7 +2047,8 @@
       "regionName": "Thieves' Town",
       "regionShort": "TT",
       "icon": "chest",
-      "ordinal": 154
+      "keydrop": false,
+      "ordinal": 172
     },
     {
       "id": "tt/compass-chest",
@@ -1689,7 +2058,8 @@
       "regionName": "Thieves' Town",
       "regionShort": "TT",
       "icon": "chest",
-      "ordinal": 155
+      "keydrop": false,
+      "ordinal": 173
     },
     {
       "id": "tt/big-key-chest",
@@ -1699,7 +2069,8 @@
       "regionName": "Thieves' Town",
       "regionShort": "TT",
       "icon": "chest",
-      "ordinal": 156
+      "keydrop": false,
+      "ordinal": 174
     },
     {
       "id": "tt/attic",
@@ -1709,7 +2080,8 @@
       "regionName": "Thieves' Town",
       "regionShort": "TT",
       "icon": "chest",
-      "ordinal": 157
+      "keydrop": false,
+      "ordinal": 175
     },
     {
       "id": "tt/blinds-cell",
@@ -1719,7 +2091,8 @@
       "regionName": "Thieves' Town",
       "regionShort": "TT",
       "icon": "chest",
-      "ordinal": 158
+      "keydrop": false,
+      "ordinal": 176
     },
     {
       "id": "tt/big-chest",
@@ -1729,7 +2102,8 @@
       "regionName": "Thieves' Town",
       "regionShort": "TT",
       "icon": "bigchest",
-      "ordinal": 159
+      "keydrop": false,
+      "ordinal": 177
     },
     {
       "id": "tt/blind",
@@ -1739,7 +2113,30 @@
       "regionName": "Thieves' Town",
       "regionShort": "TT",
       "icon": "boss",
-      "ordinal": 160
+      "keydrop": false,
+      "ordinal": 178
+    },
+    {
+      "id": "tt/hallway-pot-key",
+      "name": "Hallway Pot Key",
+      "fullName": "Thieves' Town - Hallway Pot Key",
+      "region": "tt",
+      "regionName": "Thieves' Town",
+      "regionShort": "TT",
+      "icon": "pot",
+      "keydrop": true,
+      "ordinal": 179
+    },
+    {
+      "id": "tt/spike-switch-pot-key",
+      "name": "Spike Switch Pot Key",
+      "fullName": "Thieves' Town - Spike Switch Pot Key",
+      "region": "tt",
+      "regionName": "Thieves' Town",
+      "regionShort": "TT",
+      "icon": "pot",
+      "keydrop": true,
+      "ordinal": 180
     },
     {
       "id": "ip/compass-chest",
@@ -1749,7 +2146,8 @@
       "regionName": "Ice Palace",
       "regionShort": "IP",
       "icon": "chest",
-      "ordinal": 161
+      "keydrop": false,
+      "ordinal": 181
     },
     {
       "id": "ip/spike-room",
@@ -1759,7 +2157,8 @@
       "regionName": "Ice Palace",
       "regionShort": "IP",
       "icon": "chest",
-      "ordinal": 162
+      "keydrop": false,
+      "ordinal": 182
     },
     {
       "id": "ip/map-chest",
@@ -1769,7 +2168,8 @@
       "regionName": "Ice Palace",
       "regionShort": "IP",
       "icon": "chest",
-      "ordinal": 163
+      "keydrop": false,
+      "ordinal": 183
     },
     {
       "id": "ip/big-key-chest",
@@ -1779,7 +2179,8 @@
       "regionName": "Ice Palace",
       "regionShort": "IP",
       "icon": "chest",
-      "ordinal": 164
+      "keydrop": false,
+      "ordinal": 184
     },
     {
       "id": "ip/iced-t-room",
@@ -1789,7 +2190,8 @@
       "regionName": "Ice Palace",
       "regionShort": "IP",
       "icon": "chest",
-      "ordinal": 165
+      "keydrop": false,
+      "ordinal": 185
     },
     {
       "id": "ip/freezor-chest",
@@ -1799,7 +2201,8 @@
       "regionName": "Ice Palace",
       "regionShort": "IP",
       "icon": "chest",
-      "ordinal": 166
+      "keydrop": false,
+      "ordinal": 186
     },
     {
       "id": "ip/big-chest",
@@ -1809,7 +2212,8 @@
       "regionName": "Ice Palace",
       "regionShort": "IP",
       "icon": "bigchest",
-      "ordinal": 167
+      "keydrop": false,
+      "ordinal": 187
     },
     {
       "id": "ip/kholdstare",
@@ -1819,7 +2223,52 @@
       "regionName": "Ice Palace",
       "regionShort": "IP",
       "icon": "boss",
-      "ordinal": 168
+      "keydrop": false,
+      "ordinal": 188
+    },
+    {
+      "id": "ip/jelly-key-drop",
+      "name": "Jelly Key Drop",
+      "fullName": "Ice Palace - Jelly Key Drop",
+      "region": "ip",
+      "regionName": "Ice Palace",
+      "regionShort": "IP",
+      "icon": "enemy",
+      "keydrop": true,
+      "ordinal": 189
+    },
+    {
+      "id": "ip/conveyor-key-drop",
+      "name": "Conveyor Key Drop",
+      "fullName": "Ice Palace - Conveyor Key Drop",
+      "region": "ip",
+      "regionName": "Ice Palace",
+      "regionShort": "IP",
+      "icon": "enemy",
+      "keydrop": true,
+      "ordinal": 190
+    },
+    {
+      "id": "ip/hammer-block-key-drop",
+      "name": "Hammer Block Key Drop",
+      "fullName": "Ice Palace - Hammer Block Key Drop",
+      "region": "ip",
+      "regionName": "Ice Palace",
+      "regionShort": "IP",
+      "icon": "enemy",
+      "keydrop": true,
+      "ordinal": 191
+    },
+    {
+      "id": "ip/many-pots-pot-key",
+      "name": "Many Pots Pot Key",
+      "fullName": "Ice Palace - Many Pots Pot Key",
+      "region": "ip",
+      "regionName": "Ice Palace",
+      "regionShort": "IP",
+      "icon": "pot",
+      "keydrop": true,
+      "ordinal": 192
     },
     {
       "id": "mm/bridge-chest",
@@ -1829,7 +2278,8 @@
       "regionName": "Misery Mire",
       "regionShort": "MM",
       "icon": "chest",
-      "ordinal": 169
+      "keydrop": false,
+      "ordinal": 193
     },
     {
       "id": "mm/spike-chest",
@@ -1839,7 +2289,8 @@
       "regionName": "Misery Mire",
       "regionShort": "MM",
       "icon": "chest",
-      "ordinal": 170
+      "keydrop": false,
+      "ordinal": 194
     },
     {
       "id": "mm/compass-chest",
@@ -1849,7 +2300,8 @@
       "regionName": "Misery Mire",
       "regionShort": "MM",
       "icon": "chest",
-      "ordinal": 171
+      "keydrop": false,
+      "ordinal": 195
     },
     {
       "id": "mm/main-lobby",
@@ -1859,7 +2311,8 @@
       "regionName": "Misery Mire",
       "regionShort": "MM",
       "icon": "chest",
-      "ordinal": 172
+      "keydrop": false,
+      "ordinal": 196
     },
     {
       "id": "mm/map-chest",
@@ -1869,7 +2322,8 @@
       "regionName": "Misery Mire",
       "regionShort": "MM",
       "icon": "chest",
-      "ordinal": 173
+      "keydrop": false,
+      "ordinal": 197
     },
     {
       "id": "mm/big-key-chest",
@@ -1879,7 +2333,8 @@
       "regionName": "Misery Mire",
       "regionShort": "MM",
       "icon": "chest",
-      "ordinal": 174
+      "keydrop": false,
+      "ordinal": 198
     },
     {
       "id": "mm/big-chest",
@@ -1889,7 +2344,8 @@
       "regionName": "Misery Mire",
       "regionShort": "MM",
       "icon": "bigchest",
-      "ordinal": 175
+      "keydrop": false,
+      "ordinal": 199
     },
     {
       "id": "mm/vitreous",
@@ -1899,7 +2355,41 @@
       "regionName": "Misery Mire",
       "regionShort": "MM",
       "icon": "boss",
-      "ordinal": 176
+      "keydrop": false,
+      "ordinal": 200
+    },
+    {
+      "id": "mm/spikes-pot-key",
+      "name": "Spikes Pot Key",
+      "fullName": "Misery Mire - Spikes Pot Key",
+      "region": "mm",
+      "regionName": "Misery Mire",
+      "regionShort": "MM",
+      "icon": "pot",
+      "keydrop": true,
+      "ordinal": 201
+    },
+    {
+      "id": "mm/fishbone-pot-key",
+      "name": "Fishbone Pot Key",
+      "fullName": "Misery Mire - Fishbone Pot Key",
+      "region": "mm",
+      "regionName": "Misery Mire",
+      "regionShort": "MM",
+      "icon": "pot",
+      "keydrop": true,
+      "ordinal": 202
+    },
+    {
+      "id": "mm/conveyor-crystal-key-drop",
+      "name": "Conveyor Crystal Key Drop",
+      "fullName": "Misery Mire - Conveyor Crystal Key Drop",
+      "region": "mm",
+      "regionName": "Misery Mire",
+      "regionShort": "MM",
+      "icon": "enemy",
+      "keydrop": true,
+      "ordinal": 203
     },
     {
       "id": "tr/roller-room-left",
@@ -1909,7 +2399,8 @@
       "regionName": "Turtle Rock",
       "regionShort": "TR",
       "icon": "chest",
-      "ordinal": 177
+      "keydrop": false,
+      "ordinal": 204
     },
     {
       "id": "tr/roller-room-right",
@@ -1919,7 +2410,8 @@
       "regionName": "Turtle Rock",
       "regionShort": "TR",
       "icon": "chest",
-      "ordinal": 178
+      "keydrop": false,
+      "ordinal": 205
     },
     {
       "id": "tr/compass-chest",
@@ -1929,7 +2421,8 @@
       "regionName": "Turtle Rock",
       "regionShort": "TR",
       "icon": "chest",
-      "ordinal": 179
+      "keydrop": false,
+      "ordinal": 206
     },
     {
       "id": "tr/chain-chomps",
@@ -1939,7 +2432,8 @@
       "regionName": "Turtle Rock",
       "regionShort": "TR",
       "icon": "chest",
-      "ordinal": 180
+      "keydrop": false,
+      "ordinal": 207
     },
     {
       "id": "tr/big-key-chest",
@@ -1949,7 +2443,8 @@
       "regionName": "Turtle Rock",
       "regionShort": "TR",
       "icon": "chest",
-      "ordinal": 181
+      "keydrop": false,
+      "ordinal": 208
     },
     {
       "id": "tr/big-chest",
@@ -1959,7 +2454,8 @@
       "regionName": "Turtle Rock",
       "regionShort": "TR",
       "icon": "bigchest",
-      "ordinal": 182
+      "keydrop": false,
+      "ordinal": 209
     },
     {
       "id": "tr/crystaroller-room",
@@ -1969,7 +2465,8 @@
       "regionName": "Turtle Rock",
       "regionShort": "TR",
       "icon": "chest",
-      "ordinal": 183
+      "keydrop": false,
+      "ordinal": 210
     },
     {
       "id": "tr/laser-bridge-top-left",
@@ -1979,7 +2476,8 @@
       "regionName": "Turtle Rock",
       "regionShort": "TR",
       "icon": "chest",
-      "ordinal": 184
+      "keydrop": false,
+      "ordinal": 211
     },
     {
       "id": "tr/laser-bridge-top-right",
@@ -1989,7 +2487,8 @@
       "regionName": "Turtle Rock",
       "regionShort": "TR",
       "icon": "chest",
-      "ordinal": 185
+      "keydrop": false,
+      "ordinal": 212
     },
     {
       "id": "tr/laser-bridge-bottom-left",
@@ -1999,7 +2498,8 @@
       "regionName": "Turtle Rock",
       "regionShort": "TR",
       "icon": "chest",
-      "ordinal": 186
+      "keydrop": false,
+      "ordinal": 213
     },
     {
       "id": "tr/laser-bridge-bottom-right",
@@ -2009,7 +2509,8 @@
       "regionName": "Turtle Rock",
       "regionShort": "TR",
       "icon": "chest",
-      "ordinal": 187
+      "keydrop": false,
+      "ordinal": 214
     },
     {
       "id": "tr/trinexx",
@@ -2019,7 +2520,30 @@
       "regionName": "Turtle Rock",
       "regionShort": "TR",
       "icon": "boss",
-      "ordinal": 188
+      "keydrop": false,
+      "ordinal": 215
+    },
+    {
+      "id": "tr/pokey-1-key-drop",
+      "name": "Pokey 1 Key Drop",
+      "fullName": "Turtle Rock - Pokey 1 Key Drop",
+      "region": "tr",
+      "regionName": "Turtle Rock",
+      "regionShort": "TR",
+      "icon": "enemy",
+      "keydrop": true,
+      "ordinal": 216
+    },
+    {
+      "id": "tr/pokey-2-key-drop",
+      "name": "Pokey 2 Key Drop",
+      "fullName": "Turtle Rock - Pokey 2 Key Drop",
+      "region": "tr",
+      "regionName": "Turtle Rock",
+      "regionShort": "TR",
+      "icon": "enemy",
+      "keydrop": true,
+      "ordinal": 217
     },
     {
       "id": "gt/bobs-torch",
@@ -2029,7 +2553,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "sparkle",
-      "ordinal": 189
+      "keydrop": false,
+      "ordinal": 218
     },
     {
       "id": "gt/dms-room-top-left",
@@ -2039,7 +2564,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 190
+      "keydrop": false,
+      "ordinal": 219
     },
     {
       "id": "gt/dms-room-top-right",
@@ -2049,7 +2575,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 191
+      "keydrop": false,
+      "ordinal": 220
     },
     {
       "id": "gt/dms-room-bottom-left",
@@ -2059,7 +2586,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 192
+      "keydrop": false,
+      "ordinal": 221
     },
     {
       "id": "gt/dms-room-bottom-right",
@@ -2069,7 +2597,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 193
+      "keydrop": false,
+      "ordinal": 222
     },
     {
       "id": "gt/map-chest",
@@ -2079,7 +2608,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 194
+      "keydrop": false,
+      "ordinal": 223
     },
     {
       "id": "gt/firesnake-room",
@@ -2089,7 +2619,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 195
+      "keydrop": false,
+      "ordinal": 224
     },
     {
       "id": "gt/randomizer-room-top-left",
@@ -2099,7 +2630,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 196
+      "keydrop": false,
+      "ordinal": 225
     },
     {
       "id": "gt/randomizer-room-top-right",
@@ -2109,7 +2641,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 197
+      "keydrop": false,
+      "ordinal": 226
     },
     {
       "id": "gt/randomizer-room-bottom-left",
@@ -2119,7 +2652,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 198
+      "keydrop": false,
+      "ordinal": 227
     },
     {
       "id": "gt/randomizer-room-bottom-right",
@@ -2129,7 +2663,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 199
+      "keydrop": false,
+      "ordinal": 228
     },
     {
       "id": "gt/big-chest",
@@ -2139,7 +2674,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "bigchest",
-      "ordinal": 200
+      "keydrop": false,
+      "ordinal": 229
     },
     {
       "id": "gt/bobs-chest",
@@ -2149,7 +2685,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 201
+      "keydrop": false,
+      "ordinal": 230
     },
     {
       "id": "gt/big-key-chest",
@@ -2159,7 +2696,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 202
+      "keydrop": false,
+      "ordinal": 231
     },
     {
       "id": "gt/big-key-room-left",
@@ -2169,7 +2707,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 203
+      "keydrop": false,
+      "ordinal": 232
     },
     {
       "id": "gt/big-key-room-right",
@@ -2179,7 +2718,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 204
+      "keydrop": false,
+      "ordinal": 233
     },
     {
       "id": "gt/hope-room-left",
@@ -2189,7 +2729,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 205
+      "keydrop": false,
+      "ordinal": 234
     },
     {
       "id": "gt/hope-room-right",
@@ -2199,7 +2740,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 206
+      "keydrop": false,
+      "ordinal": 235
     },
     {
       "id": "gt/compass-room-top-left",
@@ -2209,7 +2751,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 207
+      "keydrop": false,
+      "ordinal": 236
     },
     {
       "id": "gt/compass-room-top-right",
@@ -2219,7 +2762,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 208
+      "keydrop": false,
+      "ordinal": 237
     },
     {
       "id": "gt/compass-room-bottom-left",
@@ -2229,7 +2773,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 209
+      "keydrop": false,
+      "ordinal": 238
     },
     {
       "id": "gt/compass-room-bottom-right",
@@ -2239,7 +2784,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 210
+      "keydrop": false,
+      "ordinal": 239
     },
     {
       "id": "gt/tile-room",
@@ -2249,7 +2795,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 211
+      "keydrop": false,
+      "ordinal": 240
     },
     {
       "id": "gt/mini-helmasaur-room-left",
@@ -2259,7 +2806,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 212
+      "keydrop": false,
+      "ordinal": 241
     },
     {
       "id": "gt/mini-helmasaur-room-right",
@@ -2269,7 +2817,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 213
+      "keydrop": false,
+      "ordinal": 242
     },
     {
       "id": "gt/pre-moldorm-chest",
@@ -2279,7 +2828,8 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 214
+      "keydrop": false,
+      "ordinal": 243
     },
     {
       "id": "gt/moldorm-chest",
@@ -2289,7 +2839,52 @@
       "regionName": "Ganon's Tower",
       "regionShort": "GT",
       "icon": "chest",
-      "ordinal": 215
+      "keydrop": false,
+      "ordinal": 244
+    },
+    {
+      "id": "gt/conveyor-cross-pot-key",
+      "name": "Conveyor Cross Pot Key",
+      "fullName": "Ganon's Tower - Conveyor Cross Pot Key",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "pot",
+      "keydrop": true,
+      "ordinal": 245
+    },
+    {
+      "id": "gt/double-switch-pot-key",
+      "name": "Double Switch Pot Key",
+      "fullName": "Ganon's Tower - Double Switch Pot Key",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "pot",
+      "keydrop": true,
+      "ordinal": 246
+    },
+    {
+      "id": "gt/conveyor-star-pits-pot-key",
+      "name": "Conveyor Star Pits Pot Key",
+      "fullName": "Ganon's Tower - Conveyor Star Pits Pot Key",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "pot",
+      "keydrop": true,
+      "ordinal": 247
+    },
+    {
+      "id": "gt/mini-helmasaur-key-drop",
+      "name": "Mini Helmasaur Key Drop",
+      "fullName": "Ganon's Tower - Mini Helmasaur Key Drop",
+      "region": "gt",
+      "regionName": "Ganon's Tower",
+      "regionShort": "GT",
+      "icon": "enemy",
+      "keydrop": true,
+      "ordinal": 248
     }
   ],
   "items": [
@@ -2299,6 +2894,9 @@
       "label": null,
       "sprite": "sword",
       "slots": 4,
+      "keydropSlots": 4,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Equipment",
       "panel": "items",
       "dungeon": null,
@@ -2311,6 +2909,9 @@
       "label": null,
       "sprite": "shield",
       "slots": 3,
+      "keydropSlots": 3,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Equipment",
       "panel": "items",
       "dungeon": null,
@@ -2323,6 +2924,9 @@
       "label": null,
       "sprite": "mail",
       "slots": 2,
+      "keydropSlots": 2,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Equipment",
       "panel": "items",
       "dungeon": null,
@@ -2335,6 +2939,9 @@
       "label": null,
       "sprite": "glove",
       "slots": 2,
+      "keydropSlots": 2,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Equipment",
       "panel": "items",
       "dungeon": null,
@@ -2347,6 +2954,9 @@
       "label": null,
       "sprite": "boots",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Equipment",
       "panel": "items",
       "dungeon": null,
@@ -2359,6 +2969,9 @@
       "label": null,
       "sprite": "flippers",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Equipment",
       "panel": "items",
       "dungeon": null,
@@ -2371,6 +2984,9 @@
       "label": null,
       "sprite": "moonpearl",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Equipment",
       "panel": "items",
       "dungeon": null,
@@ -2383,6 +2999,9 @@
       "label": null,
       "sprite": "heartcontainer",
       "slots": 11,
+      "keydropSlots": 11,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Equipment",
       "panel": "items",
       "dungeon": null,
@@ -2395,6 +3014,9 @@
       "label": null,
       "sprite": "rupees300",
       "slots": 4,
+      "keydropSlots": 4,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Equipment",
       "panel": "items",
       "dungeon": null,
@@ -2407,6 +3029,9 @@
       "label": null,
       "sprite": "bow",
       "slots": 2,
+      "keydropSlots": 2,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Items",
       "panel": "items",
       "dungeon": null,
@@ -2419,6 +3044,9 @@
       "label": null,
       "sprite": "blueboomerang",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Items",
       "panel": "items",
       "dungeon": null,
@@ -2431,6 +3059,9 @@
       "label": null,
       "sprite": "redboomerang",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Items",
       "panel": "items",
       "dungeon": null,
@@ -2443,6 +3074,9 @@
       "label": null,
       "sprite": "hookshot",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Items",
       "panel": "items",
       "dungeon": null,
@@ -2455,6 +3089,9 @@
       "label": null,
       "sprite": "mushroom",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Items",
       "panel": "items",
       "dungeon": null,
@@ -2467,6 +3104,9 @@
       "label": null,
       "sprite": "powder",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Items",
       "panel": "items",
       "dungeon": null,
@@ -2479,6 +3119,9 @@
       "label": null,
       "sprite": "firerod",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Items",
       "panel": "items",
       "dungeon": null,
@@ -2491,6 +3134,9 @@
       "label": null,
       "sprite": "icerod",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Items",
       "panel": "items",
       "dungeon": null,
@@ -2503,6 +3149,9 @@
       "label": null,
       "sprite": "bombos",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Items",
       "panel": "items",
       "dungeon": null,
@@ -2515,6 +3164,9 @@
       "label": null,
       "sprite": "ether",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Items",
       "panel": "items",
       "dungeon": null,
@@ -2527,6 +3179,9 @@
       "label": null,
       "sprite": "quake",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Items",
       "panel": "items",
       "dungeon": null,
@@ -2539,6 +3194,9 @@
       "label": null,
       "sprite": "lamp",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Items",
       "panel": "items",
       "dungeon": null,
@@ -2551,6 +3209,9 @@
       "label": null,
       "sprite": "hammer",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Items",
       "panel": "items",
       "dungeon": null,
@@ -2563,6 +3224,9 @@
       "label": null,
       "sprite": "shovel",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Items",
       "panel": "items",
       "dungeon": null,
@@ -2575,6 +3239,9 @@
       "label": null,
       "sprite": "flute",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Items",
       "panel": "items",
       "dungeon": null,
@@ -2587,6 +3254,9 @@
       "label": null,
       "sprite": "bugnet",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Items",
       "panel": "items",
       "dungeon": null,
@@ -2599,6 +3269,9 @@
       "label": null,
       "sprite": "book",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Items",
       "panel": "items",
       "dungeon": null,
@@ -2611,6 +3284,9 @@
       "label": null,
       "sprite": "bottle",
       "slots": 4,
+      "keydropSlots": 4,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Items",
       "panel": "items",
       "dungeon": null,
@@ -2623,6 +3299,9 @@
       "label": null,
       "sprite": "somaria",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Items",
       "panel": "items",
       "dungeon": null,
@@ -2635,6 +3314,9 @@
       "label": null,
       "sprite": "byrna",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Items",
       "panel": "items",
       "dungeon": null,
@@ -2647,6 +3329,9 @@
       "label": null,
       "sprite": "cape",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Items",
       "panel": "items",
       "dungeon": null,
@@ -2659,6 +3344,9 @@
       "label": null,
       "sprite": "mirror",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Items",
       "panel": "items",
       "dungeon": null,
@@ -2671,6 +3359,9 @@
       "label": null,
       "sprite": "halfmagic",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": "Items",
       "panel": "items",
       "dungeon": null,
@@ -2678,16 +3369,34 @@
       "ordinal": 31
     },
     {
+      "id": "bk-hc",
+      "name": "HC Big Key",
+      "label": "Big Key",
+      "sprite": "bigkey",
+      "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": true,
+      "keydropLabel": null,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "hc",
+      "alwaysCount": false,
+      "ordinal": 32
+    },
+    {
       "id": "sk-hc",
       "name": "HC Small Key",
       "label": "Small Key",
       "sprite": "smallkey",
       "slots": 1,
+      "keydropSlots": 4,
+      "keydropOnly": false,
+      "keydropLabel": "Small Keys",
       "group": null,
       "panel": "keys",
       "dungeon": "hc",
       "alwaysCount": true,
-      "ordinal": 32
+      "ordinal": 33
     },
     {
       "id": "sk-ct",
@@ -2695,11 +3404,14 @@
       "label": "Small Keys",
       "sprite": "smallkey",
       "slots": 2,
+      "keydropSlots": 4,
+      "keydropOnly": false,
+      "keydropLabel": "Small Keys",
       "group": null,
       "panel": "keys",
       "dungeon": "ct",
       "alwaysCount": true,
-      "ordinal": 33
+      "ordinal": 34
     },
     {
       "id": "bk-ep",
@@ -2707,11 +3419,29 @@
       "label": "Big Key",
       "sprite": "bigkey",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": null,
       "panel": "keys",
       "dungeon": "ep",
       "alwaysCount": false,
-      "ordinal": 34
+      "ordinal": 35
+    },
+    {
+      "id": "sk-ep",
+      "name": "EP Small Key",
+      "label": "Small Keys",
+      "sprite": "smallkey",
+      "slots": 0,
+      "keydropSlots": 2,
+      "keydropOnly": true,
+      "keydropLabel": "Small Keys",
+      "group": null,
+      "panel": "keys",
+      "dungeon": "ep",
+      "alwaysCount": true,
+      "ordinal": 36
     },
     {
       "id": "bk-dp",
@@ -2719,11 +3449,14 @@
       "label": "Big Key",
       "sprite": "bigkey",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": null,
       "panel": "keys",
       "dungeon": "dp",
       "alwaysCount": false,
-      "ordinal": 35
+      "ordinal": 37
     },
     {
       "id": "sk-dp",
@@ -2731,11 +3464,14 @@
       "label": "Small Key",
       "sprite": "smallkey",
       "slots": 1,
+      "keydropSlots": 4,
+      "keydropOnly": false,
+      "keydropLabel": "Small Keys",
       "group": null,
       "panel": "keys",
       "dungeon": "dp",
       "alwaysCount": true,
-      "ordinal": 36
+      "ordinal": 38
     },
     {
       "id": "bk-toh",
@@ -2743,11 +3479,14 @@
       "label": "Big Key",
       "sprite": "bigkey",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": null,
       "panel": "keys",
       "dungeon": "toh",
       "alwaysCount": false,
-      "ordinal": 37
+      "ordinal": 39
     },
     {
       "id": "sk-toh",
@@ -2755,11 +3494,14 @@
       "label": "Small Key",
       "sprite": "smallkey",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": "Small Key",
       "group": null,
       "panel": "keys",
       "dungeon": "toh",
       "alwaysCount": true,
-      "ordinal": 38
+      "ordinal": 40
     },
     {
       "id": "bk-pod",
@@ -2767,11 +3509,14 @@
       "label": "Big Key",
       "sprite": "bigkey",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": null,
       "panel": "keys",
       "dungeon": "pod",
       "alwaysCount": false,
-      "ordinal": 39
+      "ordinal": 41
     },
     {
       "id": "sk-pod",
@@ -2779,11 +3524,14 @@
       "label": "Small Keys",
       "sprite": "smallkey",
       "slots": 6,
+      "keydropSlots": 6,
+      "keydropOnly": false,
+      "keydropLabel": "Small Keys",
       "group": null,
       "panel": "keys",
       "dungeon": "pod",
       "alwaysCount": true,
-      "ordinal": 40
+      "ordinal": 42
     },
     {
       "id": "bk-sp",
@@ -2791,11 +3539,14 @@
       "label": "Big Key",
       "sprite": "bigkey",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": null,
       "panel": "keys",
       "dungeon": "sp",
       "alwaysCount": false,
-      "ordinal": 41
+      "ordinal": 43
     },
     {
       "id": "sk-sp",
@@ -2803,11 +3554,14 @@
       "label": "Small Key",
       "sprite": "smallkey",
       "slots": 1,
+      "keydropSlots": 6,
+      "keydropOnly": false,
+      "keydropLabel": "Small Keys",
       "group": null,
       "panel": "keys",
       "dungeon": "sp",
       "alwaysCount": true,
-      "ordinal": 42
+      "ordinal": 44
     },
     {
       "id": "bk-sw",
@@ -2815,11 +3569,14 @@
       "label": "Big Key",
       "sprite": "bigkey",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": null,
       "panel": "keys",
       "dungeon": "sw",
       "alwaysCount": false,
-      "ordinal": 43
+      "ordinal": 45
     },
     {
       "id": "sk-sw",
@@ -2827,11 +3584,14 @@
       "label": "Small Keys",
       "sprite": "smallkey",
       "slots": 3,
+      "keydropSlots": 5,
+      "keydropOnly": false,
+      "keydropLabel": "Small Keys",
       "group": null,
       "panel": "keys",
       "dungeon": "sw",
       "alwaysCount": true,
-      "ordinal": 44
+      "ordinal": 46
     },
     {
       "id": "bk-tt",
@@ -2839,11 +3599,14 @@
       "label": "Big Key",
       "sprite": "bigkey",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": null,
       "panel": "keys",
       "dungeon": "tt",
       "alwaysCount": false,
-      "ordinal": 45
+      "ordinal": 47
     },
     {
       "id": "sk-tt",
@@ -2851,11 +3614,14 @@
       "label": "Small Key",
       "sprite": "smallkey",
       "slots": 1,
+      "keydropSlots": 3,
+      "keydropOnly": false,
+      "keydropLabel": "Small Keys",
       "group": null,
       "panel": "keys",
       "dungeon": "tt",
       "alwaysCount": true,
-      "ordinal": 46
+      "ordinal": 48
     },
     {
       "id": "bk-ip",
@@ -2863,11 +3629,14 @@
       "label": "Big Key",
       "sprite": "bigkey",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": null,
       "panel": "keys",
       "dungeon": "ip",
       "alwaysCount": false,
-      "ordinal": 47
+      "ordinal": 49
     },
     {
       "id": "sk-ip",
@@ -2875,11 +3644,14 @@
       "label": "Small Keys",
       "sprite": "smallkey",
       "slots": 2,
+      "keydropSlots": 6,
+      "keydropOnly": false,
+      "keydropLabel": "Small Keys",
       "group": null,
       "panel": "keys",
       "dungeon": "ip",
       "alwaysCount": true,
-      "ordinal": 48
+      "ordinal": 50
     },
     {
       "id": "bk-mm",
@@ -2887,11 +3659,14 @@
       "label": "Big Key",
       "sprite": "bigkey",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": null,
       "panel": "keys",
       "dungeon": "mm",
       "alwaysCount": false,
-      "ordinal": 49
+      "ordinal": 51
     },
     {
       "id": "sk-mm",
@@ -2899,11 +3674,14 @@
       "label": "Small Keys",
       "sprite": "smallkey",
       "slots": 3,
+      "keydropSlots": 6,
+      "keydropOnly": false,
+      "keydropLabel": "Small Keys",
       "group": null,
       "panel": "keys",
       "dungeon": "mm",
       "alwaysCount": true,
-      "ordinal": 50
+      "ordinal": 52
     },
     {
       "id": "bk-tr",
@@ -2911,11 +3689,14 @@
       "label": "Big Key",
       "sprite": "bigkey",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": null,
       "panel": "keys",
       "dungeon": "tr",
       "alwaysCount": false,
-      "ordinal": 51
+      "ordinal": 53
     },
     {
       "id": "sk-tr",
@@ -2923,11 +3704,14 @@
       "label": "Small Keys",
       "sprite": "smallkey",
       "slots": 4,
+      "keydropSlots": 6,
+      "keydropOnly": false,
+      "keydropLabel": "Small Keys",
       "group": null,
       "panel": "keys",
       "dungeon": "tr",
       "alwaysCount": true,
-      "ordinal": 52
+      "ordinal": 54
     },
     {
       "id": "bk-gt",
@@ -2935,11 +3719,14 @@
       "label": "Big Key",
       "sprite": "bigkey",
       "slots": 1,
+      "keydropSlots": 1,
+      "keydropOnly": false,
+      "keydropLabel": null,
       "group": null,
       "panel": "keys",
       "dungeon": "gt",
       "alwaysCount": false,
-      "ordinal": 53
+      "ordinal": 55
     },
     {
       "id": "sk-gt",
@@ -2947,11 +3734,14 @@
       "label": "Small Keys",
       "sprite": "smallkey",
       "slots": 4,
+      "keydropSlots": 8,
+      "keydropOnly": false,
+      "keydropLabel": "Small Keys",
       "group": null,
       "panel": "keys",
       "dungeon": "gt",
       "alwaysCount": true,
-      "ordinal": 54
+      "ordinal": 56
     }
   ],
   "keyPanel": [
@@ -2960,7 +3750,7 @@
       "name": "Hyrule Castle",
       "short": "HC",
       "color": "#5f86bf",
-      "bigKey": null,
+      "bigKey": "bk-hc",
       "smallKey": "sk-hc",
       "ordinal": 0
     },
@@ -2979,7 +3769,7 @@
       "short": "EP",
       "color": "#2fa877",
       "bigKey": "bk-ep",
-      "smallKey": null,
+      "smallKey": "sk-ep",
       "ordinal": 2
     },
     {
@@ -4085,6 +4875,42 @@
         "....kwwk....",
         "....kwwk....",
         "....kkkk....",
+        "............"
+      ]
+    },
+    {
+      "name": "pot",
+      "kind": "icon",
+      "rows": [
+        "............",
+        "....kkkk....",
+        "...knnnnk...",
+        "....kkkk....",
+        "...knnnnk...",
+        "..knnnnnnk..",
+        ".knnnnnnnnk.",
+        ".knnNnnnnnk.",
+        ".knnnnnnnnk.",
+        "..knnnnnnk..",
+        "...kkkkkk...",
+        "............"
+      ]
+    },
+    {
+      "name": "enemy",
+      "kind": "icon",
+      "rows": [
+        "............",
+        "...kkkkkk...",
+        "..kggggggk..",
+        ".kgwkggkwgk.",
+        ".kgkkggkkgk.",
+        ".kggggggggk.",
+        ".kgGGGGGGgk.",
+        "..kggggggk..",
+        "..kgkggkgk..",
+        "...kk..kk...",
+        "............",
         "............"
       ]
     },

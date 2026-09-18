@@ -12,6 +12,12 @@ public class Room
 
     public DateTimeOffset UpdatedAt { get; set; }
 
+    /// <summary>
+    /// Playing keydrop: the small keys under pots and on enemies are shuffled
+    /// too, so their locations are checks and the dungeons hold more keys.
+    /// </summary>
+    public bool Keydrop { get; set; }
+
     public List<Assignment> Assignments { get; set; } = [];
 
     public List<DeadCheck> DeadChecks { get; set; } = [];

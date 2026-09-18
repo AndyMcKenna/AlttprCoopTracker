@@ -16,6 +16,7 @@ public class RoomServiceTests : IDisposable
     private readonly SqliteConnection _connection;
     private readonly DbContextOptions<TrackerDbContext> _options;
     private readonly GameCatalog _catalog;
+    private readonly RoomLocks _locks = new();
 
     public RoomServiceTests()
     {
@@ -68,7 +69,7 @@ public class RoomServiceTests : IDisposable
     private RoomService NewService(out TrackerDbContext db)
     {
         db = new TrackerDbContext(_options);
-        return new RoomService(db, _catalog);
+        return new RoomService(db, _catalog, _locks);
     }
 
     public void Dispose() => _connection.Dispose();
@@ -363,6 +364,77 @@ public class RoomServiceTests : IDisposable
 
             Assert.False(result.Ok);
             Assert.Contains("required", result.Error);
+        }
+    }
+
+    [Fact]
+    public async Task Keydrop_locations_and_keys_need_the_room_playing_keydrop()
+    {
+        var service = NewService(out var db);
+        using (db)
+        {
+            var location = await service.AssignAsync("test-room", "lamp", "ep/dark-square-pot-key");
+            Assert.False(location.Ok);
+            Assert.Contains("turn on Keydrop", location.Error);
+
+            var key = await service.AssignAsync("test-room", "bk-hc", "hc/big-key-drop");
+            Assert.False(key.Ok);
+            Assert.Contains("turn on Keydrop", key.Error);
+
+            var dead = await service.SetDeadAsync("test-room", "ep/dark-square-pot-key", dead: true);
+            Assert.False(dead.Ok);
+
+            Assert.True((await service.SetKeydropAsync("test-room", keydrop: true)).Ok);
+
+            Assert.True((await service.AssignAsync("test-room", "lamp", "ep/dark-square-pot-key")).Ok);
+            Assert.True((await service.AssignAsync("test-room", "bk-hc", "hc/big-key-drop")).Ok);
+            Assert.True((await service.SetDeadAsync("test-room", "ep/dark-eyegore-key-drop", dead: true)).Ok);
+        }
+    }
+
+    [Fact]
+    public async Task Small_key_boxes_grow_in_keydrop_and_what_was_recorded_survives_turning_it_off()
+    {
+        var service = NewService(out var db);
+        using (db)
+        {
+            // Skull Woods holds three small keys, five in keydrop.
+            foreach (var check in new[] { "sw/map-chest", "sw/compass-chest", "sw/big-chest" })
+            {
+                Assert.True((await service.AssignAsync("test-room", "sk-sw", check)).Ok);
+            }
+
+            var full = await service.AssignAsync("test-room", "sk-sw", "sw/pot-prison");
+            Assert.False(full.Ok);
+            Assert.Contains("already has 3 locations", full.Error);
+
+            Assert.True((await service.SetKeydropAsync("test-room", keydrop: true)).Ok);
+            Assert.True((await service.AssignAsync("test-room", "sk-sw", "sw/pot-prison")).Ok);
+            Assert.True((await service.AssignAsync("test-room", "sk-sw", "sw/west-lobby-pot-key")).Ok);
+            Assert.Equal(5, db.Assignments.Count(a => a.ItemId == "sk-sw"));
+
+            var off = await service.SetKeydropAsync("test-room", keydrop: false);
+            Assert.True(off.Ok);
+            Assert.False(off.Room!.Keydrop);
+            Assert.Equal(5, db.Assignments.Count(a => a.ItemId == "sk-sw"));
+            Assert.Contains("sw/west-lobby-pot-key", RoomState.From(off.Room!).Assignments["sk-sw"].Select(a => a.CheckId));
+        }
+    }
+
+    [Fact]
+    public async Task Turning_keydrop_on_creates_the_room_and_off_does_not()
+    {
+        var service = NewService(out var db);
+        using (db)
+        {
+            Assert.True((await service.SetKeydropAsync("never-written", keydrop: false)).Ok);
+            Assert.Empty(db.Rooms);
+
+            var on = await service.SetKeydropAsync("keydrop-room", keydrop: true);
+            Assert.True(on.Ok);
+            Assert.True(on.Room!.Keydrop);
+            Assert.True(RoomState.From(on.Room!).Keydrop);
+            Assert.Single(db.Rooms);
         }
     }
 

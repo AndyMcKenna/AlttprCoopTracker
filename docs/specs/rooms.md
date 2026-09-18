@@ -36,6 +36,14 @@ same board. There are no accounts and no owners.
 - **ROOM-8** A room records when it was created and when it was last
   changed. Every write updates the latter.
 
+## Keydrop
+
+- **ROOM-13** A room is playing keydrop or it is not; it starts not. The
+  setting is shared by everyone in the room and kept with it. Turning it on
+  is a write (ROOM-7); turning it off in a room that does not exist creates
+  nothing. Reset (ROOM-10) does not change it. What it changes is in
+  [checks.md](checks.md) (KEYDROP-*) and [items-and-locations.md](items-and-locations.md) (ITEM-3a).
+
 ## Persistence and retention
 
 - **ROOM-9** A room's assignments and dead marks are kept in the database, so
