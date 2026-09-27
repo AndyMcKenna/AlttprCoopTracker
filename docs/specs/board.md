@@ -33,9 +33,9 @@ is drawn.
   with at least one location out of 32; Keys counts keys found out of 40 (a
   box with 2 of 6 counts 2).
 - **BOARD-6** The check panel lists checks by region under a header that
-  folds the region. Light World, Death Mountain and Dark World start open;
-  the dungeons start folded. Filtering to a region opens it; dropping the filter returns
-  every region to its default.
+  folds the region. Light World, Kakariko Village, Death Mountain and Dark
+  World start open; the dungeons start folded. Filtering to a region opens
+  it; dropping the filter returns every region to its default.
 - **BOARD-7** The check panel's summary reads `<recorded> of 216 recorded`
   (249 in keydrop), followed by `, <n> dead` when any are. Only checks in
   play are counted on either side.

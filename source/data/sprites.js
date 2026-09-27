@@ -641,7 +641,6 @@ const BOSSES = [
 ];
 
 const NPCS = [
-  'Potion Shop',
   'Maze Race',
 ];
 
@@ -674,6 +673,8 @@ const CHECK_ICONS = new Map([
   ['Ice Rod Cave', 'icerod'],
   ['Library', 'boots'],
   ['Mushroom', 'mushroom'],
+  // The mushroom is what you hand over, so the shop shows it too.
+  ['Potion Shop', 'mushroom'],
   ['Lumberjack Tree', 'boots'],
   ["Aginah's Cave", 'bomb'],
   ['Catfish', 'catfish'],
@@ -698,6 +699,14 @@ const CHECK_ICONS = new Map([
   ["Link's Uncle", 'uncle'],
   ['King Zora', 'zora'],
   ['Dig Spot', 'shovel'],
+  // Kakariko: the two chests you bomb your way into, and the four in the
+  // well itself.
+  ["Blind's Hideout - Top", 'bomb'],
+  ['Kakariko Well - Top', 'bomb'],
+  ['Kakariko Well - Bottom', 'well'],
+  ['Kakariko Well - Left', 'well'],
+  ['Kakariko Well - Middle', 'well'],
+  ['Kakariko Well - Right', 'well'],
 ]);
 
 const FREESTANDING = [
@@ -773,6 +782,7 @@ ICON_SPRITES.pyramid = ICON_SPRITES.sparkle;
 ICON_SPRITES.rupee = ICON_SPRITES.sparkle;
 ICON_SPRITES.uncle = ICON_SPRITES.npc;
 ICON_SPRITES.zora = ICON_SPRITES.npc;
+ICON_SPRITES.well = ICON_SPRITES.chest;
 
 // The bomb-in checks. Drawn fallback only; the real image wins when present.
 ICON_SPRITES.bomb = [

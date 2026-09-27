@@ -19,7 +19,7 @@ test('the game has exactly 216 checks with unique ids, and 33 more for keydrop',
   assert.strictEqual(regionTotal, 216);
   // Keydrop locations are only ever in dungeons.
   for (const check of keydrop) {
-    assert.ok(!['lw', 'dm', 'dw'].includes(check.region), check.id + ' is not in a dungeon');
+    assert.ok(!['lw', 'kak', 'dm', 'dw'].includes(check.region), check.id + ' is not in a dungeon');
   }
 });
 
