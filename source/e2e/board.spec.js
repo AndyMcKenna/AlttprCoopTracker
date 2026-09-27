@@ -169,15 +169,30 @@ test.describe('the board', () => {
     await expect(check(page, ledge).locator('.check-holder')).toHaveText('nothing');
     await expect(page.locator('#checks-summary')).toHaveText('0 of 216 recorded, 1 dead');
 
-    await page.locator('#hide-used').check();
+    await page.locator('#hide-dead').check();
     await expect(check(page, ledge)).toHaveCount(0);
     await expect(page.locator('.region-title', { hasText: 'Dark World' })).toContainText('(24)');
-    await page.locator('#hide-used').uncheck();
+    await page.locator('#hide-dead').uncheck();
 
     // Clicking a dead check with nothing armed brings it back.
     await checkBody(page, ledge).click();
     await expect(check(page, ledge)).not.toHaveClass(/is-dead/);
     await expect(page.locator('#checks-summary')).toHaveText('0 of 216 recorded');
+  });
+
+  test('hide dead keeps checks that hold an item', async ({ page }) => {
+    await openBoard(page, newRoom());
+
+    await item(page, 'hookshot').click();
+    await checkBody(page, 'dw/catfish').click();
+    await expect(check(page, 'dw/catfish')).toHaveClass(/is-used/);
+    await checkDead(page, 'dw/bumper-cave-ledge').click();
+    await expect(check(page, 'dw/bumper-cave-ledge')).toHaveClass(/is-dead/);
+
+    await page.locator('#hide-dead').check();
+    await expect(check(page, 'dw/bumper-cave-ledge')).toHaveCount(0);
+    await expect(check(page, 'dw/catfish')).toHaveCount(1);
+    await expect(page.locator('.region-title', { hasText: 'Dark World' })).toContainText('(24)');
   });
 
   test('recording an item at a dead check brings it back', async ({ page }) => {
