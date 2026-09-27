@@ -23,7 +23,7 @@ const el = {
   checks: document.getElementById('checks'),
   checksSummary: document.getElementById('checks-summary'),
   regions: document.getElementById('regions'),
-  hideUsed: document.getElementById('hide-used'),
+  hideDead: document.getElementById('hide-dead'),
   keydrop: document.getElementById('keydrop'),
   assignBar: document.getElementById('assign-bar'),
   assignBarText: document.getElementById('assign-bar-text'),
@@ -45,7 +45,7 @@ const state = {
   tab: 'items', // which half of the item board is showing: items or keys
   spriteImages: new Set(), // sprite names that have a real image on disk
   checkImages: new Set(), // check glyphs that have a real image on disk
-  hideUsed: false,
+  hideDead: false,
   spriteCache: new Map(),
 };
 
@@ -544,7 +544,7 @@ function renderChecks(owners) {
       if (check.region !== region.id || !inPlay(check)) {
         return false;
       }
-      if (state.hideUsed && (owners.has(check.id) || dead.has(check.id))) {
+      if (state.hideDead && dead.has(check.id)) {
         return false;
       }
       return true;
@@ -1055,8 +1055,8 @@ el.keydrop.addEventListener('change', () => {
   send({ type: 'keydrop', keydrop: el.keydrop.checked });
 });
 
-el.hideUsed.addEventListener('change', () => {
-  state.hideUsed = el.hideUsed.checked;
+el.hideDead.addEventListener('change', () => {
+  state.hideDead = el.hideDead.checked;
   render();
 });
 

@@ -95,9 +95,9 @@ is drawn.
   the folds instead: it opens every region, and, when every region is
   already open, folds them back to the default (BOARD-6). All is drawn as
   selected whenever no filter is on. There is no text search.
-- **BOARD-19** **Hide recorded/dead** hides every check that holds an item
-  or is dead, leaving what is still worth visiting. Region headers count
-  what is shown.
+- **BOARD-19** **Hide dead** hides every dead check. Checks still to look at
+  and checks that hold an item stay, so a player routing an area can see
+  which of its checks are worth hitting. Region headers count what is shown.
 
 ## Feedback
 
