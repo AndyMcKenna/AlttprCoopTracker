@@ -151,6 +151,11 @@ function tileLabel(item, count, full) {
   if (state.armed === item.id) {
     return 'Click the check where ' + item.name + ' was found (Esc to cancel)';
   }
+  // A generic key holds as many checks as the room gives it, so there is no
+  // "3 of 4" to report — only whether this would be the first one.
+  if (item.unlimited) {
+    return count ? 'Record another check that holds ' + item.name : 'Record where ' + item.name + ' was found';
+  }
   const slots = slotsFor(item);
   if (full) {
     return slots > 1
@@ -167,6 +172,11 @@ function tileLabel(item, count, full) {
 
 function assignmentsFor(itemId) {
   return (state.room && state.room.assignments[itemId]) || [];
+}
+
+/** The one assignment pairing this item with this check, if there is one. */
+function assignmentAt(itemId, checkId) {
+  return assignmentsFor(itemId).find((entry) => entry.checkId === checkId);
 }
 
 /**
@@ -221,7 +231,11 @@ function render() {
   // The summary follows the tab. Items count tiles with at least one
   // location; keys count individual keys, since a dungeon's 6 small keys
   // share one box and each is worth finding.
-  const shown = state.data.items.filter((item) => item.panel === state.tab && inPlay(item));
+  // The generic keys are excluded: they are a mark with no total to reach,
+  // and counting them would push the tally past the keys the game holds.
+  const shown = state.data.items.filter(
+    (item) => item.panel === state.tab && inPlay(item) && !item.unlimited
+  );
   const found =
     state.tab === 'keys'
       ? shown.reduce((sum, item) => sum + assignmentsFor(item.id).length, 0)
@@ -248,7 +262,7 @@ function render() {
  */
 function buildItemTile(item) {
   const entries = assignmentsFor(item.id);
-  const full = entries.length >= slotsFor(item);
+  const full = !item.unlimited && entries.length >= slotsFor(item);
 
   const tile = document.createElement('div');
   tile.className = 'item';
@@ -285,8 +299,9 @@ function buildItemTile(item) {
   name.className = 'item-name';
   // Key tiles use the short label; the dungeon is already the row heading.
   name.textContent = labelFor(item);
-  // Progressive items say how many of their locations are pinned down.
-  if (slotsFor(item) > 1 || item.alwaysCount) {
+  // Progressive items say how many of their locations are pinned down. The
+  // generic keys have no total to count towards, so they say nothing.
+  if (!item.unlimited && (slotsFor(item) > 1 || item.alwaysCount)) {
     const count = document.createElement('span');
     count.className = 'item-count';
     if (full) {
@@ -297,7 +312,10 @@ function buildItemTile(item) {
   }
   body.appendChild(name);
 
-  if (entries.length) {
+  // A generic key can hold a dozen checks; listing them would bury the panel
+  // it sits in. The checks themselves show which key they hold, and the ×
+  // at the edge of a check tile is where one is cleared (BOARD-11a).
+  if (entries.length && !item.unlimited) {
     const list = document.createElement('ul');
     list.className = 'item-locations';
 
@@ -480,7 +498,8 @@ function buildCheckTile(check, owner, dead) {
   tile.appendChild(main);
 
   // A check with an item in it is not nothing; the service would refuse the
-  // mark, so the button is not offered.
+  // mark, so the button is not offered — except for a generic key, whose tile
+  // keeps no list of locations, leaving this the only place to clear one.
   if (!owner) {
     const toggle = document.createElement('button');
     toggle.className = 'check-dead';
@@ -491,6 +510,20 @@ function buildCheckTile(check, owner, dead) {
     toggle.setAttribute('aria-pressed', String(dead));
     toggle.addEventListener('click', () => setDead(check, !dead));
     tile.appendChild(toggle);
+  } else if (owner.unlimited) {
+    const clear = document.createElement('button');
+    clear.className = 'check-clear';
+    clear.type = 'button';
+    clear.textContent = '×';
+    clear.title = 'Clear ' + owner.name + ' from ' + check.name;
+    clear.setAttribute('aria-label', clear.title);
+    clear.addEventListener('click', () => {
+      const entry = assignmentAt(owner.id, check.id);
+      if (entry) {
+        send({ type: 'unassign', assignmentId: entry.id });
+      }
+    });
+    tile.appendChild(clear);
   }
 
   return tile;
@@ -686,7 +719,11 @@ function pickCheck(check, owner, dead) {
   // A check holds one item, so arming a taken one could only end in the
   // service refusing it. Say so now, and say what to do instead.
   if (owner) {
-    showHint(check.fullName + ' already holds ' + owner.name + ' — clear it from ' + owner.name + ' first.');
+    showHint(
+      owner.unlimited
+        ? check.fullName + ' already holds ' + owner.name + ' — clear it with the × at its edge.'
+        : check.fullName + ' already holds ' + owner.name + ' — clear it from ' + owner.name + ' first.'
+    );
     return;
   }
   state.armedCheck = state.armedCheck === check.id ? null : check.id;

@@ -202,7 +202,7 @@ test.describe('the board', () => {
     await page.locator('#tab-keys').click();
 
     await expect(page.locator('#tab-keys')).toHaveAttribute('aria-selected', 'true');
-    await expect(page.locator('.key-row')).toHaveCount(13);
+    await expect(page.locator('.key-row')).toHaveCount(14);
     await expect(page.locator('#items-summary')).toHaveText('0 of 40 located');
     await expect(page.locator('#assign-bar')).toContainText('Lamp');
 
@@ -216,6 +216,50 @@ test.describe('the board', () => {
     await page.locator('#tab-items').click();
     await expect(page.locator('#items .item')).toHaveCount(32);
     await expect(page.locator('#items-summary')).toHaveText('0 of 32 located');
+  });
+
+  test('the generic keys take any number of checks and show no count', async ({ page }) => {
+    await openBoard(page, newRoom());
+    await page.locator('#tab-keys').click();
+
+    // First row on the panel, above Hyrule Castle.
+    await expect(page.locator('.key-row').first().locator('.key-dungeon')).toHaveText('Generic');
+    await expect(page.locator('.key-row').first().locator('.item')).toHaveCount(2);
+
+    // No limit shown, and none enforced: past the four a bottle would take.
+    await expect(item(page, 'sk-generic').locator('.item-count')).toHaveCount(0);
+
+    const checks = ['lw/links-house', 'lw/links-uncle', 'lw/bonk-rocks', 'kak/library', 'kak/sick-kid'];
+    for (const id of checks) {
+      await item(page, 'sk-generic').click();
+      await checkBody(page, id).click();
+      await expect(check(page, id)).toHaveClass(/is-used/);
+      await expect(check(page, id).locator('.check-holder')).toHaveText('Generic Small Key');
+    }
+
+    // Still no count, and no list of locations on the tile.
+    await expect(item(page, 'sk-generic').locator('.item-count')).toHaveCount(0);
+    await expect(item(page, 'sk-generic').locator('.item-locations')).toHaveCount(0);
+
+    // And they stay out of the keys tally, which counts the keys the game has.
+    await expect(page.locator('#items-summary')).toHaveText('0 of 40 located');
+    await expect(page.locator('#checks-summary')).toHaveText('5 of 216 recorded');
+  });
+
+  test('a check holding a generic key is cleared from the check itself', async ({ page }) => {
+    await openBoard(page, newRoom());
+    await page.locator('#tab-keys').click();
+    await item(page, 'bk-generic').click();
+    await checkBody(page, 'lw/links-house').click();
+    await expect(check(page, 'lw/links-house')).toHaveClass(/is-used/);
+
+    // An ordinary held check offers no edge button; this one offers ×.
+    await expect(check(page, 'lw/links-house').locator('.check-dead')).toHaveCount(0);
+    await check(page, 'lw/links-house').locator('.check-clear').click();
+
+    await expect(check(page, 'lw/links-house')).not.toHaveClass(/is-used/);
+    await expect(page.locator('#checks-summary')).toHaveText('0 of 216 recorded');
+    await expect(check(page, 'lw/links-house').locator('.check-dead')).toHaveCount(1);
   });
 
   test('region chips filter the list and open the region', async ({ page }) => {

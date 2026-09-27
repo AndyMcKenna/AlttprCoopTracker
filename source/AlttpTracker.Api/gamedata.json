@@ -2910,6 +2910,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 0
     },
     {
@@ -2925,6 +2926,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 1
     },
     {
@@ -2940,6 +2942,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 2
     },
     {
@@ -2955,6 +2958,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 3
     },
     {
@@ -2970,6 +2974,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 4
     },
     {
@@ -2985,6 +2990,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 5
     },
     {
@@ -3000,6 +3006,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 6
     },
     {
@@ -3015,6 +3022,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 7
     },
     {
@@ -3030,6 +3038,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 8
     },
     {
@@ -3045,6 +3054,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 9
     },
     {
@@ -3060,6 +3070,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 10
     },
     {
@@ -3075,6 +3086,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 11
     },
     {
@@ -3090,6 +3102,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 12
     },
     {
@@ -3105,6 +3118,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 13
     },
     {
@@ -3120,6 +3134,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 14
     },
     {
@@ -3135,6 +3150,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 15
     },
     {
@@ -3150,6 +3166,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 16
     },
     {
@@ -3165,6 +3182,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 17
     },
     {
@@ -3180,6 +3198,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 18
     },
     {
@@ -3195,6 +3214,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 19
     },
     {
@@ -3210,6 +3230,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 20
     },
     {
@@ -3225,6 +3246,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 21
     },
     {
@@ -3240,6 +3262,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 22
     },
     {
@@ -3255,6 +3278,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 23
     },
     {
@@ -3270,6 +3294,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 24
     },
     {
@@ -3285,6 +3310,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 25
     },
     {
@@ -3300,6 +3326,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 26
     },
     {
@@ -3315,6 +3342,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 27
     },
     {
@@ -3330,6 +3358,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 28
     },
     {
@@ -3345,6 +3374,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 29
     },
     {
@@ -3360,6 +3390,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 30
     },
     {
@@ -3375,7 +3406,40 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 31
+    },
+    {
+      "id": "bk-generic",
+      "name": "Generic Big Key",
+      "label": "Big Key",
+      "sprite": "bigkey",
+      "slots": 0,
+      "keydropSlots": 0,
+      "keydropOnly": false,
+      "keydropLabel": null,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "generic",
+      "alwaysCount": false,
+      "unlimited": true,
+      "ordinal": 32
+    },
+    {
+      "id": "sk-generic",
+      "name": "Generic Small Key",
+      "label": "Small Key",
+      "sprite": "smallkey",
+      "slots": 0,
+      "keydropSlots": 0,
+      "keydropOnly": false,
+      "keydropLabel": null,
+      "group": null,
+      "panel": "keys",
+      "dungeon": "generic",
+      "alwaysCount": false,
+      "unlimited": true,
+      "ordinal": 33
     },
     {
       "id": "bk-hc",
@@ -3390,7 +3454,8 @@
       "panel": "keys",
       "dungeon": "hc",
       "alwaysCount": false,
-      "ordinal": 32
+      "unlimited": false,
+      "ordinal": 34
     },
     {
       "id": "sk-hc",
@@ -3405,7 +3470,8 @@
       "panel": "keys",
       "dungeon": "hc",
       "alwaysCount": true,
-      "ordinal": 33
+      "unlimited": false,
+      "ordinal": 35
     },
     {
       "id": "sk-ct",
@@ -3420,7 +3486,8 @@
       "panel": "keys",
       "dungeon": "ct",
       "alwaysCount": true,
-      "ordinal": 34
+      "unlimited": false,
+      "ordinal": 36
     },
     {
       "id": "bk-ep",
@@ -3435,7 +3502,8 @@
       "panel": "keys",
       "dungeon": "ep",
       "alwaysCount": false,
-      "ordinal": 35
+      "unlimited": false,
+      "ordinal": 37
     },
     {
       "id": "sk-ep",
@@ -3450,7 +3518,8 @@
       "panel": "keys",
       "dungeon": "ep",
       "alwaysCount": true,
-      "ordinal": 36
+      "unlimited": false,
+      "ordinal": 38
     },
     {
       "id": "bk-dp",
@@ -3465,7 +3534,8 @@
       "panel": "keys",
       "dungeon": "dp",
       "alwaysCount": false,
-      "ordinal": 37
+      "unlimited": false,
+      "ordinal": 39
     },
     {
       "id": "sk-dp",
@@ -3480,7 +3550,8 @@
       "panel": "keys",
       "dungeon": "dp",
       "alwaysCount": true,
-      "ordinal": 38
+      "unlimited": false,
+      "ordinal": 40
     },
     {
       "id": "bk-toh",
@@ -3495,7 +3566,8 @@
       "panel": "keys",
       "dungeon": "toh",
       "alwaysCount": false,
-      "ordinal": 39
+      "unlimited": false,
+      "ordinal": 41
     },
     {
       "id": "sk-toh",
@@ -3510,7 +3582,8 @@
       "panel": "keys",
       "dungeon": "toh",
       "alwaysCount": true,
-      "ordinal": 40
+      "unlimited": false,
+      "ordinal": 42
     },
     {
       "id": "bk-pod",
@@ -3525,7 +3598,8 @@
       "panel": "keys",
       "dungeon": "pod",
       "alwaysCount": false,
-      "ordinal": 41
+      "unlimited": false,
+      "ordinal": 43
     },
     {
       "id": "sk-pod",
@@ -3540,7 +3614,8 @@
       "panel": "keys",
       "dungeon": "pod",
       "alwaysCount": true,
-      "ordinal": 42
+      "unlimited": false,
+      "ordinal": 44
     },
     {
       "id": "bk-sp",
@@ -3555,7 +3630,8 @@
       "panel": "keys",
       "dungeon": "sp",
       "alwaysCount": false,
-      "ordinal": 43
+      "unlimited": false,
+      "ordinal": 45
     },
     {
       "id": "sk-sp",
@@ -3570,7 +3646,8 @@
       "panel": "keys",
       "dungeon": "sp",
       "alwaysCount": true,
-      "ordinal": 44
+      "unlimited": false,
+      "ordinal": 46
     },
     {
       "id": "bk-sw",
@@ -3585,7 +3662,8 @@
       "panel": "keys",
       "dungeon": "sw",
       "alwaysCount": false,
-      "ordinal": 45
+      "unlimited": false,
+      "ordinal": 47
     },
     {
       "id": "sk-sw",
@@ -3600,7 +3678,8 @@
       "panel": "keys",
       "dungeon": "sw",
       "alwaysCount": true,
-      "ordinal": 46
+      "unlimited": false,
+      "ordinal": 48
     },
     {
       "id": "bk-tt",
@@ -3615,7 +3694,8 @@
       "panel": "keys",
       "dungeon": "tt",
       "alwaysCount": false,
-      "ordinal": 47
+      "unlimited": false,
+      "ordinal": 49
     },
     {
       "id": "sk-tt",
@@ -3630,7 +3710,8 @@
       "panel": "keys",
       "dungeon": "tt",
       "alwaysCount": true,
-      "ordinal": 48
+      "unlimited": false,
+      "ordinal": 50
     },
     {
       "id": "bk-ip",
@@ -3645,7 +3726,8 @@
       "panel": "keys",
       "dungeon": "ip",
       "alwaysCount": false,
-      "ordinal": 49
+      "unlimited": false,
+      "ordinal": 51
     },
     {
       "id": "sk-ip",
@@ -3660,7 +3742,8 @@
       "panel": "keys",
       "dungeon": "ip",
       "alwaysCount": true,
-      "ordinal": 50
+      "unlimited": false,
+      "ordinal": 52
     },
     {
       "id": "bk-mm",
@@ -3675,7 +3758,8 @@
       "panel": "keys",
       "dungeon": "mm",
       "alwaysCount": false,
-      "ordinal": 51
+      "unlimited": false,
+      "ordinal": 53
     },
     {
       "id": "sk-mm",
@@ -3690,7 +3774,8 @@
       "panel": "keys",
       "dungeon": "mm",
       "alwaysCount": true,
-      "ordinal": 52
+      "unlimited": false,
+      "ordinal": 54
     },
     {
       "id": "bk-tr",
@@ -3705,7 +3790,8 @@
       "panel": "keys",
       "dungeon": "tr",
       "alwaysCount": false,
-      "ordinal": 53
+      "unlimited": false,
+      "ordinal": 55
     },
     {
       "id": "sk-tr",
@@ -3720,7 +3806,8 @@
       "panel": "keys",
       "dungeon": "tr",
       "alwaysCount": true,
-      "ordinal": 54
+      "unlimited": false,
+      "ordinal": 56
     },
     {
       "id": "bk-gt",
@@ -3735,7 +3822,8 @@
       "panel": "keys",
       "dungeon": "gt",
       "alwaysCount": false,
-      "ordinal": 55
+      "unlimited": false,
+      "ordinal": 57
     },
     {
       "id": "sk-gt",
@@ -3750,10 +3838,20 @@
       "panel": "keys",
       "dungeon": "gt",
       "alwaysCount": true,
-      "ordinal": 56
+      "unlimited": false,
+      "ordinal": 58
     }
   ],
   "keyPanel": [
+    {
+      "id": "generic",
+      "name": "Generic",
+      "short": "GEN",
+      "color": "#a8935c",
+      "bigKey": "bk-generic",
+      "smallKey": "sk-generic",
+      "ordinal": 0
+    },
     {
       "id": "hc",
       "name": "Hyrule Castle",
@@ -3761,7 +3859,7 @@
       "color": "#5f86bf",
       "bigKey": "bk-hc",
       "smallKey": "sk-hc",
-      "ordinal": 0
+      "ordinal": 1
     },
     {
       "id": "ct",
@@ -3770,7 +3868,7 @@
       "color": "#9295a3",
       "bigKey": null,
       "smallKey": "sk-ct",
-      "ordinal": 1
+      "ordinal": 2
     },
     {
       "id": "ep",
@@ -3779,7 +3877,7 @@
       "color": "#2fa877",
       "bigKey": "bk-ep",
       "smallKey": "sk-ep",
-      "ordinal": 2
+      "ordinal": 3
     },
     {
       "id": "dp",
@@ -3788,7 +3886,7 @@
       "color": "#d1a72b",
       "bigKey": "bk-dp",
       "smallKey": "sk-dp",
-      "ordinal": 3
+      "ordinal": 4
     },
     {
       "id": "toh",
@@ -3797,7 +3895,7 @@
       "color": "#d97e42",
       "bigKey": "bk-toh",
       "smallKey": "sk-toh",
-      "ordinal": 4
+      "ordinal": 5
     },
     {
       "id": "pod",
@@ -3806,7 +3904,7 @@
       "color": "#5257a0",
       "bigKey": "bk-pod",
       "smallKey": "sk-pod",
-      "ordinal": 5
+      "ordinal": 6
     },
     {
       "id": "sp",
@@ -3815,7 +3913,7 @@
       "color": "#2f9aa8",
       "bigKey": "bk-sp",
       "smallKey": "sk-sp",
-      "ordinal": 6
+      "ordinal": 7
     },
     {
       "id": "sw",
@@ -3824,7 +3922,7 @@
       "color": "#74854f",
       "bigKey": "bk-sw",
       "smallKey": "sk-sw",
-      "ordinal": 7
+      "ordinal": 8
     },
     {
       "id": "tt",
@@ -3833,7 +3931,7 @@
       "color": "#a86333",
       "bigKey": "bk-tt",
       "smallKey": "sk-tt",
-      "ordinal": 8
+      "ordinal": 9
     },
     {
       "id": "ip",
@@ -3842,7 +3940,7 @@
       "color": "#4fb3d4",
       "bigKey": "bk-ip",
       "smallKey": "sk-ip",
-      "ordinal": 9
+      "ordinal": 10
     },
     {
       "id": "mm",
@@ -3851,7 +3949,7 @@
       "color": "#8272a8",
       "bigKey": "bk-mm",
       "smallKey": "sk-mm",
-      "ordinal": 10
+      "ordinal": 11
     },
     {
       "id": "tr",
@@ -3860,7 +3958,7 @@
       "color": "#c04a41",
       "bigKey": "bk-tr",
       "smallKey": "sk-tr",
-      "ordinal": 11
+      "ordinal": 12
     },
     {
       "id": "gt",
@@ -3869,7 +3967,7 @@
       "color": "#ab4283",
       "bigKey": "bk-gt",
       "smallKey": "sk-gt",
-      "ordinal": 12
+      "ordinal": 13
     }
   ],
   "palette": [
