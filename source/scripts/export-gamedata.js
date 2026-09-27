@@ -63,6 +63,7 @@ const payload = {
     panel: item.panel,
     dungeon: item.dungeon ?? null,
     alwaysCount: item.alwaysCount === true,
+    unlimited: item.unlimited === true,
     ordinal,
   })),
 

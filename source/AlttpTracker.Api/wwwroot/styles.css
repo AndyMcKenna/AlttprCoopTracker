@@ -607,8 +607,9 @@ h2 {
   margin-top: 5px;
 }
 
-/* Two buttons side by side: the tile itself, and the sliver at its edge that
-   marks it dead. The frame belongs to the wrapper so both share one outline. */
+/* Two buttons side by side: the tile itself, and the sliver at its edge —
+   which marks the check dead, or, when it holds a generic key, clears it.
+   The frame belongs to the wrapper so both share one outline. */
 .check {
   display: flex;
   align-items: stretch;
@@ -645,7 +646,8 @@ h2 {
   outline-offset: -1px;
 }
 
-.check-dead {
+.check-dead,
+.check-clear {
   flex: none;
   width: 20px;
   background: none;
@@ -661,7 +663,9 @@ h2 {
 }
 
 .check-dead:hover,
-.check-dead:focus-visible {
+.check-dead:focus-visible,
+.check-clear:hover,
+.check-clear:focus-visible {
   background: var(--bg-tile);
   color: var(--bad);
   opacity: 1;

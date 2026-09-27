@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AlttpTracker.Api.Services;
 
-public record CatalogItem(string Id, string Name, int Slots, int KeydropSlots, bool KeydropOnly)
+public record CatalogItem(string Id, string Name, int Slots, int KeydropSlots, bool KeydropOnly, bool Unlimited)
 {
     /// <summary>How many locations the item holds in a room playing, or not playing, keydrop.</summary>
     public int SlotsFor(bool keydrop) => keydrop ? KeydropSlots : Slots;
@@ -53,7 +53,7 @@ public class GameCatalog
 
         _items = items.ToDictionary(
             i => i.Id,
-            i => new CatalogItem(i.Id, i.Name, i.Slots, i.KeydropSlots, i.KeydropOnly),
+            i => new CatalogItem(i.Id, i.Name, i.Slots, i.KeydropSlots, i.KeydropOnly, i.Unlimited),
             StringComparer.Ordinal);
         _checks = checks.ToDictionary(c => c.Id, c => new CatalogCheck(c.Id, c.FullName, c.Keydrop), StringComparer.Ordinal);
 
@@ -75,6 +75,7 @@ public class GameCatalog
                 panel = i.Panel,
                 dungeon = i.Dungeon,
                 alwaysCount = i.AlwaysCount,
+                unlimited = i.Unlimited,
             }),
             groups = items.Where(i => i.Group is not null).Select(i => i.Group!).Distinct(),
             keyPanel = keyRows.Select(k => new

@@ -88,6 +88,9 @@ public class GameItem
     /// <summary>Show the counter even at one slot, so "0/1" reads as "one key".</summary>
     public bool AlwaysCount { get; set; }
 
+    /// <summary>Holds any number of locations: the generic keys, which are a mark rather than a count.</summary>
+    public bool Unlimited { get; set; }
+
     public int Ordinal { get; set; }
 }
 

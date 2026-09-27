@@ -168,7 +168,9 @@ public partial class RoomService(TrackerDbContext db, GameCatalog catalog, RoomL
 
         var slots = item.SlotsFor(room.Keydrop);
         var existing = room.Assignments.Where(a => a.ItemId == item.Id).ToList();
-        if (existing.Count >= slots)
+        // The generic keys are a mark, not a count: a room may have found any
+        // number of keys it cannot yet name, so there is no limit to enforce.
+        if (!item.Unlimited && existing.Count >= slots)
         {
             if (slots == 1)
             {

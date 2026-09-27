@@ -59,6 +59,11 @@ and coming back later picks the run up where it was.
   has keys — Palace of Darkness 6, Turtle Rock and Ganon's Tower 4, and so on
   (11 big keys and 29 small keys, matching the game). Hyrule Castle and Castle
   Tower have no big key; Eastern Palace has no small keys.
+- **Generic keys.** Above the dungeons is a **Generic** line with one big key
+  and one small key, for rooms not playing keysanity: a key you have found but
+  cannot yet put a dungeon to. They take any number of checks, so they show no
+  count and no list of locations — the check tiles are the record, and a `×` at
+  the edge of one clears it. They stay out of the keys tally.
 - **Resizable panels.** Drag the seam between the items and the checks to
   give either side more room; double-click it to go back to the default.
   The width is remembered in your browser.
