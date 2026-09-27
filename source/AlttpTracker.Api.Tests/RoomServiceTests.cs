@@ -95,11 +95,11 @@ public class RoomServiceTests : IDisposable
         using (db)
         {
             await service.AssignAsync("test-room", "hookshot", "ep/big-chest");
-            var result = await service.AssignAsync("test-room", "hookshot", "lw/library");
+            var result = await service.AssignAsync("test-room", "hookshot", "kak/library");
 
             Assert.True(result.Ok);
             var assignment = Assert.Single(result.Room!.Assignments);
-            Assert.Equal("lw/library", assignment.CheckId);
+            Assert.Equal("kak/library", assignment.CheckId);
         }
     }
 
@@ -109,14 +109,14 @@ public class RoomServiceTests : IDisposable
         var service = NewService(out var db);
         using (db)
         {
-            foreach (var check in new[] { "lw/sick-kid", "lw/hobo", "lw/king-zora", "dw/catfish" })
+            foreach (var check in new[] { "kak/sick-kid", "lw/hobo", "lw/king-zora", "dw/catfish" })
             {
                 Assert.True((await service.AssignAsync("test-room", "bottle", check)).Ok);
             }
 
             Assert.Equal(4, db.Assignments.Count(a => a.ItemId == "bottle"));
 
-            var full = await service.AssignAsync("test-room", "bottle", "lw/library");
+            var full = await service.AssignAsync("test-room", "bottle", "kak/library");
             Assert.False(full.Ok);
             Assert.Contains("already has 4 locations", full.Error);
         }
@@ -160,7 +160,7 @@ public class RoomServiceTests : IDisposable
     }
 
     [Theory]
-    [InlineData("nope", "lw/library")]
+    [InlineData("nope", "kak/library")]
     [InlineData("lamp", "lw/nope")]
     public async Task Unknown_ids_are_rejected(string itemId, string checkId)
     {
@@ -180,10 +180,10 @@ public class RoomServiceTests : IDisposable
         var service = NewService(out var db);
         using (db)
         {
-            await service.AssignAsync("test-room", "bottle", "lw/sick-kid");
+            await service.AssignAsync("test-room", "bottle", "kak/sick-kid");
             await service.AssignAsync("test-room", "bottle", "lw/hobo");
 
-            var first = db.Assignments.First(a => a.CheckId == "lw/sick-kid");
+            var first = db.Assignments.First(a => a.CheckId == "kak/sick-kid");
             var result = await service.UnassignAsync("test-room", first.Id);
 
             Assert.True(result.Ok);
@@ -286,10 +286,10 @@ public class RoomServiceTests : IDisposable
         var service = NewService(out var db);
         using (db)
         {
-            Assert.True((await service.SetDeadAsync("never-written", "lw/library", dead: false)).Ok);
+            Assert.True((await service.SetDeadAsync("never-written", "kak/library", dead: false)).Ok);
             Assert.Empty(db.Rooms);
 
-            Assert.True((await service.SetDeadAsync("first-dead", "lw/library", dead: true)).Ok);
+            Assert.True((await service.SetDeadAsync("first-dead", "kak/library", dead: true)).Ok);
             Assert.Single(db.Rooms);
         }
     }
@@ -352,7 +352,7 @@ public class RoomServiceTests : IDisposable
     }
 
     [Theory]
-    [InlineData(null, "lw/library")]
+    [InlineData(null, "kak/library")]
     [InlineData("lamp", null)]
     [InlineData("", "")]
     public async Task A_body_missing_a_field_is_refused_not_thrown(string? itemId, string? checkId)

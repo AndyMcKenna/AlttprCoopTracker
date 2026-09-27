@@ -7,19 +7,19 @@ const { test, expect } = require('@playwright/test');
 const { newRoom, openBoard, item, check, checkBody, checkDead } = require('./board');
 
 test.describe('the board', () => {
-  test('draws the items, the region chips, and the two overworlds open', async ({ page }) => {
+  test('draws the items, the region chips, and the overworld regions open', async ({ page }) => {
     await openBoard(page, newRoom());
 
     await expect(page.locator('#items .item')).toHaveCount(32);
     await expect(page.locator('#items-summary')).toHaveText('0 of 32 located');
     await expect(page.locator('#checks-summary')).toHaveText('0 of 216 recorded');
 
-    // Sixteen regions and All.
-    await expect(page.locator('.region-chip')).toHaveCount(17);
+    // Seventeen regions and All.
+    await expect(page.locator('.region-chip')).toHaveCount(18);
 
-    // The overworlds and Death Mountain start open; the dungeons start folded.
-    await expect(page.locator('.check')).toHaveCount(54 + 14 + 25);
-    await expect(page.locator('.region-title')).toContainText(['Light World (54)', 'Death Mountain (14)', 'Dark World (25)']);
+    // The overworlds, Kakariko and Death Mountain start open; the dungeons start folded.
+    await expect(page.locator('.check')).toHaveCount(38 + 16 + 14 + 25);
+    await expect(page.locator('.region-title')).toContainText(['Light World (38)', 'Kakariko Village (16)', 'Death Mountain (14)', 'Dark World (25)']);
     await expect(page.locator('.region-title[aria-expanded="false"]')).toHaveCount(13);
 
     // Nothing to type: the filter box is gone.
@@ -65,10 +65,10 @@ test.describe('the board', () => {
     await expect(item(page, 'lamp')).not.toHaveClass(/is-armed/);
     await expect(page.locator('#assign-bar')).toBeHidden();
 
-    await checkBody(page, 'lw/library').click();
-    await expect(check(page, 'lw/library')).toHaveClass(/is-armed/);
+    await checkBody(page, 'kak/library').click();
+    await expect(check(page, 'kak/library')).toHaveClass(/is-armed/);
     await page.keyboard.press('Escape');
-    await expect(check(page, 'lw/library')).not.toHaveClass(/is-armed/);
+    await expect(check(page, 'kak/library')).not.toHaveClass(/is-armed/);
     await expect(page.locator('#assign-bar')).toBeHidden();
 
     // A right-click anywhere is Esc for the hand on the mouse.
@@ -78,10 +78,10 @@ test.describe('the board', () => {
     await expect(item(page, 'lamp')).not.toHaveClass(/is-armed/);
     await expect(page.locator('#assign-bar')).toBeHidden();
 
-    await checkBody(page, 'lw/library').click();
-    await expect(check(page, 'lw/library')).toHaveClass(/is-armed/);
+    await checkBody(page, 'kak/library').click();
+    await expect(check(page, 'kak/library')).toHaveClass(/is-armed/);
     await page.locator('.brand').click({ button: 'right' });
-    await expect(check(page, 'lw/library')).not.toHaveClass(/is-armed/);
+    await expect(check(page, 'kak/library')).not.toHaveClass(/is-armed/);
   });
 
   test('a check holds one item, and the refusal names the holder', async ({ page }) => {
@@ -109,11 +109,11 @@ test.describe('the board', () => {
     await checkBody(page, 'lw/links-house').click();
     await expect(item(page, 'lamp').locator('.loc-name')).toHaveText("Link's House");
     await item(page, 'lamp').click();
-    await checkBody(page, 'lw/library').click();
+    await checkBody(page, 'kak/library').click();
     await expect(item(page, 'lamp').locator('.loc-name')).toHaveText('Library');
     await expect(check(page, 'lw/links-house')).not.toHaveClass(/is-used/);
 
-    for (const id of ['lw/sick-kid', 'lw/hobo', 'lw/king-zora', 'dw/catfish']) {
+    for (const id of ['kak/sick-kid', 'lw/hobo', 'lw/king-zora', 'dw/catfish']) {
       await item(page, 'bottle').click();
       await checkBody(page, id).click();
       await expect(check(page, id)).toHaveClass(/is-used/);
@@ -147,8 +147,8 @@ test.describe('the board', () => {
   test('the × clears one location without arming the tile', async ({ page }) => {
     await openBoard(page, newRoom());
     await item(page, 'bottle').click();
-    await checkBody(page, 'lw/sick-kid').click();
-    await expect(check(page, 'lw/sick-kid')).toHaveClass(/is-used/);
+    await checkBody(page, 'kak/sick-kid').click();
+    await expect(check(page, 'kak/sick-kid')).toHaveClass(/is-used/);
     await item(page, 'bottle').click();
     await checkBody(page, 'lw/hobo').click();
     await expect(check(page, 'lw/hobo')).toHaveClass(/is-used/);
@@ -157,7 +157,7 @@ test.describe('the board', () => {
 
     await expect(item(page, 'bottle').locator('.loc-name')).toHaveText(['Hobo']);
     await expect(item(page, 'bottle')).not.toHaveClass(/is-armed/);
-    await expect(check(page, 'lw/sick-kid')).not.toHaveClass(/is-used/);
+    await expect(check(page, 'kak/sick-kid')).not.toHaveClass(/is-used/);
   });
 
   test('a check can be marked dead, hidden, and brought back', async ({ page }) => {

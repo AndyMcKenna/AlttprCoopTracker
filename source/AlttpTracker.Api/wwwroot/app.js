@@ -33,7 +33,7 @@ const el = {
   splitter: document.getElementById('splitter'),
 };
 
-const OPEN_BY_DEFAULT = new Set(['lw', 'dm', 'dw']);
+const OPEN_BY_DEFAULT = new Set(['lw', 'kak', 'dm', 'dw']);
 
 const state = {
   data: null,
@@ -580,9 +580,9 @@ function renderChecks(owners) {
 
 /**
  * Filtering to a region is a statement of interest, so that region opens.
- * Dropping the filter falls back to the default: the two overworlds and Death
- * Mountain open, every dungeon folded. Regions still pinned by another chip
- * stay open.
+ * Dropping the filter falls back to the default: the two overworlds, Kakariko
+ * and Death Mountain open, every dungeon folded. Regions still pinned by
+ * another chip stay open.
  */
 function syncCollapsedToFilter() {
   state.collapsed = new Set(
@@ -1067,7 +1067,8 @@ fetch('api/gamedata')
     state.itemsById = new Map(data.items.map((item) => [item.id, item]));
     state.spriteImages = new Set(data.spriteImages || []);
     state.checkImages = new Set(data.checkImages || []);
-    // The overworlds and Death Mountain start open; the dungeons are folded away.
+    // The overworlds, Kakariko and Death Mountain start open; the dungeons
+    // are folded away.
     syncCollapsedToFilter();
     render();
     connect();

@@ -42,8 +42,9 @@ and coming back later picks the run up where it was.
 - **Filtering.** Filter by the region chips, or hide checks that are already
   recorded or dead to see what's left. There is nothing to type: the board is
   meant to be worked with one hand while the other stays on the controller.
-- **Collapsible regions.** Light World, Death Mountain and Dark World start
-  open, the dungeons start folded; click any region header to toggle it.
+- **Collapsible regions.** Light World, Kakariko Village, Death Mountain and
+  Dark World start open, the dungeons start folded; click any region header
+  to toggle it.
   Click **All** with no filter on to open every region at once, and again to
   fold them back.
 - **Keydrop.** Playing key drop shuffle? Tick **Keydrop** in the top bar and
@@ -134,7 +135,7 @@ Anyone who opens it joins the same board. The room code is in the URL
 | Path                                       | What it is                                                |
 | ------------------------------------------ | --------------------------------------------------------- |
 | `docs/specs/`                              | The specifications: how every part of the tracker behaves |
-| `source/data/checks.js`                    | The 216 checks, grouped into 16 regions                   |
+| `source/data/checks.js`                    | The 216 checks, grouped into 17 regions                   |
 | `source/data/items.js`                     | Items and dungeon keys, and how many locations each holds |
 | `source/data/sprites.js`                   | Hand-drawn 12x12 pixel art for items and check icons      |
 | `source/scripts/export-gamedata.js`        | Carries those three to `gamedata.json` for the API        |
