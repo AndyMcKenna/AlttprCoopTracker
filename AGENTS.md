@@ -68,10 +68,10 @@ that describes it in the same PR.
 - One issue per branch, one PR per issue. Stack PRs when one depends on
   another, and say so in the PR description.
 - Work in a git worktree, not on a branch switched in place, so that two
-  pieces of work never share a working copy. Worktrees go in a folder
-  beside the clone named after it with `.worktrees` appended — for a clone at
-  `alttp-coop-tracker`, that is `../alttp-coop-tracker.worktrees/` relative to
-  the repository root — one folder per piece of work, named
+  pieces of work never share a working copy. Worktrees go on the local disk
+  under `C:\source`, in a folder named after the repository with `.worktrees`
+  appended — `C:\source\AlttprCoopTracker.worktrees\` — wherever the clone
+  itself lives. Inside it, one folder per piece of work, named
   `<issue-number>-<short-description>` (`20-resizable-panel`); leave the
   number off when there is no issue (`readme-drop-deploying`). Each worktree
   needs its own `npm ci` in `source/` before the tooling or the browser tests
