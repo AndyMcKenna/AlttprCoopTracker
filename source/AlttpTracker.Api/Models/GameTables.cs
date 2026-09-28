@@ -77,7 +77,7 @@ public class GameItem
     /// <summary>The key-row label in keydrop, where a box may hold more keys.</summary>
     public string? KeydropLabel { get; set; }
 
-    /// <summary>Equipment or Items; null for keys, which are grouped by dungeon.</summary>
+    /// <summary>Equipment, Items, or Keys for the generic pair; null for dungeon keys, which are grouped by dungeon.</summary>
     public string? Group { get; set; }
 
     /// <summary>"items" or "keys".</summary>

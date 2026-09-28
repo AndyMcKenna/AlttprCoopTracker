@@ -5,7 +5,7 @@ const assert = require('node:assert');
 const fs = require('node:fs');
 
 const { CHECKS, REGIONS } = require('../data/checks');
-const { ITEMS, ITEMS_BY_ID, KEY_PANEL, GENERIC_KEYS } = require('../data/items');
+const { ITEMS, ITEMS_BY_ID, KEY_PANEL, GENERIC_KEYS, GROUPS } = require('../data/items');
 const { PALETTE, ITEM_SPRITES, ICON_SPRITES, kindForCheck } = require('../data/sprites');
 const spriteSheet = require('../scripts/build-spritesheet');
 
@@ -89,7 +89,7 @@ test('the key panel matches the game: 11 big keys, 29 small keys; 12 and 61 in k
   assert.ok(ITEMS_BY_ID.get('sk-ep').keydropOnly);
 });
 
-test('the generic keys are a pair with no limit, first on the key panel', () => {
+test('the generic keys are a pair with no limit, in a Keys group on the Items tab', () => {
   assert.deepStrictEqual(GENERIC_KEYS.map((key) => key.id), ['bk-generic', 'sk-generic']);
 
   for (const key of GENERIC_KEYS) {
@@ -101,12 +101,14 @@ test('the generic keys are a pair with no limit, first on the key panel', () => 
     assert.strictEqual(ITEMS_BY_ID.get(key.id), key);
   }
 
-  // First, above Hyrule Castle, and the only row that is not a region.
-  assert.strictEqual(KEY_PANEL[0].id, 'generic');
-  assert.strictEqual(KEY_PANEL[0].bigKey, 'bk-generic');
-  assert.strictEqual(KEY_PANEL[0].smallKey, 'sk-generic');
-  assert.strictEqual(KEY_PANEL[1].id, 'hc');
-  assert.ok(!REGIONS.some((region) => region.id === KEY_PANEL[0].id));
+  // On the Items tab, in the last group, and nowhere on the key panel.
+  for (const key of GENERIC_KEYS) {
+    assert.strictEqual(key.panel, 'items', key.id + ' should be on the Items tab');
+    assert.strictEqual(key.group, 'Keys', key.id + ' should be in the Keys group');
+  }
+  assert.deepStrictEqual(GROUPS, ['Equipment', 'Items', 'Keys']);
+  assert.strictEqual(KEY_PANEL[0].id, 'hc');
+  assert.ok(KEY_PANEL.every((row) => REGIONS.some((region) => region.id === row.id)));
 
   // Nothing else in the game is unlimited: the rule is for these two only.
   assert.deepStrictEqual(

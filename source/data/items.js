@@ -119,6 +119,10 @@ const KEY_ITEMS = DUNGEON_KEYS.flatMap((dungeon) => {
 // different from every other item: they hold as many checks as the room
 // cares to give them, so the tile shows no count and no list of locations —
 // the check tiles themselves are the record.
+//
+// They sit on the Items tab, in a Keys group of their own, not on the Keys
+// tab: a room that is not playing keysanity never otherwise opens that tab,
+// and should not have to switch to it to mark a key.
 const GENERIC_KEYS = [
   { id: 'bk-generic', name: 'Generic Big Key', label: 'Big Key', sprite: 'bigkey' },
   { id: 'sk-generic', name: 'Generic Small Key', label: 'Small Key', sprite: 'smallkey' },
@@ -128,15 +132,16 @@ const GENERIC_KEYS = [
   slots: 0,
   keydropSlots: 0,
   unlimited: true,
-  panel: 'keys',
-  dungeon: 'generic',
+  panel: 'items',
+  group: 'Keys',
 }));
 
 const ITEMS = [...MAIN_ITEMS, ...GENERIC_KEYS, ...KEY_ITEMS];
 
 const ITEMS_BY_ID = new Map(ITEMS.map((item) => [item.id, item]));
 
-const GROUPS = MAIN_ITEMS.reduce((acc, item) => {
+// In board order, so the generic keys' group comes after Items.
+const GROUPS = [...MAIN_ITEMS, ...GENERIC_KEYS].reduce((acc, item) => {
   if (!acc.includes(item.group)) {
     acc.push(item.group);
   }
@@ -144,19 +149,8 @@ const GROUPS = MAIN_ITEMS.reduce((acc, item) => {
 }, []);
 
 // What the key panel needs to lay itself out: one row per dungeon, big key
-// first, with the generic pair above them all — the row a player reaches for
-// when the dungeon is not known yet. It is not a region, so it has no short
-// label of its own and a colour that belongs to no part of the map.
-const GENERIC_KEY_ROW = {
-  id: 'generic',
-  name: 'Generic',
-  short: 'GEN',
-  color: '#a8935c',
-  bigKey: 'bk-generic',
-  smallKey: 'sk-generic',
-};
-
-const KEY_PANEL = [GENERIC_KEY_ROW, ...DUNGEON_KEYS.map((dungeon) => {
+// first.
+const KEY_PANEL = DUNGEON_KEYS.map((dungeon) => {
   const region = REGIONS_BY_ID.get(dungeon.region);
   return {
     id: region.id,
@@ -166,6 +160,6 @@ const KEY_PANEL = [GENERIC_KEY_ROW, ...DUNGEON_KEYS.map((dungeon) => {
     bigKey: dungeon.big || dungeon.keydropBig ? 'bk-' + dungeon.region : null,
     smallKey: dungeon.small > 0 || dungeon.keydropSmall > 0 ? 'sk-' + dungeon.region : null,
   };
-})];
+});
 
 module.exports = { ITEMS, MAIN_ITEMS, KEY_ITEMS, GENERIC_KEYS, ITEMS_BY_ID, GROUPS, KEY_PANEL };
