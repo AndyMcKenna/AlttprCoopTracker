@@ -194,7 +194,7 @@ public class RoomServiceTests : IDisposable
 
             var taken = await service.AssignAsync("generic", "lamp", "ep/big-chest");
             Assert.False(taken.Ok);
-            Assert.Contains("Generic Big Key", taken.Error);
+            Assert.Contains("already recorded as Big Key", taken.Error);
 
             // Recorded twice at the same check is the same refusal, not a second row.
             var again = await service.AssignAsync("generic", "bk-generic", "ep/big-chest");

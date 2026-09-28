@@ -10,7 +10,8 @@ test.describe('the board', () => {
   test('draws the items, the region chips, and the overworld regions open', async ({ page }) => {
     await openBoard(page, newRoom());
 
-    await expect(page.locator('#items .item')).toHaveCount(32);
+    // 34 tiles, but the two generic keys have no total and are not counted.
+    await expect(page.locator('#items .item')).toHaveCount(34);
     await expect(page.locator('#items-summary')).toHaveText('0 of 32 located');
     await expect(page.locator('#checks-summary')).toHaveText('0 of 216 recorded');
 
@@ -217,7 +218,7 @@ test.describe('the board', () => {
     await page.locator('#tab-keys').click();
 
     await expect(page.locator('#tab-keys')).toHaveAttribute('aria-selected', 'true');
-    await expect(page.locator('.key-row')).toHaveCount(14);
+    await expect(page.locator('.key-row')).toHaveCount(13);
     await expect(page.locator('#items-summary')).toHaveText('0 of 40 located');
     await expect(page.locator('#assign-bar')).toContainText('Lamp');
 
@@ -229,17 +230,19 @@ test.describe('the board', () => {
     await expect(page.locator('#items-summary')).toHaveText('1 of 40 located');
 
     await page.locator('#tab-items').click();
-    await expect(page.locator('#items .item')).toHaveCount(32);
+    await expect(page.locator('#items .item')).toHaveCount(34);
     await expect(page.locator('#items-summary')).toHaveText('0 of 32 located');
   });
 
   test('the generic keys take any number of checks and show no count', async ({ page }) => {
     await openBoard(page, newRoom());
-    await page.locator('#tab-keys').click();
 
-    // First row on the panel, above Hyrule Castle.
-    await expect(page.locator('.key-row').first().locator('.key-dungeon')).toHaveText('Generic');
-    await expect(page.locator('.key-row').first().locator('.item')).toHaveCount(2);
+    // A Keys group of their own at the bottom of the Items tab.
+    await expect(page.locator('.item-group-title')).toHaveText(['Equipment', 'Items', 'Keys']);
+    const group = page.locator('#items > div').filter({ has: page.locator('.item-group-title', { hasText: 'Keys' }) });
+    await expect(group.locator('.item')).toHaveCount(2);
+    await expect(group.locator('[data-item="bk-generic"]')).toHaveCount(1);
+    await expect(group.locator('[data-item="sk-generic"]')).toHaveCount(1);
 
     // No limit shown, and none enforced: past the four a bottle would take.
     await expect(item(page, 'sk-generic').locator('.item-count')).toHaveCount(0);
@@ -249,21 +252,26 @@ test.describe('the board', () => {
       await item(page, 'sk-generic').click();
       await checkBody(page, id).click();
       await expect(check(page, id)).toHaveClass(/is-used/);
-      await expect(check(page, id).locator('.check-holder')).toHaveText('Generic Small Key');
+      await expect(check(page, id).locator('.check-holder')).toHaveText('Small Key');
     }
 
     // Still no count, and no list of locations on the tile.
     await expect(item(page, 'sk-generic').locator('.item-count')).toHaveCount(0);
     await expect(item(page, 'sk-generic').locator('.item-locations')).toHaveCount(0);
 
-    // And they stay out of the keys tally, which counts the keys the game has.
-    await expect(page.locator('#items-summary')).toHaveText('0 of 40 located');
+    // They stay out of the items tally, having no total to reach.
+    await expect(page.locator('#items-summary')).toHaveText('0 of 32 located');
     await expect(page.locator('#checks-summary')).toHaveText('5 of 216 recorded');
+
+    // And the Keys tab is the dungeons alone, its tally unchanged.
+    await page.locator('#tab-keys').click();
+    await expect(page.locator('.key-row').first().locator('.key-dungeon')).toHaveText('Hyrule Castle');
+    await expect(item(page, 'sk-generic')).toHaveCount(0);
+    await expect(page.locator('#items-summary')).toHaveText('0 of 40 located');
   });
 
   test('a check holding a generic key is cleared from the check itself', async ({ page }) => {
     await openBoard(page, newRoom());
-    await page.locator('#tab-keys').click();
     await item(page, 'bk-generic').click();
     await checkBody(page, 'lw/links-house').click();
     await expect(check(page, 'lw/links-house')).toHaveClass(/is-used/);

@@ -24,16 +24,17 @@ is drawn.
   than it needs to draw its tiles. On a page too narrow for two columns the
   panels stack and the seam is not offered.
 - **BOARD-4** The item board is two tabs, **Items** and **Keys**. Items
-  shows the Equipment and Items groups as tiles; Keys shows one line per
-  dungeon with its big-key box then its small-key box (or the small-key box
-  alone, kept in its column, where there is no big key), under a **Generic**
-  line of its own (ITEM-3b) that comes first. Items is selected on load.
+  shows the Equipment and Items groups as tiles, then a **Keys** group
+  holding the generic big key and small key (ITEM-3b); Keys shows one line
+  per dungeon with its big-key box then its small-key box (or the small-key
+  box alone, kept in its column, where there is no big key). Items is
+  selected on load.
   Switching tabs changes nothing else — in particular whatever is armed
   stays armed.
 - **BOARD-5** The item panel's summary follows the tab: Items counts tiles
   with at least one location out of 32; Keys counts keys found out of 40 (a
-  box with 2 of 6 counts 2). The generic keys are left out of both halves of
-  that count: they have no total to reach.
+  box with 2 of 6 counts 2). The generic keys are left out of the Items
+  count: they have no total to reach.
 - **BOARD-6** The check panel lists checks by region under a header that
   folds the region. Light World, Kakariko Village, Death Mountain and Dark
   World start open; the dungeons start folded. Filtering to a region opens

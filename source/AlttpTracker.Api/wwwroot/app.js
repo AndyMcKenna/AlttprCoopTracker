@@ -231,8 +231,8 @@ function render() {
   // The summary follows the tab. Items count tiles with at least one
   // location; keys count individual keys, since a dungeon's 6 small keys
   // share one box and each is worth finding.
-  // The generic keys are excluded: they are a mark with no total to reach,
-  // and counting them would push the tally past the keys the game holds.
+  // The generic keys, on the Items tab, are excluded: they are a mark with
+  // no total to reach, and are not among the items the tally counts.
   const shown = state.data.items.filter(
     (item) => item.panel === state.tab && inPlay(item) && !item.unlimited
   );

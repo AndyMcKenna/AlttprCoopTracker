@@ -36,7 +36,7 @@ public class DatabaseTests(PostgresFixture postgres) : IClassFixture<PostgresFix
         Assert.Equal(249, await db.GameChecks.CountAsync());
         Assert.Equal(216, await db.GameChecks.CountAsync(c => !c.Keydrop));
         Assert.Equal(17, await db.GameRegions.CountAsync());
-        Assert.Equal(14, await db.GameKeyRows.CountAsync());
+        Assert.Equal(13, await db.GameKeyRows.CountAsync());
         Assert.NotEmpty(await db.GamePalette.ToListAsync());
 
         // The pixel art goes through a value converter on the way in and out,

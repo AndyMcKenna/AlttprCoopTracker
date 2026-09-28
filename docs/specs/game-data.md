@@ -46,7 +46,7 @@ Where the game is written down, and how it reaches the app.
 ## Tests
 
 - **DATA-9** `npm test` checks the game tables: 216 checks with unique ids,
-  the key counts (11 big, 29 small) and the generic pair above them, that
+  the key counts (11 big, 29 small), the generic pair in its Keys group, that
   every item names a sprite that is drawn, that every pixel-art grid is
   12×12 from the palette, that every check resolves to a known glyph, and
   that the sheet is current.
