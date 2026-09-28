@@ -35,7 +35,7 @@ public class DatabaseTests(PostgresFixture postgres) : IClassFixture<PostgresFix
 
         Assert.Equal(249, await db.GameChecks.CountAsync());
         Assert.Equal(216, await db.GameChecks.CountAsync(c => !c.Keydrop));
-        Assert.Equal(16, await db.GameRegions.CountAsync());
+        Assert.Equal(17, await db.GameRegions.CountAsync());
         Assert.Equal(13, await db.GameKeyRows.CountAsync());
         Assert.NotEmpty(await db.GamePalette.ToListAsync());
 
@@ -114,7 +114,7 @@ public class DatabaseTests(PostgresFixture postgres) : IClassFixture<PostgresFix
 
         await using var db = postgres.NewContext();
         db.Rooms.Add(new Room { Id = room, CreatedAt = DateTimeOffset.UtcNow, UpdatedAt = DateTimeOffset.UtcNow });
-        db.Assignments.Add(NewAssignment(room, "lamp", "lw/library"));
+        db.Assignments.Add(NewAssignment(room, "lamp", "kak/library"));
         await db.SaveChangesAsync();
 
         db.Rooms.Remove(await db.Rooms.SingleAsync(r => r.Id == room));
@@ -161,7 +161,7 @@ public class DatabaseTests(PostgresFixture postgres) : IClassFixture<PostgresFix
 
             var results = await Task.WhenAll(
                 new RoomService(first, catalog, Locks).AssignAsync(room, "lamp", "lw/hobo"),
-                new RoomService(second, catalog, Locks).AssignAsync(room, "hookshot", "lw/library"));
+                new RoomService(second, catalog, Locks).AssignAsync(room, "hookshot", "kak/library"));
 
             Assert.All(results, result => Assert.True(result.Ok, result.Error));
 
@@ -190,15 +190,15 @@ public class DatabaseTests(PostgresFixture postgres) : IClassFixture<PostgresFix
             await using var second = postgres.NewContext();
 
             var results = await Task.WhenAll(
-                new RoomService(first, catalog, Locks).AssignAsync(room, "lamp", "lw/library"),
-                new RoomService(second, catalog, Locks).AssignAsync(room, "lamp", "lw/sick-kid"));
+                new RoomService(first, catalog, Locks).AssignAsync(room, "lamp", "kak/library"),
+                new RoomService(second, catalog, Locks).AssignAsync(room, "lamp", "kak/sick-kid"));
 
             Assert.All(results, result => Assert.True(result.Ok, result.Error));
 
             await using var db = postgres.NewContext();
             var lamp = await db.Assignments.Where(a => a.RoomId == room && a.ItemId == "lamp").ToListAsync();
             var where = Assert.Single(lamp).CheckId;
-            Assert.Contains(where, new[] { "lw/library", "lw/sick-kid" });
+            Assert.Contains(where, new[] { "kak/library", "kak/sick-kid" });
         }
     }
 
@@ -221,7 +221,7 @@ public class DatabaseTests(PostgresFixture postgres) : IClassFixture<PostgresFix
             await db.Database.ExecuteSqlAsync(
                 $"""INSERT INTO "Assignments" ("Id", "RoomId", "ItemId", "CheckId", "At") VALUES ({Guid.NewGuid()}, {room}, {"lamp"}, {"lw/old-man"}, {now})""");
             await db.Database.ExecuteSqlAsync(
-                $"""INSERT INTO "Assignments" ("Id", "RoomId", "ItemId", "CheckId", "At") VALUES ({Guid.NewGuid()}, {room}, {"hookshot"}, {"lw/library"}, {now})""");
+                $"""INSERT INTO "Assignments" ("Id", "RoomId", "ItemId", "CheckId", "At") VALUES ({Guid.NewGuid()}, {room}, {"hookshot"}, {"lw/hobo"}, {now})""");
             await db.Database.ExecuteSqlAsync(
                 $"""INSERT INTO "DeadChecks" ("RoomId", "CheckId", "At") VALUES ({room}, {"lw/floating-island"}, {now})""");
 
@@ -235,10 +235,44 @@ public class DatabaseTests(PostgresFixture postgres) : IClassFixture<PostgresFix
                 .OrderBy(a => a.ItemId)
                 .Select(a => a.ItemId + "@" + a.CheckId)
                 .ToListAsync();
-            Assert.Equal(["hookshot@lw/library", "lamp@dm/old-man"], ids);
+            Assert.Equal(["hookshot@lw/hobo", "lamp@dm/old-man"], ids);
 
             var dead = Assert.Single(await check.DeadChecks.Where(d => d.RoomId == room).ToListAsync());
             Assert.Equal("dm/floating-island", dead.CheckId);
+        }
+    }
+
+    [Fact]
+    public async Task Moving_the_Kakariko_checks_carries_rooms_across()
+    {
+        var room = "kak-" + Guid.NewGuid().ToString("n")[..8];
+
+        // Step the schema back to before the move, record against the old
+        // ids the way a Beta 4 room would have, then bring it forward.
+        await using (var db = postgres.NewContext())
+        {
+            await db.GetService<IMigrator>().MigrateAsync("SwapParadoxNames");
+
+            db.Rooms.Add(new Room { Id = room, CreatedAt = DateTimeOffset.UtcNow, UpdatedAt = DateTimeOffset.UtcNow });
+            db.Assignments.Add(NewAssignment(room, "bottle", "lw/sick-kid"));
+            db.Assignments.Add(NewAssignment(room, "hookshot", "lw/hobo"));
+            db.DeadChecks.Add(new DeadCheck { RoomId = room, CheckId = "lw/kakariko-well-top", At = DateTimeOffset.UtcNow });
+            await db.SaveChangesAsync();
+
+            await db.Database.MigrateAsync();
+        }
+
+        await using (var check = postgres.NewContext())
+        {
+            var ids = await check.Assignments
+                .Where(a => a.RoomId == room)
+                .OrderBy(a => a.ItemId)
+                .Select(a => a.ItemId + "@" + a.CheckId)
+                .ToListAsync();
+            Assert.Equal(["bottle@kak/sick-kid", "hookshot@lw/hobo"], ids);
+
+            var dead = Assert.Single(await check.DeadChecks.Where(d => d.RoomId == room).ToListAsync());
+            Assert.Equal("kak/kakariko-well-top", dead.CheckId);
         }
     }
 

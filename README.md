@@ -36,14 +36,15 @@ and coming back later picks the run up where it was.
   (the `×` next to it) first. Nobody's note gets silently overwritten.
 - **Dead checks.** The small ∅ at the edge of a check tile marks it as holding
   nothing — looked at, and not worth anyone else's time. It dims and drops
-  out of "Hide recorded/dead"; click it again to bring it back if that was a
+  out of "Hide dead"; click it again to bring it back if that was a
   mistake. A check with an item recorded in it cannot be marked dead, and
   recording an item at a dead check brings it back on its own.
-- **Filtering.** Filter by the region chips, or hide checks that are already
-  recorded or dead to see what's left. There is nothing to type: the board is
+- **Filtering.** Filter by the region chips, or hide dead checks to see what's
+  left to look at and what held something. There is nothing to type: the board is
   meant to be worked with one hand while the other stays on the controller.
-- **Collapsible regions.** Light World, Death Mountain and Dark World start
-  open, the dungeons start folded; click any region header to toggle it.
+- **Collapsible regions.** Light World, Kakariko Village, Death Mountain and
+  Dark World start open, the dungeons start folded; click any region header
+  to toggle it.
   Click **All** with no filter on to open every region at once, and again to
   fold them back.
 - **Keydrop.** Playing key drop shuffle? Tick **Keydrop** in the top bar and
@@ -58,6 +59,11 @@ and coming back later picks the run up where it was.
   has keys — Palace of Darkness 6, Turtle Rock and Ganon's Tower 4, and so on
   (11 big keys and 29 small keys, matching the game). Hyrule Castle and Castle
   Tower have no big key; Eastern Palace has no small keys.
+- **Generic keys.** At the bottom of the Items tab, a **Keys** group holds one
+  big key and one small key, for rooms not playing keysanity: a key you have
+  found but cannot yet put a dungeon to, marked without leaving the Items tab. They take any number of checks, so they show no
+  count and no list of locations — the check tiles are the record, and a `×` at
+  the edge of one clears it. They stay out of the items tally.
 - **Resizable panels.** Drag the seam between the items and the checks to
   give either side more room; double-click it to go back to the default.
   The width is remembered in your browser.
@@ -134,7 +140,7 @@ Anyone who opens it joins the same board. The room code is in the URL
 | Path                                       | What it is                                                |
 | ------------------------------------------ | --------------------------------------------------------- |
 | `docs/specs/`                              | The specifications: how every part of the tracker behaves |
-| `source/data/checks.js`                    | The 216 checks, grouped into 16 regions                   |
+| `source/data/checks.js`                    | The 216 checks, grouped into 17 regions                   |
 | `source/data/items.js`                     | Items and dungeon keys, and how many locations each holds |
 | `source/data/sprites.js`                   | Hand-drawn 12x12 pixel art for items and check icons      |
 | `source/scripts/export-gamedata.js`        | Carries those three to `gamedata.json` for the API        |

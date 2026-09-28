@@ -6,9 +6,18 @@
       "name": "Light World",
       "short": "LW",
       "color": "#3f9e55",
-      "count": 54,
+      "count": 38,
       "keydropCount": 0,
       "ordinal": 0
+    },
+    {
+      "id": "kak",
+      "name": "Kakariko Village",
+      "short": "KAK",
+      "color": "#c98a5e",
+      "count": 16,
+      "keydropCount": 0,
+      "ordinal": 1
     },
     {
       "id": "dm",
@@ -17,7 +26,7 @@
       "color": "#b5762f",
       "count": 14,
       "keydropCount": 0,
-      "ordinal": 1
+      "ordinal": 2
     },
     {
       "id": "dw",
@@ -26,7 +35,7 @@
       "color": "#8f4fb5",
       "count": 25,
       "keydropCount": 0,
-      "ordinal": 2
+      "ordinal": 3
     },
     {
       "id": "hc",
@@ -35,7 +44,7 @@
       "color": "#5f86bf",
       "count": 8,
       "keydropCount": 4,
-      "ordinal": 3
+      "ordinal": 4
     },
     {
       "id": "ep",
@@ -44,7 +53,7 @@
       "color": "#2fa877",
       "count": 6,
       "keydropCount": 2,
-      "ordinal": 4
+      "ordinal": 5
     },
     {
       "id": "dp",
@@ -53,7 +62,7 @@
       "color": "#d1a72b",
       "count": 6,
       "keydropCount": 3,
-      "ordinal": 5
+      "ordinal": 6
     },
     {
       "id": "toh",
@@ -62,7 +71,7 @@
       "color": "#d97e42",
       "count": 6,
       "keydropCount": 0,
-      "ordinal": 6
+      "ordinal": 7
     },
     {
       "id": "ct",
@@ -71,7 +80,7 @@
       "color": "#9295a3",
       "count": 2,
       "keydropCount": 2,
-      "ordinal": 7
+      "ordinal": 8
     },
     {
       "id": "pod",
@@ -80,7 +89,7 @@
       "color": "#5257a0",
       "count": 14,
       "keydropCount": 0,
-      "ordinal": 8
+      "ordinal": 9
     },
     {
       "id": "sp",
@@ -89,7 +98,7 @@
       "color": "#2f9aa8",
       "count": 10,
       "keydropCount": 5,
-      "ordinal": 9
+      "ordinal": 10
     },
     {
       "id": "sw",
@@ -98,7 +107,7 @@
       "color": "#74854f",
       "count": 8,
       "keydropCount": 2,
-      "ordinal": 10
+      "ordinal": 11
     },
     {
       "id": "tt",
@@ -107,7 +116,7 @@
       "color": "#a86333",
       "count": 8,
       "keydropCount": 2,
-      "ordinal": 11
+      "ordinal": 12
     },
     {
       "id": "ip",
@@ -116,7 +125,7 @@
       "color": "#4fb3d4",
       "count": 8,
       "keydropCount": 4,
-      "ordinal": 12
+      "ordinal": 13
     },
     {
       "id": "mm",
@@ -125,7 +134,7 @@
       "color": "#8272a8",
       "count": 8,
       "keydropCount": 3,
-      "ordinal": 13
+      "ordinal": 14
     },
     {
       "id": "tr",
@@ -134,7 +143,7 @@
       "color": "#c04a41",
       "count": 12,
       "keydropCount": 2,
-      "ordinal": 14
+      "ordinal": 15
     },
     {
       "id": "gt",
@@ -143,7 +152,7 @@
       "color": "#ab4283",
       "count": 27,
       "keydropCount": 4,
-      "ordinal": 15
+      "ordinal": 16
     }
   ],
   "checks": [
@@ -181,204 +190,6 @@
       "ordinal": 2
     },
     {
-      "id": "lw/kings-tomb",
-      "name": "King's Tomb",
-      "fullName": "Light World - King's Tomb",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "boots",
-      "keydrop": false,
-      "ordinal": 3
-    },
-    {
-      "id": "lw/kakariko-tavern",
-      "name": "Kakariko Tavern",
-      "fullName": "Light World - Kakariko Tavern",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "chest",
-      "keydrop": false,
-      "ordinal": 4
-    },
-    {
-      "id": "lw/chicken-house",
-      "name": "Chicken House",
-      "fullName": "Light World - Chicken House",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "chicken",
-      "keydrop": false,
-      "ordinal": 5
-    },
-    {
-      "id": "lw/aginahs-cave",
-      "name": "Aginah's Cave",
-      "fullName": "Light World - Aginah's Cave",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "bomb",
-      "keydrop": false,
-      "ordinal": 6
-    },
-    {
-      "id": "lw/sahasrahlas-hut-left",
-      "name": "Sahasrahla's Hut - Left",
-      "fullName": "Light World - Sahasrahla's Hut - Left",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "chest",
-      "keydrop": false,
-      "ordinal": 7
-    },
-    {
-      "id": "lw/sahasrahlas-hut-middle",
-      "name": "Sahasrahla's Hut - Middle",
-      "fullName": "Light World - Sahasrahla's Hut - Middle",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "chest",
-      "keydrop": false,
-      "ordinal": 8
-    },
-    {
-      "id": "lw/sahasrahlas-hut-right",
-      "name": "Sahasrahla's Hut - Right",
-      "fullName": "Light World - Sahasrahla's Hut - Right",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "chest",
-      "keydrop": false,
-      "ordinal": 9
-    },
-    {
-      "id": "lw/sahasrahla",
-      "name": "Sahasrahla",
-      "fullName": "Light World - Sahasrahla",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "greenpendant",
-      "keydrop": false,
-      "ordinal": 10
-    },
-    {
-      "id": "lw/kakariko-well-top",
-      "name": "Kakariko Well - Top",
-      "fullName": "Light World - Kakariko Well - Top",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "chest",
-      "keydrop": false,
-      "ordinal": 11
-    },
-    {
-      "id": "lw/kakariko-well-left",
-      "name": "Kakariko Well - Left",
-      "fullName": "Light World - Kakariko Well - Left",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "chest",
-      "keydrop": false,
-      "ordinal": 12
-    },
-    {
-      "id": "lw/kakariko-well-middle",
-      "name": "Kakariko Well - Middle",
-      "fullName": "Light World - Kakariko Well - Middle",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "chest",
-      "keydrop": false,
-      "ordinal": 13
-    },
-    {
-      "id": "lw/kakariko-well-right",
-      "name": "Kakariko Well - Right",
-      "fullName": "Light World - Kakariko Well - Right",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "chest",
-      "keydrop": false,
-      "ordinal": 14
-    },
-    {
-      "id": "lw/kakariko-well-bottom",
-      "name": "Kakariko Well - Bottom",
-      "fullName": "Light World - Kakariko Well - Bottom",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "chest",
-      "keydrop": false,
-      "ordinal": 15
-    },
-    {
-      "id": "lw/blinds-hideout-top",
-      "name": "Blind's Hideout - Top",
-      "fullName": "Light World - Blind's Hideout - Top",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "chest",
-      "keydrop": false,
-      "ordinal": 16
-    },
-    {
-      "id": "lw/blinds-hideout-far-left",
-      "name": "Blind's Hideout - Far Left",
-      "fullName": "Light World - Blind's Hideout - Far Left",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "chest",
-      "keydrop": false,
-      "ordinal": 17
-    },
-    {
-      "id": "lw/blinds-hideout-left",
-      "name": "Blind's Hideout - Left",
-      "fullName": "Light World - Blind's Hideout - Left",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "chest",
-      "keydrop": false,
-      "ordinal": 18
-    },
-    {
-      "id": "lw/blinds-hideout-right",
-      "name": "Blind's Hideout - Right",
-      "fullName": "Light World - Blind's Hideout - Right",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "chest",
-      "keydrop": false,
-      "ordinal": 19
-    },
-    {
-      "id": "lw/blinds-hideout-far-right",
-      "name": "Blind's Hideout - Far Right",
-      "fullName": "Light World - Blind's Hideout - Far Right",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "chest",
-      "keydrop": false,
-      "ordinal": 20
-    },
-    {
       "id": "lw/bonk-rocks",
       "name": "Bonk Rocks",
       "fullName": "Light World - Bonk Rocks",
@@ -387,150 +198,18 @@
       "regionShort": "LW",
       "icon": "boots",
       "keydrop": false,
-      "ordinal": 21
+      "ordinal": 3
     },
     {
-      "id": "lw/mmc-far-left",
-      "name": "MMC - Far Left",
-      "fullName": "Light World - MMC - Far Left",
+      "id": "lw/kings-tomb",
+      "name": "King's Tomb",
+      "fullName": "Light World - King's Tomb",
       "region": "lw",
       "regionName": "Light World",
       "regionShort": "LW",
-      "icon": "mmc",
+      "icon": "boots",
       "keydrop": false,
-      "ordinal": 22
-    },
-    {
-      "id": "lw/mmc-left",
-      "name": "MMC - Left",
-      "fullName": "Light World - MMC - Left",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "mmc",
-      "keydrop": false,
-      "ordinal": 23
-    },
-    {
-      "id": "lw/mmc-right",
-      "name": "MMC - Right",
-      "fullName": "Light World - MMC - Right",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "mmc",
-      "keydrop": false,
-      "ordinal": 24
-    },
-    {
-      "id": "lw/mmc-far-right",
-      "name": "MMC - Far Right",
-      "fullName": "Light World - MMC - Far Right",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "mmc",
-      "keydrop": false,
-      "ordinal": 25
-    },
-    {
-      "id": "lw/mmc-guy",
-      "name": "MMC - Guy",
-      "fullName": "Light World - MMC - Guy",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "mmc",
-      "keydrop": false,
-      "ordinal": 26
-    },
-    {
-      "id": "lw/ice-rod-cave",
-      "name": "Ice Rod Cave",
-      "fullName": "Light World - Ice Rod Cave",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "icerod",
-      "keydrop": false,
-      "ordinal": 27
-    },
-    {
-      "id": "lw/bottle-merchant",
-      "name": "Bottle Merchant",
-      "fullName": "Light World - Bottle Merchant",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "rupee",
-      "keydrop": false,
-      "ordinal": 28
-    },
-    {
-      "id": "lw/magic-bat",
-      "name": "Magic Bat",
-      "fullName": "Light World - Magic Bat",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "powder",
-      "keydrop": false,
-      "ordinal": 29
-    },
-    {
-      "id": "lw/sick-kid",
-      "name": "Sick Kid",
-      "fullName": "Light World - Sick Kid",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "bottle",
-      "keydrop": false,
-      "ordinal": 30
-    },
-    {
-      "id": "lw/hobo",
-      "name": "Hobo",
-      "fullName": "Light World - Hobo",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "flippers",
-      "keydrop": false,
-      "ordinal": 31
-    },
-    {
-      "id": "lw/bombos-tablet",
-      "name": "Bombos Tablet",
-      "fullName": "Light World - Bombos Tablet",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "book",
-      "keydrop": false,
-      "ordinal": 32
-    },
-    {
-      "id": "lw/king-zora",
-      "name": "King Zora",
-      "fullName": "Light World - King Zora",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "zora",
-      "keydrop": false,
-      "ordinal": 33
-    },
-    {
-      "id": "lw/lost-woods-hideout",
-      "name": "Lost Woods Hideout",
-      "fullName": "Light World - Lost Woods Hideout",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "sparkle",
-      "keydrop": false,
-      "ordinal": 34
+      "ordinal": 4
     },
     {
       "id": "lw/lumberjack-tree",
@@ -541,51 +220,7 @@
       "regionShort": "LW",
       "icon": "boots",
       "keydrop": false,
-      "ordinal": 35
-    },
-    {
-      "id": "lw/cave-45",
-      "name": "Cave 45",
-      "fullName": "Light World - Cave 45",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "mirror",
-      "keydrop": false,
-      "ordinal": 36
-    },
-    {
-      "id": "lw/graveyard-ledge",
-      "name": "Graveyard Ledge",
-      "fullName": "Light World - Graveyard Ledge",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "mirror",
-      "keydrop": false,
-      "ordinal": 37
-    },
-    {
-      "id": "lw/checkerboard-cave",
-      "name": "Checkerboard Cave",
-      "fullName": "Light World - Checkerboard Cave",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "mirror",
-      "keydrop": false,
-      "ordinal": 38
-    },
-    {
-      "id": "lw/library",
-      "name": "Library",
-      "fullName": "Light World - Library",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "boots",
-      "keydrop": false,
-      "ordinal": 39
+      "ordinal": 5
     },
     {
       "id": "lw/mushroom",
@@ -596,62 +231,18 @@
       "regionShort": "LW",
       "icon": "mushroom",
       "keydrop": false,
-      "ordinal": 40
+      "ordinal": 6
     },
     {
-      "id": "lw/potion-shop",
-      "name": "Potion Shop",
-      "fullName": "Light World - Potion Shop",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "npc",
-      "keydrop": false,
-      "ordinal": 41
-    },
-    {
-      "id": "lw/maze-race",
-      "name": "Maze Race",
-      "fullName": "Light World - Maze Race",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "npc",
-      "keydrop": false,
-      "ordinal": 42
-    },
-    {
-      "id": "lw/desert-ledge",
-      "name": "Desert Ledge",
-      "fullName": "Light World - Desert Ledge",
+      "id": "lw/lost-woods-hideout",
+      "name": "Lost Woods Hideout",
+      "fullName": "Light World - Lost Woods Hideout",
       "region": "lw",
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "sparkle",
       "keydrop": false,
-      "ordinal": 43
-    },
-    {
-      "id": "lw/lake-hylia-island",
-      "name": "Lake Hylia Island",
-      "fullName": "Light World - Lake Hylia Island",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "mirror",
-      "keydrop": false,
-      "ordinal": 44
-    },
-    {
-      "id": "lw/sunken-treasure",
-      "name": "Sunken Treasure",
-      "fullName": "Light World - Sunken Treasure",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "sparkle",
-      "keydrop": false,
-      "ordinal": 45
+      "ordinal": 7
     },
     {
       "id": "lw/floodgate-chest",
@@ -662,29 +253,106 @@
       "regionShort": "LW",
       "icon": "chest",
       "keydrop": false,
-      "ordinal": 46
+      "ordinal": 8
     },
     {
-      "id": "lw/zoras-ledge",
-      "name": "Zora's Ledge",
-      "fullName": "Light World - Zora's Ledge",
+      "id": "lw/sunken-treasure",
+      "name": "Sunken Treasure",
+      "fullName": "Light World - Sunken Treasure",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "sparkle",
+      "keydrop": false,
+      "ordinal": 9
+    },
+    {
+      "id": "lw/mmc-far-left",
+      "name": "MMC - Far Left",
+      "fullName": "Light World - MMC - Far Left",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "mmc",
+      "keydrop": false,
+      "ordinal": 10
+    },
+    {
+      "id": "lw/mmc-left",
+      "name": "MMC - Left",
+      "fullName": "Light World - MMC - Left",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "mmc",
+      "keydrop": false,
+      "ordinal": 11
+    },
+    {
+      "id": "lw/mmc-right",
+      "name": "MMC - Right",
+      "fullName": "Light World - MMC - Right",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "mmc",
+      "keydrop": false,
+      "ordinal": 12
+    },
+    {
+      "id": "lw/mmc-far-right",
+      "name": "MMC - Far Right",
+      "fullName": "Light World - MMC - Far Right",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "mmc",
+      "keydrop": false,
+      "ordinal": 13
+    },
+    {
+      "id": "lw/mmc-guy",
+      "name": "MMC - Guy",
+      "fullName": "Light World - MMC - Guy",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "mmc",
+      "keydrop": false,
+      "ordinal": 14
+    },
+    {
+      "id": "lw/ice-rod-cave",
+      "name": "Ice Rod Cave",
+      "fullName": "Light World - Ice Rod Cave",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "icerod",
+      "keydrop": false,
+      "ordinal": 15
+    },
+    {
+      "id": "lw/lake-hylia-island",
+      "name": "Lake Hylia Island",
+      "fullName": "Light World - Lake Hylia Island",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "mirror",
+      "keydrop": false,
+      "ordinal": 16
+    },
+    {
+      "id": "lw/hobo",
+      "name": "Hobo",
+      "fullName": "Light World - Hobo",
       "region": "lw",
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "flippers",
       "keydrop": false,
-      "ordinal": 47
-    },
-    {
-      "id": "lw/dig-spot",
-      "name": "Dig Spot",
-      "fullName": "Light World - Dig Spot",
-      "region": "lw",
-      "regionName": "Light World",
-      "regionShort": "LW",
-      "icon": "shovel",
-      "keydrop": false,
-      "ordinal": 48
+      "ordinal": 17
     },
     {
       "id": "lw/waterfall-fairy-left",
@@ -695,7 +363,7 @@
       "regionShort": "LW",
       "icon": "flippers",
       "keydrop": false,
-      "ordinal": 49
+      "ordinal": 18
     },
     {
       "id": "lw/waterfall-fairy-right",
@@ -706,7 +374,117 @@
       "regionShort": "LW",
       "icon": "flippers",
       "keydrop": false,
-      "ordinal": 50
+      "ordinal": 19
+    },
+    {
+      "id": "lw/zoras-ledge",
+      "name": "Zora's Ledge",
+      "fullName": "Light World - Zora's Ledge",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "flippers",
+      "keydrop": false,
+      "ordinal": 20
+    },
+    {
+      "id": "lw/king-zora",
+      "name": "King Zora",
+      "fullName": "Light World - King Zora",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "zora",
+      "keydrop": false,
+      "ordinal": 21
+    },
+    {
+      "id": "lw/sahasrahlas-hut-left",
+      "name": "Sahasrahla's Hut - Left",
+      "fullName": "Light World - Sahasrahla's Hut - Left",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "keydrop": false,
+      "ordinal": 22
+    },
+    {
+      "id": "lw/sahasrahlas-hut-middle",
+      "name": "Sahasrahla's Hut - Middle",
+      "fullName": "Light World - Sahasrahla's Hut - Middle",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "keydrop": false,
+      "ordinal": 23
+    },
+    {
+      "id": "lw/sahasrahlas-hut-right",
+      "name": "Sahasrahla's Hut - Right",
+      "fullName": "Light World - Sahasrahla's Hut - Right",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "chest",
+      "keydrop": false,
+      "ordinal": 24
+    },
+    {
+      "id": "lw/sahasrahla",
+      "name": "Sahasrahla",
+      "fullName": "Light World - Sahasrahla",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "greenpendant",
+      "keydrop": false,
+      "ordinal": 25
+    },
+    {
+      "id": "lw/potion-shop",
+      "name": "Potion Shop",
+      "fullName": "Light World - Potion Shop",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "mushroom",
+      "keydrop": false,
+      "ordinal": 26
+    },
+    {
+      "id": "lw/desert-ledge",
+      "name": "Desert Ledge",
+      "fullName": "Light World - Desert Ledge",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "sparkle",
+      "keydrop": false,
+      "ordinal": 27
+    },
+    {
+      "id": "lw/aginahs-cave",
+      "name": "Aginah's Cave",
+      "fullName": "Light World - Aginah's Cave",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "bomb",
+      "keydrop": false,
+      "ordinal": 28
+    },
+    {
+      "id": "lw/checkerboard-cave",
+      "name": "Checkerboard Cave",
+      "fullName": "Light World - Checkerboard Cave",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "mirror",
+      "keydrop": false,
+      "ordinal": 29
     },
     {
       "id": "lw/blacksmith",
@@ -717,7 +495,40 @@
       "regionShort": "LW",
       "icon": "glove",
       "keydrop": false,
-      "ordinal": 51
+      "ordinal": 30
+    },
+    {
+      "id": "lw/magic-bat",
+      "name": "Magic Bat",
+      "fullName": "Light World - Magic Bat",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "powder",
+      "keydrop": false,
+      "ordinal": 31
+    },
+    {
+      "id": "lw/cave-45",
+      "name": "Cave 45",
+      "fullName": "Light World - Cave 45",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "mirror",
+      "keydrop": false,
+      "ordinal": 32
+    },
+    {
+      "id": "lw/dig-spot",
+      "name": "Dig Spot",
+      "fullName": "Light World - Dig Spot",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "shovel",
+      "keydrop": false,
+      "ordinal": 33
     },
     {
       "id": "lw/purple-chest",
@@ -728,7 +539,29 @@
       "regionShort": "LW",
       "icon": "purplechest",
       "keydrop": false,
-      "ordinal": 52
+      "ordinal": 34
+    },
+    {
+      "id": "lw/bombos-tablet",
+      "name": "Bombos Tablet",
+      "fullName": "Light World - Bombos Tablet",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "book",
+      "keydrop": false,
+      "ordinal": 35
+    },
+    {
+      "id": "lw/graveyard-ledge",
+      "name": "Graveyard Ledge",
+      "fullName": "Light World - Graveyard Ledge",
+      "region": "lw",
+      "regionName": "Light World",
+      "regionShort": "LW",
+      "icon": "mirror",
+      "keydrop": false,
+      "ordinal": 36
     },
     {
       "id": "lw/master-sword-pedestal",
@@ -738,6 +571,182 @@
       "regionName": "Light World",
       "regionShort": "LW",
       "icon": "sword",
+      "keydrop": false,
+      "ordinal": 37
+    },
+    {
+      "id": "kak/blinds-hideout-top",
+      "name": "Blind's Hideout - Top",
+      "fullName": "Kakariko Village - Blind's Hideout - Top",
+      "region": "kak",
+      "regionName": "Kakariko Village",
+      "regionShort": "KAK",
+      "icon": "bomb",
+      "keydrop": false,
+      "ordinal": 38
+    },
+    {
+      "id": "kak/blinds-hideout-far-left",
+      "name": "Blind's Hideout - Far Left",
+      "fullName": "Kakariko Village - Blind's Hideout - Far Left",
+      "region": "kak",
+      "regionName": "Kakariko Village",
+      "regionShort": "KAK",
+      "icon": "chest",
+      "keydrop": false,
+      "ordinal": 39
+    },
+    {
+      "id": "kak/blinds-hideout-left",
+      "name": "Blind's Hideout - Left",
+      "fullName": "Kakariko Village - Blind's Hideout - Left",
+      "region": "kak",
+      "regionName": "Kakariko Village",
+      "regionShort": "KAK",
+      "icon": "chest",
+      "keydrop": false,
+      "ordinal": 40
+    },
+    {
+      "id": "kak/blinds-hideout-right",
+      "name": "Blind's Hideout - Right",
+      "fullName": "Kakariko Village - Blind's Hideout - Right",
+      "region": "kak",
+      "regionName": "Kakariko Village",
+      "regionShort": "KAK",
+      "icon": "chest",
+      "keydrop": false,
+      "ordinal": 41
+    },
+    {
+      "id": "kak/blinds-hideout-far-right",
+      "name": "Blind's Hideout - Far Right",
+      "fullName": "Kakariko Village - Blind's Hideout - Far Right",
+      "region": "kak",
+      "regionName": "Kakariko Village",
+      "regionShort": "KAK",
+      "icon": "chest",
+      "keydrop": false,
+      "ordinal": 42
+    },
+    {
+      "id": "kak/kakariko-well-bottom",
+      "name": "Kakariko Well - Bottom",
+      "fullName": "Kakariko Village - Kakariko Well - Bottom",
+      "region": "kak",
+      "regionName": "Kakariko Village",
+      "regionShort": "KAK",
+      "icon": "well",
+      "keydrop": false,
+      "ordinal": 43
+    },
+    {
+      "id": "kak/kakariko-well-top",
+      "name": "Kakariko Well - Top",
+      "fullName": "Kakariko Village - Kakariko Well - Top",
+      "region": "kak",
+      "regionName": "Kakariko Village",
+      "regionShort": "KAK",
+      "icon": "bomb",
+      "keydrop": false,
+      "ordinal": 44
+    },
+    {
+      "id": "kak/kakariko-well-left",
+      "name": "Kakariko Well - Left",
+      "fullName": "Kakariko Village - Kakariko Well - Left",
+      "region": "kak",
+      "regionName": "Kakariko Village",
+      "regionShort": "KAK",
+      "icon": "well",
+      "keydrop": false,
+      "ordinal": 45
+    },
+    {
+      "id": "kak/kakariko-well-middle",
+      "name": "Kakariko Well - Middle",
+      "fullName": "Kakariko Village - Kakariko Well - Middle",
+      "region": "kak",
+      "regionName": "Kakariko Village",
+      "regionShort": "KAK",
+      "icon": "well",
+      "keydrop": false,
+      "ordinal": 46
+    },
+    {
+      "id": "kak/kakariko-well-right",
+      "name": "Kakariko Well - Right",
+      "fullName": "Kakariko Village - Kakariko Well - Right",
+      "region": "kak",
+      "regionName": "Kakariko Village",
+      "regionShort": "KAK",
+      "icon": "well",
+      "keydrop": false,
+      "ordinal": 47
+    },
+    {
+      "id": "kak/bottle-merchant",
+      "name": "Bottle Merchant",
+      "fullName": "Kakariko Village - Bottle Merchant",
+      "region": "kak",
+      "regionName": "Kakariko Village",
+      "regionShort": "KAK",
+      "icon": "rupee",
+      "keydrop": false,
+      "ordinal": 48
+    },
+    {
+      "id": "kak/chicken-house",
+      "name": "Chicken House",
+      "fullName": "Kakariko Village - Chicken House",
+      "region": "kak",
+      "regionName": "Kakariko Village",
+      "regionShort": "KAK",
+      "icon": "chicken",
+      "keydrop": false,
+      "ordinal": 49
+    },
+    {
+      "id": "kak/kakariko-tavern",
+      "name": "Kakariko Tavern",
+      "fullName": "Kakariko Village - Kakariko Tavern",
+      "region": "kak",
+      "regionName": "Kakariko Village",
+      "regionShort": "KAK",
+      "icon": "chest",
+      "keydrop": false,
+      "ordinal": 50
+    },
+    {
+      "id": "kak/sick-kid",
+      "name": "Sick Kid",
+      "fullName": "Kakariko Village - Sick Kid",
+      "region": "kak",
+      "regionName": "Kakariko Village",
+      "regionShort": "KAK",
+      "icon": "bottle",
+      "keydrop": false,
+      "ordinal": 51
+    },
+    {
+      "id": "kak/library",
+      "name": "Library",
+      "fullName": "Kakariko Village - Library",
+      "region": "kak",
+      "regionName": "Kakariko Village",
+      "regionShort": "KAK",
+      "icon": "boots",
+      "keydrop": false,
+      "ordinal": 52
+    },
+    {
+      "id": "kak/maze-race",
+      "name": "Maze Race",
+      "fullName": "Kakariko Village - Maze Race",
+      "region": "kak",
+      "regionName": "Kakariko Village",
+      "regionShort": "KAK",
+      "icon": "npc",
       "keydrop": false,
       "ordinal": 53
     },
@@ -2901,6 +2910,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 0
     },
     {
@@ -2916,6 +2926,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 1
     },
     {
@@ -2931,6 +2942,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 2
     },
     {
@@ -2946,6 +2958,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 3
     },
     {
@@ -2961,6 +2974,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 4
     },
     {
@@ -2976,6 +2990,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 5
     },
     {
@@ -2991,6 +3006,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 6
     },
     {
@@ -3006,6 +3022,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 7
     },
     {
@@ -3021,6 +3038,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 8
     },
     {
@@ -3036,6 +3054,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 9
     },
     {
@@ -3051,6 +3070,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 10
     },
     {
@@ -3066,6 +3086,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 11
     },
     {
@@ -3081,6 +3102,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 12
     },
     {
@@ -3096,6 +3118,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 13
     },
     {
@@ -3111,6 +3134,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 14
     },
     {
@@ -3126,6 +3150,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 15
     },
     {
@@ -3141,6 +3166,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 16
     },
     {
@@ -3156,6 +3182,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 17
     },
     {
@@ -3171,6 +3198,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 18
     },
     {
@@ -3186,6 +3214,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 19
     },
     {
@@ -3201,6 +3230,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 20
     },
     {
@@ -3216,6 +3246,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 21
     },
     {
@@ -3231,6 +3262,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 22
     },
     {
@@ -3246,6 +3278,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 23
     },
     {
@@ -3261,6 +3294,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 24
     },
     {
@@ -3276,6 +3310,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 25
     },
     {
@@ -3291,6 +3326,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 26
     },
     {
@@ -3306,6 +3342,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 27
     },
     {
@@ -3321,6 +3358,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 28
     },
     {
@@ -3336,6 +3374,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 29
     },
     {
@@ -3351,6 +3390,7 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 30
     },
     {
@@ -3366,7 +3406,40 @@
       "panel": "items",
       "dungeon": null,
       "alwaysCount": false,
+      "unlimited": false,
       "ordinal": 31
+    },
+    {
+      "id": "bk-generic",
+      "name": "Big Key",
+      "label": null,
+      "sprite": "bigkey",
+      "slots": 0,
+      "keydropSlots": 0,
+      "keydropOnly": false,
+      "keydropLabel": null,
+      "group": "Keys",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "unlimited": true,
+      "ordinal": 32
+    },
+    {
+      "id": "sk-generic",
+      "name": "Small Key",
+      "label": null,
+      "sprite": "smallkey",
+      "slots": 0,
+      "keydropSlots": 0,
+      "keydropOnly": false,
+      "keydropLabel": null,
+      "group": "Keys",
+      "panel": "items",
+      "dungeon": null,
+      "alwaysCount": false,
+      "unlimited": true,
+      "ordinal": 33
     },
     {
       "id": "bk-hc",
@@ -3381,7 +3454,8 @@
       "panel": "keys",
       "dungeon": "hc",
       "alwaysCount": false,
-      "ordinal": 32
+      "unlimited": false,
+      "ordinal": 34
     },
     {
       "id": "sk-hc",
@@ -3396,7 +3470,8 @@
       "panel": "keys",
       "dungeon": "hc",
       "alwaysCount": true,
-      "ordinal": 33
+      "unlimited": false,
+      "ordinal": 35
     },
     {
       "id": "sk-ct",
@@ -3411,7 +3486,8 @@
       "panel": "keys",
       "dungeon": "ct",
       "alwaysCount": true,
-      "ordinal": 34
+      "unlimited": false,
+      "ordinal": 36
     },
     {
       "id": "bk-ep",
@@ -3426,7 +3502,8 @@
       "panel": "keys",
       "dungeon": "ep",
       "alwaysCount": false,
-      "ordinal": 35
+      "unlimited": false,
+      "ordinal": 37
     },
     {
       "id": "sk-ep",
@@ -3441,7 +3518,8 @@
       "panel": "keys",
       "dungeon": "ep",
       "alwaysCount": true,
-      "ordinal": 36
+      "unlimited": false,
+      "ordinal": 38
     },
     {
       "id": "bk-dp",
@@ -3456,7 +3534,8 @@
       "panel": "keys",
       "dungeon": "dp",
       "alwaysCount": false,
-      "ordinal": 37
+      "unlimited": false,
+      "ordinal": 39
     },
     {
       "id": "sk-dp",
@@ -3471,7 +3550,8 @@
       "panel": "keys",
       "dungeon": "dp",
       "alwaysCount": true,
-      "ordinal": 38
+      "unlimited": false,
+      "ordinal": 40
     },
     {
       "id": "bk-toh",
@@ -3486,7 +3566,8 @@
       "panel": "keys",
       "dungeon": "toh",
       "alwaysCount": false,
-      "ordinal": 39
+      "unlimited": false,
+      "ordinal": 41
     },
     {
       "id": "sk-toh",
@@ -3501,7 +3582,8 @@
       "panel": "keys",
       "dungeon": "toh",
       "alwaysCount": true,
-      "ordinal": 40
+      "unlimited": false,
+      "ordinal": 42
     },
     {
       "id": "bk-pod",
@@ -3516,7 +3598,8 @@
       "panel": "keys",
       "dungeon": "pod",
       "alwaysCount": false,
-      "ordinal": 41
+      "unlimited": false,
+      "ordinal": 43
     },
     {
       "id": "sk-pod",
@@ -3531,7 +3614,8 @@
       "panel": "keys",
       "dungeon": "pod",
       "alwaysCount": true,
-      "ordinal": 42
+      "unlimited": false,
+      "ordinal": 44
     },
     {
       "id": "bk-sp",
@@ -3546,7 +3630,8 @@
       "panel": "keys",
       "dungeon": "sp",
       "alwaysCount": false,
-      "ordinal": 43
+      "unlimited": false,
+      "ordinal": 45
     },
     {
       "id": "sk-sp",
@@ -3561,7 +3646,8 @@
       "panel": "keys",
       "dungeon": "sp",
       "alwaysCount": true,
-      "ordinal": 44
+      "unlimited": false,
+      "ordinal": 46
     },
     {
       "id": "bk-sw",
@@ -3576,7 +3662,8 @@
       "panel": "keys",
       "dungeon": "sw",
       "alwaysCount": false,
-      "ordinal": 45
+      "unlimited": false,
+      "ordinal": 47
     },
     {
       "id": "sk-sw",
@@ -3591,7 +3678,8 @@
       "panel": "keys",
       "dungeon": "sw",
       "alwaysCount": true,
-      "ordinal": 46
+      "unlimited": false,
+      "ordinal": 48
     },
     {
       "id": "bk-tt",
@@ -3606,7 +3694,8 @@
       "panel": "keys",
       "dungeon": "tt",
       "alwaysCount": false,
-      "ordinal": 47
+      "unlimited": false,
+      "ordinal": 49
     },
     {
       "id": "sk-tt",
@@ -3621,7 +3710,8 @@
       "panel": "keys",
       "dungeon": "tt",
       "alwaysCount": true,
-      "ordinal": 48
+      "unlimited": false,
+      "ordinal": 50
     },
     {
       "id": "bk-ip",
@@ -3636,7 +3726,8 @@
       "panel": "keys",
       "dungeon": "ip",
       "alwaysCount": false,
-      "ordinal": 49
+      "unlimited": false,
+      "ordinal": 51
     },
     {
       "id": "sk-ip",
@@ -3651,7 +3742,8 @@
       "panel": "keys",
       "dungeon": "ip",
       "alwaysCount": true,
-      "ordinal": 50
+      "unlimited": false,
+      "ordinal": 52
     },
     {
       "id": "bk-mm",
@@ -3666,7 +3758,8 @@
       "panel": "keys",
       "dungeon": "mm",
       "alwaysCount": false,
-      "ordinal": 51
+      "unlimited": false,
+      "ordinal": 53
     },
     {
       "id": "sk-mm",
@@ -3681,7 +3774,8 @@
       "panel": "keys",
       "dungeon": "mm",
       "alwaysCount": true,
-      "ordinal": 52
+      "unlimited": false,
+      "ordinal": 54
     },
     {
       "id": "bk-tr",
@@ -3696,7 +3790,8 @@
       "panel": "keys",
       "dungeon": "tr",
       "alwaysCount": false,
-      "ordinal": 53
+      "unlimited": false,
+      "ordinal": 55
     },
     {
       "id": "sk-tr",
@@ -3711,7 +3806,8 @@
       "panel": "keys",
       "dungeon": "tr",
       "alwaysCount": true,
-      "ordinal": 54
+      "unlimited": false,
+      "ordinal": 56
     },
     {
       "id": "bk-gt",
@@ -3726,7 +3822,8 @@
       "panel": "keys",
       "dungeon": "gt",
       "alwaysCount": false,
-      "ordinal": 55
+      "unlimited": false,
+      "ordinal": 57
     },
     {
       "id": "sk-gt",
@@ -3741,7 +3838,8 @@
       "panel": "keys",
       "dungeon": "gt",
       "alwaysCount": true,
-      "ordinal": 56
+      "unlimited": false,
+      "ordinal": 58
     }
   ],
   "keyPanel": [
@@ -5199,6 +5297,24 @@
         ".kbbbbbbbbk.",
         ".kbbbbbbbbk.",
         ".kkkkkkkkkk.",
+        "............"
+      ]
+    },
+    {
+      "name": "well",
+      "kind": "icon",
+      "rows": [
+        "............",
+        "..kkkkkkkk..",
+        ".knnnnnnnnk.",
+        ".knnnnnnnnk.",
+        ".kkkkkkkkkk.",
+        ".knnnnnnnnk.",
+        ".knnnkyknnk.",
+        ".knnnkyknnk.",
+        ".knnnnnnnnk.",
+        ".kkkkkkkkkk.",
+        "............",
         "............"
       ]
     },

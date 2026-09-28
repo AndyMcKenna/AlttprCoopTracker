@@ -7,19 +7,20 @@ const { test, expect } = require('@playwright/test');
 const { newRoom, openBoard, item, check, checkBody, checkDead } = require('./board');
 
 test.describe('the board', () => {
-  test('draws the items, the region chips, and the two overworlds open', async ({ page }) => {
+  test('draws the items, the region chips, and the overworld regions open', async ({ page }) => {
     await openBoard(page, newRoom());
 
-    await expect(page.locator('#items .item')).toHaveCount(32);
+    // 34 tiles, but the two generic keys have no total and are not counted.
+    await expect(page.locator('#items .item')).toHaveCount(34);
     await expect(page.locator('#items-summary')).toHaveText('0 of 32 located');
     await expect(page.locator('#checks-summary')).toHaveText('0 of 216 recorded');
 
-    // Sixteen regions and All.
-    await expect(page.locator('.region-chip')).toHaveCount(17);
+    // Seventeen regions and All.
+    await expect(page.locator('.region-chip')).toHaveCount(18);
 
-    // The overworlds and Death Mountain start open; the dungeons start folded.
-    await expect(page.locator('.check')).toHaveCount(54 + 14 + 25);
-    await expect(page.locator('.region-title')).toContainText(['Light World (54)', 'Death Mountain (14)', 'Dark World (25)']);
+    // The overworlds, Kakariko and Death Mountain start open; the dungeons start folded.
+    await expect(page.locator('.check')).toHaveCount(38 + 16 + 14 + 25);
+    await expect(page.locator('.region-title')).toContainText(['Light World (38)', 'Kakariko Village (16)', 'Death Mountain (14)', 'Dark World (25)']);
     await expect(page.locator('.region-title[aria-expanded="false"]')).toHaveCount(13);
 
     // Nothing to type: the filter box is gone.
@@ -65,10 +66,10 @@ test.describe('the board', () => {
     await expect(item(page, 'lamp')).not.toHaveClass(/is-armed/);
     await expect(page.locator('#assign-bar')).toBeHidden();
 
-    await checkBody(page, 'lw/library').click();
-    await expect(check(page, 'lw/library')).toHaveClass(/is-armed/);
+    await checkBody(page, 'kak/library').click();
+    await expect(check(page, 'kak/library')).toHaveClass(/is-armed/);
     await page.keyboard.press('Escape');
-    await expect(check(page, 'lw/library')).not.toHaveClass(/is-armed/);
+    await expect(check(page, 'kak/library')).not.toHaveClass(/is-armed/);
     await expect(page.locator('#assign-bar')).toBeHidden();
 
     // A right-click anywhere is Esc for the hand on the mouse.
@@ -78,10 +79,10 @@ test.describe('the board', () => {
     await expect(item(page, 'lamp')).not.toHaveClass(/is-armed/);
     await expect(page.locator('#assign-bar')).toBeHidden();
 
-    await checkBody(page, 'lw/library').click();
-    await expect(check(page, 'lw/library')).toHaveClass(/is-armed/);
+    await checkBody(page, 'kak/library').click();
+    await expect(check(page, 'kak/library')).toHaveClass(/is-armed/);
     await page.locator('.brand').click({ button: 'right' });
-    await expect(check(page, 'lw/library')).not.toHaveClass(/is-armed/);
+    await expect(check(page, 'kak/library')).not.toHaveClass(/is-armed/);
   });
 
   test('a check holds one item, and the refusal names the holder', async ({ page }) => {
@@ -109,11 +110,11 @@ test.describe('the board', () => {
     await checkBody(page, 'lw/links-house').click();
     await expect(item(page, 'lamp').locator('.loc-name')).toHaveText("Link's House");
     await item(page, 'lamp').click();
-    await checkBody(page, 'lw/library').click();
+    await checkBody(page, 'kak/library').click();
     await expect(item(page, 'lamp').locator('.loc-name')).toHaveText('Library');
     await expect(check(page, 'lw/links-house')).not.toHaveClass(/is-used/);
 
-    for (const id of ['lw/sick-kid', 'lw/hobo', 'lw/king-zora', 'dw/catfish']) {
+    for (const id of ['kak/sick-kid', 'lw/hobo', 'lw/king-zora', 'dw/catfish']) {
       await item(page, 'bottle').click();
       await checkBody(page, id).click();
       await expect(check(page, id)).toHaveClass(/is-used/);
@@ -147,8 +148,8 @@ test.describe('the board', () => {
   test('the × clears one location without arming the tile', async ({ page }) => {
     await openBoard(page, newRoom());
     await item(page, 'bottle').click();
-    await checkBody(page, 'lw/sick-kid').click();
-    await expect(check(page, 'lw/sick-kid')).toHaveClass(/is-used/);
+    await checkBody(page, 'kak/sick-kid').click();
+    await expect(check(page, 'kak/sick-kid')).toHaveClass(/is-used/);
     await item(page, 'bottle').click();
     await checkBody(page, 'lw/hobo').click();
     await expect(check(page, 'lw/hobo')).toHaveClass(/is-used/);
@@ -157,7 +158,7 @@ test.describe('the board', () => {
 
     await expect(item(page, 'bottle').locator('.loc-name')).toHaveText(['Hobo']);
     await expect(item(page, 'bottle')).not.toHaveClass(/is-armed/);
-    await expect(check(page, 'lw/sick-kid')).not.toHaveClass(/is-used/);
+    await expect(check(page, 'kak/sick-kid')).not.toHaveClass(/is-used/);
   });
 
   test('a check can be marked dead, hidden, and brought back', async ({ page }) => {
@@ -169,15 +170,30 @@ test.describe('the board', () => {
     await expect(check(page, ledge).locator('.check-holder')).toHaveText('nothing');
     await expect(page.locator('#checks-summary')).toHaveText('0 of 216 recorded, 1 dead');
 
-    await page.locator('#hide-used').check();
+    await page.locator('#hide-dead').check();
     await expect(check(page, ledge)).toHaveCount(0);
     await expect(page.locator('.region-title', { hasText: 'Dark World' })).toContainText('(24)');
-    await page.locator('#hide-used').uncheck();
+    await page.locator('#hide-dead').uncheck();
 
     // Clicking a dead check with nothing armed brings it back.
     await checkBody(page, ledge).click();
     await expect(check(page, ledge)).not.toHaveClass(/is-dead/);
     await expect(page.locator('#checks-summary')).toHaveText('0 of 216 recorded');
+  });
+
+  test('hide dead keeps checks that hold an item', async ({ page }) => {
+    await openBoard(page, newRoom());
+
+    await item(page, 'hookshot').click();
+    await checkBody(page, 'dw/catfish').click();
+    await expect(check(page, 'dw/catfish')).toHaveClass(/is-used/);
+    await checkDead(page, 'dw/bumper-cave-ledge').click();
+    await expect(check(page, 'dw/bumper-cave-ledge')).toHaveClass(/is-dead/);
+
+    await page.locator('#hide-dead').check();
+    await expect(check(page, 'dw/bumper-cave-ledge')).toHaveCount(0);
+    await expect(check(page, 'dw/catfish')).toHaveCount(1);
+    await expect(page.locator('.region-title', { hasText: 'Dark World' })).toContainText('(24)');
   });
 
   test('recording an item at a dead check brings it back', async ({ page }) => {
@@ -214,8 +230,59 @@ test.describe('the board', () => {
     await expect(page.locator('#items-summary')).toHaveText('1 of 40 located');
 
     await page.locator('#tab-items').click();
-    await expect(page.locator('#items .item')).toHaveCount(32);
+    await expect(page.locator('#items .item')).toHaveCount(34);
     await expect(page.locator('#items-summary')).toHaveText('0 of 32 located');
+  });
+
+  test('the generic keys take any number of checks and show no count', async ({ page }) => {
+    await openBoard(page, newRoom());
+
+    // A Keys group of their own at the bottom of the Items tab.
+    await expect(page.locator('.item-group-title')).toHaveText(['Equipment', 'Items', 'Keys']);
+    const group = page.locator('#items > div').filter({ has: page.locator('.item-group-title', { hasText: 'Keys' }) });
+    await expect(group.locator('.item')).toHaveCount(2);
+    await expect(group.locator('[data-item="bk-generic"]')).toHaveCount(1);
+    await expect(group.locator('[data-item="sk-generic"]')).toHaveCount(1);
+
+    // No limit shown, and none enforced: past the four a bottle would take.
+    await expect(item(page, 'sk-generic').locator('.item-count')).toHaveCount(0);
+
+    const checks = ['lw/links-house', 'lw/links-uncle', 'lw/bonk-rocks', 'kak/library', 'kak/sick-kid'];
+    for (const id of checks) {
+      await item(page, 'sk-generic').click();
+      await checkBody(page, id).click();
+      await expect(check(page, id)).toHaveClass(/is-used/);
+      await expect(check(page, id).locator('.check-holder')).toHaveText('Small Key');
+    }
+
+    // Still no count, and no list of locations on the tile.
+    await expect(item(page, 'sk-generic').locator('.item-count')).toHaveCount(0);
+    await expect(item(page, 'sk-generic').locator('.item-locations')).toHaveCount(0);
+
+    // They stay out of the items tally, having no total to reach.
+    await expect(page.locator('#items-summary')).toHaveText('0 of 32 located');
+    await expect(page.locator('#checks-summary')).toHaveText('5 of 216 recorded');
+
+    // And the Keys tab is the dungeons alone, its tally unchanged.
+    await page.locator('#tab-keys').click();
+    await expect(page.locator('.key-row').first().locator('.key-dungeon')).toHaveText('Hyrule Castle');
+    await expect(item(page, 'sk-generic')).toHaveCount(0);
+    await expect(page.locator('#items-summary')).toHaveText('0 of 40 located');
+  });
+
+  test('a check holding a generic key is cleared from the check itself', async ({ page }) => {
+    await openBoard(page, newRoom());
+    await item(page, 'bk-generic').click();
+    await checkBody(page, 'lw/links-house').click();
+    await expect(check(page, 'lw/links-house')).toHaveClass(/is-used/);
+
+    // An ordinary held check offers no edge button; this one offers ×.
+    await expect(check(page, 'lw/links-house').locator('.check-dead')).toHaveCount(0);
+    await check(page, 'lw/links-house').locator('.check-clear').click();
+
+    await expect(check(page, 'lw/links-house')).not.toHaveClass(/is-used/);
+    await expect(page.locator('#checks-summary')).toHaveText('0 of 216 recorded');
+    await expect(check(page, 'lw/links-house').locator('.check-dead')).toHaveCount(1);
   });
 
   test('region chips filter the list and open the region', async ({ page }) => {

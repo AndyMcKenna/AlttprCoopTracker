@@ -5,7 +5,7 @@ const assert = require('node:assert');
 const fs = require('node:fs');
 
 const { CHECKS, REGIONS } = require('../data/checks');
-const { ITEMS, ITEMS_BY_ID, KEY_PANEL } = require('../data/items');
+const { ITEMS, ITEMS_BY_ID, KEY_PANEL, GENERIC_KEYS, GROUPS } = require('../data/items');
 const { PALETTE, ITEM_SPRITES, ICON_SPRITES, kindForCheck } = require('../data/sprites');
 const spriteSheet = require('../scripts/build-spritesheet');
 
@@ -19,7 +19,7 @@ test('the game has exactly 216 checks with unique ids, and 33 more for keydrop',
   assert.strictEqual(regionTotal, 216);
   // Keydrop locations are only ever in dungeons.
   for (const check of keydrop) {
-    assert.ok(!['lw', 'dm', 'dw'].includes(check.region), check.id + ' is not in a dungeon');
+    assert.ok(!['lw', 'kak', 'dm', 'dw'].includes(check.region), check.id + ' is not in a dungeon');
   }
 });
 
@@ -38,6 +38,10 @@ test('every sprite is a 12x12 grid drawn from the palette', () => {
 test('every item points at a sprite that exists', () => {
   for (const item of ITEMS) {
     assert.ok(ITEM_SPRITES[item.sprite], 'missing sprite for ' + item.id);
+    // An unlimited item has no slots by design; everything else needs one.
+    if (item.unlimited) {
+      continue;
+    }
     if (item.keydropOnly) {
       assert.ok(item.keydropSlots >= 1, item.id + ' needs at least one keydrop slot');
     } else {
@@ -47,7 +51,7 @@ test('every item points at a sprite that exists', () => {
 });
 
 test('the key panel matches the game: 11 big keys, 29 small keys; 12 and 61 in keydrop', () => {
-  const keyItems = ITEMS.filter((item) => item.panel === 'keys');
+  const keyItems = ITEMS.filter((item) => item.panel === 'keys' && !item.unlimited);
   const bigKeys = keyItems.filter((item) => item.sprite === 'bigkey');
   const smallKeys = keyItems.filter((item) => item.sprite === 'smallkey');
 
@@ -83,6 +87,39 @@ test('the key panel matches the game: 11 big keys, 29 small keys; 12 and 61 in k
   assert.ok(ITEMS_BY_ID.get('bk-hc').keydropOnly);
   assert.deepStrictEqual(KEY_PANEL.filter((d) => !d.smallKey).map((d) => d.id), []);
   assert.ok(ITEMS_BY_ID.get('sk-ep').keydropOnly);
+});
+
+test('the generic keys are a pair with no limit, in a Keys group on the Items tab', () => {
+  assert.deepStrictEqual(GENERIC_KEYS.map((key) => key.id), ['bk-generic', 'sk-generic']);
+
+  for (const key of GENERIC_KEYS) {
+    assert.ok(key.unlimited, key.id + ' should be unlimited');
+    assert.strictEqual(key.slots, 0, key.id + ' should have no slots to count');
+    assert.strictEqual(key.keydropSlots, 0, key.id + ' should have no slots in keydrop either');
+    // Always on the board: a key you cannot name is not a keydrop thing.
+    assert.ok(!key.keydropOnly, key.id + ' should be in play with keydrop off');
+    assert.strictEqual(ITEMS_BY_ID.get(key.id), key);
+  }
+
+  // On the Items tab, in the last group, and nowhere on the key panel.
+  for (const key of GENERIC_KEYS) {
+    assert.strictEqual(key.panel, 'items', key.id + ' should be on the Items tab');
+    assert.strictEqual(key.group, 'Keys', key.id + ' should be in the Keys group');
+  }
+  assert.deepStrictEqual(GROUPS, ['Equipment', 'Items', 'Keys']);
+  assert.strictEqual(KEY_PANEL[0].id, 'hc');
+  assert.ok(KEY_PANEL.every((row) => REGIONS.some((region) => region.id === row.id)));
+
+  // Plain "Big Key" and "Small Key", which only reads unambiguously on a
+  // check tile or in a refusal while no other item shares the name.
+  assert.deepStrictEqual(GENERIC_KEYS.map((key) => key.name), ['Big Key', 'Small Key']);
+  assert.strictEqual(new Set(ITEMS.map((item) => item.name)).size, ITEMS.length);
+
+  // Nothing else in the game is unlimited: the rule is for these two only.
+  assert.deepStrictEqual(
+    ITEMS.filter((item) => item.unlimited).map((item) => item.id),
+    ['bk-generic', 'sk-generic']
+  );
 });
 
 test('every check resolves to a known tile icon', () => {

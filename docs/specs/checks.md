@@ -5,11 +5,11 @@ on them.
 
 ## The checks
 
-- **CHECK-1** There are 216 checks in 16 regions: Light World (54), Death
-  Mountain (14), Dark World (25), Hyrule Castle (8), Eastern Palace (6), Desert Palace (6),
-  Tower of Hera (6), Castle Tower (2), Palace of Darkness (14), Swamp Palace
-  (10), Skull Woods (8), Thieves' Town (8), Ice Palace (8), Misery Mire (8),
-  Turtle Rock (12), Ganon's Tower (27).
+- **CHECK-1** There are 216 checks in 17 regions: Light World (38), Kakariko
+  Village (16), Death Mountain (14), Dark World (25), Hyrule Castle (8),
+  Eastern Palace (6), Desert Palace (6), Tower of Hera (6), Castle Tower (2),
+  Palace of Darkness (14), Swamp Palace (10), Skull Woods (8), Thieves' Town
+  (8), Ice Palace (8), Misery Mire (8), Turtle Rock (12), Ganon's Tower (27).
 - **CHECK-2** Names follow the community and randomizer convention, so they
   match spoiler logs and route notes. A check's id is `<region>/<slug>` —
   `dw/bumper-cave-ledge` — because names such as "Big Chest" repeat across

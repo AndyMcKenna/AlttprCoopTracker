@@ -34,16 +34,24 @@ The point of the tracker: which check each item was found at.
   cannot be recorded, while it is off. A box that holds more locations than
   its slots — filled in keydrop, then keydrop turned off — keeps them and
   shows the count over the smaller total.
-- **ITEM-4** Keys follow exactly the same rules as main items. Nothing below
-  distinguishes them.
+- **ITEM-3b** Two more keys belong to no dungeon: a **Generic** big key and
+  small key, for a room not playing keysanity, where a key is worth marking
+  before anyone knows which dungeon it opens. They are **unlimited**: they
+  hold any number of locations, so ITEM-7 and ITEM-8 do not apply to them —
+  recording one at another check is never a move and never refused. They are
+  in play whatever the keydrop setting, and are not counted among the 40 keys
+  (or 73) the game holds.
+- **ITEM-4** Keys follow exactly the same rules as main items, apart from
+  what ITEM-3b says of the generic pair. Nothing below distinguishes them.
 
 ## Recording a location
 
 - **ITEM-5** A location is recorded by pairing one item with one check. The
   result is an assignment: item, check, and the time it was recorded.
-- **ITEM-6** A check holds at most one item. Recording an item at a check
-  that already holds one is refused, and the refusal names the item that
-  holds it. The existing entry is never overwritten.
+- **ITEM-6** A check holds at most one item, the generic keys included.
+  Recording an item at a check that already holds one is refused, and the
+  refusal names the item that holds it. The existing entry is never
+  overwritten.
 - **ITEM-7** An item with one slot that already has a location **moves**: the
   old location is dropped and the new one recorded, in the one write.
 - **ITEM-8** An item with several slots fills them in order. Recording it

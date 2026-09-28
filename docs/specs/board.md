@@ -24,18 +24,21 @@ is drawn.
   than it needs to draw its tiles. On a page too narrow for two columns the
   panels stack and the seam is not offered.
 - **BOARD-4** The item board is two tabs, **Items** and **Keys**. Items
-  shows the Equipment and Items groups as tiles; Keys shows one line per
-  dungeon with its big-key box then its small-key box (or the small-key box
-  alone, kept in its column, where there is no big key). Items is selected
-  on load. Switching tabs changes nothing else — in particular whatever is
-  armed stays armed.
+  shows the Equipment and Items groups as tiles, then a **Keys** group
+  holding the generic big key and small key (ITEM-3b); Keys shows one line
+  per dungeon with its big-key box then its small-key box (or the small-key
+  box alone, kept in its column, where there is no big key). Items is
+  selected on load.
+  Switching tabs changes nothing else — in particular whatever is armed
+  stays armed.
 - **BOARD-5** The item panel's summary follows the tab: Items counts tiles
   with at least one location out of 32; Keys counts keys found out of 40 (a
-  box with 2 of 6 counts 2).
+  box with 2 of 6 counts 2). The generic keys are left out of the Items
+  count: they have no total to reach.
 - **BOARD-6** The check panel lists checks by region under a header that
-  folds the region. Light World, Death Mountain and Dark World start open;
-  the dungeons start folded. Filtering to a region opens it; dropping the filter returns
-  every region to its default.
+  folds the region. Light World, Kakariko Village, Death Mountain and Dark
+  World start open; the dungeons start folded. Filtering to a region opens
+  it; dropping the filter returns every region to its default.
 - **BOARD-7** The check panel's summary reads `<recorded> of 216 recorded`
   (249 in keydrop), followed by `, <n> dead` when any are. Only checks in
   play are counted on either side.
@@ -46,6 +49,9 @@ is drawn.
   recorded location (region label, check name, and a `×` that clears just
   that row). A progressive item, and every small-key box, shows
   `found/slots`, green once full. A tile with no location is drawn dimmed.
+- **BOARD-8a** A generic key tile shows neither the count nor the rows: it
+  can hold any number of checks, and listing them would bury the panel. It
+  is drawn found or dimmed like any other tile.
 - **BOARD-9** The whole item tile is its button: clicking anywhere on it
   arms the item. The `×` on a row clears that row and does not arm the tile.
   A tile can be reached with the keyboard and armed with Enter or Space.
@@ -54,6 +60,10 @@ is drawn.
   green-tinged; a dead tile is dimmed with a dashed border.
 - **BOARD-11** Every check tile without an item has a small `∅` button at
   its edge that marks it dead, or, if it is dead, brings it back.
+- **BOARD-11a** A check holding a generic key has a `×` in that same place,
+  which clears it. It is the only place a generic key can be cleared, since
+  its tile keeps no rows (BOARD-8a); every other held check has no edge
+  button at all.
 
 ## Recording: either order
 
@@ -86,9 +96,9 @@ is drawn.
   the folds instead: it opens every region, and, when every region is
   already open, folds them back to the default (BOARD-6). All is drawn as
   selected whenever no filter is on. There is no text search.
-- **BOARD-19** **Hide recorded/dead** hides every check that holds an item
-  or is dead, leaving what is still worth visiting. Region headers count
-  what is shown.
+- **BOARD-19** **Hide dead** hides every dead check. Checks still to look at
+  and checks that hold an item stay, so a player routing an area can see
+  which of its checks are worth hitting. Region headers count what is shown.
 
 ## Feedback
 

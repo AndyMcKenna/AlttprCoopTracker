@@ -46,9 +46,10 @@ Where the game is written down, and how it reaches the app.
 ## Tests
 
 - **DATA-9** `npm test` checks the game tables: 216 checks with unique ids,
-  the key counts (11 big, 29 small), that every item names a sprite that is
-  drawn, that every pixel-art grid is 12×12 from the palette, that every
-  check resolves to a known glyph, and that the sheet is current.
+  the key counts (11 big, 29 small), the generic pair in its Keys group, that
+  every item names a sprite that is drawn, that every pixel-art grid is
+  12×12 from the palette, that every check resolves to a known glyph, and
+  that the sheet is current.
 - **DATA-10** The rules in `RoomService` are tested on SQLite in memory
   (`AlttpTracker.Api.Tests`), seeded from the same `gamedata.json`; the
   database's own responsibilities — migrations, the unique index, cascades,

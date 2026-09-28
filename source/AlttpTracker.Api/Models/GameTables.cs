@@ -77,7 +77,7 @@ public class GameItem
     /// <summary>The key-row label in keydrop, where a box may hold more keys.</summary>
     public string? KeydropLabel { get; set; }
 
-    /// <summary>Equipment or Items; null for keys, which are grouped by dungeon.</summary>
+    /// <summary>Equipment, Items, or Keys for the generic pair; null for dungeon keys, which are grouped by dungeon.</summary>
     public string? Group { get; set; }
 
     /// <summary>"items" or "keys".</summary>
@@ -87,6 +87,9 @@ public class GameItem
 
     /// <summary>Show the counter even at one slot, so "0/1" reads as "one key".</summary>
     public bool AlwaysCount { get; set; }
+
+    /// <summary>Holds any number of locations: the generic keys, which are a mark rather than a count.</summary>
+    public bool Unlimited { get; set; }
 
     public int Ordinal { get; set; }
 }

@@ -95,11 +95,11 @@ public class RoomServiceTests : IDisposable
         using (db)
         {
             await service.AssignAsync("test-room", "hookshot", "ep/big-chest");
-            var result = await service.AssignAsync("test-room", "hookshot", "lw/library");
+            var result = await service.AssignAsync("test-room", "hookshot", "kak/library");
 
             Assert.True(result.Ok);
             var assignment = Assert.Single(result.Room!.Assignments);
-            Assert.Equal("lw/library", assignment.CheckId);
+            Assert.Equal("kak/library", assignment.CheckId);
         }
     }
 
@@ -109,14 +109,14 @@ public class RoomServiceTests : IDisposable
         var service = NewService(out var db);
         using (db)
         {
-            foreach (var check in new[] { "lw/sick-kid", "lw/hobo", "lw/king-zora", "dw/catfish" })
+            foreach (var check in new[] { "kak/sick-kid", "lw/hobo", "lw/king-zora", "dw/catfish" })
             {
                 Assert.True((await service.AssignAsync("test-room", "bottle", check)).Ok);
             }
 
             Assert.Equal(4, db.Assignments.Count(a => a.ItemId == "bottle"));
 
-            var full = await service.AssignAsync("test-room", "bottle", "lw/library");
+            var full = await service.AssignAsync("test-room", "bottle", "kak/library");
             Assert.False(full.Ok);
             Assert.Contains("already has 4 locations", full.Error);
         }
@@ -159,8 +159,52 @@ public class RoomServiceTests : IDisposable
         }
     }
 
+    [Fact]
+    public async Task The_generic_keys_hold_as_many_checks_as_a_room_gives_them()
+    {
+        var service = NewService(out var db);
+        using (db)
+        {
+            // Well past any dungeon’s key count, and past the four slots that
+            // stop a bottle: an unlimited item has no total to fill.
+            string[] checks =
+            [
+                "kak/sick-kid", "lw/hobo", "lw/king-zora", "dw/catfish",
+                "kak/library", "lw/bonk-rocks", "dw/brewery",
+            ];
+            foreach (var check in checks)
+            {
+                Assert.True((await service.AssignAsync("generic", "sk-generic", check)).Ok);
+            }
+
+            Assert.Equal(checks.Length, db.Assignments.Count(a => a.ItemId == "sk-generic"));
+
+            // And it never moves the way a one-slot item does: the first is still there.
+            Assert.Contains(db.Assignments, a => a.ItemId == "sk-generic" && a.CheckId == "kak/sick-kid");
+        }
+    }
+
+    [Fact]
+    public async Task A_generic_key_is_still_one_item_per_check()
+    {
+        var service = NewService(out var db);
+        using (db)
+        {
+            Assert.True((await service.AssignAsync("generic", "bk-generic", "ep/big-chest")).Ok);
+
+            var taken = await service.AssignAsync("generic", "lamp", "ep/big-chest");
+            Assert.False(taken.Ok);
+            Assert.Contains("already recorded as Big Key", taken.Error);
+
+            // Recorded twice at the same check is the same refusal, not a second row.
+            var again = await service.AssignAsync("generic", "bk-generic", "ep/big-chest");
+            Assert.False(again.Ok);
+            Assert.Single(db.Assignments, a => a.CheckId == "ep/big-chest");
+        }
+    }
+
     [Theory]
-    [InlineData("nope", "lw/library")]
+    [InlineData("nope", "kak/library")]
     [InlineData("lamp", "lw/nope")]
     public async Task Unknown_ids_are_rejected(string itemId, string checkId)
     {
@@ -180,10 +224,10 @@ public class RoomServiceTests : IDisposable
         var service = NewService(out var db);
         using (db)
         {
-            await service.AssignAsync("test-room", "bottle", "lw/sick-kid");
+            await service.AssignAsync("test-room", "bottle", "kak/sick-kid");
             await service.AssignAsync("test-room", "bottle", "lw/hobo");
 
-            var first = db.Assignments.First(a => a.CheckId == "lw/sick-kid");
+            var first = db.Assignments.First(a => a.CheckId == "kak/sick-kid");
             var result = await service.UnassignAsync("test-room", first.Id);
 
             Assert.True(result.Ok);
@@ -286,10 +330,10 @@ public class RoomServiceTests : IDisposable
         var service = NewService(out var db);
         using (db)
         {
-            Assert.True((await service.SetDeadAsync("never-written", "lw/library", dead: false)).Ok);
+            Assert.True((await service.SetDeadAsync("never-written", "kak/library", dead: false)).Ok);
             Assert.Empty(db.Rooms);
 
-            Assert.True((await service.SetDeadAsync("first-dead", "lw/library", dead: true)).Ok);
+            Assert.True((await service.SetDeadAsync("first-dead", "kak/library", dead: true)).Ok);
             Assert.Single(db.Rooms);
         }
     }
@@ -352,7 +396,7 @@ public class RoomServiceTests : IDisposable
     }
 
     [Theory]
-    [InlineData(null, "lw/library")]
+    [InlineData(null, "kak/library")]
     [InlineData("lamp", null)]
     [InlineData("", "")]
     public async Task A_body_missing_a_field_is_refused_not_thrown(string? itemId, string? checkId)

@@ -113,18 +113,45 @@ const KEY_ITEMS = DUNGEON_KEYS.flatMap((dungeon) => {
   return made;
 });
 
-const ITEMS = [...MAIN_ITEMS, ...KEY_ITEMS];
+// Not every room is playing keysanity, and a key found in the wild is still
+// worth marking even when nobody knows yet which dungeon it opens. These two
+// say only "a big key" and "a small key". `unlimited` is what makes them
+// different from every other item: they hold as many checks as the room
+// cares to give them, so the tile shows no count and no list of locations —
+// the check tiles themselves are the record.
+//
+// They sit on the Items tab, in a Keys group of their own, not on the Keys
+// tab: a room that is not playing keysanity never otherwise opens that tab,
+// and should not have to switch to it to mark a key. Their names are plain
+// "Big Key" and "Small Key", still unique beside the dungeon keys, which carry
+// the dungeon's short name.
+const GENERIC_KEYS = [
+  { id: 'bk-generic', name: 'Big Key', sprite: 'bigkey' },
+  { id: 'sk-generic', name: 'Small Key', sprite: 'smallkey' },
+].map((key) => ({
+  ...key,
+  // No limit to enforce, so no slots to count; `unlimited` is what is read.
+  slots: 0,
+  keydropSlots: 0,
+  unlimited: true,
+  panel: 'items',
+  group: 'Keys',
+}));
+
+const ITEMS = [...MAIN_ITEMS, ...GENERIC_KEYS, ...KEY_ITEMS];
 
 const ITEMS_BY_ID = new Map(ITEMS.map((item) => [item.id, item]));
 
-const GROUPS = MAIN_ITEMS.reduce((acc, item) => {
+// In board order, so the generic keys' group comes after Items.
+const GROUPS = [...MAIN_ITEMS, ...GENERIC_KEYS].reduce((acc, item) => {
   if (!acc.includes(item.group)) {
     acc.push(item.group);
   }
   return acc;
 }, []);
 
-// What the key panel needs to lay itself out: one row per dungeon, big key first.
+// What the key panel needs to lay itself out: one row per dungeon, big key
+// first.
 const KEY_PANEL = DUNGEON_KEYS.map((dungeon) => {
   const region = REGIONS_BY_ID.get(dungeon.region);
   return {
@@ -137,4 +164,4 @@ const KEY_PANEL = DUNGEON_KEYS.map((dungeon) => {
   };
 });
 
-module.exports = { ITEMS, MAIN_ITEMS, KEY_ITEMS, ITEMS_BY_ID, GROUPS, KEY_PANEL };
+module.exports = { ITEMS, MAIN_ITEMS, KEY_ITEMS, GENERIC_KEYS, ITEMS_BY_ID, GROUPS, KEY_PANEL };
