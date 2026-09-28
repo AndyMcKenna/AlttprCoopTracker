@@ -3411,8 +3411,8 @@
     },
     {
       "id": "bk-generic",
-      "name": "Generic Big Key",
-      "label": "Big Key",
+      "name": "Big Key",
+      "label": null,
       "sprite": "bigkey",
       "slots": 0,
       "keydropSlots": 0,
@@ -3427,8 +3427,8 @@
     },
     {
       "id": "sk-generic",
-      "name": "Generic Small Key",
-      "label": "Small Key",
+      "name": "Small Key",
+      "label": null,
       "sprite": "smallkey",
       "slots": 0,
       "keydropSlots": 0,

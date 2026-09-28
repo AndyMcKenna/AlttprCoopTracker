@@ -110,6 +110,11 @@ test('the generic keys are a pair with no limit, in a Keys group on the Items ta
   assert.strictEqual(KEY_PANEL[0].id, 'hc');
   assert.ok(KEY_PANEL.every((row) => REGIONS.some((region) => region.id === row.id)));
 
+  // Plain "Big Key" and "Small Key", which only reads unambiguously on a
+  // check tile or in a refusal while no other item shares the name.
+  assert.deepStrictEqual(GENERIC_KEYS.map((key) => key.name), ['Big Key', 'Small Key']);
+  assert.strictEqual(new Set(ITEMS.map((item) => item.name)).size, ITEMS.length);
+
   // Nothing else in the game is unlimited: the rule is for these two only.
   assert.deepStrictEqual(
     ITEMS.filter((item) => item.unlimited).map((item) => item.id),

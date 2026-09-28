@@ -252,7 +252,7 @@ test.describe('the board', () => {
       await item(page, 'sk-generic').click();
       await checkBody(page, id).click();
       await expect(check(page, id)).toHaveClass(/is-used/);
-      await expect(check(page, id).locator('.check-holder')).toHaveText('Generic Small Key');
+      await expect(check(page, id).locator('.check-holder')).toHaveText('Small Key');
     }
 
     // Still no count, and no list of locations on the tile.

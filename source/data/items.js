@@ -122,10 +122,12 @@ const KEY_ITEMS = DUNGEON_KEYS.flatMap((dungeon) => {
 //
 // They sit on the Items tab, in a Keys group of their own, not on the Keys
 // tab: a room that is not playing keysanity never otherwise opens that tab,
-// and should not have to switch to it to mark a key.
+// and should not have to switch to it to mark a key. Their names are plain
+// "Big Key" and "Small Key", still unique beside the dungeon keys, which carry
+// the dungeon's short name.
 const GENERIC_KEYS = [
-  { id: 'bk-generic', name: 'Generic Big Key', label: 'Big Key', sprite: 'bigkey' },
-  { id: 'sk-generic', name: 'Generic Small Key', label: 'Small Key', sprite: 'smallkey' },
+  { id: 'bk-generic', name: 'Big Key', sprite: 'bigkey' },
+  { id: 'sk-generic', name: 'Small Key', sprite: 'smallkey' },
 ].map((key) => ({
   ...key,
   // No limit to enforce, so no slots to count; `unlimited` is what is read.
